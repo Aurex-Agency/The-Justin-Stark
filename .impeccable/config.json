@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "inter",
+        "createdAt": "2026-08-03T21:16:07.646Z",
+        "reason": "Pinned by the client build plan: Playfair Display headlines + Inter body"
+      }
+    ]
+  }
+}
