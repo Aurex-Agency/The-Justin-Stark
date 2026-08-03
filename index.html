@@ -237,9 +237,18 @@ html.js .reveal.in[data-d="3"]{transition-delay:.24s}
 .marquee-item svg{margin:0 2.6rem;flex:none}
 @media (prefers-reduced-motion:no-preference){
   .marquee{animation:marq 36s linear infinite}
-  .marquee:hover{animation-play-state:paused}
+  .marquee:hover,.marquee:focus-within{animation-play-state:paused}
 }
 @keyframes marq{to{transform:translateX(-50%)}}
+/* touch and narrow screens get a calm static row — auto-motion is hover-pausable only */
+@media (max-width:900px),(pointer:coarse){
+  .marquee{animation:none;width:100%;justify-content:center}
+  .marquee-seq[aria-hidden]{display:none}
+  .marquee-seq{flex:0 1 100%;width:100%;flex-wrap:wrap;justify-content:center;row-gap:.5rem;padding-inline:1rem}
+  .marquee-item{font-size:.84rem;white-space:normal;text-align:center;max-width:100%}
+  .marquee-item svg{margin:0 1rem}
+  .marquee-seq .marquee-item:last-child svg{display:none}
+}
 
 /* ------------------------------------------------------------------ */
 /*  Section heads                                                      */
@@ -443,6 +452,8 @@ html.js .reveal.in[data-d="3"]{transition-delay:.24s}
 }
 @media (max-width:520px){
   .field-row{grid-template-columns:1fr}
+  .hero-note,.speaking-meta{flex-direction:column;align-items:flex-start;gap:.5rem}
+  .hero-note .sep,.speaking-meta .sep{display:none}
   .hero-cta .btn{width:100%;text-align:center}
   .speaking .hero-cta .btn{width:auto}
   .hero h1{font-size:clamp(2.6rem,12vw,3.4rem)}
