@@ -33,10 +33,10 @@
   --navy:#0b1a33;
   --ink:#f4f1ea;
   --soft:#a7a9b4;
-  --gold:#c9a24b;
-  --gold-2:#e6c877;
-  --rule:rgba(201,162,75,.32);
-  --rule-dim:rgba(201,162,75,.14);
+  --gold:#b98a2f;
+  --gold-2:#d4af37;
+  --rule:rgba(185,138,47,.32);
+  --rule-dim:rgba(185,138,47,.14);
   --hairline:rgba(244,241,234,.07);
   --serif:'Playfair Display',Georgia,'Times New Roman',serif;
   --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
@@ -105,7 +105,7 @@ html.js .reveal.in[data-d="3"]{transition-delay:.24s}
 .btn-line{
   background:transparent;color:var(--gold-2);border:1px solid var(--rule);
 }
-.btn-line:hover{border-color:var(--gold-2);background:rgba(201,162,75,.07);color:var(--ink);transform:translateY(-2px)}
+.btn-line:hover{border-color:var(--gold-2);background:rgba(185,138,47,.07);color:var(--ink);transform:translateY(-2px)}
 
 .link-engraved{
   position:relative;display:inline-block;text-decoration:none;
@@ -394,7 +394,7 @@ html.js .reveal.in[data-d="3"]{transition-delay:.24s}
 .field textarea{resize:vertical;min-height:6.2rem}
 .field select{
   appearance:none;-webkit-appearance:none;cursor:pointer;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5' stroke='%23c9a24b' stroke-width='1.25'/%3E%3C/svg%3E");
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5' stroke='%23b98a2f' stroke-width='1.25'/%3E%3C/svg%3E");
   background-repeat:no-repeat;background-position:right .2rem center;
 }
 .field select option{background:var(--stock);color:var(--ink)}
@@ -436,8 +436,8 @@ html.js .reveal.in[data-d="3"]{transition-delay:.24s}
   .hero-photo img{object-position:center 12%}
   .hero-photo::before{
     background:
-      linear-gradient(180deg,rgba(8,9,12,.62) 0%,rgba(8,9,12,.45) 35%,rgba(8,9,12,.88) 68%,var(--paper) 92%),
-      rgba(11,26,51,.35);
+      linear-gradient(180deg,rgba(8,9,12,.85) 0%,rgba(8,9,12,.66) 38%,rgba(8,9,12,.92) 68%,var(--paper) 92%),
+      rgba(11,26,51,.5);
   }
   .hero-inner{padding:9rem 0 4.5rem}
   .hero-copy{max-width:100%}
@@ -504,9 +504,9 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
     </nav>
     <button class="menu-btn" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
       <svg width="22" height="16" viewBox="0 0 22 16" aria-hidden="true">
-        <line class="bar bar1" x1="0" y1="2" x2="22" y2="2" stroke="#e6c877" stroke-width="1.5"/>
-        <line class="bar bar2" x1="0" y1="8" x2="22" y2="8" stroke="#e6c877" stroke-width="1.5"/>
-        <line class="bar bar3" x1="0" y1="14" x2="22" y2="14" stroke="#e6c877" stroke-width="1.5"/>
+        <line class="bar bar1" x1="0" y1="2" x2="22" y2="2" stroke="#d4af37" stroke-width="1.5"/>
+        <line class="bar bar2" x1="0" y1="8" x2="22" y2="8" stroke="#d4af37" stroke-width="1.5"/>
+        <line class="bar bar3" x1="0" y1="14" x2="22" y2="14" stroke="#d4af37" stroke-width="1.5"/>
       </svg>
     </button>
   </div>
@@ -525,7 +525,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   <!-- ============================== HERO ============================== -->
   <section class="hero" aria-label="Introduction">
     <div class="hero-photo" aria-hidden="true">
-      <img src="assets/img/headshot.jpg" alt="" width="1200" height="1500" fetchpriority="high">
+      <img src="assets/img/hero-action.jpg" alt="" width="1200" height="1500" fetchpriority="high">
     </div>
     <div class="hero-inner">
       <div class="hero-copy">
@@ -549,30 +549,30 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
     <div class="marquee">
       <div class="marquee-seq" role="list">
         <span class="marquee-item" role="listitem">Owner &mdash; Pontotoc Insurance Agency
-          <svg width="8" height="8" viewBox="0 0 8 8" aria-hidden="true"><rect x="1.2" y="1.2" width="5.6" height="5.6" transform="rotate(45 4 4)" fill="#c9a24b"/></svg>
+          <svg width="8" height="8" viewBox="0 0 8 8" aria-hidden="true"><rect x="1.2" y="1.2" width="5.6" height="5.6" transform="rotate(45 4 4)" fill="#b98a2f"/></svg>
         </span>
         <span class="marquee-item" role="listitem">Retirement &amp; Income Strategist
-          <svg width="8" height="8" viewBox="0 0 8 8" aria-hidden="true"><rect x="1.2" y="1.2" width="5.6" height="5.6" transform="rotate(45 4 4)" fill="#c9a24b"/></svg>
+          <svg width="8" height="8" viewBox="0 0 8 8" aria-hidden="true"><rect x="1.2" y="1.2" width="5.6" height="5.6" transform="rotate(45 4 4)" fill="#b98a2f"/></svg>
         </span>
         <span class="marquee-item" role="listitem">Agency Builder &amp; Mentor
-          <svg width="8" height="8" viewBox="0 0 8 8" aria-hidden="true"><rect x="1.2" y="1.2" width="5.6" height="5.6" transform="rotate(45 4 4)" fill="#c9a24b"/></svg>
+          <svg width="8" height="8" viewBox="0 0 8 8" aria-hidden="true"><rect x="1.2" y="1.2" width="5.6" height="5.6" transform="rotate(45 4 4)" fill="#b98a2f"/></svg>
         </span>
         <span class="marquee-item" role="listitem">National Speaker &mdash; the MedicareCon stage
-          <svg width="8" height="8" viewBox="0 0 8 8" aria-hidden="true"><rect x="1.2" y="1.2" width="5.6" height="5.6" transform="rotate(45 4 4)" fill="#c9a24b"/></svg>
+          <svg width="8" height="8" viewBox="0 0 8 8" aria-hidden="true"><rect x="1.2" y="1.2" width="5.6" height="5.6" transform="rotate(45 4 4)" fill="#b98a2f"/></svg>
         </span>
       </div>
       <div class="marquee-seq" aria-hidden="true">
         <span class="marquee-item">Owner &mdash; Pontotoc Insurance Agency
-          <svg width="8" height="8" viewBox="0 0 8 8"><rect x="1.2" y="1.2" width="5.6" height="5.6" transform="rotate(45 4 4)" fill="#c9a24b"/></svg>
+          <svg width="8" height="8" viewBox="0 0 8 8"><rect x="1.2" y="1.2" width="5.6" height="5.6" transform="rotate(45 4 4)" fill="#b98a2f"/></svg>
         </span>
         <span class="marquee-item">Retirement &amp; Income Strategist
-          <svg width="8" height="8" viewBox="0 0 8 8"><rect x="1.2" y="1.2" width="5.6" height="5.6" transform="rotate(45 4 4)" fill="#c9a24b"/></svg>
+          <svg width="8" height="8" viewBox="0 0 8 8"><rect x="1.2" y="1.2" width="5.6" height="5.6" transform="rotate(45 4 4)" fill="#b98a2f"/></svg>
         </span>
         <span class="marquee-item">Agency Builder &amp; Mentor
-          <svg width="8" height="8" viewBox="0 0 8 8"><rect x="1.2" y="1.2" width="5.6" height="5.6" transform="rotate(45 4 4)" fill="#c9a24b"/></svg>
+          <svg width="8" height="8" viewBox="0 0 8 8"><rect x="1.2" y="1.2" width="5.6" height="5.6" transform="rotate(45 4 4)" fill="#b98a2f"/></svg>
         </span>
         <span class="marquee-item">National Speaker &mdash; the MedicareCon stage
-          <svg width="8" height="8" viewBox="0 0 8 8"><rect x="1.2" y="1.2" width="5.6" height="5.6" transform="rotate(45 4 4)" fill="#c9a24b"/></svg>
+          <svg width="8" height="8" viewBox="0 0 8 8"><rect x="1.2" y="1.2" width="5.6" height="5.6" transform="rotate(45 4 4)" fill="#b98a2f"/></svg>
         </span>
       </div>
     </div>
@@ -654,8 +654,8 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 
       <div class="mosaic" aria-label="Justin at work">
         <figure class="reveal">
-          <img src="assets/img/stage-talk.jpg" alt="Justin Stark speaking on the MedicareCon stage" width="1100" height="1650" loading="lazy">
-          <figcaption>The MedicareCon stage</figcaption>
+          <img src="assets/img/headshot.jpg" alt="Justin Stark, studio portrait in a plaid blazer" width="1200" height="1500" loading="lazy">
+          <figcaption>Straight answers, no jargon</figcaption>
         </figure>
         <figure class="reveal" data-d="1">
           <img src="assets/img/office-notes.jpg" alt="Justin Stark taking notes during a working session" width="1100" height="1650" loading="lazy">

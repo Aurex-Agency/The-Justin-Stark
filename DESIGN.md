@@ -1,6 +1,6 @@
 ---
 name: The Justin Stark
-description: A modern editorial-lux personal-brand page — photo-forward, oversized serif, champagne gold on near-black — for thejustinstark.com.
+description: A modern editorial-lux personal-brand page — photo-forward, oversized serif, authentic gold on near-black — for thejustinstark.com.
 colors:
   near-black: "#08090c"
   panel: "#0d0f15"
@@ -8,10 +8,10 @@ colors:
   navy-undertone: "#0b1a33"
   warm-ink: "#f4f1ea"
   letterpress-grey: "#a7a9b4"
-  champagne-gold: "#c9a24b"
-  gold-light: "#e6c877"
-  gold-rule: "rgba(201, 162, 75, 0.32)"
-  gold-rule-dim: "rgba(201, 162, 75, 0.14)"
+  champagne-gold: "#b98a2f"
+  gold-light: "#d4af37"
+  gold-rule: "rgba(185, 138, 47, 0.32)"
+  gold-rule-dim: "rgba(185, 138, 47, 0.14)"
   ink-hairline: "rgba(244, 241, 234, 0.07)"
   ink-underline: "rgba(244, 241, 234, 0.22)"
   pressed-ink: "#14100a"
@@ -141,7 +141,7 @@ spacing:
   section-rhythm: "7.5rem"
 components:
   button-gold:
-    backgroundColor: "linear-gradient(180deg, #e6c877, #c9a24b)"
+    backgroundColor: "linear-gradient(180deg, #d4af37, #b98a2f)"
     textColor: "{colors.pressed-ink}"
     rounded: "{rounded.stamp}"
     padding: "1.05rem 2.1rem"
@@ -151,7 +151,7 @@ components:
     rounded: "{rounded.stamp}"
     padding: "1.05rem 2.1rem"
   button-hairline-hover:
-    backgroundColor: "rgba(201, 162, 75, 0.07)"
+    backgroundColor: "rgba(185, 138, 47, 0.07)"
     textColor: "{colors.warm-ink}"
     rounded: "{rounded.stamp}"
   link-engraved:
@@ -177,26 +177,26 @@ components:
 
 **Creative North Star: "The Editorial Lux Portrait"**
 
-This world is a modern editorial-lux magazine feature on a near-black ground: Justin's real photography blended full-bleed into the dark, oversized Playfair Display headlines with italic gold turns, and champagne gold rationed to 2px bars, 1px hairlines, small caps, and one gold button per view. It refuses template flatness — no icon-card grids, no boxed sections, no gradient text, no glow. Sections are open compositions laid directly on the page; structure is drawn with hairline rules and asymmetric 5/7 grids, not with cards. A faint fixed film grain (inline SVG turbulence at 2.8% opacity) keeps the black from reading as flat pixels.
+This world is a modern editorial-lux magazine feature on a near-black ground: Justin's real photography blended full-bleed into the dark, oversized Playfair Display headlines with italic gold turns, and authentic gold rationed to 2px bars, 1px hairlines, small caps, and one gold button per view. It refuses template flatness — no icon-card grids, no boxed sections, no gradient text, no glow. Sections are open compositions laid directly on the page; structure is drawn with hairline rules and asymmetric 5/7 grids, not with cards. A faint fixed film grain (inline SVG turbulence at 2.8% opacity) keeps the black from reading as flat pixels.
 
 Photography leads. The first viewport is a split hero: the portrait bleeds in from the right behind a hairline offset frame, scrimmed into the black on every edge; copy owns the left 60%. Everywhere else the same discipline holds — images are slightly desaturated, overlaid with near-black and navy gradients, and never pasted on as bright rectangles. Motion is confident and quiet: the hero photo breathes in, copy rises on a stagger, credentials glide in a slow 36s marquee (paused on hover/focus, static on touch and narrow screens), and below-the-fold content fades up via IntersectionObserver. One ease drives everything, and the page is fully visible without JS or with reduced motion.
 
 **Key Characteristics:**
 - Photo-forward: real photography blended into near-black with scrims, desaturation, and hairline offset frames
 - Oversized Playfair 900 headlines (hero up to 5.9rem, lh 1.08, -0.015em) ending in italic-600 gold turns; Inter 400–700 as the functional voice
-- Two-gold champagne accent (#c9a24b / #e6c877) spent on 2px gradient bars, hairlines, small caps, and a single gold button per view
+- Two-gold champagne accent (#b98a2f / #d4af37) spent on 2px gradient bars, hairlines, small caps, and a single gold button per view
 - Editorial full-width rows and asymmetric 5/7 grids instead of card grids; hairline rules draw all structure
 - A scrolling credential marquee as the trust strip — uppercase Playfair with gold diamond separators
 - One easing everywhere: `cubic-bezier(.16, 1, .3, 1)`; motion opts in via JS and honors `prefers-reduced-motion`
 
 ## Colors
 
-A near-black ground warmed by one metal — champagne gold in two temperatures — over a navy undertone that lives only inside gradients.
+A near-black ground warmed by one metal — authentic gold in two temperatures — over a navy undertone that lives only inside gradients.
 
 ### Primary
-- **Champagne Gold** (`#c9a24b`): the standing gold — small-caps meta lines and field labels, marquee diamond separators, focus outlines, selection background, and the darker stop of every gold gradient.
-- **Gold Light** (`#e6c877`): the brighter gold for shine — italic `<em>` turns inside headings, engraved links, default link color, hover states on nav/wordmark/links, and the brighter stop of the gradients. The two golds meet only on surfaces: the button face (`linear-gradient(180deg, #e6c877, #c9a24b)`) and the 2px accent bars (`linear-gradient(90deg, #e6c877, #c9a24b)`) — never on text.
-- **Gold Rule** (`rgba(201,162,75,.32)`) and **Gold Rule Dim** (`rgba(201,162,75,.14)`): gold diluted into hairlines. Rule (.32) draws emphatic strokes — the portrait's offset frame, hairline-button borders, dashed placeholder underlines, meta-line middots. Rule Dim (.14) draws quiet structure — the hero photo's offset frame, marquee band and speaking band top/bottom rules, contact-band top rule, signature rule, scrolled header border.
+- **Gold** (`#b98a2f`): the standing gold — small-caps meta lines and field labels, marquee diamond separators, focus outlines, selection background, and the darker stop of every gold gradient.
+- **Gold Light** (`#d4af37`): the brighter gold for shine — italic `<em>` turns inside headings, engraved links, default link color, hover states on nav/wordmark/links, and the brighter stop of the gradients. The two golds meet only on surfaces: the button face (`linear-gradient(180deg, #d4af37, #b98a2f)`) and the 2px accent bars (`linear-gradient(90deg, #d4af37, #b98a2f)`) — never on text.
+- **Gold Rule** (`rgba(185,138,47,.32)`) and **Gold Rule Dim** (`rgba(185,138,47,.14)`): gold diluted into hairlines. Rule (.32) draws emphatic strokes — the portrait's offset frame, hairline-button borders, dashed placeholder underlines, meta-line middots. Rule Dim (.14) draws quiet structure — the hero photo's offset frame, marquee band and speaking band top/bottom rules, contact-band top rule, signature rule, scrolled header border.
 
 ### Neutral
 - **Near-Black** (`#08090c`): the page ground, the color every photo scrim resolves to, the scrolled header (`rgba(8,9,12,.9)` + 14px blur), and the mobile menu (.98).
@@ -211,7 +211,7 @@ A near-black ground warmed by one metal — champagne gold in two temperatures �
 ### Named Rules
 **The Gold Budget Rule.** Gold is spent on 2px bars, 1px hairlines, small caps, italic turns, diamond separators, and at most one gold-filled button per view. It is never a background wash, never a text gradient, never a glow.
 
-**The Two Golds Rule.** `#c9a24b` is standing gold (labels, separators, outlines, dark gradient stop); `#e6c877` is gold catching light (emphasis, links, hovers, bright gradient stop). Hover resolves gold toward ink (`#f4f1ea`), not toward brighter gold.
+**The Two Golds Rule.** `#b98a2f` is standing gold (labels, separators, outlines, dark gradient stop); `#d4af37` is gold catching light (emphasis, links, hovers, bright gradient stop). Hover resolves gold toward ink (`#f4f1ea`), not toward brighter gold.
 
 **The Undertone Rule.** Navy `#0b1a33` appears only inside gradients, scrims, and tints — never as a flat panel color, border, or text color.
 
@@ -229,7 +229,7 @@ A near-black ground warmed by one metal — champagne gold in two temperatures �
 - **Marquee** (Playfair 700, 1.02rem, 0.14em, uppercase, Warm Ink): the credential voice; steps down to a static 0.84rem wrapped row at ≤900px / pointer:coarse.
 - **Flourish** (Playfair italic 600, Gold Light): path promises (1.15rem), the signature (1.55rem), the form thank-you line (1.9rem). Grey italic at .85rem for quiet asides: path notes, form reassurance, reach note.
 - **Body** (Inter 400, 1.0625rem, 1.7): paragraphs capped at 68ch; hero sub `clamp(1.02rem, 1.4vw, 1.18rem)` at 52ch; section heads and ledes inside 64ch. `<strong>` inside grey copy = Warm Ink at 600 — the in-paragraph emphasis system.
-- **Label** (Inter 600, 0.72–0.8rem, 0.16–0.22em, uppercase): small caps (.78rem/.22em, Champagne Gold), field and reach labels (.72rem/.2em), buttons (.8rem/.18em), nav (.8rem/.16em, weight 500), portrait caption (.78rem/.2em, grey), mosaic captions (.74rem/.2em, ink), wordmark (Playfair 700, 1.12rem/.22em uppercase; .95rem in footer).
+- **Label** (Inter 600, 0.72–0.8rem, 0.16–0.22em, uppercase): small caps (.78rem/.22em, Gold), field and reach labels (.72rem/.2em), buttons (.8rem/.18em), nav (.8rem/.16em, weight 500), portrait caption (.78rem/.2em, grey), mosaic captions (.74rem/.2em, ink), wordmark (Playfair 700, 1.12rem/.22em uppercase; .95rem in footer).
 
 ### Named Rules
 **The No-Kicker Rule.** The small-caps voice is a voice for lines of content — the hero conference line, the speaking meta line, captions, field labels — with middot separators in Gold Rule when listed (separators hide and lines stack at ≤520px). It never sits above a heading as a kicker or eyebrow. Headings introduce themselves.
@@ -272,9 +272,9 @@ Square. Corners are 0 on every surface — photos, frames, rows, fields, bands. 
 Stamped, uppercase, deliberate.
 - **Shape:** near-square (2px radius); Inter 600, 0.8rem, 0.18em tracking, uppercase; `padding: 1.05rem 2.1rem` (header variant `.7rem 1.4rem`; full-width in the hero at ≤520px).
 - **Gold (primary):** the two-gold vertical gradient with a Gold Light border, Pressed Ink text. One per view region: "Book a Call" / "Check Availability" / "Send It".
-- **Hairline (secondary):** transparent with a Gold Rule border, Gold Light text; hover fills faintly (`rgba(201,162,75,.07)`), brightens the border, resolves text to ink.
+- **Hairline (secondary):** transparent with a Gold Rule border, Gold Light text; hover fills faintly (`rgba(185,138,47,.07)`), brightens the border, resolves text to ink.
 - **Hover:** both lift `-2px` over .35s on the house ease; gold adds the hover-lift shadow.
-- **Focus:** global `:focus-visible` — 2px Champagne Gold outline, 3px offset.
+- **Focus:** global `:focus-visible` — 2px Gold outline, 3px offset.
 
 ### Engraved Link
 The tertiary action: small-caps text (Inter 600, 0.78rem, 0.2em, uppercase, Gold Light) on a resting Gold Rule hairline; on hover a Gold Light line draws over it left-to-right (.5s, house ease) while the text resolves to ink. Used inside path rows.
@@ -301,7 +301,7 @@ Three candids in a 7fr/5fr × 2-row grid: the first figure spans both rows (min-
 The lead-capture close: a full-bleed band (Gold Rule Dim top rule, `linear-gradient(180deg, Panel, rgba(11,26,51,.3) 130%)` fill, `clamp(5rem, 9vw, 7.5rem)` padding) holding a 5fr/7fr grid — intro left (headline with italic turn, grey lede, the reach list, italic reassurance note), form right.
 
 ### Contact Field
-Underline-only fields: transparent, borderless except a 1px Ink Underline bottom rule, no radius, ink text at 1rem, grey placeholders (.75 alpha). Small-caps gold labels above (.72rem/.2em), gold-light asterisk for required. Focus turns the underline Champagne Gold (.3s) plus the global gold outline at 4px offset. Selects: `appearance: none` with an inline gold chevron SVG, options on Panel. Textareas resize vertically from 6.2rem. Field rows are 2×1fr (1.8rem gap), stacking at ≤520px. The submit row pairs the gold button with an italic grey reassurance; success swaps the form for a centered italic-gold serif line (1.9rem) + grey copy (`role="status"`, `aria-live="polite"`, focus moved). A visually-hidden honeypot guards the form.
+Underline-only fields: transparent, borderless except a 1px Ink Underline bottom rule, no radius, ink text at 1rem, grey placeholders (.75 alpha). Small-caps gold labels above (.72rem/.2em), gold-light asterisk for required. Focus turns the underline Gold (.3s) plus the global gold outline at 4px offset. Selects: `appearance: none` with an inline gold chevron SVG, options on Panel. Textareas resize vertically from 6.2rem. Field rows are 2×1fr (1.8rem gap), stacking at ≤520px. The submit row pairs the gold button with an italic grey reassurance; success swaps the form for a centered italic-gold serif line (1.9rem) + grey copy (`role="status"`, `aria-live="polite"`, focus moved). A visually-hidden honeypot guards the form.
 
 ### Reach List
 Direct-contact rows ruled by Ink Hairline (1.35rem padding, top rule on the first): a small-caps gold label above each entry; live links in ink (1.02rem, hover to Gold Light, `overflow-wrap: anywhere`); unresolved entries as placeholder slots — italic grey (.95rem) on a 1px dashed Gold Rule underline, each with an HTML `REPLACE:` comment showing the exact swap-in markup. Honest slots, never fake content.
