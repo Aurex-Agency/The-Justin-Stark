@@ -18,6 +18,17 @@ colors:
   scrim-75: "rgba(0, 0, 0, 0.75)"
   scrim-80: "rgba(0, 0, 0, 0.8)"
   scrim-90: "rgba(0, 0, 0, 0.9)"
+  gold-highlight: "#f2dd85"
+  gold-bright: "#e0bd4e"
+  gold-shadow: "#96701e"
+  gold-bevel-edge: "#e6cd6b"
+  bevel-light: "rgba(255, 247, 214, 0.6)"
+  bevel-dark: "rgba(70, 49, 8, 0.5)"
+  sheen-light: "rgba(255, 252, 232, 0.6)"
+  etch-light: "rgba(255, 246, 205, 0.35)"
+  gold-glow: "rgba(212, 175, 55, 0.42)"
+  gold-glow-peak: "rgba(212, 175, 55, 0.65)"
+  gold-glow-line: "rgba(212, 175, 55, 0.25)"
 typography:
   display:
     fontFamily: "'Playfair Display', Georgia, 'Times New Roman', serif"
@@ -141,10 +152,15 @@ spacing:
   section-rhythm: "7.5rem"
 components:
   button-gold:
-    backgroundColor: "linear-gradient(180deg, #d4af37, #b98a2f)"
+    backgroundColor: "linear-gradient(180deg, #f2dd85 0%, #e0bd4e 24%, #d4af37 46%, #b98a2f 68%, #96701e 100%)"
     textColor: "{colors.pressed-ink}"
     rounded: "{rounded.stamp}"
     padding: "1.05rem 2.1rem"
+  button-gold-hover:
+    backgroundColor: "linear-gradient(180deg, #f2dd85 0%, #e0bd4e 24%, #d4af37 46%, #b98a2f 68%, #96701e 100%)"
+    textColor: "{colors.pressed-ink}"
+    rounded: "{rounded.stamp}"
+    boxShadow: "0 0 22px {colors.gold-glow}, pulsing to 0 0 36px {colors.gold-glow-peak} (user-requested glow; specular sheen sweep via ::before)"
   button-hairline:
     backgroundColor: "transparent"
     textColor: "{colors.gold-light}"
@@ -177,14 +193,14 @@ components:
 
 **Creative North Star: "The Editorial Lux Portrait"**
 
-This world is a modern editorial-lux magazine feature on a near-black ground: Justin's real photography blended full-bleed into the dark, oversized Playfair Display headlines with italic gold turns, and authentic gold rationed to 2px bars, 1px hairlines, small caps, and one gold button per view. It refuses template flatness — no icon-card grids, no boxed sections, no gradient text, no glow. Sections are open compositions laid directly on the page; structure is drawn with hairline rules and asymmetric 5/7 grids, not with cards. A faint fixed film grain (inline SVG turbulence at 2.8% opacity) keeps the black from reading as flat pixels.
+This world is a modern editorial-lux magazine feature on a near-black ground: Justin's real photography blended full-bleed into the dark, oversized Playfair Display headlines with italic gold turns, and authentic gold rationed to 2px bars, 1px hairlines, small caps, and one gold button per view. It refuses template flatness — no icon-card grids, no boxed sections, no gradient text; glow is reserved for gold-button hover (a user-requested, earned exception). Sections are open compositions laid directly on the page; structure is drawn with hairline rules and asymmetric 5/7 grids, not with cards. A faint fixed film grain (inline SVG turbulence at 2.8% opacity) keeps the black from reading as flat pixels.
 
 Photography leads. The first viewport is a split hero: the portrait bleeds in from the right behind a hairline offset frame, scrimmed into the black on every edge; copy owns the left 60%. Everywhere else the same discipline holds — images are slightly desaturated, overlaid with near-black and navy gradients, and never pasted on as bright rectangles. Motion is confident and quiet: the hero photo breathes in, copy rises on a stagger, credentials glide in a slow 36s marquee (paused on hover/focus, static on touch and narrow screens), and below-the-fold content fades up via IntersectionObserver. One ease drives everything, and the page is fully visible without JS or with reduced motion.
 
 **Key Characteristics:**
 - Photo-forward: real photography blended into near-black with scrims, desaturation, and hairline offset frames
 - Oversized Playfair 900 headlines (hero up to 5.9rem, lh 1.08, -0.015em) ending in italic-600 gold turns; Inter 400–700 as the functional voice
-- Two-gold champagne accent (#b98a2f / #d4af37) spent on 2px gradient bars, hairlines, small caps, and a single gold button per view
+- Metallic gold accent (#b98a2f core / #d4af37 bright, #f2dd85 highlight to #96701e shadow) rendered as polished metal on buttons and 2px foil bars; hairlines and small caps stay flat gold
 - Editorial full-width rows and asymmetric 5/7 grids instead of card grids; hairline rules draw all structure
 - A scrolling credential marquee as the trust strip — uppercase Playfair with gold diamond separators
 - One easing everywhere: `cubic-bezier(.16, 1, .3, 1)`; motion opts in via JS and honors `prefers-reduced-motion`
