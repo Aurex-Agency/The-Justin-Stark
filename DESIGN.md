@@ -15,6 +15,9 @@ colors:
   ink-hairline: "rgba(244, 241, 234, 0.07)"
   ink-underline: "rgba(244, 241, 234, 0.22)"
   pressed-ink: "#14100a"
+  scrim-75: "rgba(0, 0, 0, 0.75)"
+  scrim-80: "rgba(0, 0, 0, 0.8)"
+  scrim-90: "rgba(0, 0, 0, 0.9)"
 typography:
   display:
     fontFamily: "'Playfair Display', Georgia, 'Times New Roman', serif"
@@ -53,6 +56,78 @@ typography:
     fontSize: "0.78rem"
     fontWeight: 600
     letterSpacing: "0.22em"
+  headline-about:
+    fontFamily: "'Playfair Display', Georgia, 'Times New Roman', serif"
+    fontSize: "clamp(2.1rem, 4.2vw, 3.2rem)"
+    fontWeight: 900
+  headline-speaking:
+    fontFamily: "'Playfair Display', Georgia, 'Times New Roman', serif"
+    fontSize: "clamp(2.4rem, 5vw, 4rem)"
+    fontWeight: 900
+  headline-contact:
+    fontFamily: "'Playfair Display', Georgia, 'Times New Roman', serif"
+    fontSize: "clamp(2.2rem, 4.6vw, 3.4rem)"
+    fontWeight: 900
+  display-mobile:
+    fontFamily: "'Playfair Display', Georgia, 'Times New Roman', serif"
+    fontSize: "clamp(2.6rem, 12vw, 3.4rem)"
+    fontWeight: 900
+  thanks-line:
+    fontFamily: "'Playfair Display', Georgia, 'Times New Roman', serif"
+    fontSize: "1.9rem"
+    fontWeight: 600
+  menu-link:
+    fontFamily: "'Playfair Display', Georgia, 'Times New Roman', serif"
+    fontSize: "1.7rem"
+    fontWeight: 700
+  signature-line:
+    fontFamily: "'Playfair Display', Georgia, 'Times New Roman', serif"
+    fontSize: "1.55rem"
+    fontWeight: 600
+  reach-value:
+    fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    fontSize: "1.02rem"
+    fontWeight: 400
+  wordmark:
+    fontFamily: "'Playfair Display', Georgia, 'Times New Roman', serif"
+    fontSize: "1.12rem"
+    fontWeight: 700
+    letterSpacing: "0.22em"
+  body-list:
+    fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    fontSize: "0.97rem"
+    fontWeight: 400
+  slot-italic:
+    fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    fontSize: "0.95rem"
+    fontWeight: 400
+  note-italic:
+    fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    fontSize: "0.85rem"
+    fontWeight: 400
+  marquee-static:
+    fontFamily: "'Playfair Display', Georgia, 'Times New Roman', serif"
+    fontSize: "0.84rem"
+    fontWeight: 700
+  legal:
+    fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    fontSize: "0.82rem"
+    fontWeight: 400
+  nav-link:
+    fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    fontSize: "0.8rem"
+    fontWeight: 500
+    letterSpacing: "0.16em"
+  caption-mosaic:
+    fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    fontSize: "0.74rem"
+    fontWeight: 600
+    letterSpacing: "0.2em"
+  micro-label:
+    fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    fontSize: "0.72rem"
+    fontWeight: 600
+    letterSpacing: "0.2em"
 rounded:
   none: "0"
   stamp: "2px"
