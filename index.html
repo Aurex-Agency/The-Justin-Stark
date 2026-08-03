@@ -79,6 +79,7 @@ p{max-width:68ch}
 .smallcaps{
   font-family:var(--sans);font-weight:600;font-size:.78rem;
   letter-spacing:.22em;text-transform:uppercase;color:var(--gold);
+  white-space:nowrap;
 }
 
 /* reveals — visible by default; JS opts elements in */
@@ -191,8 +192,8 @@ html.js .reveal.in[data-d="3"]{transition-delay:.24s}
 }
 .plate-rules{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .plate-rules rect{fill:none;vector-effect:non-scaling-stroke}
-.plate-outer{stroke:var(--rule);stroke-width:1.2}
-.plate-inner{stroke:var(--rule-dim);stroke-width:1}
+.plate-outer{stroke:var(--rule);stroke-width:1.2;x:.5px;y:.5px;width:calc(100% - 1px);height:calc(100% - 1px)}
+.plate-inner{stroke:var(--rule-dim);stroke-width:1;x:8.5px;y:8.5px;width:calc(100% - 17px);height:calc(100% - 17px)}
 @media (prefers-reduced-motion:no-preference){
   .plate-outer{stroke-dasharray:100;stroke-dashoffset:100;animation:stamp 1.7s var(--ease-out) .15s forwards}
   .plate-inner{stroke-dasharray:100;stroke-dashoffset:100;animation:stamp 1.7s var(--ease-out) .55s forwards}
@@ -349,7 +350,7 @@ html.js .reveal.in[data-d="3"]{transition-delay:.24s}
 .reach-list li{padding:1.35rem 0;border-bottom:1px solid rgba(244,241,234,.07)}
 .reach-list li:first-child{border-top:1px solid rgba(244,241,234,.07)}
 .reach-label{display:block;font-weight:600;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.35rem}
-.reach-list a{color:var(--ink);text-decoration:none;font-size:1.02rem}
+.reach-list a{color:var(--ink);text-decoration:none;font-size:1.02rem;overflow-wrap:anywhere}
 .reach-list a:hover{color:var(--gold-2)}
 .slot{
   display:inline-block;color:var(--soft);font-style:italic;font-size:.95rem;
@@ -473,8 +474,8 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   <section class="hero" aria-label="Introduction">
     <div class="hero-plate">
       <svg class="plate-rules" aria-hidden="true" preserveAspectRatio="none">
-        <rect class="plate-outer" x="0.5" y="0.5" width="99%" height="99%" pathLength="100"/>
-        <rect class="plate-inner" x="8" y="8" width="calc(100% - 16px)" height="calc(100% - 16px)" pathLength="100"/>
+        <rect class="plate-outer" pathLength="100"/>
+        <rect class="plate-inner" pathLength="100"/>
       </svg>
 
       <div class="hero-seal hero-rise r1">
@@ -507,7 +508,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 
       <!-- REPLACE: add the conference name once confirmed, e.g. "On stage at {{Conference Name}}" -->
       <p class="hero-note hero-rise r5">
-        <span class="smallcaps">On the conference stage</span><span class="sep" aria-hidden="true">&#183;</span><span class="smallcaps">August 4&ndash;5, 2026</span><span class="sep" aria-hidden="true">&#183;</span><span class="smallcaps">Now booking 2026&ndash;27</span>
+        <span class="smallcaps">On the conference stage</span> <span class="sep" aria-hidden="true">&#183;</span> <span class="smallcaps">August 4&ndash;5, 2026</span> <span class="sep" aria-hidden="true">&#183;</span> <span class="smallcaps">Now booking 2026&ndash;27</span>
       </p>
     </div>
   </section>
@@ -630,7 +631,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
           <a class="btn btn-gold" href="#contact">Check Availability</a>
         </div>
         <p class="speaking-meta">
-          <span class="smallcaps">Now booking 2026&ndash;27</span><span class="sep" aria-hidden="true">&#183;</span><span class="smallcaps">Keynotes</span><span class="sep" aria-hidden="true">&#183;</span><span class="smallcaps">Team trainings</span>
+          <span class="smallcaps">Now booking 2026&ndash;27</span> <span class="sep" aria-hidden="true">&#183;</span> <span class="smallcaps">Keynotes</span> <span class="sep" aria-hidden="true">&#183;</span> <span class="smallcaps">Team trainings</span>
         </p>
       </div>
     </div>
