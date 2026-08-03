@@ -92,20 +92,46 @@ html.js .reveal.in[data-d="3"]{transition-delay:.24s}
 /*  Buttons & links                                                    */
 /* ------------------------------------------------------------------ */
 .btn{
+  position:relative;overflow:hidden;
   display:inline-block;font-family:var(--sans);font-weight:600;font-size:.8rem;
   letter-spacing:.18em;text-transform:uppercase;text-decoration:none;
   padding:1.05rem 2.1rem;border-radius:2px;cursor:pointer;
   transition:transform .35s var(--ease-out),box-shadow .35s var(--ease-out),background-color .35s,border-color .35s,color .35s;
 }
+/* polished metal: highlight ridge, rich core, shadowed base + machined bevel */
 .btn-gold{
-  background:linear-gradient(180deg,var(--gold-2),var(--gold));
-  color:#14100a;border:1px solid var(--gold-2);
+  background:linear-gradient(180deg,#f2dd85 0%,#e0bd4e 24%,#d4af37 46%,#b98a2f 68%,#96701e 100%);
+  color:#14100a;border:1px solid #e6cd6b;
+  box-shadow:inset 0 1px 0 rgba(255,247,214,.6),inset 0 -1px 0 rgba(70,49,8,.5);
+  text-shadow:0 1px 0 rgba(255,246,205,.35);
 }
-.btn-gold:hover{transform:translateY(-2px);box-shadow:0 14px 28px -14px rgba(0,0,0,.75);color:#14100a}
+/* specular sweep that crosses the face on hover */
+.btn-gold::before{
+  content:"";position:absolute;top:-4px;bottom:-4px;left:-65%;width:42%;
+  background:linear-gradient(105deg,transparent 0%,rgba(255,252,232,.6) 50%,transparent 100%);
+  transform:skewX(-18deg);pointer-events:none;
+}
+.btn-gold:hover,.btn-gold:focus-visible{
+  transform:translateY(-2px);color:#14100a;
+  box-shadow:
+    inset 0 1px 0 rgba(255,247,214,.6),inset 0 -1px 0 rgba(70,49,8,.5),
+    0 0 22px rgba(212,175,55,.42),0 12px 26px -12px rgba(0,0,0,.7);
+  animation:goldPulse 2.2s ease-in-out .35s infinite;
+}
+.btn-gold:hover::before,.btn-gold:focus-visible::before{animation:sheen .9s var(--ease-out) forwards}
+@keyframes sheen{to{left:125%}}
+@keyframes goldPulse{
+  50%{box-shadow:
+    inset 0 1px 0 rgba(255,247,214,.6),inset 0 -1px 0 rgba(70,49,8,.5),
+    0 0 36px rgba(212,175,55,.65),0 12px 26px -12px rgba(0,0,0,.7)}
+}
 .btn-line{
   background:transparent;color:var(--gold-2);border:1px solid var(--rule);
 }
-.btn-line:hover{border-color:var(--gold-2);background:rgba(185,138,47,.07);color:var(--ink);transform:translateY(-2px)}
+.btn-line:hover{
+  border-color:var(--gold-2);background:rgba(185,138,47,.07);color:var(--ink);transform:translateY(-2px);
+  box-shadow:0 0 16px rgba(212,175,55,.25);
+}
 
 .link-engraved{
   position:relative;display:inline-block;text-decoration:none;
@@ -212,7 +238,7 @@ html.js .reveal.in[data-d="3"]{transition-delay:.24s}
 
 .hero-inner{position:relative;z-index:3;width:min(100% - 3rem,1180px);margin-inline:auto;padding:8rem 0 5rem}
 .hero-copy{max-width:60%}
-.hero-bar{width:76px;height:2px;background:linear-gradient(90deg,var(--gold-2),var(--gold));margin-bottom:2.4rem}
+.hero-bar{width:76px;height:2px;background:linear-gradient(90deg,#96701e,#d4af37 32%,#f2dd85 50%,#d4af37 68%,#96701e);margin-bottom:2.4rem}
 .hero h1{font-size:clamp(3rem,6.8vw,5.9rem);max-width:13ch}
 .hero-sub{margin-top:2rem;max-width:52ch;color:var(--soft);font-size:clamp(1.02rem,1.4vw,1.18rem)}
 .hero-cta{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2.8rem}
@@ -257,7 +283,7 @@ html.js .reveal.in[data-d="3"]{transition-delay:.24s}
 .section-head{max-width:64ch}
 .section-head h2{font-size:clamp(2.2rem,4.6vw,3.6rem)}
 .section-head .lede{margin-top:1.3rem;color:var(--soft)}
-.head-rule{width:74px;height:2px;background:linear-gradient(90deg,var(--gold-2),var(--gold));margin-top:1.9rem}
+.head-rule{width:74px;height:2px;background:linear-gradient(90deg,#96701e,#d4af37 32%,#f2dd85 50%,#d4af37 68%,#96701e);margin-top:1.9rem}
 
 /* ------------------------------------------------------------------ */
 /*  How I help — editorial rows                                        */

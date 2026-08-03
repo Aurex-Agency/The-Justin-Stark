@@ -8,6 +8,15 @@
         "value": "inter",
         "createdAt": "2026-08-03T21:16:07.646Z",
         "reason": "Pinned by the client build plan: Playfair Display headlines + Inter body"
+      },
+      {
+        "rule": "dark-glow",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-08-03T21:34:25.643Z",
+        "reason": "User explicitly requested a gold glow animation on button hover"
       }
     ]
   }
