@@ -1,44 +1,47 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-03T20:35:00Z",
+  "generatedAt": "2026-08-03T21:05:00Z",
   "title": "Design System: The Justin Stark",
   "extensions": {
     "colorMeta": {
-      "table": { "role": "neutral", "displayName": "Table", "canonical": "#08090c", "tonalRamp": ["oklch(15% 0.01 265)", "oklch(26% 0.01 265)", "oklch(38% 0.01 265)", "oklch(49% 0.01 265)", "oklch(60% 0.01 265)", "oklch(72% 0.01 265)", "oklch(84% 0.01 265)", "oklch(95% 0.005 265)"] },
-      "card-stock": { "role": "neutral", "displayName": "Card Stock", "canonical": "#0d0f15", "tonalRamp": ["oklch(15% 0.012 265)", "oklch(26% 0.012 265)", "oklch(38% 0.012 265)", "oklch(49% 0.012 265)", "oklch(60% 0.012 265)", "oklch(72% 0.012 265)", "oklch(84% 0.012 265)", "oklch(95% 0.006 265)"] },
-      "second-sheet": { "role": "neutral", "displayName": "Second Sheet", "canonical": "#12151d", "tonalRamp": ["oklch(15% 0.015 265)", "oklch(26% 0.015 265)", "oklch(38% 0.015 265)", "oklch(49% 0.015 265)", "oklch(60% 0.015 265)", "oklch(72% 0.015 265)", "oklch(84% 0.015 265)", "oklch(95% 0.008 265)"] },
-      "navy-tissue": { "role": "neutral", "displayName": "Navy Tissue", "canonical": "#0b1a33", "tonalRamp": ["oklch(15% 0.05 258)", "oklch(26% 0.06 258)", "oklch(38% 0.07 258)", "oklch(49% 0.07 258)", "oklch(60% 0.07 258)", "oklch(72% 0.06 258)", "oklch(84% 0.05 258)", "oklch(95% 0.02 258)"] },
-      "engraved-ink": { "role": "neutral", "displayName": "Engraved Ink", "canonical": "#f4f1ea", "tonalRamp": ["oklch(15% 0.008 90)", "oklch(26% 0.008 90)", "oklch(38% 0.008 90)", "oklch(49% 0.008 90)", "oklch(60% 0.008 90)", "oklch(72% 0.008 90)", "oklch(84% 0.008 90)", "oklch(96% 0.008 90)"] },
+      "near-black": { "role": "neutral", "displayName": "Near-Black", "canonical": "#08090c", "tonalRamp": ["oklch(15% 0.01 265)", "oklch(26% 0.01 265)", "oklch(38% 0.01 265)", "oklch(49% 0.01 265)", "oklch(60% 0.01 265)", "oklch(72% 0.01 265)", "oklch(84% 0.01 265)", "oklch(95% 0.005 265)"] },
+      "panel": { "role": "neutral", "displayName": "Panel", "canonical": "#0d0f15", "tonalRamp": ["oklch(15% 0.012 265)", "oklch(26% 0.012 265)", "oklch(38% 0.012 265)", "oklch(49% 0.012 265)", "oklch(60% 0.012 265)", "oklch(72% 0.012 265)", "oklch(84% 0.012 265)", "oklch(95% 0.006 265)"] },
+      "panel-raised": { "role": "neutral", "displayName": "Panel Raised (reserved, currently unused)", "canonical": "#12151d", "tonalRamp": ["oklch(15% 0.015 265)", "oklch(26% 0.015 265)", "oklch(38% 0.015 265)", "oklch(49% 0.015 265)", "oklch(60% 0.015 265)", "oklch(72% 0.015 265)", "oklch(84% 0.015 265)", "oklch(95% 0.008 265)"] },
+      "navy-undertone": { "role": "neutral", "displayName": "Navy Undertone", "canonical": "#0b1a33", "tonalRamp": ["oklch(15% 0.05 258)", "oklch(26% 0.06 258)", "oklch(38% 0.07 258)", "oklch(49% 0.07 258)", "oklch(60% 0.07 258)", "oklch(72% 0.06 258)", "oklch(84% 0.05 258)", "oklch(95% 0.02 258)"] },
+      "warm-ink": { "role": "neutral", "displayName": "Warm Ink", "canonical": "#f4f1ea", "tonalRamp": ["oklch(15% 0.008 90)", "oklch(26% 0.008 90)", "oklch(38% 0.008 90)", "oklch(49% 0.008 90)", "oklch(60% 0.008 90)", "oklch(72% 0.008 90)", "oklch(84% 0.008 90)", "oklch(96% 0.008 90)"] },
       "letterpress-grey": { "role": "neutral", "displayName": "Letterpress Grey", "canonical": "#a7a9b4", "tonalRamp": ["oklch(15% 0.01 275)", "oklch(26% 0.01 275)", "oklch(38% 0.012 275)", "oklch(49% 0.012 275)", "oklch(60% 0.012 275)", "oklch(72% 0.012 275)", "oklch(84% 0.01 275)", "oklch(95% 0.006 275)"] },
-      "champagne-foil": { "role": "primary", "displayName": "Champagne Foil", "canonical": "#c9a24b", "tonalRamp": ["oklch(15% 0.04 85)", "oklch(26% 0.06 85)", "oklch(38% 0.08 85)", "oklch(49% 0.09 85)", "oklch(60% 0.1 85)", "oklch(72% 0.1 85)", "oklch(84% 0.09 85)", "oklch(95% 0.05 85)"] },
-      "foil-light": { "role": "primary", "displayName": "Foil Catching Light", "canonical": "#e6c877", "tonalRamp": ["oklch(15% 0.04 90)", "oklch(26% 0.06 90)", "oklch(38% 0.08 90)", "oklch(49% 0.09 90)", "oklch(60% 0.1 90)", "oklch(72% 0.11 90)", "oklch(84% 0.11 90)", "oklch(95% 0.06 90)"] },
-      "foil-rule": { "role": "primary", "displayName": "Foil Rule", "canonical": "rgba(201, 162, 75, 0.32)" },
-      "foil-rule-dim": { "role": "primary", "displayName": "Foil Rule Dim", "canonical": "rgba(201, 162, 75, 0.14)" },
+      "champagne-gold": { "role": "primary", "displayName": "Champagne Gold", "canonical": "#c9a24b", "tonalRamp": ["oklch(15% 0.04 85)", "oklch(26% 0.06 85)", "oklch(38% 0.08 85)", "oklch(49% 0.09 85)", "oklch(60% 0.1 85)", "oklch(72% 0.1 85)", "oklch(84% 0.09 85)", "oklch(95% 0.05 85)"] },
+      "gold-light": { "role": "primary", "displayName": "Gold Light", "canonical": "#e6c877", "tonalRamp": ["oklch(15% 0.04 90)", "oklch(26% 0.06 90)", "oklch(38% 0.08 90)", "oklch(49% 0.09 90)", "oklch(60% 0.1 90)", "oklch(72% 0.11 90)", "oklch(84% 0.11 90)", "oklch(95% 0.06 90)"] },
+      "gold-rule": { "role": "primary", "displayName": "Gold Rule", "canonical": "rgba(201, 162, 75, 0.32)" },
+      "gold-rule-dim": { "role": "primary", "displayName": "Gold Rule Dim", "canonical": "rgba(201, 162, 75, 0.14)" },
       "ink-hairline": { "role": "neutral", "displayName": "Ink Hairline", "canonical": "rgba(244, 241, 234, 0.07)" },
       "ink-underline": { "role": "neutral", "displayName": "Ink Underline", "canonical": "rgba(244, 241, 234, 0.22)" },
-      "stamped-ink": { "role": "neutral", "displayName": "Stamped Ink", "canonical": "#14100a", "tonalRamp": ["oklch(15% 0.015 75)", "oklch(26% 0.015 75)", "oklch(38% 0.015 75)", "oklch(49% 0.015 75)", "oklch(60% 0.015 75)", "oklch(72% 0.015 75)", "oklch(84% 0.012 75)", "oklch(95% 0.008 75)"] }
+      "pressed-ink": { "role": "neutral", "displayName": "Pressed Ink", "canonical": "#14100a", "tonalRamp": ["oklch(15% 0.015 75)", "oklch(26% 0.015 75)", "oklch(38% 0.015 75)", "oklch(49% 0.015 75)", "oklch(60% 0.015 75)", "oklch(72% 0.015 75)", "oklch(84% 0.012 75)", "oklch(95% 0.008 75)"] }
     },
     "typographyMeta": {
-      "display": { "displayName": "Display", "purpose": "Hero headline only; Playfair 900, balanced wrap, max-width 17ch, centered." },
-      "headline": { "displayName": "Headline", "purpose": "Section h2s; ends with an italic-600 flourish in Foil Catching Light." },
-      "title": { "displayName": "Title", "purpose": "Door/aside/credential headings, Playfair 700, 1.18-1.42rem." },
-      "flourish": { "displayName": "Italic Flourish", "purpose": "Playfair italic 600 in gold: door promises, signature (1.55rem), thank-you line (1.9rem); grey italic for quiet asides." },
-      "body": { "displayName": "Body", "purpose": "Inter 400 at 1.0625rem/1.7, max 68ch; strong = ink 600." },
-      "label": { "displayName": "Small Caps / Label", "purpose": "Inter 600 uppercase 0.72-0.8rem, 0.16-0.22em tracking. Content lines, captions, field labels, buttons, nav. Never a kicker above a heading." }
+      "display": { "displayName": "Display", "purpose": "Hero headline only; Playfair 900, lh 1.08, max-width 13ch; clamp(2.6rem, 12vw, 3.4rem) at <=520px." },
+      "headline": { "displayName": "Headline", "purpose": "Section h2s at graded clamps (speaking up to 4rem, about down to 3.2rem cap); ends with an italic-600 turn in Gold Light." },
+      "title": { "displayName": "Title", "purpose": "Path-row headings, Playfair 700, clamp(1.6rem, 2.6vw, 2.1rem); mobile-menu links 1.7rem." },
+      "marquee": { "displayName": "Marquee", "purpose": "Credential strip voice: Playfair 700 uppercase, 1.02rem/.14em; static wrapped row steps to .84rem at <=900px / pointer:coarse." },
+      "flourish": { "displayName": "Italic Flourish", "purpose": "Playfair italic 600 in gold: path promises (1.15rem), signature (1.55rem), thank-you line (1.9rem); grey italic .85rem for quiet asides." },
+      "body": { "displayName": "Body", "purpose": "Inter 400 at 1.0625rem/1.7, max 68ch (hero sub 52ch); strong = ink 600." },
+      "label": { "displayName": "Small Caps / Label", "purpose": "Inter 600 uppercase 0.72-0.8rem, 0.16-0.22em tracking. Meta lines, captions, field labels, buttons, nav. Never a kicker above a heading." }
     },
     "shadows": [
-      { "name": "resting-mat", "value": "0 24px 50px -30px rgba(0,0,0,.85)", "purpose": "Under the portrait photo mat; strip frames use 0 20px 44px -30px rgba(0,0,0,.85)." },
-      { "name": "hover-lift", "value": "0 14px 28px -14px rgba(0,0,0,.75)", "purpose": "Foil button hover, paired with translateY(-2px)." },
+      { "name": "portrait-weight", "value": "0 30px 60px -32px rgba(0,0,0,.9)", "purpose": "Under the about portrait only; the heaviest shadow in the system." },
+      { "name": "hover-lift", "value": "0 14px 28px -14px rgba(0,0,0,.75)", "purpose": "Gold button hover, paired with translateY(-2px)." },
       { "name": "header-float", "value": "0 10px 30px -18px rgba(0,0,0,.8)", "purpose": "Fixed header once scrolled past 24px." }
     ],
     "motion": [
       { "name": "ease-out", "value": "cubic-bezier(.16, 1, .3, 1)", "purpose": "The single house ease for every transition and animation." },
-      { "name": "stamp", "value": "stroke-dashoffset 100->0, 1.7s, delays .15s/.55s", "purpose": "Hero plate double border draws itself (pathLength 100); reduced-motion gated." },
-      { "name": "hero-rise", "value": "opacity+translateY(18px), .9s, delays .35s-1.05s", "purpose": "Staggered hero entrance: seal, headline, fleuron+sub, CTAs, conference line." },
-      { "name": "reveal", "value": "opacity+translateY(16px), .8s, data-d stagger .08s steps", "purpose": "IntersectionObserver scroll reveals (rootMargin -8% bottom, threshold .1); visible by default without JS or with reduced motion." },
-      { "name": "micro", "value": ".3s-.5s", "purpose": "Color/border shifts .3s; button lift .35s; engraved-link underline draw .5s from left." }
+      { "name": "photoIn", "value": "opacity 0 + scale(1.04) -> rest, 1.4s, delay .2s", "purpose": "Hero photo breathes in; reduced-motion gated." },
+      { "name": "hero-rise", "value": "opacity + translateY(22px), .9s, delays .25/.4/.58/.76s", "purpose": "Staggered hero copy entrance: bar+headline, sub, CTAs, meta line." },
+      { "name": "marquee", "value": "translateX(-50%), 36s linear infinite; paused on hover/focus-within", "purpose": "Credential marquee loop; static wrapped row at <=900px / pointer:coarse." },
+      { "name": "reveal", "value": "opacity + translateY(18px), .8s, data-d stagger .08s steps", "purpose": "IntersectionObserver scroll reveals (rootMargin -8% bottom, threshold .1); visible by default without JS or with reduced motion." },
+      { "name": "micro", "value": ".3s-1.2s", "purpose": "Color/border shifts .3s; button lift .35s; path-row hover fill .45s; link underline draw .5s; mosaic zoom scale(1.035) 1.2s." }
     ],
     "breakpoints": [
+      { "name": "hero-rebalance", "value": "1100px" },
       { "name": "nav-collapse", "value": "900px" },
       { "name": "stack", "value": "520px" },
       { "name": "narrow", "value": "360px" }
@@ -46,18 +49,18 @@
   },
   "components": [
     {
-      "name": "Foil Button",
+      "name": "Gold Button",
       "kind": "button",
-      "refersTo": "button-foil",
-      "description": "The one gold-stamped primary action per view region (Book a Call / Send It).",
-      "html": "<a class=\"ds-btn-foil\" href=\"#\">Book a Call</a>",
-      "css": ".ds-btn-foil { display: inline-block; font-family: 'Inter', sans-serif; font-weight: 600; font-size: .8rem; letter-spacing: .18em; text-transform: uppercase; text-decoration: none; padding: 1.05rem 2.1rem; border-radius: 2px; cursor: pointer; background: linear-gradient(180deg, var(--gold-2, #e6c877), var(--gold, #c9a24b)); color: #14100a; border: 1px solid var(--gold-2, #e6c877); transition: transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s cubic-bezier(.16,1,.3,1); } .ds-btn-foil:hover { transform: translateY(-2px); box-shadow: 0 14px 28px -14px rgba(0,0,0,.75); } .ds-btn-foil:focus-visible { outline: 2px solid var(--gold, #c9a24b); outline-offset: 3px; }"
+      "refersTo": "button-gold",
+      "description": "The one gold primary action per view region (Book a Call / Check Availability / Send It).",
+      "html": "<a class=\"ds-btn-gold\" href=\"#\">Book a Call</a>",
+      "css": ".ds-btn-gold { display: inline-block; font-family: 'Inter', sans-serif; font-weight: 600; font-size: .8rem; letter-spacing: .18em; text-transform: uppercase; text-decoration: none; padding: 1.05rem 2.1rem; border-radius: 2px; cursor: pointer; background: linear-gradient(180deg, var(--gold-2, #e6c877), var(--gold, #c9a24b)); color: #14100a; border: 1px solid var(--gold-2, #e6c877); transition: transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s cubic-bezier(.16,1,.3,1); } .ds-btn-gold:hover { transform: translateY(-2px); box-shadow: 0 14px 28px -14px rgba(0,0,0,.75); } .ds-btn-gold:focus-visible { outline: 2px solid var(--gold, #c9a24b); outline-offset: 3px; }"
     },
     {
       "name": "Hairline Button",
       "kind": "button",
       "refersTo": "button-hairline",
-      "description": "The blind-emboss secondary action beside the foil button.",
+      "description": "The quiet secondary action beside the gold button.",
       "html": "<a class=\"ds-btn-line\" href=\"#\">See How I Help</a>",
       "css": ".ds-btn-line { display: inline-block; font-family: 'Inter', sans-serif; font-weight: 600; font-size: .8rem; letter-spacing: .18em; text-transform: uppercase; text-decoration: none; padding: 1.05rem 2.1rem; border-radius: 2px; cursor: pointer; background: transparent; color: var(--gold-2, #e6c877); border: 1px solid var(--rule, rgba(201,162,75,.32)); transition: transform .35s cubic-bezier(.16,1,.3,1), background-color .35s, border-color .35s, color .35s; } .ds-btn-line:hover { border-color: var(--gold-2, #e6c877); background: rgba(201,162,75,.07); color: var(--ink, #f4f1ea); transform: translateY(-2px); } .ds-btn-line:focus-visible { outline: 2px solid var(--gold, #c9a24b); outline-offset: 3px; }"
     },
@@ -65,99 +68,97 @@
       "name": "Engraved Link",
       "kind": "custom",
       "refersTo": "link-engraved",
-      "description": "Tertiary small-caps link on a hairline; a gold line draws over it on hover.",
+      "description": "Tertiary small-caps link on a gold hairline; a brighter line draws over it on hover.",
       "html": "<a class=\"ds-link-engraved\" href=\"#\">Start the conversation</a>",
       "css": ".ds-link-engraved { position: relative; display: inline-block; text-decoration: none; font-family: 'Inter', sans-serif; font-weight: 600; font-size: .78rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-2, #e6c877); padding-bottom: .45rem; transition: color .3s; } .ds-link-engraved::after { content: \"\"; position: absolute; left: 0; bottom: 0; height: 1px; width: 100%; background: var(--rule, rgba(201,162,75,.32)); } .ds-link-engraved::before { content: \"\"; position: absolute; left: 0; bottom: 0; height: 1px; width: 100%; background: var(--gold-2, #e6c877); transform: scaleX(0); transform-origin: left; transition: transform .5s cubic-bezier(.16,1,.3,1); z-index: 1; } .ds-link-engraved:hover { color: var(--ink, #f4f1ea); } .ds-link-engraved:hover::before { transform: scaleX(1); } .ds-link-engraved:focus-visible { outline: 2px solid var(--gold, #c9a24b); outline-offset: 3px; }"
     },
     {
-      "name": "Reply-Card Field",
+      "name": "Gold Bar",
+      "kind": "custom",
+      "description": "The 2px two-gold section punctuation: 76px above the hero headline, 74px closing each section head.",
+      "html": "<div class=\"ds-gold-bar\" aria-hidden=\"true\"></div>",
+      "css": ".ds-gold-bar { width: 74px; height: 2px; background: linear-gradient(90deg, var(--gold-2, #e6c877), var(--gold, #c9a24b)); }"
+    },
+    {
+      "name": "Path Row",
+      "kind": "custom",
+      "refersTo": "path-row",
+      "description": "Editorial 5fr/7fr row: title, italic gold promise, engraved link left; two-column bullet-free list right; hairline separators; Panel fill on hover.",
+      "html": "<article class=\"ds-path\"><div><h3 class=\"ds-path-h3\">Families &amp; Pre-Retirees</h3><p class=\"ds-path-promise\">Retire with confidence.</p></div><ul class=\"ds-path-list\"><li><strong>Retirement &amp; income planning</strong> that turns savings into a paycheck</li><li><strong>RMD strategy</strong> and Roth conversions timed under the IRMAA cliff</li><li><strong>Life, annuities &amp; long-term care</strong> that protect what you've built</li><li><strong>\"Will my money last?\"</strong> stress-testing, in plain English</li></ul></article>",
+      "css": ".ds-path { display: grid; grid-template-columns: 5fr 7fr; gap: 2rem 3.5rem; align-items: start; padding: 3.2rem 1.5rem; border-top: 1px solid rgba(244,241,234,.07); border-bottom: 1px solid rgba(244,241,234,.07); transition: background-color .45s cubic-bezier(.16,1,.3,1); } .ds-path:hover { background: var(--stock, #0d0f15); } .ds-path-h3 { font-family: 'Playfair Display', Georgia, serif; font-weight: 700; font-size: 1.6rem; line-height: 1.08; letter-spacing: -.015em; color: var(--ink, #f4f1ea); margin: 0; } .ds-path-promise { font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-weight: 600; color: var(--gold-2, #e6c877); font-size: 1.15rem; margin: .7rem 0 0; } .ds-path-list { list-style: none; margin: 0; padding: 0; columns: 2; column-gap: 2.6rem; } .ds-path-list li { break-inside: avoid; padding: .55rem 0; color: var(--soft, #a7a9b4); font-family: 'Inter', sans-serif; font-size: .97rem; line-height: 1.6; } .ds-path-list strong { color: var(--ink, #f4f1ea); font-weight: 600; }"
+    },
+    {
+      "name": "Marquee Item",
+      "kind": "custom",
+      "description": "One credential from the 36s marquee: uppercase Playfair with the 8px gold diamond separator (static form shown).",
+      "html": "<span class=\"ds-marquee-item\">Retirement &amp; Income Strategist <svg width=\"8\" height=\"8\" viewBox=\"0 0 8 8\" aria-hidden=\"true\"><rect x=\"1.2\" y=\"1.2\" width=\"5.6\" height=\"5.6\" transform=\"rotate(45 4 4)\" fill=\"#c9a24b\"/></svg></span>",
+      "css": ".ds-marquee-item { display: inline-flex; align-items: center; font-family: 'Playfair Display', Georgia, serif; font-weight: 700; font-size: 1.02rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ink, #f4f1ea); white-space: nowrap; } .ds-marquee-item svg { margin: 0 2.6rem; flex: none; }"
+    },
+    {
+      "name": "Contact Field",
       "kind": "input",
-      "refersTo": "reply-field",
-      "description": "Underline-only form field with a small-caps gold label; underline turns foil on focus.",
+      "refersTo": "contact-field",
+      "description": "Underline-only form field with a small-caps gold label; underline turns gold on focus.",
       "html": "<div class=\"ds-field\"><label class=\"ds-field-label\" for=\"ds-name\">Name <span class=\"ds-req\" aria-hidden=\"true\">*</span></label><input class=\"ds-field-input\" id=\"ds-name\" type=\"text\" placeholder=\"Your name\"></div>",
       "css": ".ds-field { max-width: 22rem; } .ds-field-label { display: block; font-family: 'Inter', sans-serif; font-weight: 600; font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold, #c9a24b); margin-bottom: .45rem; } .ds-req { color: var(--gold-2, #e6c877); } .ds-field-input { width: 100%; background: transparent; border: 0; border-bottom: 1px solid rgba(244,241,234,.22); color: var(--ink, #f4f1ea); font-family: 'Inter', sans-serif; font-size: 1rem; padding: .65rem .1rem; border-radius: 0; transition: border-color .3s; } .ds-field-input::placeholder { color: rgba(167,169,180,.75); } .ds-field-input:focus { border-bottom-color: var(--gold, #c9a24b); outline: none; } .ds-field-input:focus-visible { outline: 2px solid var(--gold, #c9a24b); outline-offset: 4px; }"
     },
     {
-      "name": "Suite Card",
-      "kind": "card",
-      "refersTo": "suite-card",
-      "description": "Section-as-card: card stock, hairline border, inset double rule 10px inside.",
-      "html": "<section class=\"ds-suite\"><h2 class=\"ds-suite-h2\">Three doors. <em>Walk through yours.</em></h2><p class=\"ds-suite-lede\">Find the line below that sounds like you.</p><div class=\"ds-head-rule\"></div></section>",
-      "css": ".ds-suite { position: relative; background: var(--stock, #0d0f15); border: 1px solid var(--rule-dim, rgba(201,162,75,.14)); padding: 3rem; } .ds-suite::before { content: \"\"; position: absolute; inset: 10px; border: 1px solid rgba(201,162,75,.08); pointer-events: none; } .ds-suite-h2 { font-family: 'Playfair Display', Georgia, serif; font-weight: 900; font-size: 2.1rem; line-height: 1.12; letter-spacing: -.01em; color: var(--ink, #f4f1ea); margin: 0; } .ds-suite-h2 em { font-style: italic; font-weight: 600; color: var(--gold-2, #e6c877); } .ds-suite-lede { margin: 1.2rem 0 0; color: var(--soft, #a7a9b4); font-family: 'Inter', sans-serif; font-size: 1.0625rem; line-height: 1.7; max-width: 64ch; } .ds-head-rule { width: 74px; height: 1px; background: var(--gold, #c9a24b); margin-top: 1.8rem; opacity: .75; }"
+      "name": "Offset Portrait",
+      "kind": "custom",
+      "description": "About-photo treatment: bare photo, heavy black shadow, gold hairline frame offset behind, navy corner tint, small-caps caption.",
+      "html": "<figure class=\"ds-portrait\"><div class=\"ds-portrait-photo\" role=\"img\" aria-label=\"Portrait photograph\"></div><figcaption class=\"ds-portrait-caption\">Justin Stark &#183; Pontotoc, Mississippi</figcaption></figure>",
+      "css": ".ds-portrait { position: relative; margin: 16px 16px 0 16px; max-width: 280px; } .ds-portrait-photo { position: relative; z-index: 1; height: 340px; background: linear-gradient(160deg, #0b1a33, #08090c); box-shadow: 0 30px 60px -32px rgba(0,0,0,.9); } .ds-portrait-photo::after { content: \"\"; position: absolute; inset: 0; background: linear-gradient(200deg, rgba(11,26,51,.18), transparent 45%); pointer-events: none; } .ds-portrait::before { content: \"\"; position: absolute; z-index: 0; top: -16px; left: -16px; right: 16px; bottom: 16px; border: 1px solid var(--rule, rgba(201,162,75,.32)); } .ds-portrait-caption { position: relative; z-index: 1; margin-top: 1.4rem; color: var(--soft, #a7a9b4); font-family: 'Inter', sans-serif; font-size: .78rem; letter-spacing: .2em; text-transform: uppercase; }"
     },
     {
-      "name": "Matted Photograph",
+      "name": "Mosaic Figure",
       "kind": "custom",
-      "refersTo": "matted-frame",
-      "description": "Photo matted on second-sheet stock with a foil inner border, black resting shadow, small-caps caption.",
-      "html": "<figure class=\"ds-mat-fig\"><div class=\"ds-mat\"><div class=\"ds-mat-photo\" role=\"img\" aria-label=\"Photograph\"></div></div><figcaption class=\"ds-mat-caption\">The MedicareCon stage</figcaption></figure>",
-      "css": ".ds-mat-fig { margin: 0; max-width: 300px; } .ds-mat { background: var(--stock-2, #12151d); border: 1px solid var(--rule-dim, rgba(201,162,75,.14)); padding: .8rem; box-shadow: 0 20px 44px -30px rgba(0,0,0,.85); } .ds-mat-photo { border: 1px solid var(--rule, rgba(201,162,75,.32)); height: 200px; background: linear-gradient(160deg, #0b1a33, #08090c); } .ds-mat-caption { margin-top: .9rem; text-align: center; color: var(--soft, #a7a9b4); font-family: 'Inter', sans-serif; font-size: .76rem; letter-spacing: .2em; text-transform: uppercase; }"
-    },
-    {
-      "name": "Ledger List",
-      "kind": "custom",
-      "refersTo": "suite-card",
-      "description": "Bullet-free list ruled like a ledger; lead phrases in ink 600, rows divided by ink hairlines.",
-      "html": "<ul class=\"ds-ledger\"><li><strong>Retirement &amp; income planning</strong> that turns savings into a paycheck</li><li><strong>RMD strategy</strong> and Roth conversions timed under the IRMAA cliff</li><li><strong>Life, annuities &amp; long-term care</strong> that protect what you've built</li></ul>",
-      "css": ".ds-ledger { list-style: none; margin: 0; padding: 0; max-width: 32ch; } .ds-ledger li { padding: .78rem 0; color: var(--soft, #a7a9b4); font-family: 'Inter', sans-serif; font-size: .95rem; line-height: 1.55; border-bottom: 1px solid rgba(244,241,234,.07); } .ds-ledger li:first-child { border-top: 1px solid rgba(244,241,234,.07); } .ds-ledger strong { color: var(--ink, #f4f1ea); font-weight: 600; }"
-    },
-    {
-      "name": "Fleuron Divider",
-      "kind": "custom",
-      "description": "Signature ornament: two foil hairlines meeting a 45-degree diamond; marks ceremonial pauses (under the hero h1, above the reply card).",
-      "html": "<div class=\"ds-fleuron\"><svg viewBox=\"0 0 170 9\" fill=\"none\" aria-hidden=\"true\"><line x1=\"0\" y1=\"4.5\" x2=\"70\" y2=\"4.5\" stroke=\"#c9a24b\" stroke-opacity=\".55\" stroke-width=\"1\"/><rect x=\"81.9\" y=\"1.4\" width=\"6.2\" height=\"6.2\" transform=\"rotate(45 85 4.5)\" fill=\"#c9a24b\"/><line x1=\"100\" y1=\"4.5\" x2=\"170\" y2=\"4.5\" stroke=\"#c9a24b\" stroke-opacity=\".55\" stroke-width=\"1\"/></svg></div>",
-      "css": ".ds-fleuron { width: 170px; } .ds-fleuron svg { display: block; width: 100%; height: auto; }"
-    },
-    {
-      "name": "Small-Caps Line",
-      "kind": "custom",
-      "description": "The small-caps content voice with middot separators — meta lines only, never a kicker above a heading.",
-      "html": "<p class=\"ds-caps-line\"><span class=\"ds-smallcaps\">Now booking 2026&ndash;27</span> <span class=\"ds-sep\" aria-hidden=\"true\">&#183;</span> <span class=\"ds-smallcaps\">Keynotes</span> <span class=\"ds-sep\" aria-hidden=\"true\">&#183;</span> <span class=\"ds-smallcaps\">Team trainings</span></p>",
-      "css": ".ds-caps-line { margin: 0; color: var(--soft, #a7a9b4); font-family: 'Inter', sans-serif; } .ds-smallcaps { font-weight: 600; font-size: .78rem; letter-spacing: .22em; text-transform: uppercase; color: var(--gold, #c9a24b); white-space: nowrap; } .ds-sep { color: var(--rule, rgba(201,162,75,.32)); padding: 0 .55em; }"
+      "description": "Candid photo tile: desaturated cover image, subtle hover zoom, caption overlaid on a near-black gradient.",
+      "html": "<figure class=\"ds-mosaic-fig\"><div class=\"ds-mosaic-img\" role=\"img\" aria-label=\"Candid photograph\"></div><figcaption class=\"ds-mosaic-caption\">The MedicareCon stage</figcaption></figure>",
+      "css": ".ds-mosaic-fig { position: relative; margin: 0; overflow: hidden; max-width: 300px; } .ds-mosaic-img { height: 220px; background: linear-gradient(160deg, #12151d, #0b1a33 60%, #08090c); filter: saturate(.88); transition: transform 1.2s cubic-bezier(.16,1,.3,1); } .ds-mosaic-fig:hover .ds-mosaic-img { transform: scale(1.035); } .ds-mosaic-caption { position: absolute; left: 0; right: 0; bottom: 0; z-index: 1; padding: 2.2rem 1.4rem .95rem; background: linear-gradient(180deg, transparent, rgba(8,9,12,.88)); color: var(--ink, #f4f1ea); font-family: 'Inter', sans-serif; font-size: .74rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; }"
     },
     {
       "name": "Placeholder Slot",
       "kind": "custom",
-      "description": "Honest labeled slot for unresolved facts: italic grey on a dashed foil underline.",
+      "description": "Honest labeled slot for unresolved facts: italic grey on a dashed gold underline.",
       "html": "<span class=\"ds-slot\">Direct line to come at launch</span>",
       "css": ".ds-slot { display: inline-block; color: var(--soft, #a7a9b4); font-style: italic; font-family: 'Inter', sans-serif; font-size: .95rem; border-bottom: 1px dashed var(--rule, rgba(201,162,75,.32)); padding-bottom: 2px; }"
     }
   ],
   "narrative": {
-    "northStar": "The Engraved Southern Invitation",
-    "overview": "Every surface in this world is a piece of a formal engraved invitation suite: card-stock panels laid on a near-black table, navy tissue showing through underneath, and champagne foil die-stamped into the stock as hairlines, double rules, a monogram seal, and one gold button per view. The page refuses the dark-SaaS template — no glowing hero, no icon-card grid, no gradient text. Its luxury is stationer's luxury: restraint, symmetry, hairline precision, and real photographs matted like keepsakes. A faint fixed film grain gives the black its card-stock tooth.\n\nDensity is generous and ceremonial. Sections arrive as discrete cards separated by 7rem of bare table, each carrying its own hairline border and a second inset rule 10px inside — the double-plate signature. Structure inside a card is drawn, never boxed: columns are divided by vertical hairlines, list rows by ledger rules, and the form is a reply card whose fields are single underlines. Motion is engraver's motion: rules draw themselves, content rises gently on one shared ease, and everything degrades to fully-visible stillness under reduced motion or without JS.",
+    "northStar": "The Editorial Lux Portrait",
+    "overview": "This world is a modern editorial-lux magazine feature on a near-black ground: Justin's real photography blended full-bleed into the dark, oversized Playfair Display headlines with italic gold turns, and champagne gold rationed to 2px bars, 1px hairlines, small caps, and one gold button per view. It refuses template flatness — no icon-card grids, no boxed sections, no gradient text, no glow. Sections are open compositions laid directly on the page; structure is drawn with hairline rules and asymmetric 5/7 grids, not with cards. A faint fixed film grain keeps the black from reading as flat pixels.\n\nPhotography leads. The first viewport is a split hero: the portrait bleeds in from the right behind a hairline offset frame, scrimmed into the black on every edge; copy owns the left 60%. Everywhere else the same discipline holds — images are slightly desaturated, overlaid with near-black and navy gradients, and never pasted on as bright rectangles. Motion is confident and quiet: the hero photo breathes in, copy rises on a stagger, credentials glide in a slow 36s marquee (paused on hover/focus, static on touch and narrow screens), and below-the-fold content fades up via IntersectionObserver. One ease drives everything, and the page is fully visible without JS or with reduced motion.",
     "keyCharacteristics": [
-      "Two-foil champagne accent (#c9a24b standing, #e6c877 catching light) spent almost entirely on 1px rules, small caps, italic flourishes, and a single stamped button",
-      "Playfair Display 700-900 ceremonial voice with italic-600 flourishes; Inter 400-700 as the functional hand",
-      "Hairline-drawn structure (dividers, ledgers, double rules) instead of filled boxes or cards-with-icons",
-      "Authored SVG ornaments only: JS monogram seal, diamond fleuron divider, hairline hamburger",
-      "Real photographs matted on second-sheet stock; full-bleed imagery always scrimmed back to near-black and navy",
-      "One easing for everything: cubic-bezier(.16, 1, .3, 1); reveals opt in via JS and honor prefers-reduced-motion"
+      "Photo-forward: real photography blended into near-black with scrims, desaturation, and hairline offset frames",
+      "Oversized Playfair 900 headlines (hero up to 5.9rem, lh 1.08, -0.015em) ending in italic-600 gold turns; Inter 400-700 as the functional voice",
+      "Two-gold champagne accent (#c9a24b / #e6c877) spent on 2px gradient bars, hairlines, small caps, and a single gold button per view",
+      "Editorial full-width rows and asymmetric 5/7 grids instead of card grids; hairline rules draw all structure",
+      "A scrolling credential marquee as the trust strip — uppercase Playfair with gold diamond separators",
+      "One easing everywhere: cubic-bezier(.16, 1, .3, 1); motion opts in via JS and honors prefers-reduced-motion"
     ],
     "rules": [
-      { "name": "The Foil Budget Rule", "body": "Champagne foil is spent on hairlines, small caps, italic flourishes, ornament strokes, and at most one gold-filled button per view. It is never a background wash, never text-fill gradient, never a glow.", "section": "colors" },
-      { "name": "The Two Foils Rule", "body": "#c9a24b is standing foil (labels, rules, strokes); #e6c877 is foil catching light (emphasis, links, monogram letters, hovers). Hover resolves gold toward ink (#f4f1ea), not toward brighter gold.", "section": "colors" },
-      { "name": "The Tissue Rule", "body": "Navy #0b1a33 appears only inside gradients and scrims as an undertone — never as a flat panel color, border, or text color.", "section": "colors" },
-      { "name": "The No-Kicker Rule", "body": "The small-caps voice (Inter 600, 0.78rem, 0.22em, uppercase, Champagne Foil) is a voice for lines of content — the hero's engraved conference line, the speaking meta line, captions, field labels — separated by middot separators in Foil Rule when listed. It never sits above a heading as a kicker or eyebrow. Headings introduce themselves.", "section": "typography" },
-      { "name": "The Italic Flourish Rule", "body": "Emphasis inside any Playfair heading is italic 600 in Foil Catching Light — never bolder weight, never underline, never a second color family.", "section": "typography" },
-      { "name": "The Rotating Hairline Rule", "body": "When a hairline-divided grid stacks, its vertical dividers become horizontal ones (border-left to border-top). Divisions are never dropped and never replaced with boxes or gaps.", "section": "layout" },
-      { "name": "The Black Shadow Rule", "body": "Every shadow is neutral black at low spread, cast downward. No colored glows, no gold halos, no ambient accent shadows — foil shines by contrast, not by bloom.", "section": "elevation" }
+      { "name": "The Gold Budget Rule", "body": "Gold is spent on 2px bars, 1px hairlines, small caps, italic turns, diamond separators, and at most one gold-filled button per view. It is never a background wash, never a text gradient, never a glow.", "section": "colors" },
+      { "name": "The Two Golds Rule", "body": "#c9a24b is standing gold (labels, separators, outlines, dark gradient stop); #e6c877 is gold catching light (emphasis, links, hovers, bright gradient stop). Hover resolves gold toward ink (#f4f1ea), not toward brighter gold.", "section": "colors" },
+      { "name": "The Undertone Rule", "body": "Navy #0b1a33 appears only inside gradients, scrims, and tints — never as a flat panel color, border, or text color.", "section": "colors" },
+      { "name": "The No-Kicker Rule", "body": "The small-caps voice is a voice for lines of content — the hero conference line, the speaking meta line, captions, field labels — with middot separators in Gold Rule when listed (separators hide and lines stack at <=520px). It never sits above a heading as a kicker or eyebrow. Headings introduce themselves.", "section": "typography" },
+      { "name": "The Italic Turn Rule", "body": "Emphasis inside any Playfair heading is italic 600 in Gold Light — never bolder weight, never underline, never a second color family.", "section": "typography" },
+      { "name": "The Row, Not Card Rule", "body": "Repeatable content is an editorial row divided by ink hairlines (path rows, reach list), never a grid of boxed cards. Hover may fill a row with Panel; it never adds a border or shadow.", "section": "layout" },
+      { "name": "The Black Shadow Rule", "body": "Every shadow and photo overlay is neutral black (or the near-black/navy scrim family) at low spread, cast downward. No colored glows, no gold halos — gold shines by contrast, not by bloom.", "section": "elevation" }
     ],
     "dos": [
-      "Do draw structure with hairlines — Foil Rule Dim for quiet structure, Foil Rule for emphasis, Ink Hairline for ledger rows — and rotate dividers (left-border to top-border) when grids stack.",
-      "Do end section headlines with an italic Playfair flourish in Foil Catching Light, and reserve strong-in-grey (ink, 600) as the only in-paragraph emphasis.",
-      "Do spend gold on at most one foil button per view region, pairing it with a hairline button or engraved link for the quieter path.",
-      "Do mat every photograph (Second Sheet mat + Foil Rule inner border + black resting shadow + small-caps caption) or scrim it to near-black/navy when full-bleed.",
-      "Do keep motion on the single house ease, opt-in via JS (html.js), gated by prefers-reduced-motion, and fully visible without either.",
-      "Do mark unresolved facts as labeled placeholder slots (italic grey on dashed foil underline) with REPLACE: comments — honest slots, never invented content."
+      "Do blend every photograph into the ground: desaturate (saturate(.82-.88)), scrim with the near-black/navy gradient family, and let at least one edge dissolve to #08090c or carry an overlaid caption gradient.",
+      "Do draw structure with rules — Ink Hairline for row separators, Gold Rule Dim for band edges and quiet frames, Gold Rule for emphatic frames — and punctuate sections with the 2px two-gold bar (74-76px).",
+      "Do end headlines with an italic Playfair turn in Gold Light, and reserve strong-in-grey (ink, 600) as the only in-paragraph emphasis.",
+      "Do spend gold on at most one gold button per view region, pairing it with a hairline button or engraved link for the quieter path.",
+      "Do keep motion on the single house ease, opt-in via JS (html.js), gated by prefers-reduced-motion — and give any auto-playing motion a hover/focus pause plus a static fallback on touch and narrow screens.",
+      "Do mark unresolved facts as labeled placeholder slots (italic grey on dashed gold underline) with REPLACE: comments — honest slots, never invented content."
     ],
     "donts": [
-      "Don't use gradient text. The system's only gradient is the foil button surface; type is always a solid ink or foil.",
-      "Don't build icon-card grids. There are no icons beyond the authored seal, fleuron, hamburger, and select-chevron SVGs; capability lists are ledger-ruled text.",
+      "Don't use gradient text. Gradients live only on surfaces (button face, 2px bars); type is always solid ink or gold.",
+      "Don't build icon-card grids or boxed section cards. The only icons are the gold diamond, hamburger, and select chevron; repeatable content is hairline-ruled editorial rows.",
       "Don't put a kicker or small-caps eyebrow above any heading. The small-caps voice is content (meta lines, captions, labels), never a heading's warm-up.",
-      "Don't cast colored or glowing shadows. Shadows are soft black and downward; foil never blooms.",
-      "Don't round corners past the 2px stamp radius, and never on cards, mats, photos, or fields.",
-      "Don't introduce new hues. The world is three dark stocks, two inks, two foils, and a navy that lives only inside gradients."
+      "Don't cast colored or glowing shadows. Shadows are soft black and downward; overlays stay in the near-black/navy family.",
+      "Don't round corners past the 2px stamp radius, and never on photos, frames, rows, or fields.",
+      "Don't introduce new hues or bright unscrimmed imagery. The world is a near-black ground, two panels, two inks, two golds, and a navy that lives only inside gradients."
     ]
   }
 }
