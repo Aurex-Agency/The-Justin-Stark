@@ -27,7 +27,7 @@ GitHub Pages / Cloudflare Pages work the same way.
 Each spot is marked with a `REPLACE` or `DEMO ONLY` comment in `index.html`:
 
 - [ ] **Wire the form.** Create a [Formspree](https://formspree.io) form, set `action="https://formspree.io/f/XXXXXXX"` + `method="POST"` on `<form id="leadForm">`, and delete the `DEMO ONLY` script block at the bottom of the file. (On Netlify, adding the `netlify` attribute to the form works instead.) Route notifications to justin@pontotocinsuranceagency.com. Send a test submission.
-- [ ] **Scheduler link.** Point every `.js-book` "Book a Call" button and the "Book a time that works" contact slot at the Calendly/TidyCal URL (`target="_blank" rel="noopener"`).
+- [x] **Scheduler.** Done — the GoHighLevel booking calendar is embedded in the `#book` section and every "Book a Call" button anchors to it.
 - [ ] **Phone number.** Swap the "Call or text" slot for a real `tel:` link.
 - [ ] **Conference name.** Add it to the hero meta line (marked with a comment) — and confirm the "On the conference stage · August 4–5, 2026" claim itself before launch.
 - [ ] Review copy — it's a strong first draft in Justin's voice; he should read it through.

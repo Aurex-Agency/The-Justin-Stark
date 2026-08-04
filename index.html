@@ -435,6 +435,19 @@ html.js .reveal.in[data-d="3"]{transition-delay:.24s}
 .form-thanks p{margin:1rem auto 0;color:var(--soft)}
 
 /* ------------------------------------------------------------------ */
+/*  Booking — embedded GHL calendar                                    */
+/* ------------------------------------------------------------------ */
+.booking{padding:7.5rem 0}
+.booking .section-head{margin-inline:auto;text-align:center}
+.booking .head-rule{margin-inline:auto}
+.booking-frame{
+  margin-top:3.5rem;background:var(--stock);border:1px solid var(--rule-dim);
+  padding:clamp(.6rem,1.5vw,1.6rem);
+}
+.booking-frame iframe{display:block;width:100%;min-height:720px}
+.booking-alt{margin:1.4rem auto 0;text-align:center;font-size:.85rem;color:var(--soft);font-style:italic}
+
+/* ------------------------------------------------------------------ */
 /*  Footer                                                             */
 /* ------------------------------------------------------------------ */
 .site-footer{border-top:1px solid var(--rule-dim);padding:3.5rem 0 3rem;background:linear-gradient(180deg,transparent,rgba(11,26,51,.22))}
@@ -524,9 +537,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
       <a href="#about">About</a>
       <a href="#speaking">Speaking</a>
       <a href="#contact">Contact</a>
-      <!-- REPLACE: when the scheduler exists, point this at the Calendly/TidyCal URL
-           and add target="_blank" rel="noopener". Same for every .js-book link below. -->
-      <a class="btn btn-gold js-book" href="#contact">Book a Call</a>
+      <a class="btn btn-gold js-book" href="#book">Book a Call</a>
     </nav>
     <button class="menu-btn" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
       <svg width="22" height="16" viewBox="0 0 22 16" aria-hidden="true">
@@ -543,7 +554,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   <a href="#about">About</a>
   <a href="#speaking">Speaking</a>
   <a href="#contact">Contact</a>
-  <a class="btn btn-gold js-book" href="#contact">Book a Call</a>
+  <a class="btn btn-gold js-book" href="#book">Book a Call</a>
 </div>
 
 <main id="main">
@@ -559,7 +570,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
         <h1 class="hero-rise r1">Your money should work as hard as <em>you&nbsp;do.</em></h1>
         <p class="hero-sub hero-rise r2">I help families protect what they&rsquo;ve built and retire with confidence &mdash; and I help driven agents build agencies that last. Straight answers, no jargon, and a plan you&rsquo;ll actually understand.</p>
         <div class="hero-cta hero-rise r3">
-          <a class="btn btn-gold js-book" href="#contact">Book a Call</a>
+          <a class="btn btn-gold js-book" href="#book">Book a Call</a>
           <a class="btn btn-line" href="#work">See How I Help</a>
         </div>
         <!-- REPLACE: add the conference name once confirmed, e.g. "On stage at {{Conference Name}}" -->
@@ -702,7 +713,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
         <h2>Straight talk, <em>from your stage.</em></h2>
         <p>Keynotes and team trainings for audiences who are tired of jargon: retirement, insurance, and what it actually takes to build an agency. Tell me about your room, and I&rsquo;ll bring something worth their hour.</p>
         <div class="hero-cta">
-          <a class="btn btn-gold" href="#contact">Check Availability</a>
+          <a class="btn btn-gold" href="#book">Check Availability</a>
         </div>
         <p class="speaking-meta">
           <span class="smallcaps">Now booking 2026&ndash;27</span> <span class="sep" aria-hidden="true">&#183;</span> <span class="smallcaps">Keynotes</span> <span class="sep" aria-hidden="true">&#183;</span> <span class="smallcaps">Team trainings</span>
@@ -731,9 +742,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
             </li>
             <li>
               <span class="reach-label">Book a time that works</span>
-              <!-- REPLACE: once the scheduler exists (Calendly / TidyCal), swap in
-                   <a href="https://calendly.com/..." target="_blank" rel="noopener">Open my calendar</a> -->
-              <span class="slot">Scheduler link lands here at launch</span>
+              <a href="#book">Open the calendar just below</a>
             </li>
           </ul>
           <p class="reach-note">Prefer a call on your calendar, not mine? Say so in the form and I&rsquo;ll send times.</p>
@@ -797,6 +806,22 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ============================= BOOKING ============================ -->
+  <section class="booking" id="book" aria-label="Book a call">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>Or skip the form &mdash; <em>grab a time.</em></h2>
+        <p class="lede">Pick a slot that works for you and it goes straight on my calendar. No prep needed, no obligation.</p>
+        <div class="head-rule" aria-hidden="true"></div>
+      </div>
+      <div class="booking-frame reveal" data-d="1">
+        <iframe src="https://link.pontotocinsuranceagency.com/widget/booking/gHRH13Wn3Bo11BnGP8rO" allow="payment" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="gHRH13Wn3Bo11BnGP8rO_1785863012794" title="Book a call with Justin Stark" loading="lazy"></iframe>
+        <script src="https://link.pontotocinsuranceagency.com/js/form_embed.js" type="text/javascript"></script>
+      </div>
+      <p class="booking-alt">Calendar not loading? <a href="https://link.pontotocinsuranceagency.com/widget/booking/gHRH13Wn3Bo11BnGP8rO" target="_blank" rel="noopener">Open it in a new tab</a>.</p>
     </div>
   </section>
 
