@@ -5,13 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Justin Stark — Retirement Planning, Agency Building &amp; Speaking | Pontotoc, MS</title>
 <meta name="description" content="Justin Stark helps families protect what they've built and retire with confidence — and helps driven agents build agencies that last. Straight answers, no jargon. Pontotoc, Mississippi.">
-<link rel="canonical" href="https://www.thejustinstark.com/">
+<link rel="canonical" href="https://thejustinstark.com/">
 <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Justin Stark — Your money should work as hard as you do.">
 <meta property="og:description" content="Retirement &amp; income planning for families. Agency building for driven agents. Straight talk for your stage. Pontotoc, Mississippi.">
-<meta property="og:url" content="https://www.thejustinstark.com/">
-<meta property="og:image" content="https://www.thejustinstark.com/assets/img/og.jpg">
+<meta property="og:url" content="https://thejustinstark.com/">
+<meta property="og:image" content="https://thejustinstark.com/assets/img/og.jpg">
 <meta name="theme-color" content="#08090c">
 <link rel="preload" href="assets/fonts/PlayfairDisplay-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/Inter-var.woff2" as="font" type="font/woff2" crossorigin>
@@ -502,6 +503,28 @@ html.js .reveal.in[data-d="3"]{transition-delay:.24s}
   .wordmark-name{font-size:.95rem;letter-spacing:.14em}
 }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Justin Stark",
+  "url": "https://thejustinstark.com/",
+  "image": "https://thejustinstark.com/assets/img/og.jpg",
+  "jobTitle": "Owner, Pontotoc Insurance Agency",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Pontotoc Insurance Agency"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Pontotoc",
+    "addressRegion": "MS",
+    "addressCountry": "US"
+  },
+  "email": "mailto:justin@pontotocinsuranceagency.com",
+  "description": "Retirement and income planning for families, agency building for driven agents, and speaking for stages that want straight talk."
+}
+</script>
 </head>
 <body>
 <!--
@@ -749,18 +772,16 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
         </div>
 
         <div class="reveal" data-d="1">
-          <!-- ============================================================
-               WIRE THE FORM BEFORE LAUNCH (fastest: Formspree)
-               1. Create a form at formspree.io, get your endpoint ID.
-               2. Change the form tag to:
-                    <form action="https://formspree.io/f/XXXXXXX" method="POST">
-               3. Delete the demo submit handler in the <script> block below
-                  (it is marked DEMO ONLY).
-               Netlify alternative: add `netlify` + name="lead" attributes to
-               the form tag and deploy on Netlify — no endpoint needed.
-               Route notifications to justin@pontotocinsuranceagency.com.
-               ============================================================ -->
-          <form id="leadForm" novalidate>
+          <!-- Form posts through FormSubmit to justin@pontotocinsuranceagency.com.
+               ONE-TIME ACTIVATION: the first submission triggers a confirmation
+               email from formsubmit.co to that inbox — click it once and every
+               later submission is delivered. After redirect, ?sent=1 shows the
+               thank-you state (script at the bottom of the file). -->
+          <form id="leadForm" action="https://formsubmit.co/justin@pontotocinsuranceagency.com" method="POST">
+            <input type="hidden" name="_subject" value="New message from thejustinstark.com">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="https://thejustinstark.com/?sent=1">
             <div class="field-row">
               <div class="field">
                 <label for="f-name">Name <span class="req" aria-hidden="true">*</span></label>
@@ -793,7 +814,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
             <!-- honeypot: real visitors never see or fill this -->
             <div class="hp" aria-hidden="true">
               <label for="f-company">Company</label>
-              <input id="f-company" name="_gotcha" type="text" tabindex="-1" autocomplete="off">
+              <input id="f-company" name="_honey" type="text" tabindex="-1" autocomplete="off">
             </div>
             <div class="form-actions">
               <button class="btn btn-gold" type="submit">Send It</button>
@@ -891,23 +912,15 @@ if('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-moti
   reveals.forEach(function(el){el.classList.add('in')});
 }
 
-/* ==================================================================
-   DEMO ONLY — client-side thank-you state.
-   DELETE this whole block once the form posts to a real endpoint
-   (Formspree / Netlify Forms — see the comment above the <form>).
-   ================================================================== */
-var form=document.getElementById('leadForm'),thanks=document.getElementById('formThanks');
-if(form){
-  form.addEventListener('submit',function(e){
-    e.preventDefault();
-    if(!form.checkValidity()){form.reportValidity();return}
-    form.style.display='none';
-    thanks.classList.add('shown');
-    thanks.setAttribute('tabindex','-1');
-    thanks.focus();
-  });
+/* thank-you state after the FormSubmit redirect (?sent=1) */
+if(new URLSearchParams(location.search).has('sent')){
+  var form=document.getElementById('leadForm'),thanks=document.getElementById('formThanks');
+  if(form){form.style.display='none'}
+  if(thanks){thanks.classList.add('shown')}
+  history.replaceState(null,'',location.pathname+'#contact');
+  var c=document.getElementById('contact');
+  if(c){c.scrollIntoView()}
 }
-/* ================== end DEMO ONLY block ========================== */
 </script>
 </body>
 </html>
