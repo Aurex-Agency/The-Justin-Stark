@@ -139,6 +139,35 @@ typography:
     fontSize: "0.72rem"
     fontWeight: 600
     letterSpacing: "0.2em"
+  event-display:
+    fontFamily: "'Playfair Display', Georgia, 'Times New Roman', serif"
+    fontSize: "clamp(2.9rem, 6.2vw, 5.4rem)"
+    fontWeight: 900
+  event-headline:
+    fontFamily: "'Playfair Display', Georgia, 'Times New Roman', serif"
+    fontSize: "clamp(2.2rem, 4.6vw, 3.5rem)"
+    fontWeight: 900
+  event-closer:
+    fontFamily: "'Playfair Display', Georgia, 'Times New Roman', serif"
+    fontSize: "clamp(2.4rem, 5.2vw, 4.2rem)"
+    fontWeight: 900
+  event-signal:
+    fontFamily: "'Playfair Display', Georgia, 'Times New Roman', serif"
+    fontSize: "clamp(1.15rem, 2vw, 1.5rem)"
+    fontWeight: 700
+  event-seat-title:
+    fontFamily: "'Playfair Display', Georgia, 'Times New Roman', serif"
+    fontSize: "1.45rem"
+    fontWeight: 700
+  event-formula-lead:
+    fontFamily: "'Playfair Display', Georgia, 'Times New Roman', serif"
+    fontSize: "1.22rem"
+    fontWeight: 700
+  event-unit-label:
+    fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    fontSize: "0.68rem"
+    fontWeight: 600
+    letterSpacing: "0.22em"
 rounded:
   none: "0"
   stamp: "2px"
