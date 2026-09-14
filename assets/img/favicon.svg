@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <rect width="64" height="64" fill="#08090c"/>
-  <ellipse cx="32" cy="32" rx="26" ry="29" fill="none" stroke="#c9a24b" stroke-width="1.5"/>
-  <text x="32" y="41" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="24" letter-spacing="1" fill="#e6c877">JS</text>
+  <ellipse cx="32" cy="32" rx="26" ry="29" fill="none" stroke="#b98a2f" stroke-width="1.5"/>
+  <text x="32" y="41" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="24" letter-spacing="1" fill="#d4af37">JS</text>
 </svg>
