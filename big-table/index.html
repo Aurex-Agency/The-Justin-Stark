@@ -428,9 +428,9 @@ html.js .reveal.in[data-d="2"]{transition-delay:.16s}
   "performer": { "@type": "Person", "name": "Micheal Burt" },
   "organizer": { "@type": "Person", "name": "Justin Stark", "url": "https://thejustinstark.com/" },
   "offers": [
-    { "@type": "Offer", "name": "In-Person Ticket", "url": "https://buy.stripe.com/3cI8wO0Ha51NcOtb25eME01", "availability": "https://schema.org/LimitedAvailability" },
-    { "@type": "Offer", "name": "Virtual Ticket", "url": "https://buy.stripe.com/8x29ASdtW9i3bKp7PTeME00", "availability": "https://schema.org/InStock" },
-    { "@type": "Offer", "name": "1-on-1 Session with Coach Burt & Justin Stark", "url": "https://buy.stripe.com/6oUeVc4Xq8dZ3dTb25eME02", "availability": "https://schema.org/LimitedAvailability" }
+    { "@type": "Offer", "name": "In-Person Ticket", "url": "https://link.pontotocinsuranceagency.com/payment-link/6aa73b4eceb12d9fc1a8cade", "price": "49.00", "priceCurrency": "USD", "availability": "https://schema.org/LimitedAvailability" },
+    { "@type": "Offer", "name": "Virtual Ticket", "url": "https://link.pontotocinsuranceagency.com/payment-link/6aa73b1b32f95ae35594a688", "price": "49.00", "priceCurrency": "USD", "availability": "https://schema.org/InStock" },
+    { "@type": "Offer", "name": "1-on-1 Session with Coach Burt & Justin Stark", "url": "https://link.pontotocinsuranceagency.com/payment-link/6aa73b79ceb12d9fc1a8cae0", "availability": "https://schema.org/LimitedAvailability" }
   ]
 }
 </script>
@@ -449,7 +449,7 @@ OWN-WORLD: inherited from thejustinstark.com — near-black card stock, navy tis
   billing strip crowns the page.
 STORY: a North Mississippi owner/agent recognizes themselves in the frustration
   signals, watches Justin's 60-second invitation, believes because Burt's stage and
-  record are real, and claims one of three seats through Stripe.
+  record are real, and claims one of three seats through secure checkout.
 FIRST VIEWPORT: gold billing strip, sticky wordmark header, then amber-stage hero —
   headline left with gold bar, sub, gold "Claim Your Seat" + "Watch the Invitation",
   date line; the vertical VSL matted like a framed portrait on the right. Primary
@@ -643,7 +643,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
     <div class="wrap">
       <div class="section-head seats-head reveal">
         <h2>Choose your <em>seat.</em></h2>
-        <p class="lede">Three ways to sit at this table. Every seat checks out securely through Stripe with instant confirmation.</p>
+        <p class="lede">Three ways to sit at this table. Secure checkout, instant confirmation.</p>
         <div class="head-rule" aria-hidden="true"></div>
       </div>
       <div class="seats">
@@ -655,10 +655,8 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
             <li>Watch from your office, your truck, your kitchen table</li>
             <li>Access details delivered by email before doors</li>
           </ul>
-          <!-- PRICE: displayed at checkout; add the number here when confirmed, e.g.
-               <p class="seat-price"><b>$49</b> per screen</p> -->
-          <p class="seat-price">Price shown at secure checkout</p>
-          <a class="btn btn-line" href="https://buy.stripe.com/8x29ASdtW9i3bKp7PTeME00" target="_blank" rel="noopener">Watch It Live</a>
+          <p class="seat-price"><b>$49</b> per screen</p>
+          <a class="btn btn-line" href="https://link.pontotocinsuranceagency.com/payment-link/6aa73b1b32f95ae35594a688" target="_blank" rel="noopener">Watch It Live</a>
         </article>
         <article class="seat seat-featured reveal" data-d="1">
           <h3 class="serif">The Seat in the Room</h3>
@@ -669,9 +667,8 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
             <li><strong>The room itself</strong>: owners, agents, and operators from across North Mississippi</li>
             <li>Doors at noon. Come early; the table talk starts before the mic does</li>
           </ul>
-          <!-- PRICE: displayed at checkout; add the number here when confirmed -->
-          <p class="seat-price">Price shown at secure checkout</p>
-          <a class="btn btn-gold" href="https://buy.stripe.com/3cI8wO0Ha51NcOtb25eME01" target="_blank" rel="noopener">Claim My Seat in the Room</a>
+          <p class="seat-price"><b>$49</b> your seat in the room</p>
+          <a class="btn btn-gold" href="https://link.pontotocinsuranceagency.com/payment-link/6aa73b4eceb12d9fc1a8cade" target="_blank" rel="noopener">Claim My Seat in the Room</a>
           <p class="seat-note">Seats limited. The flier isn&rsquo;t kidding.</p>
         </article>
         <article class="seat reveal" data-d="2">
@@ -682,12 +679,14 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
             <li>Your business, your numbers, your next table &mdash; on the table</li>
             <li>The rarest seat of the day, in the smallest supply</li>
           </ul>
-          <!-- PRICE: displayed at checkout; add the number here when confirmed -->
+          <!-- PRICE: intentionally not shown — the payment page currently renders
+               $40,000.00 for this product; owner is confirming the intended number.
+               Once confirmed: <p class="seat-price"><b>$X,XXX</b> one session</p> -->
           <p class="seat-price">Price shown at secure checkout</p>
-          <a class="btn btn-line" href="https://buy.stripe.com/6oUeVc4Xq8dZ3dTb25eME02" target="_blank" rel="noopener">Book the 1-on-1</a>
+          <a class="btn btn-line" href="https://link.pontotocinsuranceagency.com/payment-link/6aa73b79ceb12d9fc1a8cae0" target="_blank" rel="noopener">Book the 1-on-1</a>
         </article>
       </div>
-      <p class="seats-fine">Checkout opens in a new tab on buy.stripe.com. Stripe handles the payment end to end; your card details never touch this site. Questions first? <a href="https://thejustinstark.com/#contact">Reach Justin directly</a> or call <a href="tel:+16625091213">(662) 509-1213</a>.</p>
+      <p class="seats-fine">Checkout opens in a new tab on Justin&rsquo;s secure payment page with instant confirmation; your card details never touch this site. Questions first? <a href="https://thejustinstark.com/#contact">Reach Justin directly</a> or call <a href="tel:+16625091213">(662) 509-1213</a>.</p>
     </div>
   </section>
 
@@ -719,7 +718,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
         </details>
         <details>
           <summary><span>How do I get my ticket?</span><svg width="14" height="9" viewBox="0 0 14 9" aria-hidden="true"><path d="M1 1.5 7 7.5 13 1.5" stroke="#b98a2f" stroke-width="1.4" fill="none"/></svg></summary>
-          <p>Checkout runs through Stripe and confirms instantly &mdash; that confirmation is your proof of purchase, and your name is on the list at the door. Virtual seats get their stream link by email before doors.</p>
+          <p>Checkout confirms instantly on Justin&rsquo;s secure payment page &mdash; that confirmation is your proof of purchase, and your name is on the list at the door. Virtual seats get their stream link by email before doors.</p>
         </details>
         <details>
           <summary><span>I want Coach Burt&rsquo;s eyes on <em>my</em> business.</span><svg width="14" height="9" viewBox="0 0 14 9" aria-hidden="true"><path d="M1 1.5 7 7.5 13 1.5" stroke="#b98a2f" stroke-width="1.4" fill="none"/></svg></summary>
