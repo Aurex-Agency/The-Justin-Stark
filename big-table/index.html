@@ -363,6 +363,49 @@ html.js .reveal.in[data-d="2"]{transition-delay:.16s}
 .seats-fine{margin:2.2rem auto 0;text-align:center;color:var(--soft);font-size:.85rem;max-width:60ch}
 @media (max-width:900px){.seats{grid-template-columns:1fr;max-width:480px;margin-inline:auto}.seat-featured{order:-1}}
 
+/* seat tiers inside the featured card */
+.seat-tiers{margin-top:.4rem}
+.tier + .tier{margin-top:1.15rem;border-top:1px solid var(--hairline);padding-top:1.25rem}
+.tier-line{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;margin-bottom:.8rem}
+.tier-name{font-family:var(--serif);font-weight:700;font-size:1.05rem}
+.tier-price{font-family:var(--serif);font-weight:900;font-size:1.4rem;color:var(--ink)}
+.tier .btn{width:100%}
+.tier-note{margin-top:.65rem;text-align:center;font-size:.78rem;color:var(--soft);font-style:italic}
+
+/* free seat registration */
+.free-seat{margin-top:6.5rem}
+.rsvp{
+  max-width:640px;margin-inline:auto;background:var(--stock);
+  border:1px solid var(--rule);padding:clamp(2.2rem,5vw,3.4rem);
+  box-shadow:0 30px 60px -35px rgba(0,0,0,.95);position:relative;
+}
+.rsvp::before{content:"";position:absolute;inset:8px;border:1px solid rgba(185,138,47,.12);pointer-events:none}
+.rsvp h2{font-size:clamp(1.9rem,3.6vw,2.6rem);text-align:center}
+.rsvp .lede{margin:1.1rem auto 0;color:var(--soft);text-align:center;max-width:46ch}
+.rsvp form{margin-top:2.2rem;position:relative;z-index:1}
+.field{margin-bottom:1.5rem}
+.field label{
+  display:block;font-weight:600;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:.45rem;
+}
+.field .req{color:var(--gold-2)}
+.field input{
+  width:100%;background:transparent;border:0;border-bottom:1px solid rgba(244,241,234,.22);
+  color:var(--ink);font-family:var(--sans);font-size:1rem;padding:.65rem .1rem;
+  border-radius:0;transition:border-color .3s;
+}
+.field input::placeholder{color:rgba(167,169,180,.75)}
+.field input:focus{border-bottom-color:var(--gold);outline:none}
+.field input:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.form-actions{display:flex;flex-direction:column;align-items:center;gap:.9rem;margin-top:1.9rem}
+.form-actions .btn{width:100%}
+.form-quiet{font-size:.85rem;color:var(--soft);font-style:italic;text-align:center}
+.form-thanks{display:none;text-align:center;padding:2.4rem 0 .6rem}
+.form-thanks.shown{display:block}
+.form-thanks .serif-line{font-family:var(--serif);font-style:italic;font-weight:600;font-size:1.9rem;color:var(--gold-2)}
+.form-thanks p{margin:1rem auto 0;color:var(--soft);max-width:44ch}
+
 /* logistics */
 .logistics{margin-top:6.5rem;border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline)}
 .log-grid{display:grid;grid-template-columns:repeat(4,1fr)}
@@ -428,7 +471,8 @@ html.js .reveal.in[data-d="2"]{transition-delay:.16s}
   "performer": { "@type": "Person", "name": "Micheal Burt" },
   "organizer": { "@type": "Person", "name": "Justin Stark", "url": "https://thejustinstark.com/" },
   "offers": [
-    { "@type": "Offer", "name": "In-Person Ticket", "url": "https://link.pontotocinsuranceagency.com/payment-link/6aa73b4eceb12d9fc1a8cade", "price": "49.00", "priceCurrency": "USD", "availability": "https://schema.org/LimitedAvailability" },
+    { "@type": "Offer", "name": "In-Person General Admission", "url": "https://thejustinstark.com/big-table/#free-seat", "price": "0.00", "priceCurrency": "USD", "availability": "https://schema.org/LimitedAvailability" },
+    { "@type": "Offer", "name": "In-Person VIP Admission", "url": "https://link.pontotocinsuranceagency.com/payment-link/6aa73b4eceb12d9fc1a8cade", "price": "149.00", "priceCurrency": "USD", "availability": "https://schema.org/LimitedAvailability" },
     { "@type": "Offer", "name": "Virtual Ticket", "url": "https://link.pontotocinsuranceagency.com/payment-link/6aa73b1b32f95ae35594a688", "price": "49.00", "priceCurrency": "USD", "availability": "https://schema.org/InStock" },
     { "@type": "Offer", "name": "1-on-1 Session with Coach Burt & Justin Stark", "url": "https://link.pontotocinsuranceagency.com/payment-link/6aa73b79ceb12d9fc1a8cae0", "availability": "https://schema.org/LimitedAvailability" }
   ]
@@ -489,7 +533,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
           <button class="btn btn-line js-watch" type="button">Watch the Invitation</button>
         </div>
         <p class="hero-note hero-rise r4">
-          <span class="smallcaps">Thursday, October 15, 2026</span> <span class="sep" aria-hidden="true">&#183;</span> <span class="smallcaps">1&ndash;3 PM &#183; Doors at noon</span> <span class="sep" aria-hidden="true">&#183;</span> <span class="smallcaps">Seats limited</span>
+          <span class="smallcaps">Thursday, October 15, 2026</span> <span class="sep" aria-hidden="true">&#183;</span> <span class="smallcaps">1&ndash;3 PM &#183; Doors at noon</span> <span class="sep" aria-hidden="true">&#183;</span> <span class="smallcaps">General admission free</span> <span class="sep" aria-hidden="true">&#183;</span> <span class="smallcaps">Seats limited</span>
         </p>
       </div>
       <div class="vsl hero-rise r3" id="video">
@@ -643,7 +687,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
     <div class="wrap">
       <div class="section-head seats-head reveal">
         <h2>Choose your <em>seat.</em></h2>
-        <p class="lede">Three ways to sit at this table. Secure checkout, instant confirmation.</p>
+        <p class="lede">Four ways to sit at this table &mdash; including a free seat in the room. Paid seats check out securely with instant confirmation.</p>
         <div class="head-rule" aria-hidden="true"></div>
       </div>
       <div class="seats">
@@ -667,8 +711,18 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
             <li><strong>The room itself</strong>: owners, agents, and operators from across North Mississippi</li>
             <li>Doors at noon. Come early; the table talk starts before the mic does</li>
           </ul>
-          <p class="seat-price"><b>$49</b> your seat in the room</p>
-          <a class="btn btn-gold" href="https://link.pontotocinsuranceagency.com/payment-link/6aa73b4eceb12d9fc1a8cade" target="_blank" rel="noopener">Claim My Seat in the Room</a>
+          <div class="seat-tiers">
+            <div class="tier">
+              <div class="tier-line"><span class="tier-name">General Admission</span><span class="tier-price">Free</span></div>
+              <a class="btn btn-line" href="#free-seat">Save My Free Seat</a>
+              <p class="tier-note">No card needed &mdash; register below and you&rsquo;re on the list.</p>
+            </div>
+            <div class="tier">
+              <div class="tier-line"><span class="tier-name">VIP Admission</span><span class="tier-price">$149</span></div>
+              <a class="btn btn-gold" href="https://link.pontotocinsuranceagency.com/payment-link/6aa73b4eceb12d9fc1a8cade" target="_blank" rel="noopener">Go VIP</a>
+              <p class="tier-note">Full VIP details at secure checkout.</p>
+            </div>
+          </div>
           <p class="seat-note">Seats limited. The flier isn&rsquo;t kidding.</p>
         </article>
         <article class="seat reveal" data-d="2">
@@ -687,6 +741,47 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
         </article>
       </div>
       <p class="seats-fine">Checkout opens in a new tab on Justin&rsquo;s secure payment page with instant confirmation; your card details never touch this site. Questions first? <a href="https://thejustinstark.com/#contact">Reach Justin directly</a> or call <a href="tel:+16625091213">(662) 509-1213</a>.</p>
+    </div>
+  </section>
+
+  <!-- ========================== FREE SEAT RSVP ======================== -->
+  <section class="free-seat" id="free-seat" aria-label="Free general admission registration">
+    <div class="wrap">
+      <div class="rsvp reveal">
+        <h2>Save your <em>free seat.</em></h2>
+        <p class="lede">General admission is on the house. Ten seconds of typing and your name is on the list at the door &mdash; Thursday, October 15, doors at noon.</p>
+        <!-- Submissions post to the GoHighLevel inbound webhook via a hidden iframe
+             (no CORS dependency); ticket_type/source fields ride along for workflow mapping. -->
+        <form id="gaForm" action="https://services.leadconnectorhq.com/hooks/MCFdomwXH4RRN6HkJgry/webhook-trigger/6e01b802-f669-411c-87fd-7b8488cf95e8" method="POST" target="ga_sink">
+          <input type="hidden" name="ticket_type" value="general-admission-free">
+          <input type="hidden" name="source" value="thejustinstark.com/big-table">
+          <div class="field">
+            <label for="ga-name">Name <span class="req" aria-hidden="true">*</span></label>
+            <input id="ga-name" name="name" type="text" autocomplete="name" placeholder="Your name" required>
+          </div>
+          <div class="field">
+            <label for="ga-email">Email <span class="req" aria-hidden="true">*</span></label>
+            <input id="ga-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+          </div>
+          <div class="field">
+            <label for="ga-phone">Phone <span class="req" aria-hidden="true">*</span></label>
+            <input id="ga-phone" name="phone" type="tel" autocomplete="tel" placeholder="(555) 555-5555" required>
+          </div>
+          <div class="hp" aria-hidden="true">
+            <label for="ga-company">Company</label>
+            <input id="ga-company" name="company" type="text" tabindex="-1" autocomplete="off">
+          </div>
+          <div class="form-actions">
+            <button class="btn btn-gold" id="gaSubmit" type="submit">Put Me on the List</button>
+            <span class="form-quiet">Free seat. Real chair. No card needed.</span>
+          </div>
+        </form>
+        <div class="form-thanks" id="gaThanks" role="status" aria-live="polite">
+          <p class="serif-line">You&rsquo;re on the list.</p>
+          <p>See you Thursday, October 15 &mdash; doors at noon, 507 S Church St, Tupelo. Want more than a seat? <a href="#seats">VIP and the 1-on-1 are just above.</a></p>
+        </div>
+        <iframe name="ga_sink" title="Registration submission" hidden></iframe>
+      </div>
     </div>
   </section>
 
@@ -718,7 +813,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
         </details>
         <details>
           <summary><span>How do I get my ticket?</span><svg width="14" height="9" viewBox="0 0 14 9" aria-hidden="true"><path d="M1 1.5 7 7.5 13 1.5" stroke="#b98a2f" stroke-width="1.4" fill="none"/></svg></summary>
-          <p>Checkout confirms instantly on Justin&rsquo;s secure payment page &mdash; that confirmation is your proof of purchase, and your name is on the list at the door. Virtual seats get their stream link by email before doors.</p>
+          <p>General admission is free &mdash; <a href="#free-seat">register with the quick form</a> and your name is on the list at the door. VIP, virtual, and 1-on-1 seats check out on Justin&rsquo;s secure payment page and confirm instantly. Virtual seats get their stream link by email before doors.</p>
         </details>
         <details>
           <summary><span>I want Coach Burt&rsquo;s eyes on <em>my</em> business.</span><svg width="14" height="9" viewBox="0 0 14 9" aria-hidden="true"><path d="M1 1.5 7 7.5 13 1.5" stroke="#b98a2f" stroke-width="1.4" fill="none"/></svg></summary>
@@ -819,6 +914,24 @@ window.addEventListener('scroll',function(){
     mticking=true;
   }
 },{passive:true});
+
+/* free-seat form: posts to the GHL webhook through the hidden iframe */
+var gaForm=document.getElementById('gaForm'),gaThanks=document.getElementById('gaThanks'),
+    gaBtn=document.getElementById('gaSubmit'),gaSink=document.querySelector('iframe[name=ga_sink]'),
+    gaSubmitted=false;
+function gaDone(){
+  if(!gaSubmitted)return;
+  gaSubmitted=false;
+  gaForm.style.display='none';
+  gaThanks.classList.add('shown');
+}
+gaForm.addEventListener('submit',function(){
+  gaSubmitted=true;
+  gaBtn.disabled=true;
+  gaBtn.textContent='Saving your seat\u2026';
+  setTimeout(gaDone,2500);
+});
+gaSink.addEventListener('load',gaDone);
 
 /* reveals */
 var reveals=document.querySelectorAll('.reveal');
