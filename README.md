@@ -29,7 +29,7 @@ Each spot is marked with a `REPLACE` or `DEMO ONLY` comment in `index.html`:
 
 ## The Big Table event funnel
 
-`/big-table/` is the registration funnel for the Oct 15, 2026 Tupelo event (Coach Micheal Burt, hosted by Justin). GoHighLevel payment links power all three tiers ($49 virtual / $49 in-person shown on the cards; the 1-on-1 price is hidden pending confirmation — its payment page currently renders $40,000.00). Before promoting: click-test all three payment links and send a test purchase.
+`/big-table/` is the registration funnel for the Oct 15, 2026 Tupelo event (Coach Micheal Burt, hosted by Justin). Seats: $49 virtual and $149 in-person VIP via GoHighLevel payment links; free general admission registers through the #free-seat form, which posts to the GHL inbound webhook (hidden-iframe POST). The 1-on-1 price stays hidden pending confirmation — its payment page currently renders $40,000.00. Before promoting: click-test the payment links, submit a test GA registration, and confirm it lands in the GHL workflow.
 
 ## Notes
 
