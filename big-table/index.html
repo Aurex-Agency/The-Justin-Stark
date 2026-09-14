@@ -6,20 +6,20 @@
 <title>The Big Table — Live in Tupelo with Coach Micheal Burt · October 15, 2026</title>
 <meta name="description" content="For one afternoon, WSJ-bestselling author Coach Micheal Burt brings The Big Table to Tupelo, Mississippi — two hours on playing a bigger game. Hosted by Justin Stark. Thursday, October 15, 2026 · 1–3 PM · Seats limited.">
 <link rel="canonical" href="https://thejustinstark.com/big-table/">
-<link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
-<link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
+<link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="The Big Table — Live in Tupelo · October 15, 2026">
 <meta property="og:description" content="Everyone wants a seat at a bigger table. Coach Micheal Burt, live in Tupelo for one afternoon — hosted by Justin Stark. Seats limited.">
 <meta property="og:url" content="https://thejustinstark.com/big-table/">
 <meta property="og:image" content="https://thejustinstark.com/big-table/assets/og.jpg">
 <meta name="theme-color" content="#08090c">
-<link rel="preload" href="../assets/fonts/PlayfairDisplay-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="../assets/fonts/Inter-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/PlayfairDisplay-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/Inter-var.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-@font-face{font-family:'Playfair Display';font-style:normal;font-weight:700 900;font-display:swap;src:url('../assets/fonts/PlayfairDisplay-var.woff2') format('woff2')}
-@font-face{font-family:'Playfair Display';font-style:italic;font-weight:600;font-display:swap;src:url('../assets/fonts/PlayfairDisplay-italic.woff2') format('woff2')}
-@font-face{font-family:'Inter';font-style:normal;font-weight:400 700;font-display:swap;src:url('../assets/fonts/Inter-var.woff2') format('woff2')}
+@font-face{font-family:'Playfair Display';font-style:normal;font-weight:700 900;font-display:swap;src:url('/assets/fonts/PlayfairDisplay-var.woff2') format('woff2')}
+@font-face{font-family:'Playfair Display';font-style:italic;font-weight:600;font-display:swap;src:url('/assets/fonts/PlayfairDisplay-italic.woff2') format('woff2')}
+@font-face{font-family:'Inter';font-style:normal;font-weight:400 700;font-display:swap;src:url('/assets/fonts/Inter-var.woff2') format('woff2')}
 
 /* ------------------------------------------------------------------ */
 /*  Tokens — inherited from thejustinstark.com                         */
@@ -154,7 +154,7 @@ html.js .reveal.in[data-d="2"]{transition-delay:.16s}
 .hero{
   position:relative;overflow:hidden;
   padding:clamp(4rem,9vh,7rem) 0 clamp(3.5rem,7vh,5.5rem);
-  background:url('assets/stage-amber.jpg') center 22%/cover no-repeat;
+  background:url('/big-table/assets/stage-amber.jpg') center 22%/cover no-repeat;
 }
 .hero::before{
   content:"";position:absolute;inset:0;
@@ -186,16 +186,73 @@ html.js .reveal.in[data-d="2"]{transition-delay:.16s}
   position:relative;background:var(--stock-2);border:1px solid var(--rule-dim);
   padding:.7rem;box-shadow:0 30px 60px -32px rgba(0,0,0,.9);
 }
-.vsl video{width:100%;aspect-ratio:9/16;object-fit:cover;border:1px solid var(--rule);background:#000}
+.vsl-open{display:block;position:relative;width:100%;padding:0;border:0;background:none;cursor:pointer}
+.vsl-open img{width:100%;aspect-ratio:9/16;object-fit:cover;border:1px solid var(--rule);background:#000}
 .vsl-play{
-  position:absolute;inset:.7rem;display:flex;align-items:center;justify-content:center;
-  background:rgba(8,9,12,.25);border:0;cursor:pointer;transition:background .3s;
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  background:rgba(8,9,12,.25);transition:background .3s;
 }
-.vsl-play:hover{background:rgba(8,9,12,.05)}
+.vsl-open:hover .vsl-play{background:rgba(8,9,12,.05)}
 .vsl-play svg{filter:drop-shadow(0 8px 22px rgba(0,0,0,.7));transition:transform .35s var(--ease-out)}
-.vsl-play:hover svg{transform:scale(1.06)}
-.vsl-play.hidden{display:none}
+.vsl-open:hover .vsl-play svg{transform:scale(1.06)}
+.vsl-modal{position:fixed;inset:0;z-index:80;display:flex;align-items:center;justify-content:center;padding:1.2rem}
+.vsl-modal[hidden]{display:none}
+.vsl-modal-backdrop{position:absolute;inset:0;background:rgba(8,9,12,.93);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.vsl-modal-panel{
+  position:relative;z-index:1;background:var(--stock-2);border:1px solid var(--rule);
+  padding:.7rem;box-shadow:0 40px 90px -40px rgba(0,0,0,.95);
+}
+.vsl-modal-panel video{height:min(76svh,860px);width:auto;max-width:88vw;aspect-ratio:9/16;border:1px solid var(--rule-dim);background:#000}
+.vsl-modal-close{
+  position:absolute;top:-16px;right:-16px;z-index:2;width:38px;height:38px;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  background:var(--paper);border:1px solid var(--rule);border-radius:50%;
+  transition:border-color .3s,transform .3s var(--ease-out);
+}
+.vsl-modal-close:hover{border-color:var(--gold-2);transform:scale(1.08)}
 .vsl-caption{margin-top:.9rem;text-align:center;color:var(--soft);font-size:.74rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase}
+
+/* ------------------------------------------------------------------ */
+/*  Proof strip                                                        */
+/* ------------------------------------------------------------------ */
+.proof{background:var(--stock);border-bottom:1px solid var(--rule-dim);padding:1.15rem 0}
+.proof-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;row-gap:.5rem}
+.proof-item{
+  display:flex;align-items:center;font-family:var(--serif);font-weight:700;font-size:.88rem;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--ink);text-align:center;
+}
+.proof-item svg{margin:0 1.2rem;flex:none}
+.proof-item:last-child svg{display:none}
+
+/* ------------------------------------------------------------------ */
+/*  Sticky mobile CTA                                                  */
+/* ------------------------------------------------------------------ */
+.mobile-cta{
+  position:fixed;left:0;right:0;bottom:0;z-index:55;display:none;
+  padding:.75rem 1rem calc(.75rem + env(safe-area-inset-bottom));
+  background:rgba(8,9,12,.95);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+  border-top:1px solid var(--rule-dim);
+  transform:translateY(110%);transition:transform .45s var(--ease-out);
+}
+.mobile-cta.show{transform:none}
+.mobile-cta .btn{width:100%}
+@media (max-width:900px){.mobile-cta{display:block}.site-footer{padding-bottom:6.5rem}}
+
+/* ------------------------------------------------------------------ */
+/*  FAQ                                                                */
+/* ------------------------------------------------------------------ */
+.faq{margin-top:3.2rem;border-top:1px solid var(--hairline)}
+.faq details{border-bottom:1px solid var(--hairline)}
+.faq summary{
+  display:flex;align-items:center;justify-content:space-between;gap:1.5rem;
+  padding:1.35rem 0;cursor:pointer;list-style:none;
+  font-family:var(--serif);font-weight:700;font-size:1.15rem;letter-spacing:-.01em;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary svg{flex:none;transition:transform .35s var(--ease-out)}
+.faq details[open] summary svg{transform:rotate(180deg)}
+.faq details p{padding:0 0 1.4rem;color:var(--soft);max-width:62ch}
+.faq details p a{color:var(--gold-2)}
 
 /* ------------------------------------------------------------------ */
 /*  Countdown band                                                     */
@@ -263,7 +320,7 @@ html.js .reveal.in[data-d="2"]{transition-delay:.16s}
 /* quote band */
 .band{
   position:relative;margin-top:7rem;padding:clamp(6rem,12vw,9rem) 0;
-  background:url('assets/stage-thumbs.jpg') center 25%/cover no-repeat;
+  background:url('/big-table/assets/stage-thumbs.jpg') center 25%/cover no-repeat;
 }
 .band::before{
   content:"";position:absolute;inset:0;
@@ -429,7 +486,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
         <p class="hero-sub hero-rise r2">For one afternoon, WSJ-bestselling author <strong>Coach Micheal Burt</strong> brings The Big Table to Tupelo: two hours on recognizing the game you&rsquo;ve outgrown and playing a bigger one, in a room full of North Mississippi people who are done playing small. Hosted by <strong>Justin Stark</strong>.</p>
         <div class="hero-cta hero-rise r3">
           <a class="btn btn-gold" href="#seats">Claim Your Seat</a>
-          <button class="btn btn-line" id="watchBtn" type="button">Watch the Invitation</button>
+          <button class="btn btn-line js-watch" type="button">Watch the Invitation</button>
         </div>
         <p class="hero-note hero-rise r4">
           <span class="smallcaps">Thursday, October 15, 2026</span> <span class="sep" aria-hidden="true">&#183;</span> <span class="smallcaps">1&ndash;3 PM &#183; Doors at noon</span> <span class="sep" aria-hidden="true">&#183;</span> <span class="smallcaps">Seats limited</span>
@@ -437,19 +494,30 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
       </div>
       <div class="vsl hero-rise r3" id="video">
         <div class="vsl-frame">
-          <video id="vslVideo" playsinline preload="none" poster="assets/vsl-poster.jpg" controls controlslist="nodownload">
-            <source src="assets/vsl.mp4" type="video/mp4">
-          </video>
-          <button class="vsl-play" id="vslPlay" type="button" aria-label="Play the invitation from Justin Stark">
-            <svg width="84" height="84" viewBox="0 0 84 84" fill="none" aria-hidden="true">
-              <circle cx="42" cy="42" r="40.5" stroke="#d4af37" stroke-width="1.4" fill="rgba(8,9,12,.55)"/>
-              <circle cx="42" cy="42" r="34.5" stroke="#d4af37" stroke-opacity=".35" stroke-width="1"/>
-              <path d="M35 28.5 59 42 35 55.5Z" fill="#f2dd85"/>
-            </svg>
+          <button class="vsl-open js-watch" type="button" aria-label="Watch the invitation from Justin Stark">
+            <img src="/big-table/assets/vsl-poster.jpg" alt="" width="720" height="1280">
+            <span class="vsl-play" aria-hidden="true">
+              <svg width="84" height="84" viewBox="0 0 84 84" fill="none">
+                <circle cx="42" cy="42" r="40.5" stroke="#d4af37" stroke-width="1.4" fill="rgba(8,9,12,.55)"/>
+                <circle cx="42" cy="42" r="34.5" stroke="#d4af37" stroke-opacity=".35" stroke-width="1"/>
+                <path d="M35 28.5 59 42 35 55.5Z" fill="#f2dd85"/>
+              </svg>
+            </span>
           </button>
+          <noscript><p class="vsl-caption" style="padding:.6rem"><a href="/big-table/assets/vsl.mp4">Watch the invitation video</a></p></noscript>
         </div>
         <p class="vsl-caption">A word from your host &#183; 60 seconds</p>
       </div>
+    </div>
+  </section>
+
+  <!-- ========================== PROOF STRIP ========================== -->
+  <section class="proof" aria-label="Coach Burt credentials">
+    <div class="wrap proof-row">
+      <span class="proof-item">WSJ Bestselling Author<svg width="8" height="8" viewBox="0 0 8 8" aria-hidden="true"><rect x="1.2" y="1.2" width="5.6" height="5.6" transform="rotate(45 4 4)" fill="#b98a2f"/></svg></span>
+      <span class="proof-item">Founder, The Greatness Factory<svg width="8" height="8" viewBox="0 0 8 8" aria-hidden="true"><rect x="1.2" y="1.2" width="5.6" height="5.6" transform="rotate(45 4 4)" fill="#b98a2f"/></svg></span>
+      <span class="proof-item">25+ Years Coaching High Performers<svg width="8" height="8" viewBox="0 0 8 8" aria-hidden="true"><rect x="1.2" y="1.2" width="5.6" height="5.6" transform="rotate(45 4 4)" fill="#b98a2f"/></svg></span>
+      <span class="proof-item">Featured in Forbes &amp; Entrepreneur<svg width="8" height="8" viewBox="0 0 8 8" aria-hidden="true"><rect x="1.2" y="1.2" width="5.6" height="5.6" transform="rotate(45 4 4)" fill="#b98a2f"/></svg></span>
     </div>
   </section>
 
@@ -481,6 +549,10 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
         <div class="signal reveal"><p>You know your skill deserves more income and more impact than the current game <em>pays out.</em></p></div>
       </div>
       <p class="signals-close reveal">If you nodded at any of those, hear this: <strong>frustration isn&rsquo;t a warning sign. It&rsquo;s a signal</strong>, and reading it correctly is exactly what The Big Table teaches.</p>
+      <div class="hero-cta reveal" style="margin-top:2.4rem">
+        <a class="btn btn-gold" href="#seats">Claim Your Seat</a>
+        <button class="btn btn-line js-watch" type="button">Watch the Invitation</button>
+      </div>
     </div>
   </section>
 
@@ -493,7 +565,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
       </div>
       <div class="coach-grid">
         <figure class="portrait reveal">
-          <img src="assets/coach-portrait.jpg" alt="Coach Micheal Burt, studio portrait" width="1100" height="1374" loading="lazy">
+          <img src="/big-table/assets/coach-portrait.jpg" alt="Coach Micheal Burt, studio portrait" width="1100" height="1374" loading="lazy">
           <figcaption class="portrait-caption">Coach Micheal Burt</figcaption>
         </figure>
         <div class="coach-copy reveal" data-d="1">
@@ -507,6 +579,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
             <li><strong>Host of The Big Table Podcast</strong></li>
             <li><strong>Featured in Forbes and Entrepreneur</strong></li>
           </ul>
+          <a class="link-engraved" href="#seats" style="margin-top:1.8rem">Get in the room with him</a>
         </div>
       </div>
     </div>
@@ -545,7 +618,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
           <p><a href="https://thejustinstark.com/">More about Justin &rarr; thejustinstark.com</a></p>
         </div>
         <figure class="portrait reveal" data-d="1">
-          <img src="../assets/img/stage-talk.jpg" alt="Justin Stark speaking on stage" width="1100" height="1650" loading="lazy">
+          <img src="/assets/img/stage-talk.jpg" alt="Justin Stark speaking on stage" width="1100" height="1650" loading="lazy">
           <figcaption class="portrait-caption">Justin Stark &#183; Your host</figcaption>
         </figure>
       </div>
@@ -628,6 +701,34 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
     </div>
   </section>
 
+  <!-- ============================= FAQ ================================ -->
+  <section class="section" aria-label="Common questions">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>Before you grab <em>your seat.</em></h2>
+        <div class="head-rule" aria-hidden="true"></div>
+      </div>
+      <div class="faq reveal">
+        <details>
+          <summary><span>I can&rsquo;t be in Tupelo on October 15.</span><svg width="14" height="9" viewBox="0 0 14 9" aria-hidden="true"><path d="M1 1.5 7 7.5 13 1.5" stroke="#b98a2f" stroke-width="1.4" fill="none"/></svg></summary>
+          <p>Then take <a href="#seats">the Virtual Seat</a>. The full session streams live, and your access details arrive by email before doors open. Same table, your couch.</p>
+        </details>
+        <details>
+          <summary><span>Who is this room actually for?</span><svg width="14" height="9" viewBox="0 0 14 9" aria-hidden="true"><path d="M1 1.5 7 7.5 13 1.5" stroke="#b98a2f" stroke-width="1.4" fill="none"/></svg></summary>
+          <p>Owners, agents, producers, and operators who are already good at what they do and can feel they&rsquo;ve outgrown the game they&rsquo;re playing. If you&rsquo;re brand new, you&rsquo;ll leave with a map. If you&rsquo;re established, you&rsquo;ll leave with your next move.</p>
+        </details>
+        <details>
+          <summary><span>How do I get my ticket?</span><svg width="14" height="9" viewBox="0 0 14 9" aria-hidden="true"><path d="M1 1.5 7 7.5 13 1.5" stroke="#b98a2f" stroke-width="1.4" fill="none"/></svg></summary>
+          <p>Checkout runs through Stripe and confirms instantly &mdash; that confirmation is your proof of purchase, and your name is on the list at the door. Virtual seats get their stream link by email before doors.</p>
+        </details>
+        <details>
+          <summary><span>I want Coach Burt&rsquo;s eyes on <em>my</em> business.</span><svg width="14" height="9" viewBox="0 0 14 9" aria-hidden="true"><path d="M1 1.5 7 7.5 13 1.5" stroke="#b98a2f" stroke-width="1.4" fill="none"/></svg></summary>
+          <p>That&rsquo;s <a href="#seats">the Head Seat</a>: a private 1-on-1 with Coach Micheal Burt and Justin Stark about your business, your numbers, and your next table. It&rsquo;s the smallest supply of the day.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
   <!-- ============================ CLOSER ============================== -->
   <section class="closer" aria-label="Final call">
     <div class="wrap">
@@ -643,6 +744,10 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 
 </main>
 
+<div class="mobile-cta" id="mobileCta">
+  <a class="btn btn-gold" href="#seats">Claim Your Seat &#183; Oct 15</a>
+</div>
+
 <footer class="site-footer">
   <div class="wrap footer-inner">
     <a class="wordmark" href="https://thejustinstark.com/"><span class="wordmark-name">Justin&nbsp;Stark</span></a>
@@ -651,22 +756,41 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   </div>
 </footer>
 
+<div class="vsl-modal" id="vslModal" hidden>
+  <div class="vsl-modal-backdrop" data-close></div>
+  <div class="vsl-modal-panel" role="dialog" aria-modal="true" aria-label="The invitation from Justin Stark">
+    <button class="vsl-modal-close" id="vslClose" type="button" aria-label="Close video">
+      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 2 14 14M14 2 2 14" stroke="#f2dd85" stroke-width="1.6"/></svg>
+    </button>
+    <video id="vslVideo" playsinline controls preload="metadata" poster="/big-table/assets/vsl-poster.jpg" controlslist="nodownload">
+      <source src="/big-table/assets/vsl.mp4" type="video/mp4">
+    </video>
+  </div>
+</div>
+
 <script>
 document.documentElement.classList.add('js');
 
-/* VSL play */
-var v=document.getElementById('vslVideo'),playBtn=document.getElementById('vslPlay');
-v.removeAttribute('controls');
-function playVSL(){
-  playBtn.classList.add('hidden');
-  v.setAttribute('controls','');
-  v.play();
+/* VSL lightbox */
+var modal=document.getElementById('vslModal'),v=document.getElementById('vslVideo'),
+    closeBtn=document.getElementById('vslClose'),lastFocus=null;
+function openVSL(){
+  lastFocus=document.activeElement;
+  modal.hidden=false;
+  document.body.style.overflow='hidden';
+  closeBtn.focus();
+  var p=v.play(); if(p&&p.catch){p.catch(function(){})}
 }
-playBtn.addEventListener('click',playVSL);
-document.getElementById('watchBtn').addEventListener('click',function(){
-  document.getElementById('video').scrollIntoView({behavior:'smooth',block:'center'});
-  playVSL();
-});
+function closeVSL(){
+  v.pause();
+  modal.hidden=true;
+  document.body.style.overflow='';
+  if(lastFocus&&lastFocus.focus){lastFocus.focus()}
+}
+document.querySelectorAll('.js-watch').forEach(function(b){b.addEventListener('click',openVSL)});
+closeBtn.addEventListener('click',closeVSL);
+modal.querySelector('[data-close]').addEventListener('click',closeVSL);
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!modal.hidden)closeVSL()});
 
 /* countdown — updates once a minute, calm by design */
 (function(){
@@ -684,6 +808,18 @@ document.getElementById('watchBtn').addEventListener('click',function(){
   tick();
   setInterval(tick,6e4);
 })();
+
+/* sticky mobile CTA after the hero */
+var mcta=document.getElementById('mobileCta'),mticking=false;
+window.addEventListener('scroll',function(){
+  if(!mticking){
+    requestAnimationFrame(function(){
+      mcta.classList.toggle('show',window.scrollY>560);
+      mticking=false;
+    });
+    mticking=true;
+  }
+},{passive:true});
 
 /* reveals */
 var reveals=document.querySelectorAll('.reveal');
