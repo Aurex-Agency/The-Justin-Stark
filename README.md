@@ -27,6 +27,10 @@ Each spot is marked with a `REPLACE` or `DEMO ONLY` comment in `index.html`:
 - [ ] Review copy — it's a strong first draft in Justin's voice; he should read it through.
 - [ ] Verify on a phone: nav, smooth scroll, form, calendar embed, tap targets.
 
+## The Big Table event funnel
+
+`/big-table/` is the registration funnel for the Oct 15, 2026 Tupelo event (Coach Micheal Burt, hosted by Justin). Stripe payment links power all three tiers; ticket prices display at checkout until the confirmed numbers are added at the commented spots in `big-table/index.html`. Before promoting: click-test all three Stripe links and send a test purchase.
+
 ## Notes
 
 - Fonts are self-hosted for speed and privacy; no Google Fonts request at runtime.
