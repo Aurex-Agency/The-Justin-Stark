@@ -69,6 +69,11 @@ p{max-width:68ch}
   font-family:var(--sans);font-weight:600;font-size:.78rem;
   letter-spacing:.22em;text-transform:uppercase;color:var(--gold);white-space:nowrap;
 }
+.skip-link{
+  position:absolute;left:1rem;top:-4rem;z-index:100;background:var(--gold);color:#14100a;
+  padding:.7rem 1.2rem;border-radius:2px;font-weight:600;text-decoration:none;transition:top .3s;
+}
+.skip-link:focus{top:1rem}
 html.js .reveal{opacity:0;transform:translateY(18px)}
 html.js .reveal.in{opacity:1;transform:none;transition:opacity .8s var(--ease-out),transform .8s var(--ease-out)}
 html.js .reveal.in[data-d="1"]{transition-delay:.08s}
@@ -140,8 +145,8 @@ html.js .reveal.in[data-d="2"]{transition-delay:.16s}
 .wordmark:hover .wordmark-name{color:var(--gold-2)}
 .header-meta{display:flex;align-items:center;gap:1.6rem}
 .header-date{color:var(--soft);font-size:.78rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap}
-.site-header .btn{padding:.68rem 1.3rem}
-@media (max-width:640px){.header-date{display:none}}
+.site-header .btn{padding:.68rem 1.3rem;white-space:nowrap}
+@media (max-width:640px){.header-date{display:none}.site-header .btn{padding:.6rem 1rem;letter-spacing:.14em}}
 
 /* ------------------------------------------------------------------ */
 /*  Hero — the table is set                                            */
@@ -299,7 +304,7 @@ html.js .reveal.in[data-d="2"]{transition-delay:.16s}
 .seat .btn{width:100%}
 .seat-note{margin-top:1rem;text-align:center;font-size:.8rem;color:var(--soft);font-style:italic}
 .seats-fine{margin:2.2rem auto 0;text-align:center;color:var(--soft);font-size:.85rem;max-width:60ch}
-@media (max-width:900px){.seats{grid-template-columns:1fr;max-width:480px;margin-inline:auto}}
+@media (max-width:900px){.seats{grid-template-columns:1fr;max-width:480px;margin-inline:auto}.seat-featured{order:-1}}
 
 /* logistics */
 .logistics{margin-top:6.5rem;border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline)}
@@ -372,6 +377,7 @@ html.js .reveal.in[data-d="2"]{transition-delay:.16s}
   ]
 }
 </script>
+<noscript><style>.vsl-play{display:none}</style></noscript>
 </head>
 <body>
 <!--
@@ -397,7 +403,8 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   review, the verdict, and the surface brief.
 -->
 
-<div class="billing" role="doc-subtitle">The Greatness Factory presents<span class="dot" aria-hidden="true">&#183;</span>Live in Tupelo, Mississippi</div>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="billing">The Greatness Factory presents<span class="dot" aria-hidden="true">&#183;</span>Live in Tupelo, Mississippi</div>
 
 <header class="site-header">
   <div class="wrap header-inner">
@@ -411,7 +418,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   </div>
 </header>
 
-<main>
+<main id="main">
 
   <!-- ============================== HERO ============================== -->
   <section class="hero" aria-label="The Big Table — live in Tupelo">
@@ -430,7 +437,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
       </div>
       <div class="vsl hero-rise r3" id="video">
         <div class="vsl-frame">
-          <video id="vslVideo" playsinline preload="none" poster="assets/vsl-poster.jpg" controlslist="nodownload">
+          <video id="vslVideo" playsinline preload="none" poster="assets/vsl-poster.jpg" controls controlslist="nodownload">
             <source src="assets/vsl.mp4" type="video/mp4">
           </video>
           <button class="vsl-play" id="vslPlay" type="button" aria-label="Play the invitation from Justin Stark">
@@ -534,7 +541,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
             <div class="head-rule" aria-hidden="true"></div>
           </div>
           <p><strong>Justin Stark</strong>, owner of Pontotoc Insurance Agency and a national speaker in his own right, has sat at tables most people around here never get invited to. His conviction: North Mississippi shouldn&rsquo;t have to drive to Nashville or Dallas for a room like this.</p>
-          <p>So he&rsquo;s bringing the room home. One afternoon, fifteen minutes from most of you, with a coach whose calendar does not usually say &ldquo;Tupelo&rdquo; on it.</p>
+          <p>So he&rsquo;s bringing the room home. One afternoon, right up the road, with a coach whose calendar does not usually say &ldquo;Tupelo&rdquo; on it.</p>
           <p><a href="https://thejustinstark.com/">More about Justin &rarr; thejustinstark.com</a></p>
         </div>
         <figure class="portrait reveal" data-d="1">
@@ -578,7 +585,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
           <!-- PRICE: displayed at checkout; add the number here when confirmed, e.g.
                <p class="seat-price"><b>$49</b> per screen</p> -->
           <p class="seat-price">Price shown at secure checkout</p>
-          <a class="btn btn-line" href="https://buy.stripe.com/8x29ASdtW9i3bKp7PTeME00" target="_blank" rel="noopener">Take the Virtual Seat</a>
+          <a class="btn btn-line" href="https://buy.stripe.com/8x29ASdtW9i3bKp7PTeME00" target="_blank" rel="noopener">Watch It Live</a>
         </article>
         <article class="seat seat-featured reveal" data-d="1">
           <h3 class="serif">The Seat in the Room</h3>
@@ -604,7 +611,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
           </ul>
           <!-- PRICE: displayed at checkout; add the number here when confirmed -->
           <p class="seat-price">Price shown at secure checkout</p>
-          <a class="btn btn-gold" href="https://buy.stripe.com/6oUeVc4Xq8dZ3dTb25eME02" target="_blank" rel="noopener">Book the 1-on-1</a>
+          <a class="btn btn-line" href="https://buy.stripe.com/6oUeVc4Xq8dZ3dTb25eME02" target="_blank" rel="noopener">Book the 1-on-1</a>
         </article>
       </div>
       <p class="seats-fine">Checkout opens in a new tab on buy.stripe.com. Stripe handles the payment end to end; your card details never touch this site. Questions first? <a href="https://thejustinstark.com/#contact">Reach Justin directly</a> or call <a href="tel:+16625091213">(662) 509-1213</a>.</p>
@@ -649,13 +656,13 @@ document.documentElement.classList.add('js');
 
 /* VSL play */
 var v=document.getElementById('vslVideo'),playBtn=document.getElementById('vslPlay');
+v.removeAttribute('controls');
 function playVSL(){
   playBtn.classList.add('hidden');
   v.setAttribute('controls','');
   v.play();
 }
 playBtn.addEventListener('click',playVSL);
-v.addEventListener('pause',function(){if(!v.seeking&&v.currentTime>0&&v.currentTime<v.duration){/* keep controls */}});
 document.getElementById('watchBtn').addEventListener('click',function(){
   document.getElementById('video').scrollIntoView({behavior:'smooth',block:'center'});
   playVSL();
@@ -667,7 +674,9 @@ document.getElementById('watchBtn').addEventListener('click',function(){
   var d=document.getElementById('cd-d'),h=document.getElementById('cd-h'),m=document.getElementById('cd-m');
   function tick(){
     var diff=target-Date.now();
-    if(diff<=0){d.textContent='0';h.textContent='0';m.textContent='0';return}
+    if(diff<=0){
+      document.getElementById('countdown').innerHTML='<div class="unit"><b>Doors are open</b><span>507 S Church St, Tupelo</span></div>';
+      return}
     d.textContent=Math.floor(diff/864e5);
     h.textContent=Math.floor(diff%864e5/36e5);
     m.textContent=Math.floor(diff%36e5/6e4);
