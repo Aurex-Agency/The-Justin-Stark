@@ -181,13 +181,13 @@ html.js .reveal.in[data-d="2"]{transition-delay:.16s}
 @keyframes rise{to{opacity:1;transform:none}}
 
 /* the invitation — vertical VSL in a matted frame */
-.vsl{position:relative;justify-self:end;width:min(100%,340px)}
+.vsl{position:relative;justify-self:end;width:min(100%,380px)}
 .vsl-frame{
   position:relative;background:var(--stock-2);border:1px solid var(--rule-dim);
   padding:.7rem;box-shadow:0 30px 60px -32px rgba(0,0,0,.9);
 }
 .vsl-open{display:block;position:relative;width:100%;padding:0;border:0;background:none;cursor:pointer}
-.vsl-open img{width:100%;aspect-ratio:9/16;object-fit:cover;border:1px solid var(--rule);background:#000}
+.vsl-open img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;object-position:center 30%;border:1px solid var(--rule);background:#000}
 .vsl-play{
   position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
   background:rgba(8,9,12,.25);transition:background .3s;
@@ -495,7 +495,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
       <div class="vsl hero-rise r3" id="video">
         <div class="vsl-frame">
           <button class="vsl-open js-watch" type="button" aria-label="Watch the invitation from Justin Stark">
-            <img src="/big-table/assets/vsl-poster.jpg" alt="" width="720" height="1280">
+            <img src="/big-table/assets/vsl-poster.jpg" alt="" width="720" height="960">
             <span class="vsl-play" aria-hidden="true">
               <svg width="84" height="84" viewBox="0 0 84 84" fill="none">
                 <circle cx="42" cy="42" r="40.5" stroke="#d4af37" stroke-width="1.4" fill="rgba(8,9,12,.55)"/>
