@@ -31,6 +31,17 @@ Each spot is marked with a `REPLACE` or `DEMO ONLY` comment in `index.html`:
 
 `/big-table/` is the registration funnel for the Oct 15, 2026 Tupelo event (Coach Micheal Burt, hosted by Justin). Seats: $49 virtual and $149 in-person VIP via GoHighLevel payment links; free general admission registers through the #free-seat form, which posts to the GHL inbound webhook (hidden-iframe POST). The 1-on-1 price stays hidden pending confirmation — its payment page currently renders $40,000.00. Before promoting: click-test the payment links, submit a test GA registration, and confirm it lands in the GHL workflow.
 
+## Meta Pixel (ID 4533371650216162)
+
+Installed on the homepage, `/big-table/`, and `/big-table/thanks/`. Events:
+
+- `PageView` — every page
+- `Lead` — free-ticket form submit on `/big-table/`, the homepage contact form's thank-you state, and every landing on `/big-table/thanks/`
+- `InitiateCheckout` — any payment-link click on `/big-table/` (with value for the $49/$149 seats)
+- `Purchase` — `/big-table/thanks/?seat=vip` ($149) and `?seat=virtual` ($49); the 1-on-1 fires Lead only until its price is confirmed
+
+**Required GHL setup:** each payment link's after-payment redirect must point at the thank-you page — VIP → `https://thejustinstark.com/big-table/thanks/?seat=vip`, Virtual → `.../thanks/?seat=virtual`, 1-on-1 → `.../thanks/?seat=oneonone`. Without the redirect, paid conversions never reach the pixel (payment happens on GHL's domain).
+
 ## Notes
 
 - Fonts are self-hosted for speed and privacy; no Google Fonts request at runtime.

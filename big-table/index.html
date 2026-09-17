@@ -14,6 +14,24 @@
 <meta property="og:url" content="https://thejustinstark.com/big-table/">
 <meta property="og:image" content="https://thejustinstark.com/big-table/assets/og.jpg">
 <meta name="theme-color" content="#08090c">
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '4533371650216162');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=4533371650216162&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
 <link rel="preload" href="/assets/fonts/PlayfairDisplay-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/Inter-var.woff2" as="font" type="font/woff2" crossorigin>
 <style>
@@ -700,7 +718,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
             <li>Access details delivered by email before doors</li>
           </ul>
           <p class="seat-price"><b>$49</b> per screen</p>
-          <a class="btn btn-line" href="https://link.pontotocinsuranceagency.com/payment-link/6aa73b1b32f95ae35594a688" target="_blank" rel="noopener">Watch It Live</a>
+          <a class="btn btn-line" data-seat-name="The Big Table — Virtual Seat" data-value="49" href="https://link.pontotocinsuranceagency.com/payment-link/6aa73b1b32f95ae35594a688" target="_blank" rel="noopener">Watch It Live</a>
         </article>
         <article class="seat seat-featured reveal" data-d="1">
           <h3 class="serif">The Seat in the Room</h3>
@@ -719,7 +737,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
             </div>
             <div class="tier">
               <div class="tier-line"><span class="tier-name">VIP Admission</span><span class="tier-price">$149</span></div>
-              <a class="btn btn-gold" href="https://link.pontotocinsuranceagency.com/payment-link/6aa73b4eceb12d9fc1a8cade" target="_blank" rel="noopener">Go VIP</a>
+              <a class="btn btn-gold" data-seat-name="The Big Table — VIP Admission" data-value="149" href="https://link.pontotocinsuranceagency.com/payment-link/6aa73b4eceb12d9fc1a8cade" target="_blank" rel="noopener">Go VIP</a>
               <p class="tier-note">Full VIP details at secure checkout.</p>
             </div>
           </div>
@@ -737,7 +755,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
                $40,000.00 for this product; owner is confirming the intended number.
                Once confirmed: <p class="seat-price"><b>$X,XXX</b> one session</p> -->
           <p class="seat-price">Price shown at secure checkout</p>
-          <a class="btn btn-line" href="https://link.pontotocinsuranceagency.com/payment-link/6aa73b79ceb12d9fc1a8cae0" target="_blank" rel="noopener">Book the 1-on-1</a>
+          <a class="btn btn-line" data-seat-name="The Big Table — 1-on-1 with Coach Burt & Justin" href="https://link.pontotocinsuranceagency.com/payment-link/6aa73b79ceb12d9fc1a8cae0" target="_blank" rel="noopener">Book the 1-on-1</a>
         </article>
       </div>
       <p class="seats-fine">Checkout opens in a new tab on Justin&rsquo;s secure payment page with instant confirmation; your card details never touch this site. Questions first? <a href="https://thejustinstark.com/#contact">Reach Justin directly</a> or call <a href="tel:+16625091213">(662) 509-1213</a>.</p>
@@ -929,7 +947,18 @@ gaForm.addEventListener('submit',function(){
   gaSubmitted=true;
   gaBtn.disabled=true;
   gaBtn.textContent='Saving your seat\u2026';
+  if(window.fbq){fbq('track','Lead',{content_name:'The Big Table — General Admission (Free)',content_category:'event-registration'})}
   setTimeout(gaDone,2500);
+});
+
+/* Meta: InitiateCheckout when a paid seat heads to checkout */
+document.querySelectorAll('a[href*="/payment-link/"]').forEach(function(a){
+  a.addEventListener('click',function(){
+    if(!window.fbq)return;
+    var p={content_name:this.dataset.seatName||'The Big Table'};
+    if(this.dataset.value){p.value=parseFloat(this.dataset.value);p.currency='USD'}
+    fbq('track','InitiateCheckout',p);
+  });
 });
 gaSink.addEventListener('load',gaDone);
 
