@@ -14,6 +14,24 @@
 <meta property="og:url" content="https://thejustinstark.com/">
 <meta property="og:image" content="https://thejustinstark.com/assets/img/og.jpg">
 <meta name="theme-color" content="#08090c">
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '4533371650216162');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=4533371650216162&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
 <link rel="preload" href="assets/fonts/PlayfairDisplay-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/Inter-var.woff2" as="font" type="font/woff2" crossorigin>
 <style>
@@ -919,6 +937,7 @@ if(new URLSearchParams(location.search).has('sent')){
   var form=document.getElementById('leadForm'),thanks=document.getElementById('formThanks');
   if(form){form.style.display='none'}
   if(thanks){thanks.classList.add('shown')}
+  if(window.fbq){fbq('track','Lead',{content_name:'thejustinstark.com — Contact Form'})}
   history.replaceState(null,'',location.pathname+'#contact');
   var c=document.getElementById('contact');
   if(c){c.scrollIntoView()}
