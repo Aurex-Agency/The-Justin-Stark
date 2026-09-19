@@ -14,6 +14,7 @@
 <meta property="og:url" content="https://thejustinstark.com/big-table/">
 <meta property="og:image" content="https://thejustinstark.com/big-table/assets/og.jpg">
 <meta name="theme-color" content="#08090c">
+<link rel="preconnect" href="https://connect.facebook.net" crossorigin>
 <!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
@@ -25,12 +26,26 @@ t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
 fbq('init', '4533371650216162');
-fbq('track', 'PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=4533371650216162&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
+<script>
+/* mtrack: fires each event twice on purpose — browser pixel + first-party
+   Conversions API relay (/api/meta) — sharing one eventID so Meta dedupes.
+   The relay path survives ad blockers and Safari/iOS tracking prevention. */
+window.mtrack=function(name,params){
+  var id='ev.'+Date.now().toString(36)+'.'+Math.random().toString(36).slice(2,10);
+  if(window.fbq){fbq('track',name,params||{},{eventID:id})}
+  try{
+    var body=JSON.stringify({event_name:name,event_id:id,event_source_url:location.href,custom_data:params||{}});
+    if(navigator.sendBeacon){navigator.sendBeacon('/api/meta',new Blob([body],{type:'application/json'}))}
+    else if(window.fetch){fetch('/api/meta',{method:'POST',headers:{'Content-Type':'application/json'},body:body,keepalive:true})}
+  }catch(e){}
+};
+mtrack('PageView');
+</script>
 
 <link rel="preload" href="/assets/fonts/PlayfairDisplay-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/Inter-var.woff2" as="font" type="font/woff2" crossorigin>
@@ -947,17 +962,17 @@ gaForm.addEventListener('submit',function(){
   gaSubmitted=true;
   gaBtn.disabled=true;
   gaBtn.textContent='Saving your seat\u2026';
-  if(window.fbq){fbq('track','Lead',{content_name:'The Big Table — General Admission (Free)',content_category:'event-registration'})}
+  if(window.mtrack){mtrack('Lead',{content_name:'The Big Table — General Admission (Free)',content_category:'event-registration'})}
   setTimeout(gaDone,2500);
 });
 
 /* Meta: InitiateCheckout when a paid seat heads to checkout */
 document.querySelectorAll('a[href*="/payment-link/"]').forEach(function(a){
   a.addEventListener('click',function(){
-    if(!window.fbq)return;
+    if(!window.mtrack)return;
     var p={content_name:this.dataset.seatName||'The Big Table'};
     if(this.dataset.value){p.value=parseFloat(this.dataset.value);p.currency='USD'}
-    fbq('track','InitiateCheckout',p);
+    mtrack('InitiateCheckout',p);
   });
 });
 gaSink.addEventListener('load',gaDone);
