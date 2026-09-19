@@ -42,6 +42,8 @@ Installed on the homepage, `/big-table/`, and `/big-table/thanks/`. Events:
 
 **Required GHL setup:** each payment link's after-payment redirect must point at the thank-you page — VIP → `https://thejustinstark.com/big-table/thanks/?seat=vip`, Virtual → `.../thanks/?seat=virtual`, 1-on-1 → `.../thanks/?seat=oneonone`. Without the redirect, paid conversions never reach the pixel (payment happens on GHL's domain).
 
+**Server-side delivery (Conversions API):** every event also beacons to `/api/meta`, a Vercel function that relays it to Meta's Conversions API with a shared `event_id`, so Meta dedupes browser+server pairs — this is what gets events through ad blockers and Safari/iOS tracking prevention. One-time setup: Events Manager → pixel Settings → Conversions API → **Generate access token**, then in Vercel add env var `META_CAPI_TOKEN` (and optionally `META_TEST_EVENT_CODE` while testing) and redeploy. Until the token is set, `/api/meta` answers 202/no-op and the browser pixel works alone.
+
 ## Notes
 
 - Fonts are self-hosted for speed and privacy; no Google Fonts request at runtime.

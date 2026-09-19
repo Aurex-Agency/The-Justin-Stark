@@ -9,6 +9,7 @@
 <link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <meta name="theme-color" content="#08090c">
+<link rel="preconnect" href="https://connect.facebook.net" crossorigin>
 <!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
@@ -20,12 +21,26 @@ t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
 fbq('init', '4533371650216162');
-fbq('track', 'PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=4533371650216162&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
+<script>
+/* mtrack: fires each event twice on purpose — browser pixel + first-party
+   Conversions API relay (/api/meta) — sharing one eventID so Meta dedupes.
+   The relay path survives ad blockers and Safari/iOS tracking prevention. */
+window.mtrack=function(name,params){
+  var id='ev.'+Date.now().toString(36)+'.'+Math.random().toString(36).slice(2,10);
+  if(window.fbq){fbq('track',name,params||{},{eventID:id})}
+  try{
+    var body=JSON.stringify({event_name:name,event_id:id,event_source_url:location.href,custom_data:params||{}});
+    if(navigator.sendBeacon){navigator.sendBeacon('/api/meta',new Blob([body],{type:'application/json'}))}
+    else if(window.fetch){fetch('/api/meta',{method:'POST',headers:{'Content-Type':'application/json'},body:body,keepalive:true})}
+  }catch(e){}
+};
+mtrack('PageView');
+</script>
 
 <link rel="preload" href="/assets/fonts/PlayfairDisplay-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/Inter-var.woff2" as="font" type="font/woff2" crossorigin>
@@ -135,10 +150,10 @@ footer a{color:var(--soft)}
   if(s){document.getElementById('seatLine').innerHTML=s.line}
   var guard='bt-conv-'+(key||'unknown'),fired=false;
   try{fired=!!sessionStorage.getItem(guard)}catch(e){}
-  if(!fired&&window.fbq){
+  if(!fired&&window.mtrack){
     var name=s?s.name:'The Big Table — Seat Confirmed';
-    fbq('track','Lead',{content_name:name,content_category:'event-ticket'});
-    if(s&&s.value){fbq('track','Purchase',{content_name:name,value:s.value,currency:'USD'})}
+    mtrack('Lead',{content_name:name,content_category:'event-ticket'});
+    if(s&&s.value){mtrack('Purchase',{content_name:name,value:s.value,currency:'USD'})}
     try{sessionStorage.setItem(guard,'1')}catch(e){}
   }
 })();
