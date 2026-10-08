@@ -29,7 +29,7 @@ Each spot is marked with a `REPLACE` or `DEMO ONLY` comment in `index.html`:
 
 ## The Big Table event funnel
 
-`/big-table/` is the registration funnel for the Oct 15, 2026 Tupelo event (Coach Micheal Burt, hosted by Justin). Seats: $49 virtual and $149 in-person VIP via GoHighLevel payment links; free general admission registers through the #free-seat form, which posts to the GHL inbound webhook (hidden-iframe POST). The 1-on-1 price stays hidden pending confirmation — its payment page currently renders $40,000.00. Before promoting: click-test the payment links, submit a test GA registration, and confirm it lands in the GHL workflow.
+`/big-table/` is the registration funnel for the Oct 15, 2026 Tupelo event (Coach Micheal Burt, hosted by Justin). Seats: $49 virtual and $149 in-person VIP via GoHighLevel payment links; free general admission registers through the #free-seat form, which posts to the GHL inbound webhook (hidden-iframe POST). Referral links (`/big-table?ref=<code>`) are captured verbatim, persisted first-touch for 30 days per event in localStorage (`ref.big-table`), and submitted with the registration as `referral_code` alongside `event_id: big-table` — the contact ID inside a code belongs to the promoter and never changes attendee fields. A referred registration additionally beacons the same data to the referrer-tracking webhook (`.../webhook-trigger/c7e6d841-...`) so the promoter gets credit. The 1-on-1 price stays hidden pending confirmation — its payment page currently renders $40,000.00. Before promoting: click-test the payment links, submit a test GA registration, and confirm it lands in the GHL workflow.
 
 ## Meta Pixel (ID 4533371650216162)
 
