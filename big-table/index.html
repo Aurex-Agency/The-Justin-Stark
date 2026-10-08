@@ -788,6 +788,8 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
         <form id="gaForm" action="https://services.leadconnectorhq.com/hooks/MCFdomwXH4RRN6HkJgry/webhook-trigger/6e01b802-f669-411c-87fd-7b8488cf95e8" method="POST" target="ga_sink">
           <input type="hidden" name="ticket_type" value="general-admission-free">
           <input type="hidden" name="source" value="thejustinstark.com/big-table">
+          <input type="hidden" name="event_id" value="big-table">
+          <input type="hidden" name="referral_code" id="gaRefCode" value="">
           <div class="field">
             <label for="ga-name">Name <span class="req" aria-hidden="true">*</span></label>
             <input id="ga-name" name="name" type="text" autocomplete="name" placeholder="Your name" required>
@@ -948,6 +950,30 @@ window.addEventListener('scroll',function(){
   }
 },{passive:true});
 
+/* Referral tracking: ?ref=<code> is captured verbatim (no splitting, no
+   case changes) and persisted per event — first touch wins for 30 days;
+   an expired entry can be replaced by a new touch. The contact ID inside
+   the code belongs to the PROMOTER and never alters attendee fields. */
+var REF_EVENT='big-table',REF_KEY='ref.'+REF_EVENT,REF_TTL=30*24*60*60*1000;
+function refRead(){
+  try{
+    var raw=localStorage.getItem(REF_KEY);
+    if(!raw)return null;
+    var o=JSON.parse(raw);
+    if(!o||!o.code||typeof o.ts!=='number')return null;
+    if(Date.now()-o.ts>REF_TTL){localStorage.removeItem(REF_KEY);return null}
+    return o.code;
+  }catch(e){return null}
+}
+(function(){
+  var incoming=new URLSearchParams(location.search).get('ref');
+  if(incoming&&incoming.length<=256&&!refRead()){
+    try{localStorage.setItem(REF_KEY,JSON.stringify({code:incoming,ts:Date.now()}))}catch(e){}
+  }
+  var el=document.getElementById('gaRefCode');
+  if(el){el.value=refRead()||''}
+})();
+
 /* free-seat form: posts to the GHL webhook through the hidden iframe */
 var gaForm=document.getElementById('gaForm'),gaThanks=document.getElementById('gaThanks'),
     gaBtn=document.getElementById('gaSubmit'),gaSink=document.querySelector('iframe[name=ga_sink]'),
@@ -959,6 +985,8 @@ function gaDone(){
   gaThanks.classList.add('shown');
 }
 gaForm.addEventListener('submit',function(){
+  var refEl=document.getElementById('gaRefCode');
+  if(refEl){refEl.value=refRead()||''}
   gaSubmitted=true;
   gaBtn.disabled=true;
   gaBtn.textContent='Saving your seat\u2026';
