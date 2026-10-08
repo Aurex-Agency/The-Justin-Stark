@@ -974,6 +974,25 @@ function refRead(){
   if(el){el.value=refRead()||''}
 })();
 
+/* Referrer tracking: a completed registration that carries a referral code
+   also notifies the referrer-tracking webhook, so the promoter gets credit.
+   Sent as a fire-and-forget beacon (urlencoded, no preflight needed). */
+var REF_HOOK='https://services.leadconnectorhq.com/hooks/MCFdomwXH4RRN6HkJgry/webhook-trigger/c7e6d841-5e0d-4890-9c12-a584195f1e4c';
+function notifyReferrer(code){
+  try{
+    var d=new URLSearchParams();
+    d.set('referral_code',code);
+    d.set('event_id',REF_EVENT);
+    d.set('ticket_type','general-admission-free');
+    d.set('source','thejustinstark.com/big-table');
+    d.set('name',(document.getElementById('ga-name')||{}).value||'');
+    d.set('email',(document.getElementById('ga-email')||{}).value||'');
+    d.set('phone',(document.getElementById('ga-phone')||{}).value||'');
+    if(navigator.sendBeacon){navigator.sendBeacon(REF_HOOK,d)}
+    else if(window.fetch){fetch(REF_HOOK,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:d.toString(),keepalive:true})}
+  }catch(e){}
+}
+
 /* free-seat form: posts to the GHL webhook through the hidden iframe */
 var gaForm=document.getElementById('gaForm'),gaThanks=document.getElementById('gaThanks'),
     gaBtn=document.getElementById('gaSubmit'),gaSink=document.querySelector('iframe[name=ga_sink]'),
@@ -985,8 +1004,10 @@ function gaDone(){
   gaThanks.classList.add('shown');
 }
 gaForm.addEventListener('submit',function(){
+  var refCode=refRead()||'';
   var refEl=document.getElementById('gaRefCode');
-  if(refEl){refEl.value=refRead()||''}
+  if(refEl){refEl.value=refCode}
+  if(refCode){notifyReferrer(refCode)}
   gaSubmitted=true;
   gaBtn.disabled=true;
   gaBtn.textContent='Saving your seat\u2026';
