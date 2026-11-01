@@ -1,0 +1,23 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//thejustinstark.com//Box Top Launch//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:boxtop-launch-2026-11-09@thejustinstark.com
+DTSTAMP:20261101T000000Z
+DTSTART:20261109T180000Z
+DTEND:20261109T193000Z
+SUMMARY:The Box Top Method: Live Zoom Launch with Justin Stark
+DESCRIPTION:Your personal Zoom link is in your confirmation email from Just
+ in and from Zoom. Bring your questions and your spouse.\n\nhttps://thejus
+ tinstark.com/theboxtop/launch/
+LOCATION:Zoom (your personal link is in your confirmation email)
+URL:https://thejustinstark.com/theboxtop/launch/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:The Box Top Method live launch starts in 30 minutes
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+END:VCALENDAR

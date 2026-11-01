@@ -1,153 +1,160 @@
 # Phase 2: GoHighLevel tracking, pipeline and communications
 
-**Status:** draft for approval · Builds right after the landing page (and overlaps it: GHL needs one sample submission from the preview deploy to map fields).
-**Who builds:** Kalob in the GHL sub-account (there's no GHL connection from this repo). Claude supplies the exact spec below, the test payloads, and all email/SMS copy during the build.
+**Status:** approved, revised after independent review (see README review log).
+**Who builds:** Kalob in GHL (there is no GHL connection from this repo). Claude supplies this spec, test payloads, and all email/SMS copy.
+**Sub-account:** the existing webhook location (`MCFdomwXH4RRN6HkJgry`, also used by `/big-table/`) is Pontotoc Insurance Agency's live account. See check 1.
 
 ---
 
-## 1. Day-1 checks (do these first; two of them can quietly sink the launch)
+## 1. Day-1 checks (Mon Nov 2, morning)
 
-| Check | Why it matters | If it fails |
-|---|---|---|
-| **A2P 10DLC brand + campaign approved** in LC Phone for this sub-account, and the campaign's use case covers event reminders/marketing | Unregistered SMS to US numbers gets filtered or blocked. New approvals can take days to weeks. | Launch runs email-only + Zoom's own reminder emails. Hide the SMS checkbox. |
-| **Email sending domain** set up in GHL (dedicated subdomain like `mail.thejustinstark.com`) with SPF, DKIM, and a DMARC record | Without it, reminders land in spam or Promotions, which kills show rate | Set it up today; DNS for the domain is on Vercel or the registrar |
-| **Zoom webinar settings** (Phase 1 §7): registration auto-approve, capacity, cloud recording on | Auto-approve is what makes the instant join link work; capacity caps live attendance | See §8 |
-| **Inbound Webhook trigger available** (already used by `/big-table/`, so it should be) | It's how the site talks to GHL | n/a |
+| # | Check | Why it matters | If it fails |
+|---|---|---|---|
+| 1 | **Existing PIA workflows** triggered by "Contact created", "Tag added", or form/webhook events | Box Top registrants land in PIA's live account and could fall into insurance sequences | Add a filter `does not have tag bt-registered` to those workflows, or exclude the `boxtop` source |
+| 2 | **A2P 10DLC brand + campaign approved** for this sub-account, use case covering event reminders | Unregistered texts get filtered. A new approval needs the live opt-in page + privacy policy and won't clear by Nov 9 | **Decide by Monday noon:** if not already approved, this launch is **email only**. Hide the SMS checkbox (one-line change on the page) |
+| 3 | **Email sending domain** authenticated (dedicated subdomain, SPF, DKIM, DMARC `p=none`) | Reminders in spam kill show rate. DNS for thejustinstark.com is at **GoDaddy** (nameservers `ns77/ns78.domaincontrol.com`), so records go there | Set up today |
+| 4 | **Zoom webinar settings** (§8) and **which Zoom account owns the webinar** | The Zoom app must be created by that account's owner/admin | Plan B (README) |
+| 5 | Business name for A2P, privacy and terms. Reviewer found **"Stark Broker Services d/b/a Pontotoc Insurance Agency"** in PIA onboarding docs | A2P rejects mismatched names | Justin confirms the exact legal name |
 
 ## 2. Custom fields (Contact, folder "Box Top Launch")
 
-| Field | Type | Filled by |
-|---|---|---|
-| BT Zoom Join URL | Single line | Registration webhook |
-| BT Zoom Registrant ID | Single line | Registration webhook |
-| BT Zoom Status | Dropdown: registered / failed | Registration webhook |
-| BT Registered At | Date/time | Registration webhook |
-| BT SMS Consent | Dropdown: yes / no | Registration webhook |
-| BT SMS Consent At + BT Consent Text Version | Date/time + Single line | Registration webhook (proof of consent) |
-| BT Segment | Dropdown: Retired / Retiring within 5 years / 5+ years out / Business owner / Financial professional | Thank-you survey |
-| BT Attended Live | Dropdown: yes / no | Attendance sync or CSV import |
-| BT Minutes Attended | Number | Attendance sync or CSV import |
-| BT FT Source / Medium / Campaign / Content / Term | Single line ×5 | First touch |
-| BT LT Source / Medium / Campaign / Content / Term | Single line ×5 | Last touch |
-| BT Campaign ID, BT fbclid, BT gclid | Single line ×3 | Click IDs |
-| BT Landing Page, BT Referrer | Single line ×2 | Page context |
+| Field | Type | Written by | Rule |
+|---|---|---|---|
+| BT Zoom Join URL | Single line | Inbound webhook | **Only write when the incoming value isn't empty** (a duplicate submit sends blank) |
+| BT Zoom Registrant ID | Single line | Inbound webhook | Only when not empty |
+| BT Zoom Status | Single line: `registered` / `already` / `failed` | Inbound webhook | |
+| BT Registered At | Date/time | Inbound webhook | Only when empty (keep the first) |
+| BT SMS Consent | Single line: `yes` / `no` | Inbound webhook | Never downgrade `yes` to `no` on a re-submit; STOP handles opt-out |
+| BT SMS Consent At, BT Consent Version, BT Consent Text | Date/time, Single line, Multi line | Inbound webhook | Proof of consent: exact wording shown at signup |
+| BT Segment | Single line, values `retired` / `red-zone` / `planning` / `business-owner` / `pro` | Thank-you survey | Slugs match the page exactly |
+| BT Source Bucket | Single line | Inbound webhook | `paid-meta` `paid-other` `organic-social` `vanity` `referral` `email` `direct` `other` `zoom-direct` |
+| BT Attended Live, BT Minutes Attended | Single line `yes`/`no`, Number | Zoom CSV import | |
+| BT FT Source / Medium / Campaign / Content / Term | Single line ×5 | Inbound webhook | **Only write when empty** (true first touch, even across devices) |
+| BT LT Source / Medium / Campaign / Content / Term | Single line ×5 | Inbound webhook | Overwrite every time (last touch) |
+| BT Campaign ID, BT fbclid, BT gclid, BT Landing Page, BT Referrer | Single line ×5 | Inbound webhook | |
 
-Why custom fields instead of GHL's built-in attribution: GHL fills its native attribution when its own forms or funnels capture the lead. Our form posts through a webhook, so we carry attribution ourselves, explicitly, and it shows up on the contact, in smart-list filters and in reports. *(Optional extra: if GHL's external tracking script is available on this account, adding it to the page also populates native attribution. Reviewer to verify availability.)*
+Why custom fields: GHL's native attribution only fills when GHL's own forms or funnels capture the lead. Ours posts through a webhook, so we carry attribution explicitly. GHL's external tracking script exists, but it could create contacts a second way and its handling of JavaScript-submitted forms is undocumented: **don't install it for this launch.**
 
-## 3. Webhook payload (what `/api/boxtop-register` sends)
+## 3. Webhook payload (sent by `/api/boxtop-register`)
 
-One inbound webhook URL. The `action` field routes inside the workflow.
+One inbound webhook URL (Vercel env `GHL_BOXTOP_WEBHOOK_URL`). The `action` field routes inside the workflow.
 
 ```json
 {
-  "action": "register",                       // register | profile | replay | attended
+  "action": "register",            // register | replay | profile | zoom_direct (backfill script)
   "event": "boxtop-launch-2026-11-09",
-  "first_name": "Jane", "last_name": "Doe",
-  "email": "jane@example.com", "phone": "+16625550123",
-  "sms_consent": "yes", "sms_consent_at": "2026-11-03T15:04:05Z", "consent_version": "bt-sms-v1",
-  "zoom_status": "registered", "zoom_join_url": "https://us02web.zoom.us/w/…", "zoom_registrant_id": "…",
-  "registered_at": "2026-11-03T15:04:05Z",
-  "ft_source": "facebook", "ft_medium": "paid_social", "ft_campaign": "BT Launch Reg", "ft_content": "Puzzle 15s", "ft_term": "Broad US",
-  "lt_source": "facebook", "lt_medium": "paid_social", "lt_campaign": "BT Launch Reg", "lt_content": "Puzzle 15s", "lt_term": "Broad US",
+  "first_name": "Jane", "last_name": "Doe", "email": "jane@example.com", "phone": "+16625550123",
+  "segment": "",                   // profile only
+  "sms_consent": "yes", "sms_consent_at": "2026-11-03T15:04:05.000Z",
+  "consent_version": "bt-sms-v1", "consent_text": "Yes, text me reminders about … Consent is not a condition of registration.",
+  "zoom_status": "registered",     // registered | already | failed
+  "zoom_join_url": "https://us02web.zoom.us/w/…", "zoom_registrant_id": "…",
+  "zoom_fallback_url": "",         // filled only when zoom_status = failed
+  "registered_at": "2026-11-03T15:04:05.000Z",
+  "source_bucket": "paid-meta",
+  "ft_source": "fb", "ft_medium": "paid_social", "ft_campaign": "BT Launch Reg", "ft_content": "Puzzle 15s", "ft_term": "Broad US",
+  "lt_source": "fb", "lt_medium": "paid_social", "lt_campaign": "BT Launch Reg", "lt_content": "Puzzle 15s", "lt_term": "Broad US",
   "campaign_id": "1202…", "fbclid": "…", "gclid": "",
-  "landing_page": "https://thejustinstark.com/theboxtop/launch/?utm_…", "referrer": "",
-  "segment": ""                                // filled on action=profile
+  "landing_page": "https://thejustinstark.com/theboxtop/launch/?utm_…", "referrer": ""
 }
 ```
+
+Note: Meta's `{{site_source_name}}` returns `fb`, `ig`, `msg` or `an`, not "facebook". The function's `source_bucket` already accounts for that.
 
 ## 4. Tags
 
 | Tag | Applied when |
 |---|---|
-| `bt-registered` | Any successful registration |
-| `bt-src-paid-meta` / `bt-src-organic-social` / `bt-src-vanity` / `bt-src-referral` / `bt-src-email` / `bt-src-direct` | Derived from last-touch medium/source in the workflow |
-| `bt-sms-optin` | `sms_consent = yes` |
-| `bt-zoom-failed` | `zoom_status = failed` (also fires an internal alert) |
-| `bt-seg-retired` / `bt-seg-red-zone` / `bt-seg-planning` / `bt-seg-business-owner` / `bt-seg-pro` | Thank-you survey |
-| `bt-attended-live` | Joined the live webinar |
-| `bt-no-show` | Registered, not attended (applied after the event) |
-| `bt-replay-request` | Signed up after the event |
-| `bt-replay-clicked` | Clicked the replay trigger link |
-| `bt-review-booked` | Booked a Box Top Review |
+| `bt-registered` | `action` = register or zoom_direct |
+| `bt-src-{bucket}` (one of the BT Source Bucket values) | From `source_bucket` |
+| `bt-sms-optin` | `sms_consent` = yes |
+| `bt-zoom-failed` | `zoom_status` = failed (+ internal alert) |
+| `bt-seg-retired` / `bt-seg-red-zone` / `bt-seg-planning` / `bt-seg-business-owner` / `bt-seg-pro` | Survey |
+| `bt-attended-live` | Zoom attendee CSV import |
+| `bt-no-show` | Registered and not attended, applied after the CSV import |
+| `bt-replay-request` | `action` = replay |
+| `bt-replay-ready` | **Manual**, once the replay plays end to end. Releases every replay message |
+| `bt-replay-clicked` | Replay trigger link clicked |
+| `bt-review-booked` | Box Top Review booked |
 
 ## 5. Pipeline: "Box Top Launch"
 
 | # | Stage | Moves here when |
 |---|---|---|
-| 1 | Registered | Registration webhook |
-| 2 | Attended Live | `bt-attended-live` added |
-| 3 | No-Show | `bt-no-show` added |
-| 4 | Replay Engaged | Replay link clicked (and didn't attend live) |
+| 1 | Registered | `bt-registered` |
+| 2 | Attended Live | `bt-attended-live` |
+| 3 | No-Show | `bt-no-show` |
+| 4 | Replay Engaged | `bt-replay-clicked` and not attended |
 | 5 | Box Top Review Booked | Booking on the Box Top Review calendar |
 | 6 | Box Top Review Held | Appointment marked showed |
-| 7 | Client | Status **Won** (set by Justin) |
+| 7 | Client | Status **Won** (Justin) |
 
-Opportunity name `{{contact.name}} · Box Top Launch`, source = `BT LT Source / BT LT Campaign`, assigned to Justin. Lost reasons: Not a fit · No response · Already has an advisor · Other.
-
-Financial professionals (`bt-seg-pro`) also get routed to Justin's agent-recruiting pipeline if one exists (confirm), since Box Top certification is a separate offer.
+Opportunity: `{{contact.name}} · Box Top Launch`, source = BT Source Bucket + BT LT Campaign, assigned to Justin. Lost reasons: Not a fit · No response · Already has an advisor · Other. `bt-seg-pro` also goes to Justin's agent-recruiting pipeline if one exists.
 
 ## 6. Workflows
 
 | Workflow | Trigger | Steps |
 |---|---|---|
-| **BT · Inbound** | Inbound Webhook | Create/Update Contact (map all fields) → branch on `action`: **register**: tags, source tag, opportunity → stage Registered, send "You're in" email now, if `bt-sms-optin` send confirmation SMS inside an 8 AM–8 PM window (contact's time zone, Central as fallback), if `zoom_status=failed` internal alert to Kalob + Justin · **profile**: set BT Segment + segment tag · **replay**: tag `bt-replay-request`, send replay email · **attended**: set BT Attended Live = yes, minutes, tag `bt-attended-live` |
-| **BT · Attended** | Tag added `bt-attended-live` | Move opportunity → Attended Live. Remove from no-show list. (Post-event emails are scheduled sends, §7, so nobody gets a "thanks for coming" while the webinar is still running.) |
-| **BT · Attended nurture** | Tag added `bt-attended-live` **and** wait until Nov 9, 2:00 PM CT | Day 0 bonuses → Day 1 quiz → Day 3 Box Top Review invite → Day 6 last call. Goal step: `bt-review-booked` exits the workflow. |
-| **BT · No-show nurture** | Tag added `bt-no-show` | Day 0 replay → Day 1 replay reminder → Day 3 Box Top Review invite → Day 6 replay coming down (*if D5 sets a window*). Goal: `bt-review-booked` or `bt-replay-clicked` (switches to the engaged branch). |
-| **BT · Replay clicked** | Trigger link "BT Replay" clicked | Tag `bt-replay-clicked`; if not attended, move → Replay Engaged |
-| **BT · Review booked** | Appointment booked, calendar "Box Top Review" | Tag `bt-review-booked`, move → Review Booked, internal notification, confirmation + reminders (standard calendar reminders) |
-| **BT · Review showed** | Appointment status showed | Move → Review Held |
+| **BT · Inbound** | Inbound Webhook | Branch on `action`. **register / replay:** Create/Update Contact (field rules in §2) → tags → opportunity (Registered) → if `zoom_status=failed`, internal alert to Kalob + Justin with the contact link. **profile:** set BT Segment + segment tag. **zoom_direct:** if the contact already has `bt-registered`, only fill an empty join URL and stop; otherwise create, tag `bt-registered` + `bt-src-zoom-direct`, opportunity, no attribution fields |
+| **BT · Launch comms** | Tag added `bt-registered` | The whole pre-event sequence in §7, one workflow. Every Wait uses **"If the time is already in the past: skip all outbound communication actions until the next wait"**, so a late registrant never gets a stale message |
+| **BT · Post-event** | Tag added `bt-attended-live` or `bt-no-show` | Attended → Day 0 thank-you + bonus vault + Box Top Review link + where to buy the book; Day 2 quiz; Day 4 Review invite; Day 7 last call. No-show → Day 0 "replay coming tonight", then waits for `bt-replay-ready` → replay link; Day 2 replay reminder; Day 4 Review invite; Day 7 "replay comes down". **Email only** (the SMS consent covers launch reminders, not follow-up). Goal: `bt-review-booked` exits |
+| **BT · Replay request** | Tag added `bt-replay-request` | Wait for `bt-replay-ready` → replay email → joins the no-show track from Day 2 |
+| **BT · Replay clicked** | Trigger link "BT Replay" | Tag `bt-replay-clicked`; if not attended → Replay Engaged |
+| **BT · Review booked** | Appointment booked, calendar "Box Top Review" | Tag, stage → Box Top Review Booked, internal notification |
+| **BT · Review showed** | Appointment showed | Stage → Box Top Review Held |
 
-**Calendar:** a "Box Top Review" calendar (or reuse the existing GHL booking calendar from the homepage if Justin prefers one calendar; a separate one keeps reporting clean).
+**Calendar:** "Box Top Review" (separate from the homepage calendar for clean reporting). Its link goes in the live webinar and the Day 0 emails; it doesn't wait for a `/theboxtop/review/` page.
 
-## 7. Communications calendar
+## 7. Communications calendar (BT · Launch comms)
 
-Fixed-time messages go out as **scheduled sends to the smart list "BT Registered"** (Email Campaigns + scheduled bulk SMS), not as workflow date-waits. Reason: someone who registers at 11:40 AM on launch day would otherwise get the stale "24 hours to go" message the instant a workflow's wait date is already past. Scheduled sends only hit whoever is registered at send time, and copy stays editable until it fires.
+All times Central. Every message carries `{{contact.bt_zoom_join_url}}` (copy the exact merge key from Settings → Custom Fields). Keep **Zoom's own reminder emails on** as a backstop for anyone GHL misses.
 
-Every message carries the personal join link `{{contact.bt_zoom_join_url}}`. All times Central.
-
-| When (CT) | Email | SMS | Purpose |
+| When (CT) | Email | SMS (only `bt-sms-optin`, never DND) | Purpose |
 |---|---|---|---|
-| On registration | ✔ "You're in" (join link, calendar links, bonus stack, "bring your spouse") | ✔ (if opted in, 8 AM–8 PM window) | Confirm, set expectations |
-| Wed Nov 4, 10 AM | ✔ "Here's what you get for showing up" | | Bonus stack (mirrors the social reveals) |
-| Fri Nov 6, 10 AM | ✔ "One thing to bring Monday" (write down your pieces: accounts, policies, Social Security) | | Homework raises show rate |
-| Sun Nov 8, 12 PM | ✔ "This time tomorrow" | ✔ | 24-hour reminder |
-| Mon Nov 9, 8 AM | ✔ "Today at noon Central" | | Morning-of (email only; 8 AM CT is 6 AM Pacific, too early to text) |
-| Mon Nov 9, 11 AM | ✔ "One hour" | ✔ | 1-hour reminder (9 AM Pacific) |
-| Mon Nov 9, 12:02 PM | ✔ "We're live" | ✔ | Pull late joiners in |
-| Mon Nov 9, ~1:45 PM | Apply `bt-no-show` to Registered NOT `bt-attended-live` (bulk action) | | Starts the right nurture |
-| Mon Nov 9, 2 PM onward | Nurture workflows (§6) | 1 SMS max that day (replay link to no-shows) | Bonuses, replay, Box Top Review |
+| On registration | "You're in" (join link, calendar, Zoom app tip, bonus stack) | Confirmation, **only if registered before Sun Nov 8, 12 PM CT** and inside 8 AM to 8 PM their time | Confirm |
+| Wed Nov 4, 10 AM | "What you get for showing up live" | | Bonus stack |
+| Fri Nov 6, 10 AM | "One thing to bring Monday" (list your pieces) | | Homework lifts show rate |
+| Sun Nov 8, 12 PM | "This time tomorrow" | 24-hour reminder | |
+| Mon Nov 9, 8 AM | "Today at noon Central" | | Email only (6 AM Pacific) |
+| Mon Nov 9, 11 AM | "One hour" | 1-hour reminder, **skipped for 808 (Hawaii) numbers** (7 AM there) | |
+| Mon Nov 9, 12:02 PM | "We're live" | "We're live", same | Pull late joiners in |
+| Mon Nov 9, ~6 PM | | Replay link to no-shows, **after `bt-replay-ready`** | 4 PM PT / 7 PM ET |
 
-**SMS cap: no more than 3 texts to one person in any 24 hours, and only 8 AM to 8 PM their time.** Launch day is exactly three (11 AM, 12:02 PM, replay). Florida's and Oklahoma's mini-TCPA laws set that ceiling for marketing texts, and it's good manners everywhere. *(Reviewer to verify.)* Every SMS identifies the sender and ends with "Reply STOP to opt out" on the first message.
+**SMS rules (verified):** Florida (§501.616(6)), Oklahoma (15 O.S. §775C.4) and Maryland (Stop the Spam Calls Act) each cap marketing texts at **3 per 24 hours on the same subject** and **8 AM to 8 PM recipient time**. The plan above never exceeds 3 in any 24-hour window, because the confirmation text is skipped for anyone registering inside the final 24 hours. Total per person ≤ 5, matching the consent text ("Up to 5 messages"). The first text names the sender and includes STOP/HELP. Opt-outs by any reasonable means are honored (FCC; the one-to-one consent rule was vacated in Jan 2025).
 
-Draft SMS (final copy during build, Justin approves):
-- Confirm: `Justin Stark here. You're in for The Box Top Method live launch, Mon Nov 9 at 12PM CT. Your link: {{join}} Reply STOP to opt out.`
-- 24h: `Tomorrow at noon Central, I'm going live to launch The Box Top Method. Bring your questions and your spouse. Your link: {{join}}`
-- 1h: `One hour till we go live. Your link: {{join}}`
-- Live: `We're live right now. Hop in: {{join}}`
+**Before go-live, test in the account:** that the workflow's Wait steps resolve in the contact's time zone (or set the workflow to Central and keep the windows above), and the "skip outbound if past" option.
 
-Email sender: **Justin Stark**, from a monitored address on the authenticated sending domain, reply-to Justin's inbox. Short, plain, in his voice (Brand Guide rules: no em dashes, no AI phrasing).
+Draft SMS (final copy with Justin):
+- Confirm: `Justin Stark / Box Top Method: you're in for the live launch Mon Nov 9, 12PM CT. Your link: {{join}} Msg & data rates may apply. Reply STOP to opt out, HELP for help.`
+- 24h: `Tomorrow at noon Central I'm going live to launch The Box Top Method. Bring your questions and your spouse. Your link: {{join}} -Justin`
+- 1h: `One hour till we go live. Your link: {{join}} -Justin`
+- Live: `We're live right now. Hop in: {{join}} -Justin`
+- Replay: `Missed the live launch? Here's the replay: {{replay}} -Justin`
 
-## 8. Zoom side (settings + attendance)
+## 8. Zoom side
 
-**Webinar settings:** registration required + **auto-approve** · ask only first/last/email on Zoom's own form (for anyone using the old link) · Zoom's confirmation email **on** (a reliable backup for the join link) · Zoom's own reminders off if GHL SMS is live, on if it isn't · Q&A on · cloud recording on (replay) · practice session on · **confirm capacity** (webinar licenses cap live attendees at 500/1,000/etc.; if registrations pass roughly 2.5× capacity, turn on a YouTube or Facebook livestream as overflow).
+**Webinar settings:** registration required, **auto-approve** (no join link otherwise) · Zoom's confirmation and reminder emails **on** · Q&A on · cloud recording on · practice session on · **confirm capacity** (live attendance is capped by the license; registration isn't unless "Restrict number of registrants" is on; past roughly 2.5× capacity, add a YouTube/Facebook livestream as overflow).
 
-**Attendance into GHL, two layers:**
-1. **Live sync (should-have):** the same Zoom app subscribes to `webinar.participant_joined` (and `webinar.registration_created`, to catch anyone who registers through the old Zoom link). A second small function `/api/zoom-events` checks Zoom's signature, then posts `action=attended` (or `action=register` with `lt_source=zoom-direct`) to the GHL webhook. This is what lets the 12:02 PM "We're live" text go only to people not yet in the room.
-2. **CSV fallback (must-have):** right after the webinar, export Zoom's attendee report, import to GHL with tag `bt-attended-live`. Takes ten minutes and catches anything the live sync missed. (Zoom's report can lag after the webinar ends; the no-show tagging waits for it.)
+**Zoom app (Server-to-Server OAuth), created by the account owner** (in an Aug 2026 Zoom forum thread, non-owners couldn't see the registrant scopes). Scopes: `webinar:write:registrant:admin`, `webinar:read:registrant:admin`, `webinar:read:list_registrants:admin`, `report:read:list_webinar_participants:admin`. Zoom allows **3 add-registrant calls per person per webinar per day**; the function treats a 429 as "already registered."
+
+**People who registered through the raw Zoom link** (every organic post so far): run `tools/zoom-registrants-to-ghl.js` on day 1 and again Sunday Nov 8 to pull them into GHL as `action=zoom_direct` with their own join links. They then get GHL's reminders too.
+
+**Attendance:** after the webinar, export Zoom's attendee report (it can lag), import to GHL with `bt-attended-live`, then bulk-tag registered-and-not-attended as `bt-no-show`. The bonus vault link also goes in the Zoom chat at the close, so a sync miss never costs an attendee their bonuses.
+
+**Live attendance sync (`/api/zoom-events`): deferred.** It's what would let the 12:02 text skip people already in the room, but it adds a signed-webhook endpoint (3-second reply, HMAC over the raw body, `registrant_id` matching because Zoom blanks some emails) the week of launch. CSV + backfill covers the need. Revisit for the next event.
 
 ## 9. Attribution and reporting
 
-**The questions the dashboard answers:** which ad made registrations, which made attendees, and which made Box Top Reviews.
-
-- **GHL dashboard "Box Top Launch":** registrations by `BT LT Source` and `BT LT Content` (ad name), pipeline funnel by stage, show rate (Attended ÷ Registered), reviews booked by campaign.
-- **Smart lists:** BT Registered · BT Paid Meta · BT Organic · BT SMS opt-in · BT Attended · BT No-show · BT Pros · BT Business owners.
-- **Unit economics to watch daily** (from Meta spend + GHL counts): cost per registration, cost per attendee, cost per Box Top Review booked. Kill or scale ads on the last two, not just the first.
-- **Feeding results back to Meta (nice-to-have, after launch):** send `attended` and `review booked` back through the Conversions API as events (e.g. `Schedule` for a booked review), so future campaigns can optimize for people who actually show up and book.
+- **During the ad run (Nov 4 to 9), judge ads on:** cost per registration, plus quality signals per ad: share who give a phone, share who opt into texts, survey mix (Red Zone + retired + business owners vs. pros). Attendance and reviews don't exist until after the ads stop.
+- **After:** cost per attendee and cost per Box Top Review booked, by `BT LT Content` (ad name). That's the input for the next campaign.
+- **GHL dashboard "Box Top Launch":** registrations by source bucket and ad, pipeline by stage, show rate, reviews by campaign.
+- **Smart lists:** BT Registered · BT Paid Meta · BT Zoom-direct · BT SMS opt-in · BT Attended · BT No-show · BT Pros · BT Business owners.
+- **Never send survey answers or retirement status to Meta** (Meta Business Tools Terms bar financial information). Feeding "attended" or "review booked" back to Meta later is fine as a bare event; GHL's native Meta CAPI action is unverified, so check the workflow builder before planning on it.
 
 ## 10. Testing (with Phase 1 QA)
 
-1. Send one sample payload from the preview deploy → map every field in the Inbound Webhook trigger.
-2. Run 4 test contacts: SMS yes/no × source paid/organic. Check fields, tags, opportunity stage, both confirmation messages, internal alert on a forced Zoom failure.
-3. Fire one scheduled send early to a test smart list to see merge fields render (join link especially).
-4. Delete test contacts and their opportunities.
+1. Send one real submission from the preview deploy → map every field in the Inbound Webhook trigger (premium trigger: 100 free runs, then $0.01 each).
+2. Four test contacts: SMS yes/no × paid/organic. Check the field rules (first touch kept on a second submit, join URL not blanked), tags, stage, both confirmations, the failure alert.
+3. Run a test contact through **BT · Launch comms** with test dates to see skip-if-past and the SMS windows behave.
+4. Run the backfill script with `--dry-run`, then for real.
+5. Delete test contacts and opportunities; delete test registrants in Zoom.

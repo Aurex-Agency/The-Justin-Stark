@@ -374,3 +374,24 @@ One ease everywhere: `cubic-bezier(.16, 1, .3, 1)`. The hero entrance: the photo
 - **Don't** cast colored or glowing shadows. Shadows are soft black and downward; overlays stay in the near-black/navy family.
 - **Don't** round corners past the 2px stamp radius, and never on photos, frames, rows, or fields.
 - **Don't** introduce new hues or bright unscrimmed imagery. The world is a near-black ground, two panels, two inks, two golds, and a navy that lives only inside gradients.
+
+---
+
+# Sub-brand: The Box Top Method (`/theboxtop/`)
+
+Pages about the book use the book's own kit (Drive: *The Box Top Method — Brand Guide*, `box-top-tokens.json`), built from Game Changer Publishing's launch countdown post. It's a light world, unlike the dark/gold homepage. Don't mix the two on one page.
+
+**Tokens:** indigo `#2D378F` · sky `#3598D0` · cream `#FDFADD` · steel `#5EA0BE` · ground `#F1F1F1` · surface `#FFFFFF` · ink `#1E2347` · muted `#565C7E`.
+
+**Contrast (measured):** indigo on ground ~9:1, use anywhere. Cream on sky and on indigo for bold display text and small caps on indigo. **Sky on ground is 2.84:1, so sky never carries text people must read**, even at 24px; the time line is indigo. Steel is decoration only.
+
+**Type:** Montserrat only, self-hosted variable woff2 (`/assets/fonts/Montserrat-var.woff2`, latin, 100 to 900). Headlines 800/900 all caps with slight tracking; labels 700 caps tracked .12 to .18em; body 400 at 17 to 18px, line-height 1.6.
+
+**Wordmark:** THE BOX TOP METHOD, heaviest weight. On sky: THE and METHOD indigo, BOX TOP cream. Stacked (THE / BOX TOP / METHOD) in the title band on small screens. Never outlined, never a serif, never a different color split.
+
+**Layout (the countdown-post pattern):** indigo caps headline → full-width sky title band with indigo rules above and below, wordmark inside → byline row (BY JUSTIN L STARK, sky rule, date) → details line → CTA → the real cover tilted 12 to 15 degrees, bleeding off the band, with the only soft shadow on the page. Square blocks (radius 0), no gradients, no emoji. Times always run west to east: 10AM PT · 11AM MT · 12PM CT · 1PM ET.
+
+**Imagery:** the real cover only (`theboxtop/assets/book-3d.webp` is cut from the publisher's launch post until hi-res files arrive). Photos of Justin sit on ground or in a sky field, never under text.
+
+**Voice:** Justin across a kitchen table. Short sentences, contractions, no em dashes, no AI phrasing. Canon words: the Four Corners, the edges (never "doors"), the liquidity ladder, time, cash flow and cash, the three tax buckets, safety, growth and access, the Box Top Review, "clarity precedes confidence." Education only: no product named, recommended or priced.
+

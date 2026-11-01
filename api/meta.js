@@ -14,7 +14,7 @@
 // answers 202 and does nothing, and the browser pixel keeps working alone.
 
 const PIXEL_ID = '4533371650216162';
-const ALLOWED_EVENTS = ['PageView', 'Lead', 'InitiateCheckout', 'Purchase'];
+const ALLOWED_EVENTS = ['PageView', 'ViewContent', 'Lead', 'InitiateCheckout', 'Purchase'];
 const ALLOWED_CUSTOM = ['content_name', 'content_category', 'value', 'currency'];
 
 function parseCookies(header) {
@@ -33,7 +33,8 @@ module.exports = async (req, res) => {
     return res.end(JSON.stringify({ error: 'POST only' }));
   }
 
-  let body = req.body;
+  let body;
+  try { body = req.body; } catch (e) { body = null; } // Vercel throws on malformed JSON
   if (typeof body === 'string') {
     try { body = JSON.parse(body); } catch (e) { body = null; }
   }
@@ -77,7 +78,7 @@ module.exports = async (req, res) => {
 
   try {
     const r = await fetch(
-      'https://graph.facebook.com/v21.0/' + PIXEL_ID + '/events?access_token=' + encodeURIComponent(token),
+      'https://graph.facebook.com/v25.0/' + PIXEL_ID + '/events?access_token=' + encodeURIComponent(token),
       { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }
     );
     const out = await r.json().catch(() => ({}));
