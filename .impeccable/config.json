@@ -35,6 +35,12 @@
         "value": "montserrat",
         "createdAt": "2026-11-02T23:09:46.743Z",
         "reason": "DESIGN.md 'Sub-brand: The Box Top Method' specifies Montserrat only, from the book's brand kit"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "rgba(30,35,71,.45)",
+        "createdAt": "2026-11-02T23:22:44.824Z",
+        "reason": "DESIGN.md Box Top sub-brand ink token #1E2347 at alpha, used for the page's one soft shadow (landing cover uses the same ink tint)"
       }
     ]
   }
