@@ -25,7 +25,8 @@
 | BT Zoom Status | Single line: `registered` / `already` / `failed` | Inbound webhook | |
 | BT Registered At | Date/time | Inbound webhook | Only when empty (keep the first) |
 | BT SMS Consent | Single line: `yes` / `no` | Inbound webhook | Never downgrade `yes` to `no` on a re-submit; STOP handles opt-out |
-| BT SMS Consent At, BT Consent Version, BT Consent Text | Date/time, Single line, Multi line | Inbound webhook | Proof of consent: exact wording shown at signup |
+| BT SMS Consent At, BT Consent Version, BT Consent Text | Date/time, Single line, Multi line | Inbound webhook | Proof of consent for **event texts**: exact wording shown at signup |
+| BT SMS Marketing Consent, BT SMS Marketing Consent At, BT Marketing Consent Text | Single line `yes`/`no`, Date/time, Multi line | Inbound webhook | Separate **marketing** consent (second checkbox). Never downgrade `yes` to `no` |
 | BT Segment | Single line, values `retired` / `red-zone` / `planning` / `business-owner` / `pro` | Thank-you survey | Slugs match the page exactly |
 | BT Source Bucket | Single line | Inbound webhook | `paid-meta` `paid-other` `organic-social` `vanity` `referral` `email` `direct` `other` `zoom-direct` |
 | BT Attended Live, BT Minutes Attended | Single line `yes`/`no`, Number | Zoom CSV import | |
@@ -45,8 +46,11 @@ One inbound webhook URL (Vercel env `GHL_BOXTOP_WEBHOOK_URL`). The `action` fiel
   "event": "boxtop-launch-2026-11-09",
   "first_name": "Jane", "last_name": "Doe", "email": "jane@example.com", "phone": "+16625550123",
   "segment": "",                   // profile only
-  "sms_consent": "yes", "sms_consent_at": "2026-11-03T15:04:05.000Z",
-  "consent_version": "bt-sms-v1", "consent_text": "Yes, text me reminders about … Consent is not a condition of registration.",
+  "sms_consent": "yes", "sms_consent_at": "2026-11-03T15:04:05.000Z",          // event confirmation + reminders
+  "sms_marketing_consent": "no", "sms_marketing_consent_at": "",                  // updates, invitations, offers
+  "consent_version": "bt-sms-v2",
+  "consent_text": "Yes, text me my confirmation and reminders … Consent is not a condition of registration.",
+  "marketing_consent_text": "",
   "zoom_status": "registered",     // registered | already | failed
   "zoom_join_url": "https://us02web.zoom.us/w/…", "zoom_registrant_id": "…",
   "zoom_fallback_url": "",         // filled only when zoom_status = failed
@@ -67,7 +71,8 @@ Note: Meta's `{{site_source_name}}` returns `fb`, `ig`, `msg` or `an`, not "face
 |---|---|
 | `bt-registered` | `action` = register or zoom_direct |
 | `bt-src-{bucket}` (one of the BT Source Bucket values) | From `source_bucket` |
-| `bt-sms-optin` | `sms_consent` = yes |
+| `bt-sms-optin` | `sms_consent` = yes (event texts) |
+| `bt-sms-marketing-optin` | `sms_marketing_consent` = yes (updates and offers) |
 | `bt-zoom-failed` | `zoom_status` = failed (+ internal alert) |
 | `bt-seg-retired` / `bt-seg-red-zone` / `bt-seg-planning` / `bt-seg-business-owner` / `bt-seg-pro` | Survey |
 | `bt-attended-live` | Zoom attendee CSV import |
@@ -97,7 +102,7 @@ Opportunity: `{{contact.name}} · Box Top Launch`, source = BT Source Bucket + B
 |---|---|---|
 | **BT · Inbound** | Inbound Webhook | Branch on `action`. **register / replay:** Create/Update Contact (field rules in §2) → tags → opportunity (Registered) → if `zoom_status=failed`, internal alert to Kalob + Justin with the contact link. **profile:** set BT Segment + segment tag. **zoom_direct:** if the contact already has `bt-registered`, only fill an empty join URL and stop; otherwise create, tag `bt-registered` + `bt-src-zoom-direct`, opportunity, no attribution fields |
 | **BT · Launch comms** | Tag added `bt-registered` | The whole pre-event sequence in §7, one workflow. Every Wait uses **"If the time is already in the past: skip all outbound communication actions until the next wait"**, so a late registrant never gets a stale message |
-| **BT · Post-event** | Tag added `bt-attended-live` or `bt-no-show` | Attended → Day 0 thank-you + bonus vault + Box Top Review link + where to buy the book; Day 2 quiz; Day 4 Review invite; Day 7 last call. No-show → Day 0 "replay coming tonight", then waits for `bt-replay-ready` → replay link; Day 2 replay reminder; Day 4 Review invite; Day 7 "replay comes down". **Email only** (the SMS consent covers launch reminders, not follow-up). Goal: `bt-review-booked` exits |
+| **BT · Post-event** | Tag added `bt-attended-live` or `bt-no-show` | Attended → Day 0 thank-you + bonus vault + Box Top Review link + where to buy the book; Day 2 quiz; Day 4 Review invite; Day 7 last call. No-show → Day 0 "replay coming tonight", then waits for `bt-replay-ready` → replay link; Day 2 replay reminder; Day 4 Review invite; Day 7 "replay comes down". Email, plus **one** Box Top Review invite text on Day 4 to `bt-sms-marketing-optin` only (the event-text consent doesn't cover follow-up). Goal: `bt-review-booked` exits |
 | **BT · Replay request** | Tag added `bt-replay-request` | Wait for `bt-replay-ready` → replay email → joins the no-show track from Day 2 |
 | **BT · Replay clicked** | Trigger link "BT Replay" | Tag `bt-replay-clicked`; if not attended → Replay Engaged |
 | **BT · Review booked** | Appointment booked, calendar "Box Top Review" | Tag, stage → Box Top Review Booked, internal notification |

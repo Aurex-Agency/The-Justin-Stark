@@ -148,10 +148,11 @@ input[aria-invalid=true]{border-color:var(--error)}
 .err{display:none;color:var(--error);font-size:.85rem;font-weight:600;margin-top:.3rem}
 .err.on{display:block}
 .hint{font-size:.82rem;color:var(--muted);margin-top:.3rem}
-.consent{display:none;grid-template-columns:auto 1fr;gap:.6rem;align-items:start;background:var(--ground);padding:.75rem;margin:-.2rem 0 .9rem;font-size:.8rem;line-height:1.45;color:var(--ink)}
-.consent.on{display:grid}
-.consent input{width:22px;height:22px;margin:.1rem 0 0;accent-color:var(--indigo)}
+.consent{display:grid;gap:.7rem;border:0;min-width:0;background:var(--ground);padding:.8rem .8rem .75rem;margin:-.2rem 0 .95rem;font-size:.78rem;line-height:1.45;color:var(--ink)}
+.consent-row{display:grid;grid-template-columns:auto 1fr;gap:.6rem;align-items:start}
+.consent input{width:22px;height:22px;margin:.05rem 0 0;accent-color:var(--indigo);cursor:pointer}
 .consent label{all:unset;cursor:pointer}
+.consent .legal-links{margin:0;color:var(--muted)}
 .consent a{color:var(--indigo)}
 .hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;overflow:hidden}
 .btn{display:block;width:100%;font:inherit;font-weight:900;font-size:1.05rem;letter-spacing:.12em;text-transform:uppercase;text-align:center;text-decoration:none;color:var(--cream);background:var(--indigo);border:0;border-radius:0;padding:1.05rem 1rem;min-height:56px;cursor:pointer;transition:background .15s ease,transform .15s ease}
@@ -335,15 +336,26 @@ footer nav{display:flex;flex-wrap:wrap;gap:.4rem 1.4rem;margin-top:1.2rem}
           <div class="err" id="err-email" role="alert"></div>
         </div>
         <div class="field hide-over">
-          <label for="phone">Mobile <span class="opt">(optional)</span></label>
-          <input id="phone" name="phone" type="tel" autocomplete="tel-national" inputmode="tel" maxlength="20" aria-describedby="phone-hint">
-          <div class="hint" id="phone-hint">For a text reminder so you don't miss it.</div>
+          <label for="phone">Mobile phone</label>
+          <input id="phone" name="phone" type="tel" autocomplete="tel-national" inputmode="tel" maxlength="20" required aria-describedby="phone-hint">
+          <div class="hint" id="phone-hint">So we can reach you about your seat. We never sell or share it.</div>
           <div class="err" id="err-phone" role="alert"></div>
         </div>
-        <div class="consent hide-over" id="consentRow">
-          <input type="checkbox" id="sms_consent" name="sms_consent" value="yes">
-          <label for="sms_consent">Yes, text me reminders about The Box Top Method launch from Justin Stark / Pontotoc Insurance Agency. Up to 5 messages. Msg &amp; data rates may apply. Reply STOP to opt out, HELP for help. Consent is not a condition of registration. See our <a href="/privacy/">Privacy Policy</a> and <a href="/terms/#sms">SMS Terms</a>.</label>
-        </div>
+        <!-- Two separate, optional, unchecked SMS consents (A2P: non-marketing and marketing
+             are consented to separately). The label text is stored in GHL as proof of consent
+             and must match CONSENT_TEXT / MARKETING_CONSENT_TEXT in /api/boxtop-register.js. -->
+        <fieldset class="consent hide-over" id="consentRow">
+          <legend class="hp">Text message consent (optional)</legend>
+          <div class="consent-row">
+            <input type="checkbox" id="sms_consent" name="sms_consent" value="yes">
+            <label for="sms_consent">Yes, text me my confirmation and reminders for The Box Top Method launch from Justin Stark / Pontotoc Insurance Agency. Up to 5 messages. Msg &amp; data rates may apply. Reply STOP to opt out, HELP for help. Consent is not a condition of registration.</label>
+          </div>
+          <div class="consent-row">
+            <input type="checkbox" id="sms_marketing_consent" name="sms_marketing_consent" value="yes">
+            <label for="sms_marketing_consent">Yes, text me occasional updates, invitations and offers from Justin Stark / Pontotoc Insurance Agency, like new Box Top classes and events. Msg frequency varies. Msg &amp; data rates may apply. Reply STOP to opt out, HELP for help. Consent is not a condition of registration.</label>
+          </div>
+          <p class="legal-links">See our <a href="/privacy/">Privacy Policy</a> and <a href="/terms/#sms">SMS Terms</a>.</p>
+        </fieldset>
         <div class="hp" aria-hidden="true">
           <label for="company">Company</label>
           <input id="company" name="company" type="text" tabindex="-1" autocomplete="off">
@@ -553,18 +565,10 @@ footer nav{display:flex;flex-wrap:wrap;gap:.4rem 1.4rem;margin-top:1.2rem}
   /* ---- form ---- */
   var form=document.getElementById('regForm'),btn=document.getElementById('regBtn'),
       alertBox=document.getElementById('formAlert'),phone=document.getElementById('phone'),
-      consentRow=document.getElementById('consentRow'),consent=document.getElementById('sms_consent');
+      consent=document.getElementById('sms_consent'),mktConsent=document.getElementById('sms_marketing_consent');
   var loadedAt=Date.now(),sending=false,viewed=false;
 
   function digits(v){return String(v||'').replace(/\D/g,'')}
-  function syncConsent(){
-    var d=digits(phone.value);
-    var show=d.length>=10;
-    consentRow.classList.toggle('on',show);
-    if(!show)consent.checked=false;
-  }
-  phone.addEventListener('input',syncConsent);
-  syncConsent();
 
   function setErr(name,msg){
     var el=document.getElementById('err-'+name),input=document.getElementById(name);
@@ -572,6 +576,9 @@ footer nav{display:flex;flex-wrap:wrap;gap:.4rem 1.4rem;margin-top:1.2rem}
     el.textContent=msg||'';el.classList.toggle('on',!!msg);
     if(input){if(msg){input.setAttribute('aria-invalid','true');input.setAttribute('aria-describedby','err-'+name)}else{input.removeAttribute('aria-invalid')}}
   }
+  // an error clears as soon as the visitor starts fixing that field
+  form.addEventListener('input',function(e){var t=e.target;if(t&&t.id&&t.getAttribute('aria-invalid')==='true')setErr(t.id,'')});
+
   function clearErrs(){['first_name','last_name','email','phone'].forEach(function(n){setErr(n,'')});alertBox.classList.remove('on');alertBox.innerHTML=''}
 
   function validate(over){
@@ -579,7 +586,7 @@ footer nav{display:flex;flex-wrap:wrap;gap:.4rem 1.4rem;margin-top:1.2rem}
     if(!f.first_name.value.trim()){setErr('first_name','Enter your first name.');ok=false}
     if(!f.last_name.value.trim()){setErr('last_name','Enter your last name.');ok=false}
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(f.email.value.trim())){setErr('email','Enter a valid email address.');ok=false}
-    if(!over){var d=digits(f.phone.value);if(d&&!(d.length===10||(d.length===11&&d[0]==='1'))){setErr('phone','Enter a 10-digit US mobile number, or leave it blank.');ok=false}}
+    if(!over){var d=digits(f.phone.value);if(!d){setErr('phone','Enter your mobile number.');ok=false}else if(!(d.length===10||(d.length===11&&d[0]==='1'))){setErr('phone','Enter a 10-digit US mobile number.');ok=false}}
     return ok;
   }
 
@@ -603,7 +610,7 @@ footer nav{display:flex;flex-wrap:wrap;gap:.4rem 1.4rem;margin-top:1.2rem}
     var payload={
       action:over?'replay':'register',
       first_name:f.first_name.value.trim(),last_name:f.last_name.value.trim(),email:f.email.value.trim(),
-      phone:over?'':f.phone.value.trim(),sms_consent:!over&&consent.checked,
+      phone:over?'':f.phone.value.trim(),sms_consent:!over&&consent.checked,sms_marketing_consent:!over&&mktConsent.checked,
       company:f.company.value,elapsed_ms:Date.now()-loadedAt,event_id:eventId,
       ft_source:ft.utm_source||'',ft_medium:ft.utm_medium||'',ft_campaign:ft.utm_campaign||'',ft_content:ft.utm_content||'',ft_term:ft.utm_term||'',
       lt_source:lt.utm_source||'',lt_medium:lt.utm_medium||'',lt_campaign:lt.utm_campaign||'',lt_content:lt.utm_content||'',lt_term:lt.utm_term||'',

@@ -77,7 +77,7 @@ test('register: Zoom + GHL + Meta all succeed', async () => {
   assert.equal(ghl.action, 'register');
   assert.equal(ghl.phone, '+16625550123');
   assert.equal(ghl.sms_consent, 'yes');
-  assert.equal(ghl.consent_version, 'bt-sms-v1');
+  assert.equal(ghl.consent_version, 'bt-sms-v2');
   assert.equal(ghl.zoom_status, 'registered');
   assert.equal(ghl.zoom_join_url, r.json.join_url);
   assert.equal(ghl.source_bucket, 'paid-meta');
@@ -153,13 +153,35 @@ test('validation: bad email and bad phone return field errors', async () => {
   assert.ok(r.json.errors.phone);
 });
 
-test('no phone → no SMS consent even if the box was somehow sent checked', async () => {
+test('register: phone is required; replay requests are not', async () => {
   const h = load(FULL_ENV);
-  const calls = mockFetch([...ZOOM_OK, ...GHL_OK, ...META_OK]);
-  await run(h, Object.assign({}, PERSON, { phone: '', sms_consent: true }));
-  const ghl = calls.find((c) => c.url.includes('leadconnectorhq')).body;
-  assert.equal(ghl.sms_consent, 'no');
-  assert.equal(ghl.consent_text, '');
+  const calls = mockFetch([...GHL_OK, ...META_OK]);
+  const r = await run(h, Object.assign({}, PERSON, { phone: '' }));
+  assert.equal(r.status, 422);
+  assert.match(r.json.errors.phone, /mobile number/);
+  assert.equal(calls.length, 0);
+  const rp = await run(h, Object.assign({}, PERSON, { action: 'replay', phone: '' }));
+  assert.equal(rp.status, 200);
+  assert.equal(rp.json.action, 'replay');
+});
+
+test('SMS consents are separate: reminders only, marketing only, neither', async () => {
+  const h = load(FULL_ENV);
+  const cases = [
+    [{ sms_consent: true, sms_marketing_consent: false }, 'yes', 'no'],
+    [{ sms_consent: false, sms_marketing_consent: true }, 'no', 'yes'],
+    [{ sms_consent: false, sms_marketing_consent: false }, 'no', 'no'],
+  ];
+  for (const [flags, rem, mkt] of cases) {
+    const calls = mockFetch([...ZOOM_OK, ...GHL_OK, ...META_OK]);
+    await run(h, Object.assign({}, PERSON, flags));
+    const ghl = calls.find((c) => c.url.includes('leadconnectorhq')).body;
+    assert.equal(ghl.sms_consent, rem);
+    assert.equal(ghl.sms_marketing_consent, mkt);
+    assert.equal(!!ghl.consent_text, rem === 'yes');
+    assert.equal(!!ghl.marketing_consent_text, mkt === 'yes');
+    assert.equal(ghl.consent_version, rem === 'yes' || mkt === 'yes' ? 'bt-sms-v2' : '');
+  }
 });
 
 test('bots: honeypot or instant submit → quiet success, no outbound calls', async () => {
@@ -218,13 +240,15 @@ test('register: Zoom 429 (already registered today) → ok, no fallback, GHL tol
   assert.ok(calls.find((c) => c.url.includes('graph.facebook.com/v25.0/')));
 });
 
-test('consent text sent to GHL matches the checkbox label word for word', async () => {
+test('both consent texts sent to GHL match their checkbox labels word for word', async () => {
   const fs = require('fs');
   const html = fs.readFileSync(path.join(__dirname, '..', 'theboxtop', 'launch', 'index.html'), 'utf8')
     .replace(/&amp;/g, '&').replace(/\s+/g, ' ');
   const h = load(FULL_ENV);
   const calls = mockFetch([...ZOOM_OK, ...GHL_OK, ...META_OK]);
-  await run(h, PERSON);
+  await run(h, Object.assign({}, PERSON, { sms_consent: true, sms_marketing_consent: true }));
   const ghl = calls.find((c) => c.url.includes('leadconnectorhq')).body;
-  assert.ok(html.includes(ghl.consent_text), 'label must contain: ' + ghl.consent_text);
+  assert.ok(ghl.consent_text && html.includes(ghl.consent_text), 'label must contain: ' + ghl.consent_text);
+  assert.ok(ghl.marketing_consent_text && html.includes(ghl.marketing_consent_text), 'label must contain: ' + ghl.marketing_consent_text);
+  assert.ok(!/\(optional\)/.test(html.split('id="phone"')[0].slice(-200)), 'phone label must not say optional');
 });

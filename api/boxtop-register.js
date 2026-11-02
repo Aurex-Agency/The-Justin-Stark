@@ -33,11 +33,16 @@ const EVENT_NAME = 'The Box Top Method Launch';
 const EVENT_START = Date.parse('2026-11-09T18:00:00Z');
 const EVENT_END = Date.parse('2026-11-09T19:30:00Z');
 const ZOOM_FALLBACK_URL = 'https://us02web.zoom.us/webinar/register/WN_bjdBGZXbSoOfl3x2_XPqHQ';
-const CONSENT_VERSION = 'bt-sms-v1';
-// Must match the checkbox label on /theboxtop/launch/ word for word (proof of consent).
+const CONSENT_VERSION = 'bt-sms-v2';
+// Both must match the checkbox labels on /theboxtop/launch/ word for word (proof of consent).
+// Two separate optional consents, as A2P expects: event texts (non-marketing) and marketing.
 const CONSENT_TEXT =
-  'Yes, text me reminders about The Box Top Method launch from Justin Stark / Pontotoc Insurance Agency. ' +
+  'Yes, text me my confirmation and reminders for The Box Top Method launch from Justin Stark / Pontotoc Insurance Agency. ' +
   'Up to 5 messages. Msg & data rates may apply. Reply STOP to opt out, HELP for help. ' +
+  'Consent is not a condition of registration.';
+const MARKETING_CONSENT_TEXT =
+  'Yes, text me occasional updates, invitations and offers from Justin Stark / Pontotoc Insurance Agency, like new Box Top classes and events. ' +
+  'Msg frequency varies. Msg & data rates may apply. Reply STOP to opt out, HELP for help. ' +
   'Consent is not a condition of registration.';
 const SEGMENTS = ['retired', 'red-zone', 'planning', 'business-owner', 'pro'];
 const TIMEOUT_MS = 5000;
@@ -253,7 +258,9 @@ module.exports = async (req, res) => {
     const rawPhone = str(body.phone, 30);
     if (rawPhone) {
       p.phone = normalizePhone(rawPhone);
-      if (!p.phone) errors.phone = 'Enter a 10-digit US mobile number, or leave it blank.';
+      if (!p.phone) errors.phone = 'Enter a 10-digit US mobile number.';
+    } else if (action === 'register' && Date.now() <= EVENT_END) {
+      errors.phone = 'Enter your mobile number.'; // required for registration; replay requests don't ask
     }
   } else {
     p.segment = SEGMENTS.includes(str(body.segment, 30)) ? str(body.segment, 30) : '';
@@ -264,7 +271,9 @@ module.exports = async (req, res) => {
   const now = Date.now();
   if (action === 'register' && now > EVENT_END) action = 'replay';
 
-  const smsConsent = action !== 'profile' && !!p.phone && (body.sms_consent === true || body.sms_consent === 'yes');
+  const yes = (v) => v === true || v === 'yes';
+  const smsConsent = action !== 'profile' && !!p.phone && yes(body.sms_consent);
+  const smsMarketing = action !== 'profile' && !!p.phone && yes(body.sms_marketing_consent);
   const eventId = /^[A-Za-z0-9_.-]{8,64}$/.test(str(body.event_id, 64))
     ? str(body.event_id, 64)
     : 'bt-' + crypto.randomBytes(8).toString('hex');
@@ -301,8 +310,11 @@ module.exports = async (req, res) => {
     segment: p.segment,
     sms_consent: action === 'profile' ? '' : (smsConsent ? 'yes' : 'no'),
     sms_consent_at: smsConsent ? nowIso : '',
-    consent_version: smsConsent ? CONSENT_VERSION : '',
+    sms_marketing_consent: action === 'profile' ? '' : (smsMarketing ? 'yes' : 'no'),
+    sms_marketing_consent_at: smsMarketing ? nowIso : '',
+    consent_version: smsConsent || smsMarketing ? CONSENT_VERSION : '',
     consent_text: smsConsent ? CONSENT_TEXT : '',
+    marketing_consent_text: smsMarketing ? MARKETING_CONSENT_TEXT : '',
     zoom_status: action === 'register' ? (zoom.status === 'registered' || zoom.status === 'already' ? zoom.status : 'failed') : '',
     zoom_join_url: zoom.join_url || '',
     zoom_registrant_id: zoom.registrant_id || '',
