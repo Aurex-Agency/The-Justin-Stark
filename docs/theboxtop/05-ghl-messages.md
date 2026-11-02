@@ -2,30 +2,50 @@
 
 Voice rules (Brand Guide): Justin across a kitchen table. Short sentences, contractions, **no em dashes**, no AI phrasing, education only: no product named, recommended or priced. Times always run west to east.
 
+**What changed on Nov 2 (for Justin's review)**
+- **Signing up is two steps now.** The site saves people in GHL, then Zoom's own page confirms their seat and Zoom emails them their personal join link. GHL can't tell who finished on Zoom, so every message before and during the live says both things: "your link is in Zoom's email" and "not confirmed yet? 20 seconds here." This only works if Zoom's **confirmation email stays on** in the webinar settings (04 §8).
+- **The 1:1 Box Top Review offer is dropped.** Nothing links to a calendar. The follow-ups point to the tools, the quiz, the packets and the book. M16 is gone.
+- **The book link isn't known yet.** M11, M14 and S06 only go out if BT Book URL is filled in. The book lines in M08, M15 and M17 get deleted if it's still empty.
+- **Texts open with "The Justin Stark:"** (Kalob, Nov 2).
+
 **Every email**
-- **From:** Justin Stark, on the verified sending domain. **Reply-to:** Justin.
-- **Merge fields:** first name `{{contact.first_name}}`; join link `{{contact.bt_zoom_join_url}}` (for Plan B registrants it holds the Zoom registration link, so it always gets them to Zoom).
+- **From:** Justin Stark, `justin@replies.pontotocinsuranceagency.com`. **Reply-to:** `justin@pontotocinsuranceagency.com`.
+- **Merge fields:**
+  - first name: `{{contact.first_name}}`
+  - Zoom confirm link: `{{custom_values.bt_zoom_register_url}}`
+  - tools: `{{custom_values.bt_bonus_vault_url}}`
+  - book: `{{custom_values.bt_book_url}}`
+  - replay: trigger link **BT Replay** (`{{trigger_link.Lbc8PBvv84TFzWcaLnJK}}`)
 - **Footer:** GHL's unsubscribe link plus a **postal address** (required by CAN-SPAM; PIA's mailing address, which is still needed), then "Presented by Pontotoc Insurance Agency. The Box Top Method is educational, not financial, tax or legal advice."
 - **Layout:** plain, one column. Buttons in indigo `#2D378F` with cream text, in caps.
+
+**Zoom block** (M02 to M05 use exactly this, so every reminder says the same thing):
+
+> **Your join link** is in the confirmation email Zoom sent you. Search your inbox for "Zoom" if you can't find it.
+>
+> Haven't confirmed your seat on Zoom yet? It takes about 20 seconds:
+> [ CONFIRM MY SEAT ON ZOOM ] → {{custom_values.bt_zoom_register_url}}
 
 ---
 
 ## Emails
 
-### M01 · "You're in" (BT · 02, on registration)
-**Subject:** You're in, {{contact.first_name}}. Here's your link.
-**Preview:** Monday, Nov 9 at noon Central. Save this email.
+### M01Z · "One more step" (BT · 02, everyone who signs up on the site)
+**Subject:** One more step to save your seat
+**Preview:** Confirm on Zoom and it sends your personal link.
 
 > {{contact.first_name}},
 >
-> You're registered for the live launch of The Box Top Method.
+> Thanks for signing up for the live launch of The Box Top Method.
 >
 > **Monday, November 9**
 > 10AM PT · 11AM MT · 12PM CT · 1PM ET
 >
-> [ JOIN THE LIVE LAUNCH ] → {{contact.bt_zoom_join_url}}
+> One more step: confirm your seat on Zoom. It takes about 20 seconds, and Zoom emails you your personal join link right after.
 >
-> That link is yours. Save this email, or put it on your calendar now.
+> [ CONFIRM MY SEAT ON ZOOM ] → {{custom_values.bt_zoom_register_url}}
+>
+> Already did that on the page after you signed up? Then you're set. Keep Zoom's email handy.
 >
 > On a phone or tablet? Grab the free Zoom app before Monday so it's one tap when we go live.
 >
@@ -38,42 +58,58 @@ Voice rules (Brand Guide): Justin across a kitchen table. Short sentences, contr
 > See you Monday,
 > Justin
 
-### M01T · same day (registered Mon Nov 9 before 11:55 AM)
-**Subject:** You're in. We go live at noon Central today.
-**Preview:** Your link is inside.
+### M01ZT · same day (signed up Mon Nov 9 before 11:55 AM)
+**Subject:** One more step before noon today
+**Preview:** Confirm on Zoom and you're set.
 
-> {{contact.first_name}}, you're in.
+> {{contact.first_name}}, thanks for signing up.
 >
 > We go live **today at 10AM PT · 11AM MT · 12PM CT · 1PM ET**.
 >
-> [ JOIN THE LIVE LAUNCH ] → {{contact.bt_zoom_join_url}}
+> One more step: confirm your seat on Zoom. It takes about 20 seconds, and Zoom emails your personal join link right away.
+>
+> [ CONFIRM MY SEAT ON ZOOM ] → {{custom_values.bt_zoom_register_url}}
 >
 > On a phone? Grab the free Zoom app now so it's one tap at noon. Bring your questions, and bring your spouse. The five free tools are for everyone who comes live.
 >
 > Justin
 
-### M01L · registered while we're live
-**Subject:** We're live right now. Here's your link.
-**Preview:** Jump in.
+### M01ZL · signed up while we're live
+**Subject:** We're live right now. Here's how to get in.
+**Preview:** About 20 seconds on Zoom.
 
-> {{contact.first_name}}, we're live right now. Come on in:
+> {{contact.first_name}}, we're live right now.
 >
-> [ JOIN NOW ] → {{contact.bt_zoom_join_url}}
+> Confirm your seat on Zoom and it takes you right in:
+>
+> [ JOIN ON ZOOM ] → {{custom_values.bt_zoom_register_url}}
 >
 > Justin
 
-### M01Z · Plan B or Zoom error (no personal link yet)
-**Subject:** One more step to save your seat
-**Preview:** Finish on Zoom so it can send your personal link.
+*(Build note: "takes you right in" assumes the webinar approves registrants automatically, which is the Zoom owner's setting. If approval is manual, change it to "and Zoom emails you your link.")*
+
+### M01 · already confirmed on Zoom (contacts imported from Zoom's registrant list)
+**Subject:** You're in, {{contact.first_name}}
+**Preview:** Monday, Nov 9 at noon Central.
 
 > {{contact.first_name}},
 >
-> We've got your info. One more step: Zoom needs you to confirm on their page so it can send your personal join link. It takes about 20 seconds.
+> You're registered for the live launch of The Box Top Method.
 >
-> [ FINISH ON ZOOM ] → {{custom_values.bt_zoom_register_url}}
+> **Monday, November 9**
+> 10AM PT · 11AM MT · 12PM CT · 1PM ET
 >
-> The live launch is **Monday, November 9 · 10AM PT · 11AM MT · 12PM CT · 1PM ET**. If we're already live when you read this, that same button gets you in.
+> Your personal join link is in the confirmation email Zoom sent you. Search your inbox for "Zoom" if you can't find it, or just reply here and we'll help.
 >
+> On a phone or tablet? Grab the free Zoom app before Monday so it's one tap when we go live.
+>
+> Here's what we'll do together. Most folks I sit down with have the pieces: the 401(k), the savings, a policy or two. What they don't have is the picture on the box. Monday I'll walk you through the four corners that frame the whole thing.
+>
+> Show up live and you'll leave with five free tools: The Box Top Training, the Legacy Trust Finder, the Box Top Quiz, and two fillable planning packets.
+>
+> Bring your questions. Bring your spouse.
+>
+> See you Monday,
 > Justin
 
 ### M02 · Wed Nov 4, 10 AM · bonus stack
@@ -94,7 +130,9 @@ Voice rules (Brand Guide): Justin across a kitchen table. Short sentences, contr
 >
 > Why give this much away? Because clarity precedes confidence. I'd rather you see your whole picture before you move a single dollar, whether you ever work with me or not.
 >
-> [ MY ZOOM LINK ] → {{contact.bt_zoom_join_url}}
+> Monday, Nov 9 · 10AM PT · 11AM MT · 12PM CT · 1PM ET
+>
+> *(Zoom block)*
 >
 > Justin
 
@@ -111,7 +149,8 @@ Voice rules (Brand Guide): Justin across a kitchen table. Short sentences, contr
 > Monday we'll start putting those pieces in their corners. You'll get a lot more out of it with your own list in front of you.
 >
 > Monday, Nov 9 · 10AM PT · 11AM MT · 12PM CT · 1PM ET
-> [ MY ZOOM LINK ] → {{contact.bt_zoom_join_url}}
+>
+> *(Zoom block)*
 >
 > Justin
 
@@ -125,7 +164,7 @@ Voice rules (Brand Guide): Justin across a kitchen table. Short sentences, contr
 >
 > **Monday, November 9 · 10AM PT · 11AM MT · 12PM CT · 1PM ET**
 >
-> [ JOIN THE LIVE LAUNCH ] → {{contact.bt_zoom_join_url}}
+> *(Zoom block)*
 >
 > Bring your list of pieces, your questions, and your spouse. Remember, the five free tools are for the folks who come live.
 >
@@ -133,13 +172,13 @@ Voice rules (Brand Guide): Justin across a kitchen table. Short sentences, contr
 
 ### M05 · Mon Nov 9, 8 AM · today
 **Subject:** Today at noon Central
-**Preview:** Your link is inside.
+**Preview:** How to join is inside.
 
 > {{contact.first_name}}, today's the day.
 >
 > The Box Top Method launches today, and we go live at **10AM PT · 11AM MT · 12PM CT · 1PM ET**.
 >
-> [ JOIN THE LIVE LAUNCH ] → {{contact.bt_zoom_join_url}}
+> *(Zoom block)*
 >
 > See you at noon.
 > Justin
@@ -150,7 +189,9 @@ Voice rules (Brand Guide): Justin across a kitchen table. Short sentences, contr
 
 > One hour till we go live, {{contact.first_name}}.
 >
-> [ JOIN THE LIVE LAUNCH ] → {{contact.bt_zoom_join_url}}
+> Join from the link in Zoom's confirmation email. Haven't confirmed your seat yet? Do it now and Zoom gets you in:
+>
+> [ JOIN ON ZOOM ] → {{custom_values.bt_zoom_register_url}}
 >
 > Justin
 
@@ -160,13 +201,15 @@ Voice rules (Brand Guide): Justin across a kitchen table. Short sentences, contr
 
 > We're live right now, {{contact.first_name}}. Come on in.
 >
-> [ JOIN NOW ] → {{contact.bt_zoom_join_url}}
+> Use the link in Zoom's email, or confirm your seat here and Zoom takes you in:
+>
+> [ JOIN ON ZOOM ] → {{custom_values.bt_zoom_register_url}}
 >
 > Justin
 
 ### M08 · Nov 9, 2 PM · attended: thank you + tools
 **Subject:** Thank you for coming. Here are your tools.
-**Preview:** All five, plus what's next.
+**Preview:** All five, plus where to start.
 
 > {{contact.first_name}},
 >
@@ -175,14 +218,11 @@ Voice rules (Brand Guide): Justin across a kitchen table. Short sentences, contr
 > As promised, here are your free tools:
 > [ GET MY 5 TOOLS ] → {{custom_values.bt_bonus_vault_url}}
 >
-> Start with the Box Top Quiz. It takes a few minutes and tells you your retiree type and your biggest gap.
->
-> If you want me to look at your picture with you, one on one, that's what a Box Top Review is. We put your pieces on the table, find your four corners, and you leave with a clear picture. Education first, no pressure.
-> [ BOOK A BOX TOP REVIEW ] → {{custom_values.bt_review_url}}
+> Start with the Box Top Quiz. It takes a few minutes and tells you your retiree type and your biggest gap. Then open the planning packet that fits you and fill in the first few pages.
 >
 > And if you'd like the book itself: {{custom_values.bt_book_url}}
 >
-> *(Build note: delete this line if BT Book URL is still empty on Nov 9.)*
+> *(Build note: delete the book line if BT Book URL is still empty on Nov 9.)*
 >
 > Justin
 
@@ -200,33 +240,38 @@ Voice rules (Brand Guide): Justin across a kitchen table. Short sentences, contr
 >
 > Justin
 
-### M10 · Fri Nov 13, 10 AM · attended: review invite
-**Subject:** Want me to look at your picture with you?
-**Preview:** One on one. Education first.
+### M10 · Fri Nov 13, 10 AM · attended: the packet
+**Subject:** Ten minutes with your packet this weekend
+**Preview:** Not the whole thing. Just the first few pages.
 
 > {{contact.first_name}},
 >
-> Once you can see the whole picture, the gap usually points to the next step. Sometimes it helps to have someone sit down and look at it with you.
+> If you haven't opened your planning packet yet, this weekend is a good time. Not the whole thing. Just the first few pages.
 >
-> That's a Box Top Review. It's free and takes about 45 minutes, just you (and your spouse) and me. We put your pieces in their corners, and you leave knowing where you stand and what questions to ask next. No pressure.
+> Put your family's picture and your wishes down on paper. That alone puts you ahead of most folks I meet.
 >
-> [ BOOK A BOX TOP REVIEW ] → {{custom_values.bt_review_url}}
+> Own a business? Use the Legacy & Business Planning Packet instead. The succession pages are the ones most owners keep putting off.
 >
+> [ OPEN MY TOOLS ] → {{custom_values.bt_bonus_vault_url}}
+>
+> Clarity precedes confidence.
 > Justin
 
-### M11 · Mon Nov 16, 10 AM · attended: last call
-**Subject:** Box Top Reviews for launch folks, through November
-**Preview:** I've set aside time this month.
+### M11 · Mon Nov 16, 10 AM · attended: the book (only if BT Book URL is filled in)
+**Subject:** The whole picture, in one place
+**Preview:** The Box Top Method, the book.
 
 > {{contact.first_name}},
 >
-> Quick note. I've set aside time through November for Box Top Reviews with folks from the launch. If you've been meaning to book one, now's a good time.
+> Everything we covered on the live, and a lot we didn't have time for, is in the book.
 >
-> [ BOOK A BOX TOP REVIEW ] → {{custom_values.bt_review_url}}
+> [ GET THE BOOK ] → {{custom_values.bt_book_url}}
 >
 > Either way, keep that list of pieces. Clarity precedes confidence.
 >
 > Justin
+
+*(Build note: if BT Book URL is still empty on Nov 15, remove this email from BT · 04 before it sends.)*
 
 ### M12 · Nov 9, 6 PM (or on request) · replay
 **Subject:** Here's the replay
@@ -258,8 +303,8 @@ Voice rules (Brand Guide): Justin across a kitchen table. Short sentences, contr
 >
 > Justin
 
-### M14 · Fri Nov 13, 10 AM · replay: review invite
-Same as M10, with one opening line swapped: "Whether or not you've finished the replay, …"
+### M14 · Fri Nov 13, 10 AM · replay: the book (only if BT Book URL is filled in)
+Same as M11, with the first line swapped: "Whether or not you've finished the replay, everything we covered is in the book, and a lot more." *(Build note: if BT Book URL is still empty on Nov 12, remove this email from BT · 05 before it sends.)*
 
 ### M15 · Mon Nov 16, 10 AM · replay comes down
 **Subject:** The replay comes down tonight
@@ -271,19 +316,14 @@ Same as M10, with one opening line swapped: "Whether or not you've finished the 
 >
 > [ WATCH THE REPLAY ] → trigger link **BT Replay**
 >
-> And if you'd rather talk it through one on one: [ BOOK A BOX TOP REVIEW ] → {{custom_values.bt_review_url}}
+> And if you'd like the book: {{custom_values.bt_book_url}}
+>
+> *(Build note: delete the book line if BT Book URL is still empty.)*
 >
 > Justin
 
-### M16 · Box Top Review no-show · rebook
-**Subject:** Sorry we missed you
-**Preview:** Pick a new time that works.
-
-> {{contact.first_name}}, sorry we missed each other today. No problem at all. Pick a time that works better:
->
-> [ PICK A NEW TIME ] → {{custom_values.bt_review_url}}
->
-> Justin
+### M16 · removed
+The Box Top Review offer is dropped, so there's no no-show rebook email.
 
 ### M17 · replay requested after the window closed (Nov 17 on)
 **Subject:** The launch replay has closed
@@ -295,7 +335,9 @@ Same as M10, with one opening line swapped: "Whether or not you've finished the 
 >
 > The book is here: {{custom_values.bt_book_url}}
 >
-> And if you'd like to look at your own picture with me, one on one: [ BOOK A BOX TOP REVIEW ] → {{custom_values.bt_review_url}}
+> *(Build note: delete the book line if BT Book URL is still empty.)*
+>
+> If you have a question, just reply to this email.
 >
 > Justin
 
@@ -308,23 +350,24 @@ Same as M10, with one opening line swapped: "Whether or not you've finished the 
 - **How many:** at most 3 per person in any rolling 24 hours, and 5 event texts in total, which matches "Up to 5 messages" in the consent.
 - **When:** only between 8 AM and 8 PM the recipient's time. The waits in the build sheet enforce this, and Puerto Rico, Virgin Islands, Guam and Canadian numbers are never texted.
 - **What every text includes:**
-  - It opens with the brand registered for A2P, assumed here to be "Pontotoc Insurance Agency". Match the Trust Center name exactly.
+  - It opens with **"The Justin Stark:"**, the brand name for this campaign (Kalob, Nov 2). If the A2P registration in Trust Center shows a different brand name, carriers may filter texts that don't match; check it before S01 goes out.
   - It carries STOP, because for some people (late registrants, Hawaii numbers) any one of these can be the first text they get.
 
 | # | When (CT) | Text |
 |---|---|---|
-| S01 | Confirmation. Window 11 AM to 6:55 PM, only if registered before Sun Nov 8 at noon, not Hawaii | `Justin Stark (Pontotoc Insurance Agency): you're in for The Box Top Method live launch, Mon Nov 9 at 12PM CT. Your link: {{contact.bt_zoom_join_url}} Reply STOP to opt out, HELP for help.` |
-| S02 | Sun Nov 8, 12 PM (Hawaii 12:05 PM) | `Justin Stark (Pontotoc Insurance Agency): tomorrow at noon Central we go live. Bring your questions and your spouse. Your link: {{contact.bt_zoom_join_url}} Reply STOP to opt out.` |
-| S03 | Mon Nov 9, 11 AM, not Hawaii | `Justin Stark (Pontotoc Insurance Agency): one hour till we go live. Your link: {{contact.bt_zoom_join_url}} Reply STOP to opt out.` |
-| S04 | Mon Nov 9, 12:02 PM | `Justin Stark (Pontotoc Insurance Agency): we're live right now. Hop in: {{contact.bt_zoom_join_url}} Reply STOP to opt out.` |
-| S05 | When the replay is released; window 12 to 6:55 PM | `Justin Stark (Pontotoc Insurance Agency): sorry we missed you at the live launch. Here's the replay: {{trigger_link.bt_replay}} Reply STOP to opt out.` |
-| S06 | Fri Nov 13, window 1 to 6:55 PM, marketing opt-in only | `Justin Stark (Pontotoc Insurance Agency): want me to look at your retirement picture with you? Book a free Box Top Review: {{custom_values.bt_review_url}} Reply STOP to opt out.` |
+| S01 | Confirmation. Window 11 AM to 6:55 PM, only if registered before Sun Nov 8 at noon, not Hawaii | `The Justin Stark: you're signed up for The Box Top Method live launch, Mon Nov 9 at 12PM CT. Last step, about 20 seconds: confirm your seat on Zoom at {{custom_values.bt_zoom_register_url}} Reply STOP to opt out, HELP for help.` |
+| S02 | Sun Nov 8, 12 PM (Hawaii 12:05 PM) | `The Justin Stark: tomorrow at noon Central we go live. Bring your questions and your spouse. Your join link is in Zoom's email. Not confirmed yet? {{custom_values.bt_zoom_register_url}} Reply STOP to opt out.` |
+| S03 | Mon Nov 9, 11 AM, not Hawaii | `The Justin Stark: one hour till we go live. Join from Zoom's email, or confirm your seat here: {{custom_values.bt_zoom_register_url}} Reply STOP to opt out.` |
+| S04 | Mon Nov 9, 12:02 PM | `The Justin Stark: we're live right now. Join from Zoom's email, or confirm here and hop in: {{custom_values.bt_zoom_register_url}} Reply STOP to opt out.` |
+| S05 | When the replay is released; window 12 to 6:55 PM | `The Justin Stark: sorry we missed you at the live launch. Here's the replay: {{trigger_link.Lbc8PBvv84TFzWcaLnJK}} Reply STOP to opt out.` |
+| S06 | Fri Nov 13, window 1 to 6:55 PM, marketing opt-in only, **only if BT Book URL is filled in** | `The Justin Stark: the whole Box Top Method, in one book. Get your copy: {{custom_values.bt_book_url}} Reply STOP to opt out.` |
 
 **Notes:**
-- **Replay link in S05:** use the exact trigger-link key GHL shows for "BT Replay" in place of `{{trigger_link.bt_replay}}`. If that key doesn't work in SMS, use `{{custom_values.bt_replay_url}}`.
-- **Length and cost:** the brand prefix and a full Zoom link push most of these to 2 or 3 SMS segments. That's fine; it costs a little more per text.
+- **Replay link in S05:** `{{trigger_link.Lbc8PBvv84TFzWcaLnJK}}` is the key GHL generated for "BT Replay". If it doesn't render in SMS, use `{{custom_values.bt_replay_url}}`.
+- **S06 without a book link:** remove S06 from BT · 04 and BT · 05 before Nov 13 if BT Book URL is still empty.
+- **Length and cost:** the brand prefix and the full Zoom link push most of these to 2 or 3 SMS segments. That's fine; it costs a little more per text.
 
 **Text count for one person who registered early (Nov 4):**
 - **Event texts:** S01 (Nov 4), S02 (Nov 8, 12 PM), S03 (Nov 9, 11 AM), S04 (Nov 9, 12:02 PM), and S05 (Nov 9 evening, only if they missed the live).
 - **Busiest 24 hours:** S03, S04 and S05, which is 3.
-- **Marketing text:** S06 (Nov 13), only if they checked box 2.
+- **Marketing text:** S06 (Nov 13), only if they checked box 2 and the book link exists.

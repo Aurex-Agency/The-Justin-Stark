@@ -142,11 +142,11 @@ Defaults: **Draft** until tests pass; time zone **Central**; sender **Justin Sta
 
 **Trigger:** tag added `bt-registered`.
 
-1. **If/Else** (first match wins):
-   - BT Zoom Status is skipped / failed → Email **M01Z** "One more step: finish on Zoom".
-   - BT Event Phase = live → Email **M01L** "We're live right now".
-   - BT Event Phase = today → Email **M01T** "You're in. We go live at noon Central today."
-   - Else → Email **M01** "You're in".
+1. **If/Else** (first match wins). *Plan B (Nov 2): every site signup arrives with Zoom Status = skipped, so the M01Z family is the default; M01 is only for contacts imported from Zoom's registrant list.*
+   - BT Zoom Status = registered → Email **M01** "You're in" (Zoom already emailed their link).
+   - BT Event Phase = live → Email **M01ZL** "We're live right now. Here's how to get in."
+   - BT Event Phase = today → Email **M01ZT** "One more step before noon today".
+   - Else → Email **M01Z** "One more step to save your seat".
 2. **If** has `bt-sms-optin` **and** `bt-sms-confirm`, not `bt-sms-hawaii`, not DND → **Wait: Advance Window 11:00 AM to 6:55 PM** → SMS **S01**.
 
 ### BT · 03 Reminders · re-entry OFF · Goal: tag added `bt-attended-live`
@@ -162,7 +162,7 @@ Defaults: **Draft** until tests pass; time zone **Central**; sender **Justin Sta
 | Mon Nov 9, 11:00 AM | **M06** → if `bt-sms-optin` & not `bt-sms-hawaii` & not DND → **S03** |
 | Mon Nov 9, 12:02 PM | **M07** → if `bt-sms-optin` & not DND → **S04** |
 
-### BT · 04 Attended · re-entry OFF · Goal: `bt-review-booked`
+### BT · 04 Attended · re-entry OFF · no goal (Review offer dropped Nov 2)
 
 **Trigger:** tag added `bt-attended-live`.
 
@@ -170,28 +170,32 @@ Defaults: **Draft** until tests pass; time zone **Central**; sender **Justin Sta
 2. Update Opportunity → Attended Live (**allow backward move** on this step only).
 3. Wait until Mon Nov 9, 2:00 PM (if past → **continue**) → **M08**.
 4. Wait until Wed Nov 11, 10 AM (skip) → **M09**.
-5. Wait until Fri Nov 13, 10 AM (skip) → **M10** → if `bt-sms-marketing-optin` & not DND → Advance Window **1:00 to 6:55 PM** → **S06**.
-6. Wait until Mon Nov 16, 10 AM (skip) → **M11**.
+5. Wait until Fri Nov 13, 10 AM (skip) → **M10** (the packet) → if `bt-sms-marketing-optin` & not DND → Advance Window **1:00 to 6:55 PM** → **S06** (book; only if BT Book URL is filled in).
+6. Wait until Mon Nov 16, 10 AM (skip) → **M11** (book; only if BT Book URL is filled in).
 
-### BT · 05 Missed live · re-entry OFF · Goal: tag added `bt-attended-live` or `bt-review-booked`
+### BT · 05 Missed live · re-entry OFF · Goal: tag added `bt-attended-live`
 
-**Trigger:** tag added `bt-no-show` **or** `bt-replay-request`. **Filter:** does not have `bt-attended-live` and does not have `bt-review-booked`.
+**Trigger:** tag added `bt-no-show` **or** `bt-replay-request`. **Filter:** does not have `bt-attended-live`.
 
 1. Create/Update Opportunity → Missed Live (Replay).
 2. Wait until Mon Nov 9, 6:00 PM (if past → continue) → **Wait for condition: has tag `bt-replay-ready`** (the gate; released in §8) → **M12** → if `bt-sms-optin` & not DND → Advance Window **12:00 to 6:55 PM** → **S05**.
 3. Wait until Wed Nov 11, 10 AM (skip) → **M13**.
-4. Wait until Fri Nov 13, 10 AM (skip) → **M14** → if `bt-sms-marketing-optin` & not DND → Advance Window 1:00 to 6:55 PM → **S06**.
+4. Wait until Fri Nov 13, 10 AM (skip) → **M14** (book; only if BT Book URL is filled in) → if `bt-sms-marketing-optin` & not DND → Advance Window 1:00 to 6:55 PM → **S06** (same condition).
 5. Wait until Mon Nov 16, 10 AM (skip) → **M15**.
 
 ### BT · 06 Replay clicked · re-entry ON
 
 **Trigger:** Trigger Link Clicked `BT Replay`. Add `bt-replay-clicked` → **If** opportunity stage = Missed Live (Replay) → move → Replay Engaged (no backward moves).
 
-### BT · 07 Review booked · re-entry ON
+### BT · 07 and BT · 08 · dropped (Nov 2)
+
+The 1:1 Box Top Review offer is off, so there's no calendar, no booking or outcome workflow, and no M16. The original specs are kept below for reference only.
+
+### ~~BT · 07 Review booked~~ · re-entry ON
 
 **Trigger:** Appointment Status = booked/confirmed, calendar Box Top Review. Check in the UI whether "Customer Booked Appointment" is still offered; if so, either works. Add `bt-review-booked` → Opportunity → Box Top Review Booked → Internal Notification to Justin: "Box Top Review booked: {{contact.name}}, {{appointment.start_time}}. Segment {{contact.bt_segment}}. From {{contact.bt_source_bucket}} / {{contact.bt_lt_content}}."
 
-### BT · 08 Review outcome · re-entry ON
+### ~~BT · 08 Review outcome~~ · re-entry ON
 
 **Trigger:** Appointment Status changed, calendar Box Top Review. Showed → Opportunity → Box Top Review Held. No-show → **M16** (rebook link).
 
@@ -213,7 +217,7 @@ Tag added `bt-seg-pro` → Internal Notification to Justin. If an agent-recruiti
 
 ## 9. Smart lists
 
-BT Registered · BT Paid Meta · BT Zoom-direct · BT Zoom Failed (check daily) · BT SMS Event Opt-in · BT SMS Marketing Opt-in · BT Attended · BT Missed Live · BT Review Booked · BT Pros · BT Business Owners.
+BT Registered · BT Paid Meta · BT Zoom-direct · BT SMS Event Opt-in · BT SMS Marketing Opt-in · BT Attended · BT Missed Live · BT Pros · BT Business Owners. *(BT Zoom Failed and BT Review Booked dropped Nov 2: Plan B never sets `failed`, and there's no Review offer.)*
 
 ## 10. Tests (before ads go live)
 
