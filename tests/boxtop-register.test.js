@@ -83,7 +83,7 @@ test('register: Zoom + GHL + Meta all succeed', async () => {
   assert.equal(ghl.source_bucket, 'paid-meta');
   assert.equal(ghl.lt_content, 'Puzzle 15s');
 
-  const meta = calls.find((c) => c.url.includes('graph.facebook.com')).body.data[0];
+  const meta = calls.find((c) => new URL(c.url).hostname === 'graph.facebook.com').body.data[0];
   assert.equal(meta.event_name, 'CompleteRegistration');
   assert.equal(meta.event_id, 'bt-test-123456');
   assert.match(meta.user_data.em[0], /^[a-f0-9]{64}$/);
