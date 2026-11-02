@@ -1,0 +1,612 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Box Top Method · Free Live Zoom Launch · Nov 9</title>
+<meta name="description" content="Join Justin Stark live on Zoom, Monday, November 9 at 12PM CT, for the launch of The Box Top Method: how to see your whole retirement picture before you move a single dollar. Free.">
+<link rel="canonical" href="https://thejustinstark.com/theboxtop/launch/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://thejustinstark.com/theboxtop/launch/">
+<meta property="og:title" content="The Box Top Method · Free Live Zoom Launch with Justin Stark">
+<meta property="og:description" content="Monday, November 9 · 10AM PT · 11AM MT · 12PM CT · 1PM ET. See your whole retirement picture before you move a single dollar.">
+<meta property="og:image" content="https://thejustinstark.com/theboxtop/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="/theboxtop/assets/favicon.svg">
+<link rel="apple-touch-icon" href="/theboxtop/assets/apple-touch-icon.png">
+<meta name="theme-color" content="#2D378F">
+<link rel="preconnect" href="https://connect.facebook.net" crossorigin>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '4533371650216162');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=4533371650216162&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+<script>
+/* mtrack: browser pixel + first-party Conversions API relay (/api/meta),
+   sharing one eventID so Meta dedupes. Same helper as /big-table/.
+   CompleteRegistration is NOT sent through here: /api/boxtop-register sends
+   the server half with hashed identifiers, and the thank-you page fires the
+   browser half with the same event_id. */
+window.mtrack=function(name,params){
+  var id='ev.'+Date.now().toString(36)+'.'+Math.random().toString(36).slice(2,10);
+  if(window.fbq){fbq('track',name,params||{},{eventID:id})}
+  try{
+    var body=JSON.stringify({event_name:name,event_id:id,event_source_url:location.href,custom_data:params||{}});
+    if(navigator.sendBeacon){navigator.sendBeacon('/api/meta',new Blob([body],{type:'application/json'}))}
+    else if(window.fetch){fetch('/api/meta',{method:'POST',headers:{'Content-Type':'application/json'},body:body,keepalive:true})}
+  }catch(e){}
+};
+mtrack('PageView');
+</script>
+<link rel="preload" href="/assets/fonts/Montserrat-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/theboxtop/assets/book-3d.webp" as="image" type="image/webp">
+<style>
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:100 900;font-display:swap;src:url('/assets/fonts/Montserrat-var.woff2') format('woff2')}
+
+/* Box Top Method brand kit (Drive: Brand Guide, box-top-tokens.json).
+   Contrast rules: indigo on ground for anything; cream on sky/indigo and
+   indigo on sky only at 24px+; sky and steel never carry small text. */
+:root{
+  --indigo:#2D378F; --sky:#3598D0; --cream:#FDFADD; --steel:#5EA0BE;
+  --ground:#F1F1F1; --surface:#FFFFFF; --ink:#1E2347; --muted:#565C7E;
+  --error:#A3261B;
+  --wrap:1120px; --gut:20px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:'Montserrat',system-ui,-apple-system,'Segoe UI',sans-serif;font-size:17px;line-height:1.6;font-weight:400}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--indigo)}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--gut)}
+.caps{text-transform:uppercase}
+.label{font-weight:700;text-transform:uppercase;letter-spacing:.16em;font-size:.78rem}
+h1,h2,h3{font-weight:900;text-transform:uppercase;color:var(--indigo);letter-spacing:.01em;line-height:1.08;margin:0}
+h2{font-size:clamp(1.65rem,5.4vw,2.6rem)}
+p{margin:0 0 1em}
+.skip{position:absolute;left:-999px;top:0;background:var(--indigo);color:var(--cream);padding:.6rem 1rem;z-index:10}
+.skip:focus{left:8px;top:8px}
+:focus-visible{outline:3px solid var(--indigo);outline-offset:2px}
+
+/* ---------- billing strip ---------- */
+.strip{background:var(--indigo);color:var(--cream);text-align:center;padding:.6rem var(--gut);font-weight:700;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase}
+@media (min-width:600px){.strip{font-size:.74rem;letter-spacing:.18em}}
+.strip .live-dot{display:none;width:.55em;height:.55em;background:var(--cream);border-radius:50%;margin-right:.5em;vertical-align:.08em}
+.is-live .strip .live-dot{display:inline-block;animation:pulse 1.4s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.25}}
+@media (prefers-reduced-motion:reduce){.is-live .strip .live-dot{animation:none}}
+
+/* ---------- hero: the countdown-post pattern ---------- */
+.hero{padding:1.6rem 0 0;overflow:hidden;position:relative}
+.hero-top{position:relative}
+.book-desk{display:none}
+.hero h1{font-size:clamp(1.4rem,5.9vw,3.3rem);max-width:19ch}
+.band{position:relative;background:var(--sky);margin-top:1.4rem;border-top:3px solid var(--indigo);border-bottom:3px solid var(--indigo)}
+.band .wrap{display:flex;align-items:center;min-height:132px;position:relative}
+.wordmark{font-weight:900;text-transform:uppercase;line-height:.92;letter-spacing:.01em;margin:0;padding:1rem 0}
+.wordmark .the,.wordmark .method{color:var(--indigo);display:block;font-size:clamp(1.5rem,5.6vw,2.2rem)}
+.wordmark .bt{color:var(--cream);display:block;font-size:clamp(2.6rem,11vw,4.6rem);letter-spacing:.02em}
+.band .book{position:absolute;right:calc(var(--gut) + 4px);top:8px;width:clamp(104px,28vw,150px);transform:rotate(12deg);transform-origin:center;filter:drop-shadow(8px 14px 14px rgba(30,35,71,.32));pointer-events:none;z-index:1}
+.byline{display:flex;align-items:center;gap:.9rem;margin-top:1.3rem;font-weight:700;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--indigo);max-width:30rem;white-space:nowrap}
+.byline .rule,.byline .date{display:none}
+.byline .rule{flex:1;height:2px;background:var(--sky);min-width:2rem}
+@media (min-width:600px){.byline{font-size:.8rem;letter-spacing:.14em}.byline .rule,.byline .date{display:block}}
+.details{margin:.7rem 0 0;font-weight:800;color:var(--indigo);text-transform:uppercase;letter-spacing:.03em;font-size:.95rem;max-width:15rem}
+@media (min-width:600px){.details{max-width:none}}
+.details span{white-space:nowrap}
+.lede{margin:1rem 0 0;font-size:1.06rem;max-width:34rem}
+.lede strong{font-weight:700;color:var(--indigo)}
+.countdown{display:flex;gap:.5rem;margin:1.2rem 0 0;align-items:stretch}
+.countdown .unit{background:var(--surface);min-width:4.2rem;padding:.45rem .5rem;text-align:center}
+.countdown b{display:block;font-size:1.5rem;font-weight:900;color:var(--indigo);line-height:1.1;font-variant-numeric:tabular-nums}
+.countdown small{display:block;font-size:.62rem;letter-spacing:.16em;font-weight:700;text-transform:uppercase;color:var(--muted)}
+.countdown-label{font-size:.68rem;margin-top:1.4rem;color:var(--muted)}
+.hero-grid{display:grid;gap:1.3rem;padding-bottom:2.6rem;grid-template-areas:"meta" "form" "more"}
+.hero-meta{grid-area:meta}.hero-form{grid-area:form}.hero-more{grid-area:more}
+.hero-more .lede:first-child{margin-top:0}
+
+/* ---------- form ---------- */
+.card{background:var(--surface);padding:1.4rem 1.2rem 1.3rem;border-top:6px solid var(--sky)}
+.card h2{font-size:1.35rem;margin-bottom:.25rem}
+.card .sub{font-size:.92rem;color:var(--muted);margin-bottom:1rem}
+.field{margin-bottom:.85rem}
+.row2{display:grid;gap:0 .75rem;grid-template-columns:1fr}
+@media (min-width:340px){.row2{grid-template-columns:1fr 1fr}}
+label{display:block;font-weight:700;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);margin-bottom:.3rem}
+label .opt{font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted)}
+input[type=text],input[type=email],input[type=tel]{width:100%;font:inherit;font-size:1.05rem;color:var(--ink);background:var(--surface);border:2px solid #C9CBD6;border-radius:0;padding:.72rem .8rem;min-height:50px;-webkit-appearance:none;appearance:none}
+input:focus{outline:none;border-color:var(--indigo);box-shadow:0 0 0 3px rgba(45,55,143,.18)}
+input[aria-invalid=true]{border-color:var(--error)}
+.err{display:none;color:var(--error);font-size:.85rem;font-weight:600;margin-top:.3rem}
+.err.on{display:block}
+.hint{font-size:.82rem;color:var(--muted);margin-top:.3rem}
+.consent{display:none;grid-template-columns:auto 1fr;gap:.6rem;align-items:start;background:var(--ground);padding:.75rem;margin:-.2rem 0 .9rem;font-size:.8rem;line-height:1.45;color:var(--ink)}
+.consent.on{display:grid}
+.consent input{width:22px;height:22px;margin:.1rem 0 0;accent-color:var(--indigo)}
+.consent label{all:unset;cursor:pointer}
+.consent a{color:var(--indigo)}
+.hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;overflow:hidden}
+.btn{display:block;width:100%;font:inherit;font-weight:900;font-size:1.05rem;letter-spacing:.12em;text-transform:uppercase;text-align:center;text-decoration:none;color:var(--cream);background:var(--indigo);border:0;border-radius:0;padding:1.05rem 1rem;min-height:56px;cursor:pointer;transition:background .15s ease,transform .15s ease}
+.btn:hover{background:#232c78}
+.btn:active{transform:translateY(1px)}
+.btn[disabled]{opacity:.7;cursor:progress}
+.btn-inline{display:inline-block;width:auto;padding:1rem 2rem}
+.fine{font-size:.78rem;color:var(--muted);margin:.8rem 0 0;line-height:1.5}
+.form-alert{display:none;background:#FFF4D6;border-left:4px solid var(--indigo);padding:.8rem .9rem;margin-top:.9rem;font-size:.9rem}
+.form-alert.on{display:block}
+.form-alert a{font-weight:700}
+
+/* ---------- sections ---------- */
+section{padding:3.4rem 0}
+.sec-white{background:var(--surface)}
+.kicker{color:var(--muted);margin-bottom:.6rem}
+.prose{max-width:40rem;font-size:1.06rem}
+.prose p:last-child{margin-bottom:0}
+.pull{font-weight:800;color:var(--indigo);font-size:clamp(1.25rem,4.4vw,1.75rem);line-height:1.25;text-transform:uppercase;margin:1.4rem 0;max-width:24ch}
+
+.corners{display:grid;gap:1rem;margin-top:1.8rem}
+@media (min-width:640px){.corners{grid-template-columns:1fr 1fr}}
+@media (min-width:1000px){.corners{grid-template-columns:repeat(4,1fr)}}
+.corner{background:var(--surface);padding:1.3rem 1.2rem 1.4rem;border-top:6px solid var(--indigo);position:relative}
+.sec-white .corner{background:var(--ground)}
+.corner .num{display:flex;align-items:center;justify-content:center;width:2.6rem;height:2.6rem;background:var(--sky);color:var(--cream);font-weight:900;font-size:1.5rem;margin-bottom:.9rem}
+.corner:nth-child(even) .num{background:var(--indigo)}
+.corner h3{font-size:1.05rem;margin-bottom:.5rem}
+.corner p{font-size:.95rem;margin:0}
+.corner .canon{display:block;margin-top:.7rem;font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+.bonus-band{background:var(--sky)}
+.bonus-band h2{color:var(--indigo)}
+.bonus-band .kicker{color:var(--indigo)}
+.bonuses{display:grid;gap:.75rem;margin:1.6rem 0 0;padding:0;list-style:none;counter-reset:b}
+@media (min-width:760px){.bonuses{grid-template-columns:1fr 1fr}}
+.bonuses li{background:var(--surface);padding:1rem 1.1rem 1rem 3.6rem;position:relative;counter-increment:b;min-height:4.6rem}
+.bonuses li::before{content:counter(b);position:absolute;left:1rem;top:1rem;width:1.9rem;height:1.9rem;background:var(--indigo);color:var(--cream);font-weight:900;display:flex;align-items:center;justify-content:center;font-size:1rem}
+.bonuses b{display:block;color:var(--indigo);font-weight:800;text-transform:uppercase;font-size:.95rem;letter-spacing:.02em}
+.bonuses span{display:block;font-size:.9rem;color:var(--ink);margin-top:.15rem}
+.bonuses li.more{background:var(--indigo);color:var(--cream)}
+.bonuses li.more::before{content:'+';background:var(--cream);color:var(--indigo)}
+.bonuses li.more b,.bonuses li.more span{color:var(--cream)}
+.bonus-cta{margin-top:1.6rem}
+
+.fit{display:grid;gap:.6rem;margin:1.4rem 0 0;padding:0;list-style:none;max-width:44rem}
+.fit li{background:var(--surface);padding:.85rem 1rem .85rem 2.9rem;position:relative}
+.fit li::before{content:'';position:absolute;left:1rem;top:1.15rem;width:.95rem;height:.95rem;background:var(--sky)}
+.fit li:nth-child(even)::before{background:var(--indigo)}
+
+.justin{display:grid;gap:1.6rem;align-items:start}
+@media (min-width:820px){.justin{grid-template-columns:minmax(260px,360px) 1fr;gap:3rem}}
+.justin figure{margin:0;background:var(--sky);padding:14px 14px 0}
+.justin figcaption{background:var(--indigo);color:var(--cream);margin:0 -14px;padding:.7rem 14px;font-weight:700;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase}
+.justin .sig{font-weight:800;color:var(--indigo);text-transform:uppercase;letter-spacing:.06em;margin-top:1.2rem}
+
+.faq{max-width:46rem;margin-top:1.4rem}
+.faq details{background:var(--surface);margin-bottom:.6rem}
+.sec-white .faq details{background:var(--ground)}
+.faq summary{cursor:pointer;list-style:none;font-weight:800;color:var(--indigo);padding:1rem 3rem 1rem 1.1rem;position:relative;text-transform:uppercase;font-size:.92rem;letter-spacing:.03em;min-height:52px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+';position:absolute;right:1.1rem;top:50%;transform:translateY(-50%);font-size:1.4rem;font-weight:700}
+.faq details[open] summary::after{content:'\2212'}
+.faq details p{padding:0 1.1rem 1rem;margin:0}
+
+.closer{background:var(--sky);text-align:center;padding:3rem 0;border-top:3px solid var(--indigo)}
+.closer .wordmark{display:inline-block;padding:0}
+.closer .details{margin:1rem auto 1.4rem;max-width:none}
+.closer .btn-inline{background:var(--indigo)}
+
+footer{background:var(--ink);color:#D8DAE6;padding:2.4rem 0 2.6rem;font-size:.82rem;line-height:1.6}
+footer .credit{font-weight:700;letter-spacing:.16em;text-transform:uppercase;font-size:.7rem;color:var(--cream);margin-bottom:1rem}
+footer p{max-width:52rem}
+footer a{color:#FFFFFF}
+footer nav{display:flex;flex-wrap:wrap;gap:.4rem 1.4rem;margin-top:1.2rem}
+
+/* ---------- desktop ---------- */
+@media (min-width:960px){
+  :root{--gut:32px}
+  .hero{padding-top:2.4rem}
+  .band .wrap{min-height:170px}
+  .band .book{display:none}
+  .book-desk{display:block;position:absolute;right:calc(var(--gut) + 56px);top:-14px;width:178px;transform:rotate(15deg);filter:drop-shadow(10px 18px 18px rgba(30,35,71,.34));z-index:3;pointer-events:none}
+  .hero-grid{grid-template-columns:1fr 430px;grid-template-rows:auto 1fr;grid-template-areas:"meta form" "more form";gap:0 3rem;align-items:start;padding-bottom:4rem}
+  .hero-more .lede:first-child{margin-top:1rem}
+  .hero-form{margin-top:-112px;position:relative;z-index:2}
+  .details{font-size:1.5rem} /* stays indigo: sky on ground is 2.84:1 */
+  .countdown .unit{min-width:5rem}
+  section{padding:4.6rem 0}
+}
+
+/* ---------- time states ---------- */
+.only-live,.only-over{display:none}
+.is-live .only-live{display:revert}
+.is-over .only-over{display:revert}
+.is-over .hide-over,.is-live .hide-live{display:none}
+</style>
+</head>
+<body>
+<a class="skip" href="#register">Skip to the sign-up form</a>
+
+<div class="strip" role="note">
+  <span class="live-dot" aria-hidden="true"></span>
+  <span class="hide-live hide-over">Free live Zoom · Monday, Nov 9 · 12PM CT</span>
+  <span class="only-live">We're live now · Register and jump in</span>
+  <span class="only-over">The live launch has ended · Get the replay</span>
+</div>
+
+<header class="hero">
+  <div class="wrap hero-top">
+    <img class="book-desk" src="/theboxtop/assets/book-3d.webp" width="437" height="662" alt="" aria-hidden="true">
+    <h1 class="hide-over">See your whole retirement picture before you move a single dollar.</h1>
+    <h1 class="only-over">Missed the live launch? Get the replay.</h1>
+  </div>
+
+  <div class="band">
+    <div class="wrap">
+      <p class="wordmark" aria-label="The Box Top Method"><span class="the">The</span><span class="bt">Box Top</span><span class="method">Method</span></p>
+      <img class="book" src="/theboxtop/assets/book-3d.webp" width="437" height="662" alt="The Box Top Method by Justin L Stark, book cover" fetchpriority="high">
+    </div>
+  </div>
+
+  <div class="wrap hero-grid">
+    <div class="hero-meta">
+      <div class="byline"><span>By Justin L Stark</span><span class="rule" aria-hidden="true"></span><span class="date">November 9, 2026</span></div>
+      <p class="details hide-over"><span>10AM PT</span> · <span>11AM MT</span> · <span>12PM CT</span> · <span>1PM ET</span></p>
+    </div>
+    <div class="hero-more">
+      <p class="lede hide-over"><strong>Most people don't have a money problem. They have a clarity problem.</strong> Join me live on Zoom for the launch of my new book, and I'll walk you through the four corners of your retirement picture.</p>
+      <p class="lede only-over"><strong>Most people don't have a money problem. They have a clarity problem.</strong> The live launch is over, but you can still watch it. Tell me where to send the replay.</p>
+      <div class="hide-over" id="cdWrap">
+        <p class="label countdown-label hide-live">We go live in</p>
+        <div class="countdown hide-live" id="countdown" aria-live="off">
+          <div class="unit"><b id="cdD">8</b><small>Days</small></div>
+          <div class="unit"><b id="cdH">0</b><small>Hours</small></div>
+          <div class="unit"><b id="cdM">0</b><small>Minutes</small></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-form" id="register">
+      <form class="card" id="regForm" novalidate>
+        <h2 class="hide-over hide-live">Save your free seat</h2>
+        <h2 class="only-live">Register and join now</h2>
+        <h2 class="only-over">Send me the replay</h2>
+        <p class="sub hide-over">Free. Live on Zoom. Your personal join link comes by email.</p>
+        <p class="sub only-over">Free. We'll email you the link.</p>
+
+        <div class="row2">
+          <div class="field">
+            <label for="first_name">First name</label>
+            <input id="first_name" name="first_name" type="text" autocomplete="given-name" autocapitalize="words" required maxlength="60">
+            <div class="err" id="err-first_name" role="alert"></div>
+          </div>
+          <div class="field">
+            <label for="last_name">Last name</label>
+            <input id="last_name" name="last_name" type="text" autocomplete="family-name" autocapitalize="words" required maxlength="60">
+            <div class="err" id="err-last_name" role="alert"></div>
+          </div>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false" required maxlength="120">
+          <div class="err" id="err-email" role="alert"></div>
+        </div>
+        <div class="field hide-over">
+          <label for="phone">Mobile <span class="opt">(optional)</span></label>
+          <input id="phone" name="phone" type="tel" autocomplete="tel-national" inputmode="tel" maxlength="20" aria-describedby="phone-hint">
+          <div class="hint" id="phone-hint">For a text reminder so you don't miss it.</div>
+          <div class="err" id="err-phone" role="alert"></div>
+        </div>
+        <div class="consent hide-over" id="consentRow">
+          <input type="checkbox" id="sms_consent" name="sms_consent" value="yes">
+          <label for="sms_consent">Yes, text me reminders about The Box Top Method launch from Justin Stark / Pontotoc Insurance Agency. Up to 5 messages. Msg &amp; data rates may apply. Reply STOP to opt out, HELP for help. Consent is not a condition of registration. See our <a href="/privacy/">Privacy Policy</a> and <a href="/terms/#sms">SMS Terms</a>.</label>
+        </div>
+        <div class="hp" aria-hidden="true">
+          <label for="company">Company</label>
+          <input id="company" name="company" type="text" tabindex="-1" autocomplete="off">
+        </div>
+
+        <button class="btn" type="submit" id="regBtn">
+          <span class="hide-over hide-live">Save my free seat</span>
+          <span class="only-live">Register and join</span>
+          <span class="only-over">Send me the replay</span>
+        </button>
+        <p class="fine">Education only. No sales pitch. We don't sell or share your information. <a href="/privacy/">Privacy Policy</a></p>
+        <div class="form-alert" id="formAlert" role="alert"></div>
+      </form>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="sec-white" aria-labelledby="pieces-h">
+    <div class="wrap">
+      <p class="label kicker">The box top problem</p>
+      <h2 id="pieces-h">You have the pieces. Do you have the picture?</h2>
+      <div class="prose" style="margin-top:1.2rem">
+        <p>You ever try to put together a thousand-piece puzzle without the picture on the box? That's how most folks feel about retirement.</p>
+        <p>You've got the 401(k), the savings, the old policy from twenty years ago, and advice from everybody and their uncle. You've done a lot right. But nobody's ever shown you how it all fits together.</p>
+        <p class="pull">Clarity precedes confidence.</p>
+        <p>You can't feel good about a decision when you can't see the picture. The Box Top Method gives you the picture on the box first, so every move after that makes sense.</p>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="corners-h">
+    <div class="wrap">
+      <p class="label kicker">What we'll walk through live</p>
+      <h2 id="corners-h">Every puzzle starts with the four corners. So does your retirement.</h2>
+      <div class="corners">
+        <article class="corner">
+          <span class="num" aria-hidden="true">1</span>
+          <h3>Where your money sits</h3>
+          <p>Your money isn't one big pile. Before you decide what it should do, know where it lives and how easy it is to reach.</p>
+          <span class="canon">The liquidity ladder</span>
+        </article>
+        <article class="corner">
+          <span class="num" aria-hidden="true">2</span>
+          <h3>What you want it to do</h3>
+          <p>Time, cash flow, or cash. Which one matters most to you? Not your neighbor. Not your brother-in-law. You.</p>
+          <span class="canon">Time, cash flow and cash</span>
+        </article>
+        <article class="corner">
+          <span class="num" aria-hidden="true">3</span>
+          <h3>What it costs in tax</h3>
+          <p>The balance on your statement doesn't tell the whole story. Every dollar sits in a tax bucket, and most planning skips this corner.</p>
+          <span class="canon">The three tax buckets</span>
+        </article>
+        <article class="corner">
+          <span class="num" aria-hidden="true">4</span>
+          <h3>How your money works</h3>
+          <p>Safety, growth and access. You rarely get all three at once, so every dollar needs a job on purpose.</p>
+          <span class="canon">Safety, growth and access</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="bonus-band hide-over" aria-labelledby="bonus-h">
+    <div class="wrap">
+      <p class="label kicker">For everyone who shows up live</p>
+      <h2 id="bonus-h">Show up live. Leave with 5 free tools.</h2>
+      <ul class="bonuses">
+        <li><b>The Box Top Training</b><span>Four modules: the pieces and the picture, corners one and two, corners three and four, building your box top.</span></li>
+        <li><b>The Legacy Trust Finder</b><span>A short guided tool that shows where a trust may fit, so you know what to ask your attorney.</span></li>
+        <li><b>The Box Top Quiz</b><span>14 questions. Your retiree type, your Four Corners clarity score, and your biggest gap.</span></li>
+        <li><b>The Legacy Planning Packet</b><span>16 fillable pages that put your family's picture and your wishes in one place.</span></li>
+        <li><b>The Legacy &amp; Business Planning Packet</b><span>22 fillable pages for business owners, including the succession questions most owners keep putting off.</span></li>
+        <li class="more"><b>And a few more things</b><span>I'm saving those for the live.</span></li>
+      </ul>
+      <div class="bonus-cta"><a class="btn btn-inline" href="#register">Save my free seat</a></div>
+    </div>
+  </section>
+
+  <section class="sec-white" aria-labelledby="fit-h">
+    <div class="wrap">
+      <p class="label kicker">Who it's for</p>
+      <h2 id="fit-h">If this sounds like you, grab a seat.</h2>
+      <ul class="fit">
+        <li>You're within about five years of retirement, on either side. That's the Retirement Red Zone, and it's when the picture matters most.</li>
+        <li>You're retired and want to see how everything fits before you make your next move.</li>
+        <li>You own a business and want your family and your business in one plan.</li>
+        <li>You've got accounts in a few places, a policy or two, and nobody's ever put it all on one table.</li>
+      </ul>
+      <p class="prose" style="margin-top:1.2rem"><strong>Bring your spouse.</strong> These are kitchen-table decisions. Watch together.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="justin-h">
+    <div class="wrap justin">
+      <figure>
+        <img src="/theboxtop/assets/justin.jpg" width="640" height="800" alt="Justin Stark" loading="lazy" decoding="async">
+        <figcaption>Justin L Stark · Pontotoc, Mississippi</figcaption>
+      </figure>
+      <div>
+        <p class="label kicker">Meet your host</p>
+        <h2 id="justin-h">I'm the mapmaker, not the salesman.</h2>
+        <div class="prose" style="margin-top:1.2rem">
+          <p>I grew up blue-collar in North Mississippi. I served in the Marine Corps as an infantryman and scout sniper, wore a badge as a police officer, and planted a church as a pastor. For the last decade I've worked in Medicare and retirement planning, mostly across kitchen tables.</p>
+          <p>Most folks I sit down with have done a lot right. They just can't see how it all fits. I wrote The Box Top Method so you could see your whole picture before you move a single dollar, whether you ever work with me or not.</p>
+        </div>
+        <p class="sig">Justin Stark</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec-white" aria-labelledby="faq-h">
+    <div class="wrap">
+      <p class="label kicker">Good questions</p>
+      <h2 id="faq-h">Before you sign up</h2>
+      <div class="faq">
+        <details><summary>Is it really free?</summary><p>Yes. The launch is free to attend. Register once and your personal Zoom link comes by email.</p></details>
+        <details><summary>Is this a sales pitch?</summary><p>No. The Box Top Method is education. I won't name, recommend or price a single product on the call. The point is to help you see your own picture clearly.</p></details>
+        <details><summary>What time is it where I live?</summary><p>Monday, November 9: 10AM Pacific, 11AM Mountain, 12PM Central, 1PM Eastern.</p></details>
+        <details><summary>Do I need a Zoom account?</summary><p>No account needed. On a computer your link opens right in the browser. On a phone or tablet, install the free Zoom app before Monday so you're not fumbling at noon.</p></details>
+        <details><summary>Will there be a replay?</summary><p>Yes, registered folks get the replay by email after the launch. The free tools are for people who join live, so if you can make it, come live.</p></details>
+        <details><summary>Can my spouse come?</summary><p>Please bring them. If you share one email, register once and watch together. If you each have your own, register separately and you'll each get reminders.</p></details>
+        <details><summary>Will you sell my information?</summary><p>No. We use it to send your link, your reminders and the replay. Unsubscribe or reply STOP anytime.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="closer" aria-label="Register">
+    <div class="wrap">
+      <p class="wordmark" aria-hidden="true"><span class="the">The</span><span class="bt">Box Top</span><span class="method">Method</span></p>
+      <p class="details hide-over"><span>Monday, Nov 9</span> · <span>12PM CT</span> · <span>Live on Zoom</span></p>
+      <p class="details only-over"><span>Watch the replay</span></p>
+      <a class="btn btn-inline" href="#register"><span class="hide-over">Save my free seat</span><span class="only-over">Send me the replay</span></a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="credit">Presented by Pontotoc Insurance Agency · Published by Game Changer Publishing</p>
+    <p>The Box Top Method is educational. It is not financial, tax, or legal advice, and it does not recommend any specific product, investment, or strategy. Before acting on anything you learn, talk with a licensed professional who understands your full situation. Tax questions belong with your own tax professional, and legal questions with an attorney. Stories and examples are fictional composites.</p>
+    <p>Justin Stark is a licensed insurance agent with Pontotoc Insurance Agency. Nothing is sold on the call.</p>
+    <p>This page uses cookies and the Meta Pixel to measure our ads and send you the right reminders. See how, and how to opt out, in our <a href="/privacy/#cookies">Privacy Policy</a>.</p>
+    <p>This site is not part of the Facebook website or Meta Platforms, Inc., and is not endorsed by Meta in any way.</p>
+    <nav aria-label="Legal">
+      <a href="/privacy/">Privacy Policy</a>
+      <a href="/terms/">Terms</a>
+      <a href="/terms/#sms">SMS Terms</a>
+      <a href="/">TheJustinStark.com</a>
+    </nav>
+    <p style="margin-top:1rem">© 2026 Justin Stark</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var EVENT_START=Date.parse('2026-11-09T18:00:00Z'); // 12:00 PM CT
+  var LIVE_FROM=EVENT_START-5*60*1000;               // banner flips 5 min early
+  var EVENT_END=Date.parse('2026-11-09T19:30:00Z');   // matches /api/boxtop-register
+  var ZOOM_FALLBACK='https://us02web.zoom.us/webinar/register/WN_bjdBGZXbSoOfl3x2_XPqHQ';
+  var PROD=location.hostname==='thejustinstark.com'||location.hostname==='www.thejustinstark.com';
+  var qs=new URLSearchParams(location.search);
+
+  /* ---- clock: ?now=ISO works on preview/local only, for testing the states ---- */
+  var offset=0;
+  if(!PROD&&qs.get('now')){var forced=Date.parse(qs.get('now'));if(!isNaN(forced))offset=forced-Date.now()}
+  function now(){return Date.now()+offset}
+  function state(){var t=now();return t>=EVENT_END?'over':t>=LIVE_FROM?'live':'pre'}
+  var root=document.documentElement;
+  function applyState(){
+    var s=state();
+    root.classList.toggle('is-live',s==='live');
+    root.classList.toggle('is-over',s==='over');
+    return s;
+  }
+
+  /* ---- countdown (minute resolution; quiet for screen readers) ---- */
+  var cdD=document.getElementById('cdD'),cdH=document.getElementById('cdH'),cdM=document.getElementById('cdM');
+  function tick(){
+    var s=applyState();
+    if(s==='pre'){
+      var ms=Math.max(0,EVENT_START-now()),m=Math.floor(ms/60000);
+      cdD.textContent=Math.floor(m/1440);cdH.textContent=Math.floor(m%1440/60);cdM.textContent=m%60;
+    }
+  }
+  tick();setInterval(tick,15000);
+
+  /* ---- attribution: first touch kept 30 days, last touch every visit ---- */
+  var KEYS=['utm_source','utm_medium','utm_campaign','utm_content','utm_term','utm_id','fbclid','gclid'];
+  function store(){try{return window.localStorage}catch(e){return null}}
+  var ls=store(),touch={},has=false;
+  KEYS.forEach(function(k){var v=qs.get(k);if(v){touch[k]=v.slice(0,500);has=true}});
+  touch.landing_page=location.href.slice(0,1000);
+  touch.referrer=(document.referrer||'').slice(0,500);
+  touch.ts=Date.now();
+  var ft=null,lt=null;
+  try{
+    ft=JSON.parse(ls&&ls.getItem('bt.ft')||'null');
+    if(ft&&Date.now()-ft.ts>30*864e5)ft=null;
+    lt=JSON.parse(ls&&ls.getItem('bt.lt')||'null');
+  }catch(e){ft=null;lt=null}
+  if(!ft){ft=touch;try{ls&&ls.setItem('bt.ft',JSON.stringify(ft))}catch(e){}}
+  if(has||!lt){lt=touch;try{ls&&ls.setItem('bt.lt',JSON.stringify(lt))}catch(e){}}
+
+  /* ---- form ---- */
+  var form=document.getElementById('regForm'),btn=document.getElementById('regBtn'),
+      alertBox=document.getElementById('formAlert'),phone=document.getElementById('phone'),
+      consentRow=document.getElementById('consentRow'),consent=document.getElementById('sms_consent');
+  var loadedAt=Date.now(),sending=false,viewed=false;
+
+  function digits(v){return String(v||'').replace(/\D/g,'')}
+  function syncConsent(){
+    var d=digits(phone.value);
+    var show=d.length>=10;
+    consentRow.classList.toggle('on',show);
+    if(!show)consent.checked=false;
+  }
+  phone.addEventListener('input',syncConsent);
+  syncConsent();
+
+  function setErr(name,msg){
+    var el=document.getElementById('err-'+name),input=document.getElementById(name);
+    if(!el)return;
+    el.textContent=msg||'';el.classList.toggle('on',!!msg);
+    if(input){if(msg){input.setAttribute('aria-invalid','true');input.setAttribute('aria-describedby','err-'+name)}else{input.removeAttribute('aria-invalid')}}
+  }
+  function clearErrs(){['first_name','last_name','email','phone'].forEach(function(n){setErr(n,'')});alertBox.classList.remove('on');alertBox.innerHTML=''}
+
+  function validate(over){
+    var ok=true,f=form.elements;
+    if(!f.first_name.value.trim()){setErr('first_name','Enter your first name.');ok=false}
+    if(!f.last_name.value.trim()){setErr('last_name','Enter your last name.');ok=false}
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(f.email.value.trim())){setErr('email','Enter a valid email address.');ok=false}
+    if(!over){var d=digits(f.phone.value);if(d&&!(d.length===10||(d.length===11&&d[0]==='1'))){setErr('phone','Enter a 10-digit US mobile number, or leave it blank.');ok=false}}
+    return ok;
+  }
+
+  function showFallback(url){
+    alertBox.innerHTML='Our sign-up hit a snag. You can finish on Zoom\'s registration page instead: <a href="'+url+'">Register on Zoom</a>';
+    alertBox.classList.add('on');
+  }
+
+  form.addEventListener('focusin',function(){if(!viewed){viewed=true;mtrack('ViewContent',{content_name:'The Box Top Method Launch',content_category:'webinar'})}});
+
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(sending)return;
+    clearErrs();
+    var s=state(),over=s==='over';
+    if(!validate(over)){var bad=form.querySelector('[aria-invalid=true]');if(bad)bad.focus();return}
+    sending=true;btn.disabled=true;
+    var label=btn.innerHTML;btn.textContent=over?'Sending…':'Saving your seat…';
+    var eventId='bt.'+Date.now().toString(36)+'.'+Math.random().toString(36).slice(2,10);
+    var f=form.elements;
+    var payload={
+      action:over?'replay':'register',
+      first_name:f.first_name.value.trim(),last_name:f.last_name.value.trim(),email:f.email.value.trim(),
+      phone:over?'':f.phone.value.trim(),sms_consent:!over&&consent.checked,
+      company:f.company.value,elapsed_ms:Date.now()-loadedAt,event_id:eventId,
+      ft_source:ft.utm_source||'',ft_medium:ft.utm_medium||'',ft_campaign:ft.utm_campaign||'',ft_content:ft.utm_content||'',ft_term:ft.utm_term||'',
+      lt_source:lt.utm_source||'',lt_medium:lt.utm_medium||'',lt_campaign:lt.utm_campaign||'',lt_content:lt.utm_content||'',lt_term:lt.utm_term||'',
+      campaign_id:lt.utm_id||ft.utm_id||'',fbclid:lt.fbclid||ft.fbclid||'',gclid:lt.gclid||ft.gclid||'',
+      landing_page:ft.landing_page||location.href,referrer:ft.referrer||''
+    };
+    var ctrl=('AbortController' in window)?new AbortController():null;
+    var timer=setTimeout(function(){if(ctrl)ctrl.abort()},20000);
+    fetch('/api/boxtop-register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),signal:ctrl?ctrl.signal:undefined})
+      .then(function(r){return r.json().then(function(j){return{status:r.status,body:j}},function(){return{status:r.status,body:{}}})})
+      .then(function(res){
+        clearTimeout(timer);
+        var j=res.body||{};
+        if(res.status===422&&j.errors){
+          Object.keys(j.errors).forEach(function(k){setErr(k,j.errors[k])});
+          var bad=form.querySelector('[aria-invalid=true]');if(bad)bad.focus();
+          throw 'handled';
+        }
+        if(!j.ok){throw{fallback:j.fallback_url||ZOOM_FALLBACK}}
+        try{sessionStorage.setItem('bt.reg',JSON.stringify({
+          action:j.action,zoom:j.zoom||'',first_name:payload.first_name,email:payload.email,
+          join_url:j.join_url||'',fallback_url:j.fallback_url||'',event_id:j.event_id||'',fired:false,ts:Date.now()
+        }))}catch(e){}
+        var q=(j.join_url||j.zoom==='already')?'':(j.fallback_url?'?step=zoom':'');
+        location.href='/theboxtop/launch/thanks/'+(j.action==='replay'?'?replay=1':q);
+      })
+      .catch(function(err){
+        clearTimeout(timer);
+        sending=false;btn.disabled=false;btn.innerHTML=label;
+        if(err==='handled')return;
+        if(over){alertBox.textContent='Something went wrong on our end. Please try again in a minute.';alertBox.classList.add('on');return}
+        showFallback((err&&err.fallback)||ZOOM_FALLBACK);
+      });
+  });
+})();
+</script>
+</body>
+</html>

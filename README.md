@@ -31,11 +31,25 @@ Each spot is marked with a `REPLACE` or `DEMO ONLY` comment in `index.html`:
 
 `/big-table/` is the registration funnel for the Oct 15, 2026 Tupelo event (Coach Micheal Burt, hosted by Justin). Seats: $49 virtual and $149 in-person VIP via GoHighLevel payment links; free general admission registers through the #free-seat form, which posts to the GHL inbound webhook (hidden-iframe POST). Referral links (`/big-table?ref=<code>`) are captured verbatim, persisted first-touch for 30 days per event in localStorage (`ref.big-table`), and submitted with the registration as `referral_code` alongside `event_id: big-table` — the contact ID inside a code belongs to the promoter and never changes attendee fields. A referred registration additionally beacons the same data to the referrer-tracking webhook (`.../webhook-trigger/c7e6d841-...`) so the promoter gets credit. The 1-on-1 price stays hidden pending confirmation — its payment page currently renders $40,000.00. Before promoting: click-test the payment links, submit a test GA registration, and confirm it lands in the GHL workflow.
 
+## The Box Top Method launch funnel
+
+`/theboxtop/launch/` is the ad landing page for the Nov 9, 2026 Box Top Method live Zoom launch (12PM CT). It's in the **Box Top brand kit** (indigo/sky/cream on light ground, self-hosted Montserrat), not the homepage's dark/gold look. Plans, decisions and the review log live in [`docs/theboxtop/`](docs/theboxtop/README.md) (not deployed).
+
+- **One form, registered everywhere:** `POST /api/boxtop-register` adds the person as a Zoom webinar registrant (personal join link), posts contact + attribution + join link to the GHL "BT · Inbound" webhook, and sends Meta `CompleteRegistration` through the Conversions API with hashed identifiers. The thank-you page fires the browser half with the same `event_id`. After 1:30 PM CT Nov 9, sign-ups become replay requests.
+- **Env vars (Vercel):** `ZOOM_ACCOUNT_ID`, `ZOOM_CLIENT_ID`, `ZOOM_CLIENT_SECRET`, `ZOOM_WEBINAR_ID` (numeric), `GHL_BOXTOP_WEBHOOK_URL`, plus the existing `META_CAPI_TOKEN`. Without the Zoom vars the page still works: people land in GHL and the thank-you page sends them to Zoom's own registration page as step 2.
+- **Time states** (pre / live / over) switch on the clock; on preview or local, `?now=2026-11-09T12:10:00-06:00` forces one.
+- **Redirects** (`vercel.json`, all 307): `/theboxtop` → the launch page; `/boxtop` → the launch page tagged `utm_source=vanity`.
+- **Legal:** `/privacy/` (Meta Pixel notice + opt-out, A2P mobile-data language) and `/terms/` (with `#sms` terms) are site-wide.
+- **Tests:** `node --test tests/*.test.js`. **Backfill** of people who registered through the raw Zoom link: `node tools/zoom-registrants-to-ghl.js --dry-run`.
+- `docs/`, `tests/` and `tools/` are excluded from deploys by `.vercelignore`.
+
 ## Meta Pixel (ID 4533371650216162)
 
-Installed on the homepage, `/big-table/`, and `/big-table/thanks/`. Events:
+Installed on the homepage, `/big-table/`, `/big-table/thanks/`, `/theboxtop/launch/`, and `/theboxtop/launch/thanks/`. Events:
 
 - `PageView` — every page
+- `ViewContent` — first form focus on `/theboxtop/launch/`
+- `CompleteRegistration` — Box Top launch registration (server via `/api/boxtop-register`, browser on the thank-you page, shared `event_id`)
 - `Lead` — free-ticket form submit on `/big-table/`, the homepage contact form's thank-you state, and every landing on `/big-table/thanks/`
 - `InitiateCheckout` — any payment-link click on `/big-table/` (with value for the $49/$149 seats)
 - `Purchase` — `/big-table/thanks/?seat=vip` ($149) and `?seat=virtual` ($49); the 1-on-1 fires Lead only until its price is confirmed
