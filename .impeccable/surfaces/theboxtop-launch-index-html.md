@@ -11,7 +11,7 @@ Scope: the paid-ad landing page for The Box Top Method live Zoom launch, Mon Nov
 
 Primary action: the registration form (first, last, email, optional mobile + separate unchecked SMS consent) → `/api/boxtop-register` → Zoom + GHL + Meta CAPI. On phones the form sits directly under the time line so it's in the first screen.
 
-Structure: indigo billing strip → subtitle as H1 → sky title band with stacked wordmark and the real cover tilted off the band → byline + time line (indigo; sky fails contrast) → form card → lede + countdown → the box top problem → Four Corners cards → bonus stack on sky (live attendees only) → who it's for → Justin → FAQ → wordmark closer → footer with education disclaimer, licensed-agent line, Meta Pixel notice. World: the Box Top sub-brand section of DESIGN.md.
+Structure: indigo billing strip → subtitle as H1 → sky title band with stacked wordmark and the real cover tilted off the band → byline + time line (indigo; sky fails contrast) → form card (opens with three checkmark reasons) → lede → "What you get for showing up" (4 numbered payoffs + "Why now?"; phone-only CTA back to the form) → countdown → the box top problem → Four Corners cards → bonus stack on sky (live attendees only) → who it's for → Justin → FAQ → wordmark closer → footer with education disclaimer, licensed-agent line, Meta Pixel notice. World: the Box Top sub-brand section of DESIGN.md.
 
 States by clock (America/Chicago): pre (countdown) · live 11:55 AM to 1:30 PM (banner, "Register and join") · over (replay request; bonuses and time line hidden). `?now=` forces a state off production.
 

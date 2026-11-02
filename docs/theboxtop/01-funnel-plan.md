@@ -62,7 +62,7 @@ Ad → /theboxtop/launch/?utm_…&fbclid=…
 
 Mobile first (Facebook/Instagram in-app browsers). Box Top brand kit. Copy in Justin's voice, no em dashes, canon words only, times west to east. **Justin approves the final copy.**
 
-Order: billing strip → headline (book subtitle) → sky title band with wordmark and the real cover → byline + time line → **form** (phones: right under the time line; desktop: right column) → lede + countdown → the box top problem → the Four Corners → "Show up live. Leave with 5 free tools." → who it's for → meet Justin → FAQ → closer → footer.
+Order: billing strip → headline (book subtitle) → sky title band with wordmark and the real cover → byline + time line → **form**, opening with three checkmarks (free and live with Justin · the Four Corners · 5 free tools when you come live) (phones: right under the time line; desktop: right column) → lede → **"What you get for showing up"** (four payoffs + "Why now?" on old settings and the Retirement Red Zone, plus a sign-up button on phones) → countdown → the box top problem → the Four Corners → "Show up live. Leave with 5 free tools." → who it's for → meet Justin → FAQ → closer → footer.
 
 Review-driven changes, now in the page:
 - The time line stays **indigo at every size** (sky on ground is 2.84:1 and fails AA even at 24px).

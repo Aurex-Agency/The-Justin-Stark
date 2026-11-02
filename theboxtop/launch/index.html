@@ -122,6 +122,21 @@ p{margin:0 0 1em}
 .card{background:var(--surface);padding:1.4rem 1.2rem 1.3rem;border-top:6px solid var(--sky)}
 .card h2{font-size:1.35rem;margin-bottom:.25rem}
 .card .sub{font-size:.92rem;color:var(--muted);margin-bottom:1rem}
+/* reasons to sign up, right at the point of sign-up */
+.perks{list-style:none;margin:.5rem 0 1.1rem;padding:0;display:grid;gap:.4rem}
+.perks li{position:relative;padding-left:1.65rem;font-weight:700;font-size:.92rem;line-height:1.4;color:var(--ink)}
+.perks li::before{content:'';position:absolute;left:0;top:.12em;width:1.05rem;height:1.05rem;background:var(--indigo)}
+.perks li::after{content:'';position:absolute;left:.36rem;top:.26em;width:.28rem;height:.56rem;border:solid var(--cream);border-width:0 2px 2px 0;transform:rotate(45deg)}
+/* what you get + why now, beside the form (under it on phones) */
+.gets{margin-top:1.4rem;background:var(--surface);padding:1.25rem 1.1rem 1.3rem;border-left:6px solid var(--indigo)}
+.gets-h{font-size:1.15rem;margin:0 0 1rem}
+.gets-list{list-style:none;margin:0;padding:0;display:grid;gap:.95rem;counter-reset:g}
+.gets-list li{position:relative;padding-left:2.5rem;font-size:.97rem;line-height:1.5;counter-increment:g}
+.gets-list li::before{content:counter(g);position:absolute;left:0;top:.05rem;width:1.75rem;height:1.75rem;background:var(--indigo);color:var(--cream);font-weight:900;font-size:.92rem;display:flex;align-items:center;justify-content:center}
+.gets-list b{display:block;color:var(--indigo);font-weight:800;text-transform:uppercase;font-size:.86rem;letter-spacing:.03em;margin-bottom:.15rem}
+.why{margin:1.15rem 0 0;padding-top:1rem;border-top:2px solid var(--ground);font-size:.97rem;line-height:1.55}
+.why b{color:var(--indigo);text-transform:uppercase;letter-spacing:.04em;font-size:.86rem;font-weight:800}
+.gets-cta{margin-top:1.15rem}
 .field{margin-bottom:.85rem}
 .row2{display:grid;gap:0 .75rem;grid-template-columns:1fr}
 @media (min-width:340px){.row2{grid-template-columns:1fr 1fr}}
@@ -222,6 +237,8 @@ footer nav{display:flex;flex-wrap:wrap;gap:.4rem 1.4rem;margin-top:1.2rem}
   .book-desk{display:block;position:absolute;right:calc(var(--gut) + 56px);top:-14px;width:178px;transform:rotate(15deg);filter:drop-shadow(10px 18px 18px rgba(30,35,71,.34));z-index:3;pointer-events:none}
   .hero-grid{grid-template-columns:1fr 430px;grid-template-rows:auto 1fr;grid-template-areas:"meta form" "more form";gap:0 3rem;align-items:start;padding-bottom:4rem}
   .hero-more .lede:first-child{margin-top:1rem}
+  .gets{padding:1.4rem 1.5rem 1.5rem}
+  .gets-cta{display:none} /* the form is right beside it on desktop */
   .hero-form{margin-top:-112px;position:relative;z-index:2}
   .details{font-size:1.5rem} /* stays indigo: sky on ground is 2.84:1 */
   .countdown .unit{min-width:5rem}
@@ -267,6 +284,17 @@ footer nav{display:flex;flex-wrap:wrap;gap:.4rem 1.4rem;margin-top:1.2rem}
     <div class="hero-more">
       <p class="lede hide-over"><strong>Most people don't have a money problem. They have a clarity problem.</strong> Join me live on Zoom for the launch of my new book, and I'll walk you through the four corners of your retirement picture.</p>
       <p class="lede only-over"><strong>Most people don't have a money problem. They have a clarity problem.</strong> The live launch is over, but you can still watch it. Tell me where to send the replay.</p>
+      <section class="gets hide-over" aria-labelledby="gets-h">
+        <h2 class="gets-h" id="gets-h">What you get for showing up</h2>
+        <ol class="gets-list">
+          <li><b>Your whole picture, corner by corner</b>I'll walk through all four corners live: where your money sits, what you want it to do, what it costs in tax, and how it works.</li>
+          <li><b>Your biggest gap, in plain sight</b>Don't start with a product. Start with the picture, then let the gap point to the next step.</li>
+          <li><b>Straight answers to your questions</b>No jargon, no sales pitch. Bring your questions, and bring your spouse.</li>
+          <li><b>5 free tools, only for people who come live</b>The Box Top Training, the Legacy Trust Finder, the Box Top Quiz, and two fillable planning packets for your family and your business.</li>
+        </ol>
+        <p class="why"><b>Why now?</b> A lot of folks are running their retirement on old settings: a plan built at 40 that nobody's looked at since. If you're within about five years of retirement, on either side, you're in the Retirement Red Zone. That's when the picture matters most.</p>
+        <a class="btn gets-cta" href="#register"><span class="hide-live">Save my free seat</span><span class="only-live">Register and join</span></a>
+      </section>
       <div class="hide-over" id="cdWrap">
         <p class="label countdown-label hide-live">We go live in</p>
         <div class="countdown hide-live" id="countdown" aria-live="off">
@@ -282,7 +310,11 @@ footer nav{display:flex;flex-wrap:wrap;gap:.4rem 1.4rem;margin-top:1.2rem}
         <h2 class="hide-over hide-live">Save your free seat</h2>
         <h2 class="only-live">Register and join now</h2>
         <h2 class="only-over">Send me the replay</h2>
-        <p class="sub hide-over">Free. Live on Zoom. Your personal join link comes by email.</p>
+        <ul class="perks hide-over" aria-label="What you get">
+          <li>Free, live on Zoom with Justin</li>
+          <li>The Four Corners, step by step</li>
+          <li>5 free tools when you come live</li>
+        </ul>
         <p class="sub only-over">Free. We'll email you the link.</p>
 
         <div class="row2">
@@ -322,7 +354,7 @@ footer nav{display:flex;flex-wrap:wrap;gap:.4rem 1.4rem;margin-top:1.2rem}
           <span class="only-live">Register and join</span>
           <span class="only-over">Send me the replay</span>
         </button>
-        <p class="fine">Education only. No sales pitch. We don't sell or share your information. <a href="/privacy/">Privacy Policy</a></p>
+        <p class="fine"><span class="hide-over">Your personal Zoom link comes by email. </span>Education only. No sales pitch. We don't sell or share your information. <a href="/privacy/">Privacy Policy</a></p>
         <div class="form-alert" id="formAlert" role="alert"></div>
       </form>
     </div>
