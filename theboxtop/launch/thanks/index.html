@@ -81,9 +81,33 @@ p{margin:0 0 1em}
 .thanks-note.on{display:block}
 .list{margin:0;padding-left:1.2rem}
 .list li{margin-bottom:.4rem}
+/* Justin's video. Phones: a full-bleed sky field right under the Zoom step.
+   Desktop: the right column, risen into the title band, where the form sat on the landing page. */
+.watch{margin:1.6rem calc(-1 * var(--gut)) 0;padding:1.3rem var(--gut) 1.6rem;background:var(--sky);border-top:3px solid var(--indigo);border-bottom:3px solid var(--indigo)}
+.watch-h{color:var(--cream);font-size:1.35rem;letter-spacing:.02em;text-align:center;text-wrap:balance;margin:0 0 1rem}
+.watch-frame{max-width:360px;margin:0 auto;background:var(--indigo)}
+wistia-player[media-id='vswi0wy98t']:not(:defined){background:center / contain no-repeat url('https://fast.wistia.com/embed/medias/vswi0wy98t/swatch');display:block;filter:blur(5px);padding-top:177.78%}
 .hide{display:none!important}
 footer{color:var(--muted);font-size:.8rem;padding:2.4rem 0 3rem;line-height:1.55}
 footer nav{display:flex;gap:1.2rem;flex-wrap:wrap;margin-top:.8rem}
+
+/* ---------- desktop ---------- */
+@media (min-width:960px){
+  :root{--gut:32px}
+  .wrap{max-width:1080px}
+  .top{padding-right:calc(400px + 3.5rem)}
+  .band .wrap{min-height:150px}
+  .wm .a{font-size:1.6rem}
+  .wm .b{font-size:3.3rem}
+  .hero-grid{display:grid;grid-template-columns:1fr 400px;grid-template-areas:"steps watch" "more watch";gap:0 3.5rem;align-items:start}
+  .hero-grid:has(#videoPanel.hide){grid-template-columns:1fr;grid-template-areas:"steps" "more"}
+  .steps{grid-area:steps}
+  .steps-more{grid-area:more}
+  .watch{grid-area:watch;position:relative;z-index:2;margin:-19rem 0 0;padding:1.4rem 1.4rem 1.6rem;border:3px solid var(--indigo);box-shadow:12px 22px 36px -18px rgba(30,35,71,.45)}
+  .watch-frame{max-width:none}
+  .after{display:grid;grid-template-columns:1fr 1fr;gap:0 1.2rem;align-items:start}
+  .after #surveyPanel{grid-row:span 2}
+}
 </style>
 </head>
 <body>
@@ -98,7 +122,8 @@ footer nav{display:flex;gap:1.2rem;flex-wrap:wrap;margin-top:.8rem}
 
   <div class="band" aria-hidden="true"><div class="wrap"><p class="wm"><span class="a">The</span><span class="b">Box Top</span><span class="a">Method</span></p></div></div>
 
-  <div class="wrap">
+  <div class="wrap hero-grid">
+    <div class="steps">
     <!-- A: registered, personal join link in hand -->
     <section class="panel hide" id="joinPanel" aria-labelledby="join-h">
       <h2 id="join-h">Your personal Zoom link</h2>
@@ -117,7 +142,7 @@ footer nav{display:flex;gap:1.2rem;flex-wrap:wrap;margin-top:.8rem}
     <!-- C: no session (direct visit) -->
     <section class="panel hide" id="genericPanel">
       <h2>Check your email</h2>
-      <p>Your personal Zoom link is in your confirmation email from Justin and from Zoom (no-reply@zoom.us). Can't find it? Check spam or promotions, or <a href="/theboxtop/launch/#register">register again</a> with the same email and we'll resend it.</p>
+      <p>Zoom emails your personal link (from no-reply@zoom.us) once you've confirmed your seat on their page. Haven't done that yet? It takes 20 seconds: <a href="https://us02web.zoom.us/webinar/register/WN_bjdBGZXbSoOfl3x2_XPqHQ" rel="noopener">confirm your seat on Zoom</a>. Can't find Zoom's email? Check spam or promotions.</p>
     </section>
 
     <!-- D: replay request -->
@@ -125,7 +150,17 @@ footer nav{display:flex;gap:1.2rem;flex-wrap:wrap;margin-top:.8rem}
       <h2>We'll send the replay</h2>
       <p>Watch your inbox for an email from Justin with the replay link. While you wait, jot down your pieces: every account, policy and income source you've got. You'll want that list when you watch.</p>
     </section>
+    </div>
 
+    <!-- Justin's welcome video (Wistia, vertical 9:16) -->
+    <section class="watch" id="videoPanel" aria-labelledby="video-h">
+      <h2 class="watch-h" id="video-h">A quick word from Justin</h2>
+      <div class="watch-frame"><wistia-player media-id="vswi0wy98t" aspect="0.5625"></wistia-player></div>
+    </section>
+    <script src="https://fast.wistia.com/player.js" async></script>
+    <script src="https://fast.wistia.com/embed/vswi0wy98t.js" async type="module"></script>
+
+    <div class="steps-more">
     <section class="panel" id="calPanel" aria-labelledby="cal-h">
       <h2 id="cal-h">Put it on your calendar</h2>
       <div class="cal">
@@ -134,7 +169,10 @@ footer nav{display:flex;gap:1.2rem;flex-wrap:wrap;margin-top:.8rem}
         <a class="btn ghost" id="calOutlook" href="#" target="_blank" rel="noopener">Outlook</a>
       </div>
     </section>
+    </div>
+  </div>
 
+  <div class="wrap after">
     <section class="panel" id="surveyPanel" aria-labelledby="survey-h">
       <h2 id="survey-h">One quick question: which sounds most like you?</h2>
       <p class="small">So Justin can speak to what matters to you. One tap.</p>
@@ -194,7 +232,7 @@ footer nav{display:flex;gap:1.2rem;flex-wrap:wrap;margin-top:.8rem}
   if(replay){
     $('kicker').textContent="You're on the list";
     $('headline').textContent='Replay coming your way.';
-    hide('when');show('replayPanel');hide('calPanel');hide('sharePanel');
+    hide('when');show('replayPanel');hide('calPanel');hide('sharePanel');hide('videoPanel');
   }else if(joinUrl){
     show('joinPanel');
     $('joinBtn').href=joinUrl;
@@ -232,7 +270,7 @@ footer nav{display:flex;gap:1.2rem;flex-wrap:wrap;margin-top:.8rem}
 
   /* ---- calendar links (personal link goes in the event when we have it) ---- */
   var title='The Box Top Method: Live Zoom Launch with Justin Stark';
-  var desc=(joinUrl?'Your personal Zoom link: '+joinUrl:'Your personal Zoom link is in your confirmation email from Justin and from Zoom.')+'\n\nBring your questions and your spouse.\nhttps://thejustinstark.com/theboxtop/launch/';
+  var desc=(joinUrl?'Your personal Zoom link: '+joinUrl:'Your personal Zoom link is in Zoom\'s confirmation email (no-reply@zoom.us).')+'\n\nBring your questions and your spouse.\nhttps://thejustinstark.com/theboxtop/launch/';
   var loc=joinUrl||'Zoom';
   $('calGoogle').href='https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(title)+'&dates='+START+'/'+END+'&details='+encodeURIComponent(desc)+'&location='+encodeURIComponent(loc);
   $('calOutlook').href='https://outlook.live.com/calendar/0/deeplink/compose?path=%2Fcalendar%2Faction%2Fcompose&rru=addevent&subject='+encodeURIComponent(title)+'&startdt=2026-11-09T18%3A00%3A00Z&enddt=2026-11-09T19%3A30%3A00Z&body='+encodeURIComponent(desc)+'&location='+encodeURIComponent(loc);
