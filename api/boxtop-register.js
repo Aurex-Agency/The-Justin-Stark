@@ -32,14 +32,48 @@ const EVENT_NAME = 'The Box Top Method Launch';
 // until the webinar is planned to end; after that, sign-ups are replay requests.
 const EVENT_START = Date.parse('2026-11-09T18:00:00Z');
 const EVENT_END = Date.parse('2026-11-09T19:30:00Z');
+// Phases GHL uses to pick the right first email, and the SMS-cap cutoff.
+const DAY_START = Date.parse('2026-11-09T06:00:00Z');      // Mon Nov 9, 12:00 AM CT
+const LIVE_FROM = Date.parse('2026-11-09T17:55:00Z');      // 11:55 AM CT
+const REPLAY_END = Date.parse('2026-11-17T06:00:00Z');     // replay window closes end of Mon Nov 16 CT
+// Registrations before Sun Nov 8, 12 PM CT may get a confirmation text; later ones would
+// push someone past 3 texts in 24 hours (FL/OK/MD), so GHL skips it for them.
+const SMS_CONFIRM_CUTOFF = Date.parse('2026-11-08T18:00:00Z');
+// Area codes our CT send windows can't serve between 8 AM and 8 PM local:
+// Puerto Rico, USVI, Guam, Northern Marianas, American Samoa, and Canada.
+const NO_SMS_AREAS = new Set(['787', '939', '340', '671', '670', '684',
+  '204', '226', '236', '249', '250', '257', '263', '289', '306', '343', '354', '365', '367', '368', '382', '387',
+  '403', '416', '418', '428', '431', '437', '438', '450', '460', '468', '474', '506', '514', '519', '548', '579',
+  '581', '584', '587', '604', '613', '639', '647', '672', '683', '705', '709', '742', '753', '778', '780', '782',
+  '807', '819', '825', '867', '873', '879', '902', '905', '942']);
 const ZOOM_FALLBACK_URL = 'https://us02web.zoom.us/webinar/register/WN_bjdBGZXbSoOfl3x2_XPqHQ';
-const CONSENT_VERSION = 'bt-sms-v1';
-// Must match the checkbox label on /theboxtop/launch/ word for word (proof of consent).
+const CONSENT_VERSION = 'bt-sms-v2';
+// Both must match the checkbox labels on /theboxtop/launch/ word for word (proof of consent).
+// Two separate optional consents, as A2P expects: event texts (non-marketing) and marketing.
 const CONSENT_TEXT =
-  'Yes, text me reminders about The Box Top Method launch from Justin Stark / Pontotoc Insurance Agency. ' +
+  'Yes, text me my confirmation and reminders for The Box Top Method launch from Justin Stark / Pontotoc Insurance Agency. ' +
   'Up to 5 messages. Msg & data rates may apply. Reply STOP to opt out, HELP for help. ' +
   'Consent is not a condition of registration.';
+const MARKETING_CONSENT_TEXT =
+  'Yes, text me occasional updates, invitations and offers from Justin Stark / Pontotoc Insurance Agency, like new Box Top classes and events. ' +
+  'Msg frequency varies. Msg & data rates may apply. Reply STOP to opt out, HELP for help. ' +
+  'Consent is not a condition of registration.';
 const SEGMENTS = ['retired', 'red-zone', 'planning', 'business-owner', 'pro'];
+
+function phoneAreaFlag(e164) {
+  if (!e164) return '';
+  const area = e164.slice(2, 5);
+  if (area === '808') return 'hawaii';
+  return NO_SMS_AREAS.has(area) ? 'no-sms' : '';
+}
+
+function eventPhase(t) {
+  if (t < DAY_START) return 'pre';
+  if (t < LIVE_FROM) return 'today';
+  if (t < EVENT_END) return 'live';
+  if (t < REPLAY_END) return 'post';
+  return 'closed';
+}
 const TIMEOUT_MS = 5000;
 const GRAPH_VERSION = 'v25.0';
 
@@ -253,7 +287,9 @@ module.exports = async (req, res) => {
     const rawPhone = str(body.phone, 30);
     if (rawPhone) {
       p.phone = normalizePhone(rawPhone);
-      if (!p.phone) errors.phone = 'Enter a 10-digit US mobile number, or leave it blank.';
+      if (!p.phone) errors.phone = 'Enter a 10-digit US mobile number.';
+    } else if (action === 'register' && Date.now() <= EVENT_END) {
+      errors.phone = 'Enter your mobile number.'; // required for registration; replay requests don't ask
     }
   } else {
     p.segment = SEGMENTS.includes(str(body.segment, 30)) ? str(body.segment, 30) : '';
@@ -264,7 +300,12 @@ module.exports = async (req, res) => {
   const now = Date.now();
   if (action === 'register' && now > EVENT_END) action = 'replay';
 
-  const smsConsent = action !== 'profile' && !!p.phone && (body.sms_consent === true || body.sms_consent === 'yes');
+  const yes = (v) => v === true || v === 'yes';
+  const rawSmsConsent = action !== 'profile' && !!p.phone && yes(body.sms_consent);
+  const areaFlag = phoneAreaFlag(p.phone);
+  // Numbers we can't text inside 8 AM to 8 PM local get no texts at all.
+  const smsConsent = rawSmsConsent && areaFlag !== 'no-sms';
+  const smsMarketing = action !== 'profile' && !!p.phone && areaFlag !== 'no-sms' && yes(body.sms_marketing_consent);
   const eventId = /^[A-Za-z0-9_.-]{8,64}$/.test(str(body.event_id, 64))
     ? str(body.event_id, 64)
     : 'bt-' + crypto.randomBytes(8).toString('hex');
@@ -301,13 +342,20 @@ module.exports = async (req, res) => {
     segment: p.segment,
     sms_consent: action === 'profile' ? '' : (smsConsent ? 'yes' : 'no'),
     sms_consent_at: smsConsent ? nowIso : '',
-    consent_version: smsConsent ? CONSENT_VERSION : '',
+    sms_marketing_consent: action === 'profile' ? '' : (smsMarketing ? 'yes' : 'no'),
+    sms_marketing_consent_at: smsMarketing ? nowIso : '',
+    consent_version: smsConsent || smsMarketing ? CONSENT_VERSION : '',
     consent_text: smsConsent ? CONSENT_TEXT : '',
-    zoom_status: action === 'register' ? (zoom.status === 'registered' || zoom.status === 'already' ? zoom.status : 'failed') : '',
+    marketing_consent_text: smsMarketing ? MARKETING_CONSENT_TEXT : '',
+    // registered | already | skipped (no Zoom credentials yet: Plan B, no alert) | failed (alert)
+    zoom_status: action === 'register' ? (['registered', 'already', 'skipped'].includes(zoom.status) ? zoom.status : 'failed') : '',
     zoom_join_url: zoom.join_url || '',
     zoom_registrant_id: zoom.registrant_id || '',
     zoom_fallback_url: action === 'register' && zoom.status !== 'registered' && zoom.status !== 'already' ? ZOOM_FALLBACK_URL : '',
     registered_at: action === 'profile' ? '' : nowIso,
+    event_phase: action === 'profile' ? '' : eventPhase(now),
+    sms_confirm_ok: smsConsent && now < SMS_CONFIRM_CUTOFF ? 'yes' : 'no',
+    phone_area_flag: areaFlag,
     source_bucket: sourceBucket(p.lt_source || p.ft_source, p.lt_medium || p.ft_medium),
     ft_source: p.ft_source, ft_medium: p.ft_medium, ft_campaign: p.ft_campaign, ft_content: p.ft_content, ft_term: p.ft_term,
     lt_source: p.lt_source, lt_medium: p.lt_medium, lt_campaign: p.lt_campaign, lt_content: p.lt_content, lt_term: p.lt_term,
@@ -346,4 +394,4 @@ module.exports = async (req, res) => {
 };
 
 // Exposed for tests only.
-module.exports._internals = { normalizePhone, sourceBucket, EVENT_START, EVENT_END };
+module.exports._internals = { normalizePhone, sourceBucket, phoneAreaFlag, eventPhase, EVENT_START, EVENT_END };

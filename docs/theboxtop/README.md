@@ -7,6 +7,8 @@ Justin Stark's book *The Box Top Method* launches with a live Zoom on **Monday, 
 | [01-funnel-plan.md](01-funnel-plan.md) | Ad landing page, thank-you page, registration function, tracking | Approved Nov 1 · **built** |
 | [02-ghl-plan.md](02-ghl-plan.md) | GHL fields, tags, pipeline, workflows, email/SMS calendar, attribution | Approved · Kalob builds in GHL |
 | [03-website-plan.md](03-website-plan.md) | `/theboxtop/` site roadmap, Nov 9 bonus delivery | Approved in principle |
+| [04-ghl-build.md](04-ghl-build.md) | GHL build sheet for the shared PIA / Justin Stark account: fences, "Box Top" fields, pipeline, calendar, 9 workflows, launch-day steps, tests | **Awaiting Kalob's approval** · reviewed Nov 2 |
+| [05-ghl-messages.md](05-ghl-messages.md) | Every email (M01 to M17) and text (S01 to S06) | Awaiting Justin's approval |
 
 ## The clock (realistic)
 

@@ -62,7 +62,7 @@ Ad → /theboxtop/launch/?utm_…&fbclid=…
 
 Mobile first (Facebook/Instagram in-app browsers). Box Top brand kit. Copy in Justin's voice, no em dashes, canon words only, times west to east. **Justin approves the final copy.**
 
-Order: billing strip → headline (book subtitle) → sky title band with wordmark and the real cover → byline + time line → **form** (phones: right under the time line; desktop: right column) → lede + countdown → the box top problem → the Four Corners → "Show up live. Leave with 5 free tools." → who it's for → meet Justin → FAQ → closer → footer.
+Order: billing strip → headline (book subtitle) → sky title band with wordmark and the real cover → byline + time line → **form**, opening with three checkmarks (free and live with Justin · the Four Corners · 5 free tools when you come live) (phones: right under the time line; desktop: right column) → lede → **"What you get for showing up"** (four payoffs + "Why now?" on old settings and the Retirement Red Zone, plus a sign-up button on phones) → countdown → the box top problem → the Four Corners → "Show up live. Leave with 5 free tools." → who it's for → meet Justin → FAQ → closer → footer.
 
 Review-driven changes, now in the page:
 - The time line stays **indigo at every size** (sky on ground is 2.84:1 and fails AA even at 24px).
@@ -81,11 +81,15 @@ Time states run off the clock (America/Chicago), with a `?now=` override on prev
 
 ## 6. Form
 
-First name, last name, email (required); mobile (optional). The SMS checkbox appears only after a full 10-digit number and is unchecked by default. Its label, which the server also stores in GHL as proof of consent (a test enforces they match):
+First name, last name, email and **mobile phone are required** (changed Nov 2 at Kalob's request; replay requests after the event still ask only for name and email). Below the phone field, **two separate, optional, unchecked SMS consents**, always visible. A2P expects non-marketing and marketing consent to be separate. The server stores each label in GHL as proof of consent, and a test enforces that they match word for word:
 
-> Yes, text me reminders about The Box Top Method launch from Justin Stark / Pontotoc Insurance Agency. Up to 5 messages. Msg & data rates may apply. Reply STOP to opt out, HELP for help. Consent is not a condition of registration. See our Privacy Policy and SMS Terms.
+> ☐ Yes, text me my confirmation and reminders for The Box Top Method launch from Justin Stark / Pontotoc Insurance Agency. Up to 5 messages. Msg & data rates may apply. Reply STOP to opt out, HELP for help. Consent is not a condition of registration.
+>
+> ☐ Yes, text me occasional updates, invitations and offers from Justin Stark / Pontotoc Insurance Agency, like new Box Top classes and events. Msg frequency varies. Msg & data rates may apply. Reply STOP to opt out, HELP for help. Consent is not a condition of registration.
+>
+> See our Privacy Policy and SMS Terms.
 
-If A2P isn't already approved Monday (02 §1), remove the phone field and checkbox for this launch.
+The second box also covers what the first can't: texting about Box Top Reviews and future classes after the launch. If A2P isn't approved by Monday noon (02 §1), hide both boxes for this launch. The phone stays required for calls and records.
 
 ## 7. Function settings (Vercel → Environment Variables)
 
