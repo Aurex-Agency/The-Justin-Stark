@@ -17,6 +17,24 @@
         ],
         "createdAt": "2026-08-03T21:34:25.643Z",
         "reason": "User explicitly requested a gold glow animation on button hover"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "montserrat",
+        "createdAt": "2026-11-02T23:07:52.741Z",
+        "reason": "DESIGN.md 'Sub-brand: The Box Top Method' specifies Montserrat only for /theboxtop/ pages"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "#fdfadd",
+        "createdAt": "2026-11-02T23:07:52.837Z",
+        "reason": "DESIGN.md 'Sub-brand: The Box Top Method' token: cream #FDFADD"
+      },
+      {
+        "rule": "overused-font",
+        "value": "montserrat",
+        "createdAt": "2026-11-02T23:09:46.743Z",
+        "reason": "DESIGN.md 'Sub-brand: The Box Top Method' specifies Montserrat only, from the book's brand kit"
       }
     ]
   }
