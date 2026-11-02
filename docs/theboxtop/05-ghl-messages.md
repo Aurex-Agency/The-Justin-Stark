@@ -38,6 +38,44 @@ Voice rules (Brand Guide): Justin across a kitchen table. Short sentences, contr
 > See you Monday,
 > Justin
 
+### M01T · same day (registered Mon Nov 9 before 11:55 AM)
+**Subject:** You're in. We go live at noon Central today.
+**Preview:** Your link is inside.
+
+> {{contact.first_name}}, you're in.
+>
+> We go live **today at 10AM PT · 11AM MT · 12PM CT · 1PM ET**.
+>
+> [ JOIN THE LIVE LAUNCH ] → {{contact.bt_zoom_join_url}}
+>
+> On a phone? Grab the free Zoom app now so it's one tap at noon. Bring your questions, and bring your spouse. The five free tools are for everyone who comes live.
+>
+> Justin
+
+### M01L · registered while we're live
+**Subject:** We're live right now. Here's your link.
+**Preview:** Jump in.
+
+> {{contact.first_name}}, we're live right now. Come on in:
+>
+> [ JOIN NOW ] → {{contact.bt_zoom_join_url}}
+>
+> Justin
+
+### M01Z · Plan B or Zoom error (no personal link yet)
+**Subject:** One more step to save your seat
+**Preview:** Finish on Zoom so it can send your personal link.
+
+> {{contact.first_name}},
+>
+> We've got your info. One more step: Zoom needs you to confirm on their page so it can send your personal join link. It takes about 20 seconds.
+>
+> [ FINISH ON ZOOM ] → {{custom_values.bt_zoom_register_url}}
+>
+> The live launch is **Monday, November 9 · 10AM PT · 11AM MT · 12PM CT · 1PM ET**. If we're already live when you read this, that same button gets you in.
+>
+> Justin
+
 ### M02 · Wed Nov 4, 10 AM · bonus stack
 **Subject:** What you get for showing up Monday
 **Preview:** Five free tools, only for the folks who come live.
@@ -99,7 +137,7 @@ Voice rules (Brand Guide): Justin across a kitchen table. Short sentences, contr
 
 > {{contact.first_name}}, today's the day.
 >
-> The Box Top Method is out, and we go live at **10AM PT · 11AM MT · 12PM CT · 1PM ET**.
+> The Box Top Method launches today, and we go live at **10AM PT · 11AM MT · 12PM CT · 1PM ET**.
 >
 > [ JOIN THE LIVE LAUNCH ] → {{contact.bt_zoom_join_url}}
 >
@@ -144,6 +182,8 @@ Voice rules (Brand Guide): Justin across a kitchen table. Short sentences, contr
 >
 > And if you'd like the book itself: {{custom_values.bt_book_url}}
 >
+> *(Build note: delete this line if BT Book URL is still empty on Nov 9.)*
+>
 > Justin
 
 ### M09 · Wed Nov 11, 10 AM · attended: quiz
@@ -175,12 +215,12 @@ Voice rules (Brand Guide): Justin across a kitchen table. Short sentences, contr
 > Justin
 
 ### M11 · Mon Nov 16, 10 AM · attended: last call
-**Subject:** Last call for November Box Top Reviews
-**Preview:** A few spots left this month.
+**Subject:** Box Top Reviews for launch folks, through November
+**Preview:** I've set aside time this month.
 
 > {{contact.first_name}},
 >
-> Quick note. I'm holding a few Box Top Reviews for folks from the launch this month, and they're filling up. If you've been meaning to book one, this is the week.
+> Quick note. I've set aside time through November for Box Top Reviews with folks from the launch. If you've been meaning to book one, now's a good time.
 >
 > [ BOOK A BOX TOP REVIEW ] → {{custom_values.bt_review_url}}
 >
@@ -245,19 +285,46 @@ Same as M10, with one opening line swapped: "Whether or not you've finished the 
 >
 > Justin
 
+### M17 · replay requested after the window closed (Nov 17 on)
+**Subject:** The launch replay has closed
+**Preview:** Here's where to go from here.
+
+> {{contact.first_name}},
+>
+> Thanks for reaching out. The launch replay window has closed, but the ideas aren't going anywhere.
+>
+> The book is here: {{custom_values.bt_book_url}}
+>
+> And if you'd like to look at your own picture with me, one on one: [ BOOK A BOX TOP REVIEW ] → {{custom_values.bt_review_url}}
+>
+> Justin
+
 ---
 
 ## SMS
 
-Event texts (S01 to S05) go only to `bt-sms-optin`; marketing (S06) goes only to `bt-sms-marketing-optin`. Max 3 per person in any 24 hours, 8 AM to 8 PM their time (the workflow sheet's waits enforce this). Each is about 160 characters or less, except where the link is long.
+**Rules:**
+- **Who gets them:** event texts (S01 to S05) go only to `bt-sms-optin`; S06 goes only to `bt-sms-marketing-optin`.
+- **How many:** at most 3 per person in any rolling 24 hours, and 5 event texts in total, which matches "Up to 5 messages" in the consent.
+- **When:** only between 8 AM and 8 PM the recipient's time. The waits in the build sheet enforce this, and Puerto Rico, Virgin Islands, Guam and Canadian numbers are never texted.
+- **What every text includes:**
+  - It opens with the brand registered for A2P, assumed here to be "Pontotoc Insurance Agency". Match the Trust Center name exactly.
+  - It carries STOP, because for some people (late registrants, Hawaii numbers) any one of these can be the first text they get.
 
-| # | When | Text |
+| # | When (CT) | Text |
 |---|---|---|
-| S01 | Confirmation (window 11 AM to 6:55 PM CT, only if registered before Nov 8 noon) | `Justin Stark: you're in for The Box Top Method live launch, Mon Nov 9 at 12PM CT. Your link: {{contact.bt_zoom_join_url}} Reply STOP to opt out, HELP for help.` |
-| S02 | Sun Nov 8, 12 PM | `Justin Stark: tomorrow at noon Central we go live. Bring your questions and your spouse. Your link: {{contact.bt_zoom_join_url}}` |
-| S03 | Mon Nov 9, 11 AM (not Hawaii) | `Justin Stark: one hour till we go live. Your link: {{contact.bt_zoom_join_url}}` |
-| S04 | Mon Nov 9, 12:02 PM | `Justin Stark: we're live right now. Hop in: {{contact.bt_zoom_join_url}}` |
-| S05 | Nov 9, 6 PM (no-shows and replay requests) | `Justin Stark: sorry we missed you at the live launch. Here's the replay: {{trigger_link.bt_replay}} Reply STOP to opt out.` |
-| S06 | Nov 13 (marketing opt-in, window 1 PM to 6:55 PM CT so Hawaii is after 9 AM) | `Justin Stark: want me to look at your retirement picture with you? Book a free Box Top Review: {{custom_values.bt_review_url}} Reply STOP to opt out.` |
+| S01 | Confirmation. Window 11 AM to 6:55 PM, only if registered before Sun Nov 8 at noon, not Hawaii | `Justin Stark (Pontotoc Insurance Agency): you're in for The Box Top Method live launch, Mon Nov 9 at 12PM CT. Your link: {{contact.bt_zoom_join_url}} Reply STOP to opt out, HELP for help.` |
+| S02 | Sun Nov 8, 12 PM (Hawaii 12:05 PM) | `Justin Stark (Pontotoc Insurance Agency): tomorrow at noon Central we go live. Bring your questions and your spouse. Your link: {{contact.bt_zoom_join_url}} Reply STOP to opt out.` |
+| S03 | Mon Nov 9, 11 AM, not Hawaii | `Justin Stark (Pontotoc Insurance Agency): one hour till we go live. Your link: {{contact.bt_zoom_join_url}} Reply STOP to opt out.` |
+| S04 | Mon Nov 9, 12:02 PM | `Justin Stark (Pontotoc Insurance Agency): we're live right now. Hop in: {{contact.bt_zoom_join_url}} Reply STOP to opt out.` |
+| S05 | When the replay is released; window 12 to 6:55 PM | `Justin Stark (Pontotoc Insurance Agency): sorry we missed you at the live launch. Here's the replay: {{trigger_link.bt_replay}} Reply STOP to opt out.` |
+| S06 | Fri Nov 13, window 1 to 6:55 PM, marketing opt-in only | `Justin Stark (Pontotoc Insurance Agency): want me to look at your retirement picture with you? Book a free Box Top Review: {{custom_values.bt_review_url}} Reply STOP to opt out.` |
 
-The replay text's link: use GHL's trigger-link merge tag from the trigger link's settings (the exact tag GHL shows), or the plain `{{custom_values.bt_replay_url}}` if trigger links aren't available in SMS.
+**Notes:**
+- **Replay link in S05:** use the exact trigger-link key GHL shows for "BT Replay" in place of `{{trigger_link.bt_replay}}`. If that key doesn't work in SMS, use `{{custom_values.bt_replay_url}}`.
+- **Length and cost:** the brand prefix and a full Zoom link push most of these to 2 or 3 SMS segments. That's fine; it costs a little more per text.
+
+**Text count for one person who registered early (Nov 4):**
+- **Event texts:** S01 (Nov 4), S02 (Nov 8, 12 PM), S03 (Nov 9, 11 AM), S04 (Nov 9, 12:02 PM), and S05 (Nov 9 evening, only if they missed the live).
+- **Busiest 24 hours:** S03, S04 and S05, which is 3.
+- **Marketing text:** S06 (Nov 13), only if they checked box 2.

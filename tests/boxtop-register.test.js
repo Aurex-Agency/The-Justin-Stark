@@ -7,6 +7,15 @@ const path = require('path');
 
 const MOD = path.join(__dirname, '..', 'api', 'boxtop-register.js');
 
+// Pin the clock: the function's behavior depends on the date (registration turns into
+// replay after the event), so tests must not depend on when they run.
+const REAL_NOW = Date.now;
+let FIXED_NOW = Date.parse('2026-11-03T15:00:00Z'); // Tue Nov 3, 9 AM CT
+Date.now = () => FIXED_NOW;
+function at(iso) { FIXED_NOW = Date.parse(iso); }
+test.afterEach(() => at('2026-11-03T15:00:00Z'));
+test.after(() => { Date.now = REAL_NOW; });
+
 function load(env) {
   delete require.cache[require.resolve(MOD)];
   for (const k of ['ZOOM_ACCOUNT_ID', 'ZOOM_CLIENT_ID', 'ZOOM_CLIENT_SECRET', 'ZOOM_WEBINAR_ID', 'GHL_BOXTOP_WEBHOOK_URL', 'META_CAPI_TOKEN', 'META_TEST_EVENT_CODE']) delete process.env[k];
@@ -129,6 +138,9 @@ test('register: no Zoom credentials yet → skipped, GHL captures, fallback show
   assert.equal(r.json.zoom, 'failed');
   assert.ok(r.json.fallback_url);
   assert.equal(calls.length, 1);
+  // GHL hears "skipped", not "failed", so Plan B doesn't fire a manual-fix alert per registrant
+  assert.equal(calls[0].body.zoom_status, 'skipped');
+  assert.match(calls[0].body.zoom_fallback_url, /WN_/);
 });
 
 test('register: expired Zoom token is refreshed once', async () => {
@@ -251,4 +263,62 @@ test('both consent texts sent to GHL match their checkbox labels word for word',
   assert.ok(ghl.consent_text && html.includes(ghl.consent_text), 'label must contain: ' + ghl.consent_text);
   assert.ok(ghl.marketing_consent_text && html.includes(ghl.marketing_consent_text), 'label must contain: ' + ghl.marketing_consent_text);
   assert.ok(!/\(optional\)/.test(html.split('id="phone"')[0].slice(-200)), 'phone label must not say optional');
+});
+
+test('event_phase and sms_confirm_ok follow the clock', async () => {
+  const h = load(FULL_ENV);
+  const cases = [
+    ['2026-11-03T15:00:00Z', 'pre', 'yes'],    // Tue Nov 3
+    ['2026-11-08T17:59:00Z', 'pre', 'yes'],    // Sun Nov 8, 11:59 AM CT: last minute for a confirmation text
+    ['2026-11-08T18:00:00Z', 'pre', 'no'],     // Sun Nov 8, 12:00 PM CT: would break 3-per-24h
+    ['2026-11-09T16:30:00Z', 'today', 'no'],   // Mon 10:30 AM CT
+    ['2026-11-09T18:20:00Z', 'live', 'no'],    // Mon 12:20 PM CT
+  ];
+  for (const [iso, phase, confirm] of cases) {
+    at(iso);
+    const calls = mockFetch([...ZOOM_OK, ...GHL_OK, ...META_OK]);
+    await run(h, Object.assign({}, PERSON, { sms_consent: true }));
+    const ghl = calls.find((c) => c.url.includes('leadconnectorhq')).body;
+    assert.equal(ghl.action, 'register', iso);
+    assert.equal(ghl.event_phase, phase, iso);
+    assert.equal(ghl.sms_confirm_ok, confirm, iso);
+  }
+  at('2026-11-10T15:00:00Z');
+  let calls = mockFetch([...GHL_OK, ...META_OK]);
+  await run(h, Object.assign({}, PERSON, { action: 'replay', phone: '' }));
+  assert.equal(calls.find((c) => c.url.includes('leadconnectorhq')).body.event_phase, 'post');
+  at('2026-11-17T15:00:00Z');
+  calls = mockFetch([...GHL_OK, ...META_OK]);
+  await run(h, Object.assign({}, PERSON, { action: 'replay', phone: '' }));
+  assert.equal(calls.find((c) => c.url.includes('leadconnectorhq')).body.event_phase, 'closed');
+});
+
+test('register after the webinar ends becomes a replay request (no Zoom call)', async () => {
+  at('2026-11-09T20:00:00Z');
+  const h = load(FULL_ENV);
+  const calls = mockFetch([...GHL_OK, ...META_OK]);
+  const r = await run(h, PERSON);
+  assert.equal(r.json.action, 'replay');
+  assert.ok(!calls.some((c) => c.url.includes('zoom.us')));
+});
+
+test('area codes: Hawaii flagged; PR/USVI/Guam/Canada get no texts even if boxes are checked', async () => {
+  const { phoneAreaFlag } = load()._internals;
+  assert.equal(phoneAreaFlag('+18085550123'), 'hawaii');
+  assert.equal(phoneAreaFlag('+17875550123'), 'no-sms');
+  assert.equal(phoneAreaFlag('+14165550123'), 'no-sms');
+  assert.equal(phoneAreaFlag('+16625550123'), '');
+  const h = load(FULL_ENV);
+  let calls = mockFetch([...ZOOM_OK, ...GHL_OK, ...META_OK]);
+  await run(h, Object.assign({}, PERSON, { phone: '(787) 555-0123', sms_consent: true, sms_marketing_consent: true }));
+  let ghl = calls.find((c) => c.url.includes('leadconnectorhq')).body;
+  assert.equal(ghl.phone_area_flag, 'no-sms');
+  assert.equal(ghl.sms_consent, 'no');
+  assert.equal(ghl.sms_marketing_consent, 'no');
+  assert.equal(ghl.sms_confirm_ok, 'no');
+  calls = mockFetch([...ZOOM_OK, ...GHL_OK, ...META_OK]);
+  await run(h, Object.assign({}, PERSON, { phone: '808-555-0123', sms_consent: true }));
+  ghl = calls.find((c) => c.url.includes('leadconnectorhq')).body;
+  assert.equal(ghl.phone_area_flag, 'hawaii');
+  assert.equal(ghl.sms_consent, 'yes');
 });

@@ -1,283 +1,259 @@
 # GHL build sheet: Box Top launch (for approval before anything is created)
 
-**Account:** the GoGuru/GHL sub-account for **Pontotoc Insurance Agency**, which is also used for **Justin Stark blasts**. Everything below is namespaced (`BT ·` workflows, `bt-` tags, a **Box Top** custom-field folder, its own pipeline) so it can't collide with PIA or blast automations. Nothing existing is deleted or renamed. The only edits to existing items are the exclusion filters in step 0.
+**Account:** the GoGuru/GHL sub-account for **Pontotoc Insurance Agency (PIA)**, which also sends **Justin Stark blasts**. Everything here is namespaced (`BT ·` workflows, `bt-` tags, a **Box Top** custom-field folder, its own pipeline and calendar). Nothing existing is deleted or renamed. The only edits to existing items are the fences in step 0, and each one gets your OK and a removal date.
 
-**Source of truth for what the website sends:** `api/boxtop-register.js` (payload keys below match it exactly).
+**Source of truth for the webhook payload:** `api/boxtop-register.js` (in PR #8). Every key mapped below exists there, including `event_phase`, `sms_confirm_ok` and `phone_area_flag`. **PR #8 must be merged before capturing the webhook sample**, or those keys won't be in it to map.
 **Message copy:** [05-ghl-messages.md](05-ghl-messages.md).
-**Where this differs from 02-ghl-plan.md, this sheet wins** (see "Changes from 02" at the end).
+**Status:** revised after an independent review (log at the end). Where this differs from 02-ghl-plan.md, this sheet wins.
 
 ---
 
-## 0. Pre-flight audit (read-only, about 15 minutes, before creating anything)
+## 0. Pre-flight audit (read-only first, then fences with your OK)
 
-| Where in GHL | Look for | Action |
-|---|---|---|
-| Automation → Workflows | Published workflows whose trigger could fire on Box Top contacts: **Contact Created**, **Contact Tag** (any tag), **Inbound Webhook**, **Form Submitted** (any form), **Opportunity Created / Stage Changed** (any pipeline), **Contact Changed** | Add the filter **Contact Tags → does not include → `bt-registered`** to each, so registrants don't fall into insurance or blast sequences. List them in the build log |
-| Marketing → Emails / Bulk Actions → Scheduled | Justin Stark blasts or PIA campaigns scheduled **Nov 2 to 16** to "all contacts" or a broad smart list | Add the exclusion `bt-registered` until Nov 16 (protects show rate and avoids over-messaging) |
-| Settings → Tags | The existing tag(s) that define the **Justin Stark blast list** | Note the exact name for decision G3 |
-| Settings → Custom Fields | No existing "Box Top" folder; no fields named `BT …` | Confirm clean |
-| Settings → Business Profile | Time zone | Must be **(GMT-06:00) America/Chicago**. All waits below assume Central |
-| Settings → Phone System → Trust Center | A2P 10DLC brand + campaign **approved**, and the campaign's use case | If not approved: launch is email only (decision G1) |
-| Settings → Email Services | Dedicated sending domain verified | If not: set up now (DNS is at GoDaddy) |
-| Calendars | The existing booking calendar used on the homepage | Leave it alone; we create "Box Top Review" |
-| Settings → My Staff | Justin's and Kalob's users | For assignment and alerts |
+### 0a. Look (change nothing)
 
-## 1. Custom fields: folder "Box Top"
+| Where | Look for |
+|---|---|
+| Automation → Workflows (published) | Triggers that could fire on Box Top contacts: **Contact Created** · **Contact Tag** (any tag, or `bt-`) · **Contact Changed** · **Inbound Webhook** · **Form/Survey Submitted** (any) · **Opportunity Created / Status / Stage Changed** (any pipeline) · **Appointment / Customer Booked** (any calendar) · **Customer Replied** · **Trigger Link Clicked** · **Email events** (opened, clicked) · **Conversation AI / auto-replies** on SMS or email |
+| Marketing → Emails and Bulk Actions (scheduled) | Justin Stark blasts or PIA sends scheduled Nov 2 to 16 to "all contacts" or broad lists |
+| Settings → Tags | The exact tag(s) for the **Justin Stark blast list**, and the tag(s) that mark **existing PIA clients** |
+| Settings → Business Profile | Time zone. **Don't change it**, since that retimes PIA's workflows. If it isn't Central, set each BT workflow's time zone to Central in its settings, or convert every wait below |
+| Settings → Email Services | Which sending domain is assigned to **Workflows** and to **Bulk**. Use what's there; don't add or reassign domains without checking PIA's mail |
+| Settings → Phone System → Trust Center | A2P 10DLC brand name and campaign use case. Texts must name the registered brand |
+| Settings → Custom Fields | No existing "Box Top" folder or `BT …` fields |
 
-Settings → Custom Fields → **Add Folder: `Box Top`** (Contact object) → add each field **with this exact name**. GHL builds the merge key from the name, and the emails use these keys. The `BT` prefix keeps the keys unique in a shared account.
+### 0b. Fence (each one approved by you, logged, removal date **Nov 17**)
 
-| # | Field name | Type | Merge key | Filled from webhook key |
-|---|---|---|---|---|
-| 1 | BT Zoom Join URL | Single Line | `{{contact.bt_zoom_join_url}}` | `zoom_join_url` |
-| 2 | BT Zoom Registrant ID | Single Line | `contact.bt_zoom_registrant_id` | `zoom_registrant_id` |
-| 3 | BT Zoom Status | Single Line | `contact.bt_zoom_status` | `zoom_status` (registered / already / failed) |
-| 4 | BT Registered At | Single Line | `contact.bt_registered_at` | `registered_at` (ISO time) |
-| 5 | BT SMS Event Consent | Single Line | `contact.bt_sms_event_consent` | `sms_consent` (yes / no) |
-| 6 | BT SMS Event Consent At | Single Line | `contact.bt_sms_event_consent_at` | `sms_consent_at` |
-| 7 | BT Event Consent Text | Multi Line | `contact.bt_event_consent_text` | `consent_text` |
-| 8 | BT SMS Marketing Consent | Single Line | `contact.bt_sms_marketing_consent` | `sms_marketing_consent` (yes / no) |
-| 9 | BT SMS Marketing Consent At | Single Line | `contact.bt_sms_marketing_consent_at` | `sms_marketing_consent_at` |
-| 10 | BT Marketing Consent Text | Multi Line | `contact.bt_marketing_consent_text` | `marketing_consent_text` |
-| 11 | BT Consent Version | Single Line | `contact.bt_consent_version` | `consent_version` |
-| 12 | BT Segment | Single Line | `contact.bt_segment` | `segment` (retired / red-zone / planning / business-owner / pro) |
-| 13 | BT Source Bucket | Single Line | `contact.bt_source_bucket` | `source_bucket` |
-| 14–18 | BT FT Source · BT FT Medium · BT FT Campaign · BT FT Content · BT FT Term | Single Line ×5 | `contact.bt_ft_source` … | `ft_source` … `ft_term` |
-| 19–23 | BT LT Source · BT LT Medium · BT LT Campaign · BT LT Content · BT LT Term | Single Line ×5 | `contact.bt_lt_source` … | `lt_source` … `lt_term` |
-| 24 | BT Campaign ID | Single Line | `contact.bt_campaign_id` | `campaign_id` |
-| 25 | BT FBCLID | Single Line | `contact.bt_fbclid` | `fbclid` |
-| 26 | BT GCLID | Single Line | `contact.bt_gclid` | `gclid` |
-| 27 | BT Landing Page | Single Line | `contact.bt_landing_page` | `landing_page` |
-| 28 | BT Referrer | Single Line | `contact.bt_referrer` | `referrer` |
-| 29 | BT Attended Live | Single Line | `contact.bt_attended_live` | Zoom CSV import (yes) |
-| 30 | BT Minutes Attended | Number | `contact.bt_minutes_attended` | Zoom CSV import |
+- **`bt-contact`** is the fence tag. BT · 01 sets it **in the Create/Update Contact action itself**, if that action has a tags field; otherwise it's the very first action. Every Box Top path sets it, including replay requests and zoom_direct.
+- **Workflows triggered by Contact Created:** a filter can't see a tag that doesn't exist yet. Add **Wait 2 minutes → If has `bt-contact` and not [PIA client tag] → End** at the top.
+- **Workflows triggered by any tag / any form / any pipeline / any calendar / replies:** prefer **narrowing the trigger** to PIA's own tags, forms, pipelines or calendars. Otherwise add the filter "does not include `bt-contact`", **unless the contact has the PIA client tag**. That way existing PIA clients who register keep their PIA flows during Medicare open enrollment (AEP).
+- **Scheduled blasts Nov 2 to 16:** exclude `bt-contact`.
+- **Tell Justin:** a STOP reply to any Box Top text sets text-DND on the whole contact. That includes PIA's texts to that person if they're also a client. GHL can't scope opt-outs per brand.
 
-Everything the website sends is text. Single Line keeps webhook values exact; dropdowns would silently drop any value that doesn't match an option. After creating them, open each field and **copy the real merge key** into the build log. If GHL generated a different key, the emails must use that one.
+## 1. Custom fields: folder "Box Top" (31 fields)
 
-## 2. Custom Values (account-level links used in emails)
+Settings → Custom Fields → **Add Folder `Box Top`** → add with these exact names (all **Single Line** unless noted). After creating them, **copy the real merge key** of each into the build log; emails must use what GHL actually generated.
 
-Settings → Custom Values → add. Each link can then be changed in one place without editing emails.
+| Field | Webhook key | Field | Webhook key |
+|---|---|---|---|
+| BT Zoom Join URL | `zoom_join_url` (or `zoom_fallback_url`, see BT · 01) | BT FT Source / Medium / Campaign / Content / Term | `ft_*` |
+| BT Zoom Registrant ID | `zoom_registrant_id` | BT LT Source / Medium / Campaign / Content / Term | `lt_*` |
+| BT Zoom Status | `zoom_status` (registered / already / skipped / failed) | BT Campaign ID | `campaign_id` |
+| BT Registered At | `registered_at` | BT FBCLID | `fbclid` |
+| BT Event Phase | `event_phase` (pre / today / live / post / closed) | BT GCLID | `gclid` |
+| BT SMS Event Consent | `sms_consent` | BT Landing Page | `landing_page` |
+| BT SMS Event Consent At | `sms_consent_at` | BT Referrer | `referrer` |
+| BT Event Consent Text (Multi Line) | `consent_text` | BT Segment | `segment` |
+| BT SMS Marketing Consent | `sms_marketing_consent` | BT Source Bucket | `source_bucket` |
+| BT SMS Marketing Consent At | `sms_marketing_consent_at` | BT Attended Live | CSV import (yes) |
+| BT Marketing Consent Text (Multi Line) | `marketing_consent_text` | BT Minutes Attended (**Number**) | CSV import |
+| BT Consent Version | `consent_version` | | |
 
-| Name | Key | Value |
-|---|---|---|
-| BT Replay URL | `{{custom_values.bt_replay_url}}` | `https://thejustinstark.com/theboxtop/replay/` |
-| BT Bonus Vault URL | `{{custom_values.bt_bonus_vault_url}}` | `https://thejustinstark.com/theboxtop/bonuses/` |
-| BT Review URL | `{{custom_values.bt_review_url}}` | the Box Top Review calendar's booking link (step 5) |
-| BT Book URL | `{{custom_values.bt_book_url}}` | **where to buy the book (still needed, W2)** |
-| BT Launch Page URL | `{{custom_values.bt_launch_url}}` | `https://thejustinstark.com/theboxtop/launch/` |
+Single Line keeps webhook values exact; a dropdown silently drops any value that doesn't match an option.
 
-The replay and bonus-vault pages are ours. They show "posting soon" until the content is ready, so the emails can safely carry those links ahead of time.
+## 2. Custom Values (links used in emails)
+
+| Name | Value |
+|---|---|
+| BT Replay URL | `https://thejustinstark.com/theboxtop/replay/` |
+| BT Bonus Vault URL | `https://thejustinstark.com/theboxtop/bonuses/` |
+| BT Review URL | Box Top Review calendar booking link (§5) |
+| BT Book URL | **Where to buy the book (still needed).** M08 has a book line; delete it if this is empty on Nov 9 |
+| BT Zoom Register URL | `https://us02web.zoom.us/webinar/register/WN_bjdBGZXbSoOfl3x2_XPqHQ` |
 
 ## 3. Tags
 
-Created on first use, or ahead of time in Settings → Tags.
-
 | Tag | Meaning |
 |---|---|
-| `bt-registered` | Registered for the launch (website or raw Zoom link) |
-| `bt-src-paid-meta` `bt-src-paid-other` `bt-src-organic-social` `bt-src-vanity` `bt-src-referral` `bt-src-email` `bt-src-direct` `bt-src-other` `bt-src-zoom-direct` | Where they came from (one each) |
-| `bt-sms-optin` | Checked box 1: event confirmation + reminders |
-| `bt-sms-marketing-optin` | Checked box 2: updates, invitations, offers |
-| `bt-sms-hawaii` | 808 number: skip texts that would land before 8 AM there |
-| `bt-sms-confirm` | Registered early enough for a confirmation text without breaking the 3-per-24h cap |
-| `bt-zoom-failed` | Zoom registration failed; needs manual fix |
-| `bt-seg-retired` `bt-seg-red-zone` `bt-seg-planning` `bt-seg-business-owner` `bt-seg-pro` | Thank-you page answer |
-| `bt-attended-live` | Joined the live (from Zoom's attendee report) |
-| `bt-no-show` | Registered, didn't join live |
-| `bt-replay-request` | Signed up after the live ended |
-| `bt-replay-clicked` | Clicked the replay link |
+| `bt-contact` | **Fence:** any Box Top contact. Set first, every path |
+| `bt-registered` | Registered for the launch |
+| `bt-src-paid-meta` `-paid-other` `-organic-social` `-vanity` `-referral` `-email` `-direct` `-other` `-zoom-direct` | Source (one each) |
+| `bt-sms-optin` / `bt-sms-marketing-optin` | Checkbox 1 (event texts) / checkbox 2 (updates and offers) |
+| `bt-sms-confirm` | Registered before Sun Nov 8, 12 PM CT, so a confirmation text fits under the 3-per-24h cap |
+| `bt-sms-hawaii` | 808 number; time-shifted texts |
+| `bt-zoom-failed` | Zoom error (not Plan B); needs a manual fix |
+| `bt-seg-retired` `-red-zone` `-planning` `-business-owner` `-pro` | Thank-you page answer |
+| `bt-attended-live` / `bt-no-show` | From the Zoom attendee report |
+| `bt-replay-request` / `bt-replay-ready` / `bt-replay-clicked` | Replay sign-up / **replay released (gate)** / clicked |
 | `bt-review-booked` | Booked a Box Top Review |
-| `bt-test` | Test contacts (delete before launch) |
+| `bt-test` | Test contacts |
 
 ## 4. Pipeline: "Box Top Launch"
 
-Opportunities → Pipelines → **Create new pipeline: `Box Top Launch`**; show in funnel and pie charts.
-
 | # | Stage | Moves here when |
 |---|---|---|
-| 1 | Registered | `bt-registered` (BT · 01) |
-| 2 | Attended Live | `bt-attended-live` (BT · 03) |
-| 3 | Missed Live (Replay) | `bt-no-show` or `bt-replay-request` (BT · 04) |
-| 4 | Replay Engaged | Clicked the replay and didn't attend (BT · 05) |
-| 5 | Box Top Review Booked | Booked on the Box Top Review calendar (BT · 06) |
-| 6 | Box Top Review Held | Appointment marked Showed (BT · 07) |
-| 7 | Client | Justin sets status **Won** by hand |
+| 1 | Registered | BT · 01 |
+| 2 | Attended Live | BT · 04 (the **only** step allowed to move an opportunity backward) |
+| 3 | Missed Live (Replay) | BT · 05 |
+| 4 | Replay Engaged | BT · 06, only from stage 3 |
+| 5 | Box Top Review Booked | BT · 07 |
+| 6 | Box Top Review Held | BT · 08 |
+| 7 | Client | Justin sets **Won** |
 
-Opportunity defaults: name `{{contact.name}} · Box Top Launch`, source `{{contact.bt_source_bucket}}`, assigned to **Justin**, status Open. Lost reasons: Not a fit · No response · Already has an advisor · Other.
+Defaults: name `{{contact.name}} · Box Top Launch`; source = BT Source Bucket; owner Justin; **no duplicates**; backward moves off except in BT · 04.
 
 ## 5. Calendar: "Box Top Review"
 
-Calendars → Create → **Event calendar**, owner Justin.
-
-| Setting | Proposed | Decide |
-|---|---|---|
-| Name / slug | Box Top Review / `box-top-review` | |
-| Length / price | **About 45 minutes, free** | G4 |
-| Where | Zoom or phone (Justin's choice) | G4 |
-| Availability | Justin's hours; 24-hour minimum notice | Justin |
-| Form | Name, email, phone, "What's the biggest question on your mind about retirement?" | |
-| Confirmation and reminders | Calendar's built-in notifications, **email only** (they can't check text consent); reminders 24h and 1h before | |
-| Description | "One-on-one with Justin. We put your pieces on the table, find your four corners, and you leave with a clear picture. Education first. No pressure." | Justin approves |
-
-Its booking link goes into Custom Value **BT Review URL**.
+Event calendar, owner Justin, slug `box-top-review`. **About 45 minutes, free, Zoom or phone** (decision G4). Form: name, email, phone, "What's the biggest question on your mind about retirement?" **Minimum notice: 48 hours.** If Medicare Advantage or Part D could come up, CMS requires a Scope of Appointment form 48 hours ahead; Justin confirms whether these reviews can touch MA or Part D. Notifications: **email only** (calendar texts can't check consent). Link → Custom Value **BT Review URL**.
 
 ## 6. Trigger link
 
-Marketing → Trigger Links → **`BT Replay`** → `{{custom_values.bt_replay_url}}`. Every replay email uses this link, so clicks are tracked.
+Marketing → Trigger Links → **`BT Replay`** → `{{custom_values.bt_replay_url}}`. Used in every replay email and S05.
 
 ## 7. Workflows (folder "Box Top Launch")
 
-All workflows: **Allow re-entry OFF** unless noted. **Stop on response OFF.** Time zone: account (Central). Sender: **Justin Stark**, from the verified sending domain, reply-to Justin.
+Defaults: **Draft** until tests pass; time zone **Central**; sender **Justin Stark** on the assigned sending domain, reply-to Justin. "If past → skip" means the Wait setting **"Skip all outbound communication actions till next wait."**
 
-### BT · 01 Inbound (website + Zoom backfill)
+### BT · 01 Inbound (website + Zoom backfill) · re-entry ON
 
-**Trigger:** Inbound Webhook. Copy its URL into Vercel as `GHL_BOXTOP_WEBHOOK_URL`, then send one real test registration from the preview site and click **Fetch sample request** so the fields below can be mapped. **Re-entry ON**, since the same person can submit more than once.
+**Trigger:** Inbound Webhook. Copy its URL into Vercel as `GHL_BOXTOP_WEBHOOK_URL`. After PR #8 is live on a preview, submit one registration with **both SMS boxes checked**, then run **Test Trigger** and pick that sample.
 
-1. **Create Contact** (duplicates off; updates the existing contact on email or phone match): First name ← `first_name`, Last name ← `last_name`, Email ← `email`, Phone ← `phone`.
-2. **If/Else on `action`:**
+**If/Else on `action`:**
 
-**Branch `register` or `replay`:**
-  - **Update fields** (always): BT LT Source/Medium/Campaign/Content/Term, BT Campaign ID, BT FBCLID, BT GCLID, BT Source Bucket, BT Zoom Status, BT Consent Version.
-  - **If** BT FT Source is empty **and** BT FT Medium is empty → set BT FT Source/Medium/Campaign/Content/Term, BT Landing Page, BT Referrer, BT Registered At. *(First touch is written once and never overwritten.)*
-  - **If** webhook `zoom_join_url` is not empty → set BT Zoom Join URL, BT Zoom Registrant ID. *(A duplicate submit never blanks the link.)*
-    **Else if** `zoom_fallback_url` is not empty **and** BT Zoom Join URL is empty → set BT Zoom Join URL ← `zoom_fallback_url`. *(Plan B or a Zoom failure: every "your link" button still lands on Zoom's registration page instead of rendering blank.)*
-  - **If** `sms_consent` = yes → set BT SMS Event Consent = yes, Consent At, Event Consent Text; add `bt-sms-optin`.
-  - **If** `sms_marketing_consent` = yes → set BT SMS Marketing Consent = yes, Consent At, Marketing Consent Text; add `bt-sms-marketing-optin`.
-  - **If** `phone_area_flag` = hawaii → add `bt-sms-hawaii`.
-  - **If** `sms_confirm_ok` = yes → add `bt-sms-confirm`.
-  - **If/Else on `source_bucket`** (9 branches) → add the matching `bt-src-…` tag.
-  - **Sub-branch `register`:**
-    - Add `bt-registered`.
-    - **Create/Update Opportunity:** pipeline Box Top Launch, stage Registered, defaults from §4 (no duplicates).
-    - **If** `zoom_status` = failed → add `bt-zoom-failed` + **Internal Notification** (email + in-app) to Kalob and Justin: "Zoom registration failed for {{contact.name}} ({{contact.email}}). Register them in Zoom by hand, then paste their join link into BT Zoom Join URL."
-  - **Sub-branch `replay`:** add `bt-replay-request`.
+**`register`**
+1. **Create/Update Contact:** first, last, email, phone; tag `bt-contact`.
+2. Always: BT LT ×5, BT Campaign ID, BT FBCLID, BT GCLID, BT Source Bucket.
+3. **If** BT Registered At is empty (first registration) → set BT FT ×5, BT Landing Page, BT Referrer, BT Registered At, BT Event Phase.
+4. **If** `zoom_status` not empty → set BT Zoom Status.
+5. **If** `zoom_join_url` not empty → set BT Zoom Join URL + Registrant ID. **Else if** BT Zoom Join URL is empty → set it ← `zoom_fallback_url` (Zoom's registration page, so links never render blank).
+6. **If** `sms_consent` = yes → set Event Consent, At, Text, BT Consent Version; add `bt-sms-optin`. **If** `sms_marketing_consent` = yes → set Marketing Consent, At, Text, BT Consent Version; add `bt-sms-marketing-optin`. *(No "no" branch, so a later submit never erases a yes.)*
+7. **If** `sms_confirm_ok` = yes → add `bt-sms-confirm`. **If** `phone_area_flag` = hawaii → add `bt-sms-hawaii`.
+8. **If/Else on `source_bucket`** → matching `bt-src-…`.
+9. **Create/Update Opportunity** → Registered.
+10. **If** `zoom_status` = failed → add `bt-zoom-failed` + Internal Notification (Kalob, Justin): "Zoom registration failed for {{contact.name}} ({{contact.email}}). Register them in Zoom by hand and paste the join link into BT Zoom Join URL." *(`skipped` = Plan B, no alert.)*
+11. **Add tag `bt-registered` last**, so every field is set before BT · 02 and BT · 03 start.
 
-**Branch `profile`:** set BT Segment ← `segment` → **If/Else on `segment`** (5 branches) → add `bt-seg-…`.
+**`replay`**
+1. Create/Update Contact (first, last, email; tag `bt-contact`).
+2. Set LT fields; first-touch fields only if BT Registered At is empty.
+3. **If** `event_phase` = closed → Email **M17** "The replay window has closed" (links to the book and the Review) → End.
+4. Else → add `bt-replay-request`. *(After the replay is released, add one more action here: add tag `bt-replay-ready`. See §8.)*
 
-**Branch `zoom_direct`** (from `tools/zoom-registrants-to-ghl.js`):
-  - **If** the contact already has `bt-registered` → **If** BT Zoom Join URL is empty **or** BT Zoom Status is not `registered` → set Join URL, Registrant ID, Zoom Status = registered. Then end. *(Upgrades Plan B contacts to their real personal link once they finish on Zoom's page; never touches attribution.)*
-  - **Else** → set BT Zoom Join URL, Registrant ID, Zoom Status = registered, Source Bucket = zoom-direct; add `bt-src-zoom-direct`, `bt-registered`; Create Opportunity (Registered).
+**`profile`**
+1. Create/Update Contact with **email only**. *(The survey sends no name or phone, so none can be blanked.)*
+2. Set BT Segment; add the matching `bt-seg-…`.
 
-### BT · 02 Launch confirmation
+**`zoom_direct`** (backfill script)
+1. Create/Update Contact (first, last, email; **no phone**; tag `bt-contact`).
+2. **If** has `bt-registered` → **If** BT Zoom Status ≠ registered → set Join URL, Registrant ID, Zoom Status = registered; **remove `bt-zoom-failed`**. End. *(Upgrades Plan B or failed contacts to their personal link; never touches attribution.)*
+3. Else → set Join URL, Registrant ID, Zoom Status = registered, Source Bucket = zoom-direct, BT Event Phase = pre; add `bt-src-zoom-direct`; Opportunity → Registered; add `bt-registered` last.
 
-**Trigger:** Contact Tag added `bt-registered`.
+### BT · 02 Confirmation · re-entry OFF
 
-1. **Email M01** "You're in" (immediately). *Skip for `bt-test`? No: test contacts should receive everything.*
-2. **If** has `bt-sms-optin` **and** `bt-sms-confirm` **and** not `bt-sms-hawaii` **and** SMS not DND → **Wait: time window 11:00 AM to 6:55 PM, any day** → **SMS S01** confirmation.
+**Trigger:** tag added `bt-registered`.
 
-*(The window is Central. It lands 9 AM to 4:55 PM Pacific, 12 PM to 7:55 PM Eastern, and 8 AM or later Alaska time. Hawaii numbers skip it; they get the email.)*
+1. **If/Else** (first match wins):
+   - BT Zoom Status is skipped / failed → Email **M01Z** "One more step: finish on Zoom".
+   - BT Event Phase = live → Email **M01L** "We're live right now".
+   - BT Event Phase = today → Email **M01T** "You're in. We go live at noon Central today."
+   - Else → Email **M01** "You're in".
+2. **If** has `bt-sms-optin` **and** `bt-sms-confirm`, not `bt-sms-hawaii`, not DND → **Wait: Advance Window 11:00 AM to 6:55 PM** → SMS **S01**.
 
-### BT · 03 Launch reminders
+### BT · 03 Reminders · re-entry OFF · Goal: tag added `bt-attended-live`
 
-**Trigger:** Contact Tag added `bt-registered`. Every Wait uses **"If the time is already in the past: Skip all outbound communication actions until the next wait"**, so late registrants never get stale messages.
+**Trigger:** tag added `bt-registered`. Every wait is "if past → skip".
 
-| Step | Wait until (CT) | Then |
-|---|---|---|
-| 1 | Wed Nov 4, 10:00 AM | Email **M02** "What you get for showing up live" |
-| 2 | Fri Nov 6, 10:00 AM | Email **M03** "One thing to bring Monday" |
-| 3 | Sun Nov 8, 12:00 PM | Email **M04** "This time tomorrow" → **If** `bt-sms-optin` & not DND → SMS **S02** |
-| 4 | Mon Nov 9, 8:00 AM | Email **M05** "Today at noon Central" |
-| 5 | Mon Nov 9, 11:00 AM | Email **M06** "One hour" → **If** `bt-sms-optin` & not `bt-sms-hawaii` & not DND → SMS **S03** |
-| 6 | Mon Nov 9, 12:02 PM | Email **M07** "We're live" → **If** `bt-sms-optin` & not DND → SMS **S04** |
-
-**Goal (exit):** tag `bt-attended-live` added *(once attendance is imported, nobody gets a stray message)*.
-
-### BT · 04 Attended live
-
-**Trigger:** Contact Tag added `bt-attended-live` (from the CSV import).
-
-1. Update Opportunity → **Attended Live**. Remove tag `bt-no-show` if present.
-2. **Wait until Mon Nov 9, 2:00 PM** (if past: **continue**) → Email **M08** "Thank you for coming + your 5 tools".
-3. **Wait until Wed Nov 11, 10:00 AM** (if past: skip outbound to next wait) → Email **M09** "Take the Box Top Quiz".
-4. **Wait until Fri Nov 13, 10:00 AM** (if past: skip) → Email **M10** "Want me to look at your picture with you?" → **If** `bt-sms-marketing-optin` & not DND → **Wait: time window 1:00 PM to 6:55 PM** → SMS **S06** review invite.
-5. **Wait until Mon Nov 16, 10:00 AM** (if past: skip) → Email **M11** "Last call for November Box Top Reviews".
-
-**Goal:** `bt-review-booked`.
-
-### BT · 05 Missed live (no-shows + replay requests)
-
-**Trigger:** Contact Tag added `bt-no-show` **or** `bt-replay-request`.
-
-1. **Create/Update Opportunity** → **Missed Live (Replay)** (creates one for replay requesters, who never had one).
-2. **Wait until Mon Nov 9, 6:00 PM** (if past: **continue**) → Email **M12** "Here's the replay" → **If** `bt-sms-optin` & not DND → **Wait: time window 9:00 AM to 6:55 PM** → SMS **S05** replay.
-3. **Wait until Wed Nov 11, 10:00 AM** (if past: skip) → Email **M13** "Did you get to watch?"
-4. **Wait until Fri Nov 13, 10:00 AM** (if past: skip) → Email **M14** review invite (replay version) → **If** `bt-sms-marketing-optin` & not DND → **Wait: time window 1:00 PM to 6:55 PM** → SMS **S06**.
-5. **Wait until Mon Nov 16, 10:00 AM** (if past: skip) → Email **M15** "Replay comes down tonight".
-
-**Goal:** `bt-review-booked`. *(A replay requester who signs up on Nov 14 gets M12 immediately and only the messages still ahead of them.)*
-
-### BT · 06 Replay clicked
-
-**Trigger:** Trigger Link Clicked → `BT Replay`.
-
-Add `bt-replay-clicked` → **If** not `bt-attended-live` → Update Opportunity → **Replay Engaged**.
-
-### BT · 07 Review booked
-
-**Trigger:** Customer Booked Appointment → calendar **Box Top Review**.
-
-Add `bt-review-booked` → Update Opportunity → **Box Top Review Booked** → Internal Notification to Justin: "Box Top Review booked: {{contact.name}}, {{appointment.start_time}}. Segment: {{contact.bt_segment}}. Came from: {{contact.bt_source_bucket}} / {{contact.bt_lt_content}}."
-
-### BT · 08 Review outcome
-
-**Trigger:** Appointment Status changed → calendar **Box Top Review**.
-
-- **If** Showed → Update Opportunity → **Box Top Review Held**.
-- **If** No-show → Email **M16** "Sorry we missed you, here's a new time" (with `{{custom_values.bt_review_url}}`).
-
-### BT · 09 Financial professional alert *(optional)*
-
-**Trigger:** Contact Tag added `bt-seg-pro`.
-
-Internal Notification to Justin: "A financial professional registered for the launch: {{contact.name}}, {{contact.email}}." If an agent-recruiting pipeline exists, also create an opportunity there.
-
-## 8. Launch-day operations (manual, Mon Nov 9)
-
-| Time (CT) | Step |
+| Wait until (CT) | Then |
 |---|---|
-| ~11:30 AM | Pause the Meta ads |
-| At the close | Post `{{custom_values.bt_bonus_vault_url}}` in Zoom chat (attendees get their tools even if the import is late) |
-| ~1:45 PM | Zoom → Reports → Webinars → **Attendee report** CSV (can lag; refresh) → GHL Contacts → Import → match on email → **add tag `bt-attended-live`**, map Time in Session → BT Minutes Attended, BT Attended Live = yes. BT · 04 runs |
-| ~2:00 PM | Smart list **BT Registered** minus `bt-attended-live` → Bulk Action → **add tag `bt-no-show`**. BT · 05 runs |
-| By 5:30 PM | Replay uploaded and plays on `/theboxtop/replay/`. If it won't be ready by 6 PM, edit BT · 05 step 2's wait to the new time |
+| Wed Nov 4, 10:00 AM | **M02** |
+| Fri Nov 6, 10:00 AM | **M03** |
+| Sun Nov 8, 12:00 PM | **M04** → if `bt-sms-optin` & not DND: if `bt-sms-hawaii` wait 5 min → **S02** |
+| Mon Nov 9, 8:00 AM | **M05** |
+| Mon Nov 9, 11:00 AM | **M06** → if `bt-sms-optin` & not `bt-sms-hawaii` & not DND → **S03** |
+| Mon Nov 9, 12:02 PM | **M07** → if `bt-sms-optin` & not DND → **S04** |
+
+### BT · 04 Attended · re-entry OFF · Goal: `bt-review-booked`
+
+**Trigger:** tag added `bt-attended-live`.
+
+1. **Remove from workflow: BT · 05.** Remove tag `bt-no-show`.
+2. Update Opportunity → Attended Live (**allow backward move** on this step only).
+3. Wait until Mon Nov 9, 2:00 PM (if past → **continue**) → **M08**.
+4. Wait until Wed Nov 11, 10 AM (skip) → **M09**.
+5. Wait until Fri Nov 13, 10 AM (skip) → **M10** → if `bt-sms-marketing-optin` & not DND → Advance Window **1:00 to 6:55 PM** → **S06**.
+6. Wait until Mon Nov 16, 10 AM (skip) → **M11**.
+
+### BT · 05 Missed live · re-entry OFF · Goal: tag added `bt-attended-live` or `bt-review-booked`
+
+**Trigger:** tag added `bt-no-show` **or** `bt-replay-request`. **Filter:** does not have `bt-attended-live` and does not have `bt-review-booked`.
+
+1. Create/Update Opportunity → Missed Live (Replay).
+2. Wait until Mon Nov 9, 6:00 PM (if past → continue) → **Wait for condition: has tag `bt-replay-ready`** (the gate; released in §8) → **M12** → if `bt-sms-optin` & not DND → Advance Window **12:00 to 6:55 PM** → **S05**.
+3. Wait until Wed Nov 11, 10 AM (skip) → **M13**.
+4. Wait until Fri Nov 13, 10 AM (skip) → **M14** → if `bt-sms-marketing-optin` & not DND → Advance Window 1:00 to 6:55 PM → **S06**.
+5. Wait until Mon Nov 16, 10 AM (skip) → **M15**.
+
+### BT · 06 Replay clicked · re-entry ON
+
+**Trigger:** Trigger Link Clicked `BT Replay`. Add `bt-replay-clicked` → **If** opportunity stage = Missed Live (Replay) → move → Replay Engaged (no backward moves).
+
+### BT · 07 Review booked · re-entry ON
+
+**Trigger:** Appointment Status = booked/confirmed, calendar Box Top Review. Check in the UI whether "Customer Booked Appointment" is still offered; if so, either works. Add `bt-review-booked` → Opportunity → Box Top Review Booked → Internal Notification to Justin: "Box Top Review booked: {{contact.name}}, {{appointment.start_time}}. Segment {{contact.bt_segment}}. From {{contact.bt_source_bucket}} / {{contact.bt_lt_content}}."
+
+### BT · 08 Review outcome · re-entry ON
+
+**Trigger:** Appointment Status changed, calendar Box Top Review. Showed → Opportunity → Box Top Review Held. No-show → **M16** (rebook link).
+
+### BT · 09 Financial professional alert (optional) · re-entry OFF
+
+Tag added `bt-seg-pro` → Internal Notification to Justin. If an agent-recruiting pipeline exists, also create an opportunity there.
+
+## 8. Launch day (Mon Nov 9, CT)
+
+| Time | Step |
+|---|---|
+| ~11:30 AM | Pause Meta ads |
+| At the close | Post `{{custom_values.bt_bonus_vault_url}}` in Zoom chat |
+| ~1:45 PM | Zoom attendee report CSV. **Filter to Attended = Yes, dedupe by email**, keep email + time in session. Import into GHL in **update existing only** mode: add tag `bt-attended-live`, set BT Attended Live = yes, BT Minutes Attended. *(Test this with a 2-row CSV before Nov 9: tag-added triggers from imports must fire.)* |
+| ~2:00 PM | Smart list: has `bt-registered`, not `bt-attended-live` → bulk add `bt-no-show` |
+| When the replay plays end to end on `/theboxtop/replay/` | (1) Bulk add `bt-replay-ready` to the smart list "has `bt-no-show` or `bt-replay-request`". (2) Edit BT · 01's replay branch to add `bt-replay-ready`, so later requesters go straight through. Editing a Wait doesn't affect contacts already waiting, which is why this is a tag gate rather than a wait time |
+
+**Zoom's own emails:** keep Zoom's **confirmation** email on; turn Zoom's **reminder** emails **off**, otherwise Nov 9 brings 5 or more emails.
 
 ## 9. Smart lists
 
-BT Registered (`bt-registered`) · BT Paid Meta (`bt-src-paid-meta`) · BT Zoom-direct · BT SMS Event Opt-in · BT SMS Marketing Opt-in · BT Attended · BT Missed Live · BT Review Booked · BT Pros (`bt-seg-pro`) · BT Business Owners · BT Zoom Failed (check daily).
+BT Registered · BT Paid Meta · BT Zoom-direct · BT Zoom Failed (check daily) · BT SMS Event Opt-in · BT SMS Marketing Opt-in · BT Attended · BT Missed Live · BT Review Booked · BT Pros · BT Business Owners.
 
-## 10. Test plan (before ads go live)
+## 10. Tests (before ads go live)
 
-1. Four website registrations from the preview with `+bt1…4` emails: SMS boxes yes/yes, yes/no, no/no, and Hawaii number + yes. Check fields, tags, opportunity, M01, S01 only where allowed.
-2. Same email twice: first touch kept, join link not blanked, no second opportunity, M01 not re-sent (BT · 02 re-entry off).
-3. Force a Zoom failure on the preview (wrong webinar ID): `bt-zoom-failed` + alert.
-4. Thank-you survey: BT Segment + `bt-seg-…` tag.
-5. Backfill script `--dry-run`, then live against a test registrant.
-6. Copy BT · 03/04/05 into a **TEST** folder with waits set to the next few minutes; run a test contact through, check skip-if-past behavior and that every merge field renders (especially the join link). Delete the copies.
-7. Delete all `bt-test` contacts and their opportunities; delete test registrants in Zoom.
+1. Four registrations (`+bt-test1..4`, tagged `bt-test`): boxes yes/yes, yes/no, no/no, and an 808 number. Check every field, tag, the stage, the M01 variant, and S01 only where allowed.
+2. **Same email twice:** first touch, consent and Zoom Status stay intact; no second opportunity; no second M01.
+3. **Shared phone, two emails** (spouses), and **an existing PIA contact with a different phone:** see which record GHL updates and which number gets texted. It must be the number that consented.
+4. **Plan B** (no Zoom vars on preview): M01Z, no alert. **Forced Zoom failure:** alert + `bt-zoom-failed`. Backfill upgrade clears it.
+5. Survey answer: segment set, and name and phone unchanged.
+6. Fence: a test contact doesn't enter any PIA workflow.
+7. Copy BT · 03, 04 and 05 to a TEST folder with waits a few minutes out; walk a contact through. Check skip-if-past, the replay gate and merge fields (join link, custom values). Delete the copies.
+8. 2-row CSV import → BT · 04 fires; BT · 05 exits.
+9. Delete all `bt-test` contacts, their opportunities, and the test registrants in Zoom.
 
-## 11. Decisions for you
+## 11. Decisions
 
 | # | Decision | Recommendation |
 |---|---|---|
-| G1 | A2P approved? | If not by Mon noon: email only; hide both SMS boxes on the page (one-line change) |
-| G2 | Fence off existing workflows and blasts from `bt-registered` until Nov 16 | Yes |
-| G3 | After Nov 16, add registrants to the **Justin Stark blast list** | Yes for email (they opted in to hear from Justin; they can unsubscribe). Texts only for `bt-sms-marketing-optin` |
-| G4 | Box Top Review: length, price, medium | About 45 minutes, free, Zoom or phone (the emails say "free" and "about 45 minutes") |
-| G5 | Replay window | Through Mon Nov 16 (M15 says it comes down that night) |
-| G6 | BT · 09 pro alert | Yes, if Justin wants agent leads flagged |
+| G1 | A2P approved? | If not by Mon noon: email only; hide both SMS boxes |
+| G2 | Fences in §0b, removed Nov 17 | Yes, each approved one by one |
+| G3 | After Nov 16, add registrants to the Justin Stark blast list | Email yes (the FAQ now says so); texts only for `bt-sms-marketing-optin` |
+| G4 | Box Top Review: length, price, medium, Medicare scope | About 45 minutes, free, Zoom or phone, 48-hour notice; Justin confirms MA/Part D |
+| G5 | Replay window | Through Mon Nov 16 |
+| G6 | BT · 09 pro alert | Yes |
+| G7 | PIA client tag(s) to exempt from the fence | From the audit |
 
-## 12. Small website change this sheet relies on
+## Review log (Nov 2)
 
-Two extra webhook fields, so GHL doesn't have to do date or area-code math:
+An independent reviewer checked this sheet against GHL's help docs, the website's payload and the SMS rules, and traced 12 people through every workflow. Everything below is now applied.
 
-- `sms_confirm_ok` = yes when the registration happens before Sun Nov 8, 12:00 PM CT. This keeps any person at 3 or fewer texts in 24 hours.
-- `phone_area_flag` = `hawaii` for 808 numbers.
-
-This is about 10 lines in `api/boxtop-register.js` plus tests. I'll add it to the open PR once you approve this sheet.
-
-## Changes from 02-ghl-plan.md
-
-- Pipeline stage 3 is now **"Missed Live (Replay)"** and covers no-shows and after-event replay requests.
-- The **`bt-replay-ready`** gate is dropped: the replay link points to our own page, which shows "posting soon" until the recording is up.
-- Field "BT SMS Consent" → **"BT SMS Event Consent"**, now alongside the marketing-consent fields.
-- Confirmation-text timing and Hawaii handling move server-side (§12).
-- Links live in **Custom Values**.
+| Finding | Fix |
+|---|---|
+| `bt-registered` fence misses Contact Created, earlier tags, replay requesters and more trigger types; blanket filters would cut PIA clients out during AEP; STOP is account-wide | `bt-contact` set first on every path; 2-minute guard on Contact Created; wider audit; PIA-client exemption; Nov 17 removal; DND note |
+| Raw attendee CSV would tag no-shows; late imports run both tracks; backward stage move blocked | Filter Attended = Yes, update-only import; BT · 05 goal and filter; BT · 04 removes from BT · 05 and may move back |
+| Editing a Wait doesn't affect people already waiting | `bt-replay-ready` gate restored |
+| S05 could land at 7 AM Pacific or 5 AM Hawaii; S02 at exactly 8 AM in Hawaii; PR/USVI/Guam/Canada out of window; S02 to S04 had no STOP line | S05 window 12 to 6:55 PM; Hawaii +5 min; no-SMS area codes (website); STOP and brand on every text |
+| Create/Update ran for every action (survey could blank name and phone); "update always" blanked consent and Zoom Status; first-touch gate failed for direct traffic | Contact action per branch (survey = email only); conditional writes; gate on BT Registered At |
+| Spouses sharing a phone overwrite each other or get double texts | FAQ: shared email or phone, register once; test cases added |
+| Plan B alerted on every registrant; "your link" was Zoom's sign-up page | `skipped` vs `failed`; M01Z variant; backfill clears `bt-zoom-failed` |
+| Live-day registrants got "see you Monday" | `event_phase` → M01T / M01L |
+| Rebookings untracked; replay click could move a booked contact back | Re-entry on for BT · 07 and 08; BT · 06 only from Missed Live |
+| Website fields were a hidden dependency | Built and tested in PR #8 (17 tests); merge before capturing the sample |
+| Copy risks: "a few spots left", "is out", empty book link, blast use vs FAQ, Medicare 48-hour scope, replay promised after it's down, too many Zoom emails | Rewritten (05); FAQ updated; 48-hour notice; M17 for closed replay; Zoom reminders off |
+| Shared settings (time zone, sending domain, deprecated trigger) | Don't change account settings; check in UI |

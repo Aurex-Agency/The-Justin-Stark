@@ -1,6 +1,6 @@
 # Phase 2: GoHighLevel tracking, pipeline and communications
 
-**Status:** approved, revised after independent review (see README review log).
+**Status:** approved, revised after independent review (see README review log). **The build-ready version is [04-ghl-build.md](04-ghl-build.md) (with copy in [05-ghl-messages.md](05-ghl-messages.md)); where they differ, 04 wins.**
 **Who builds:** Kalob in GHL (there is no GHL connection from this repo). Claude supplies this spec, test payloads, and all email/SMS copy.
 **Sub-account:** the existing webhook location (`MCFdomwXH4RRN6HkJgry`, also used by `/big-table/`) is Pontotoc Insurance Agency's live account. See check 1.
 
