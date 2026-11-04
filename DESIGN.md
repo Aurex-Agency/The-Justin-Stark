@@ -168,6 +168,152 @@ typography:
     fontSize: "0.68rem"
     fontWeight: 600
     letterSpacing: "0.22em"
+  boxtop-wordmark:
+    fontFamily: "'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif"
+    fontSize: "clamp(2.6rem, 11vw, 4.6rem)"
+    fontWeight: 900
+    lineHeight: 0.92
+    letterSpacing: "0.02em"
+  boxtop-wordmark-line:
+    fontFamily: "'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif"
+    fontSize: "clamp(1.5rem, 5.6vw, 2.2rem)"
+    fontWeight: 900
+    lineHeight: 0.92
+  boxtop-band-wordmark-wide:
+    fontFamily: "'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif"
+    fontSize: "3.3rem"
+    fontWeight: 900
+    lineHeight: 0.92
+  boxtop-band-wordmark:
+    fontFamily: "'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif"
+    fontSize: "2.5rem"
+    fontWeight: 900
+    lineHeight: 0.92
+  boxtop-band-wordmark-line-wide:
+    fontFamily: "'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif"
+    fontSize: "1.6rem"
+    fontWeight: 900
+    lineHeight: 0.92
+  boxtop-band-wordmark-line:
+    fontFamily: "'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif"
+    fontSize: "1.3rem"
+    fontWeight: 900
+    lineHeight: 0.92
+  boxtop-headline:
+    fontFamily: "'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif"
+    fontSize: "clamp(1.4rem, 5.9vw, 3.3rem)"
+    fontWeight: 900
+    lineHeight: 1.08
+    letterSpacing: "0.01em"
+  boxtop-headline-thanks:
+    fontFamily: "'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif"
+    fontSize: "clamp(2rem, 9vw, 3.4rem)"
+    fontWeight: 900
+    lineHeight: 1.08
+    letterSpacing: "0.01em"
+  boxtop-section:
+    fontFamily: "'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif"
+    fontSize: "clamp(1.65rem, 5.4vw, 2.6rem)"
+    fontWeight: 900
+    lineHeight: 1.08
+    letterSpacing: "0.01em"
+  boxtop-pull:
+    fontFamily: "'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif"
+    fontSize: "clamp(1.25rem, 4.4vw, 1.75rem)"
+    fontWeight: 800
+    lineHeight: 1.25
+  boxtop-figure:
+    fontFamily: "'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif"
+    fontSize: "1.5rem"
+    fontWeight: 900
+    lineHeight: 1.1
+  boxtop-faq-mark:
+    fontFamily: "'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif"
+    fontSize: "1.4rem"
+    fontWeight: 700
+  boxtop-title:
+    fontFamily: "'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif"
+    fontSize: "1.35rem"
+    fontWeight: 900
+    letterSpacing: "0.02em"
+  boxtop-title-small:
+    fontFamily: "'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif"
+    fontSize: "1.15rem"
+    fontWeight: 900
+  boxtop-body:
+    fontFamily: "'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif"
+    fontSize: "17px"
+    fontWeight: 400
+    lineHeight: 1.6
+  boxtop-button-thanks:
+    fontFamily: "'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif"
+    fontSize: "1.02rem"
+    fontWeight: 900
+    letterSpacing: "0.1em"
+  boxtop-marker:
+    fontFamily: "'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif"
+    fontSize: "1rem"
+    fontWeight: 900
+  boxtop-copy:
+    fontFamily: "'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif"
+    fontSize: "0.97rem"
+    fontWeight: 400
+    lineHeight: 1.5
+  boxtop-copy-small:
+    fontFamily: "'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif"
+    fontSize: "0.95rem"
+    fontWeight: 400
+  boxtop-copy-tight:
+    fontFamily: "'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif"
+    fontSize: "0.92rem"
+    fontWeight: 400
+  boxtop-note:
+    fontFamily: "'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif"
+    fontSize: "0.9rem"
+    fontWeight: 400
+  boxtop-small:
+    fontFamily: "'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif"
+    fontSize: "0.86rem"
+    fontWeight: 400
+  boxtop-hint:
+    fontFamily: "'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif"
+    fontSize: "0.82rem"
+    fontWeight: 400
+  boxtop-field-label:
+    fontFamily: "'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif"
+    fontSize: "0.8rem"
+    fontWeight: 700
+    letterSpacing: "0.06em"
+  boxtop-label:
+    fontFamily: "'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif"
+    fontSize: "0.78rem"
+    fontWeight: 700
+    letterSpacing: "0.16em"
+  boxtop-byline:
+    fontFamily: "'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif"
+    fontSize: "0.74rem"
+    fontWeight: 700
+    letterSpacing: "0.12em"
+  boxtop-caption:
+    fontFamily: "'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif"
+    fontSize: "0.72rem"
+    fontWeight: 700
+    letterSpacing: "0.16em"
+  boxtop-canon:
+    fontFamily: "'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif"
+    fontSize: "0.7rem"
+    fontWeight: 700
+    letterSpacing: "0.14em"
+  boxtop-strip:
+    fontFamily: "'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif"
+    fontSize: "0.68rem"
+    fontWeight: 700
+    letterSpacing: "0.12em"
+  boxtop-micro:
+    fontFamily: "'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif"
+    fontSize: "0.62rem"
+    fontWeight: 700
+    letterSpacing: "0.16em"
 rounded:
   none: "0"
   stamp: "2px"
@@ -386,6 +532,15 @@ Pages about the book use the book's own kit (Drive: *The Box Top Method — Bran
 **Contrast (measured):** indigo on ground ~9:1, use anywhere. Cream on sky and on indigo for bold display text and small caps on indigo. **Sky on ground is 2.84:1, so sky never carries text people must read**, even at 24px; the time line is indigo. Steel is decoration only.
 
 **Type:** Montserrat only, self-hosted variable woff2 (`/assets/fonts/Montserrat-var.woff2`, latin, 100 to 900). Headlines 800/900 all caps with slight tracking; labels 700 caps tracked .12 to .18em; body 400 at 17 to 18px, line-height 1.6.
+
+**Type scale** (the `boxtop-*` roles in the frontmatter, as shipped on `/theboxtop/launch/` and its thank-you page):
+- **Wordmark** (900, line-height .92): landing band BOX TOP `clamp(2.6rem, 11vw, 4.6rem)`, THE and METHOD `clamp(1.5rem, 5.6vw, 2.2rem)`. Thank-you band BOX TOP 2.5rem and THE/METHOD 1.3rem on phones, 3.3rem and 1.6rem at 960px and up.
+- **Headline** (900 caps, 1.08, .01em): landing H1 `clamp(1.4rem, 5.9vw, 3.3rem)`, thank-you H1 `clamp(2rem, 9vw, 3.4rem)`, section H2 `clamp(1.65rem, 5.4vw, 2.6rem)`. Pull line 800 caps `clamp(1.25rem, 4.4vw, 1.75rem)`, line-height 1.25.
+- **Figure** (900, 1.5rem): countdown digits, Four Corners numbers, the time line at desktop width. The FAQ open/close mark is 1.4rem 700.
+- **Title** (900 caps): form card heading and the thank-you video heading 1.35rem (.02em on the video heading); "What you get" heading and thank-you H2 1.15rem.
+- **Body** (400, 17px, 1.6): lede and prose 1.06rem, inputs and the landing button 1.05rem (button 900 caps, .12em). Thank-you buttons 1.02rem 900 caps, .1em; calendar buttons .82rem.
+- **Supporting copy:** list items and "Why now?" .97rem (1.5); time line, Four Corners copy, bonus titles, survey choices .95rem; card sub, checkmark reasons, FAQ questions .92rem; bonus lines and the form alert .9rem; bold caps leads and thank-you small print .86rem (800 for the leads); field errors .85rem 600; hints and footer .82rem (.8rem on the thank-you page). List markers are 1rem 900.
+- **Labels** (700 caps): field labels .8rem/.06em; section labels, consent and fine print .78rem (labels .16em); byline .74rem/.12em (.8rem/.14em wider); thank-you label .74rem/.16em; photo caption .72rem/.16em; Four Corners canon words and footer credit .7rem/.14 to .16em; billing strip .68rem/.12em (.74rem/.18em wider) and the countdown label .68rem; countdown units .62rem/.16em.
 
 **Wordmark:** THE BOX TOP METHOD, heaviest weight. On sky: THE and METHOD indigo, BOX TOP cream. Stacked (THE / BOX TOP / METHOD) in the title band on small screens. Never outlined, never a serif, never a different color split.
 
