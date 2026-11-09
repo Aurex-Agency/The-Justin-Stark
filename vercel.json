@@ -7,12 +7,26 @@
     { "source": "/BoxTop", "destination": "/theboxtop/launch/?utm_source=vanity&utm_medium=offline&utm_campaign=boxtop_launch", "permanent": false },
     { "source": "/Boxtop", "destination": "/theboxtop/launch/?utm_source=vanity&utm_medium=offline&utm_campaign=boxtop_launch", "permanent": false },
     { "source": "/BOXTOP", "destination": "/theboxtop/launch/?utm_source=vanity&utm_medium=offline&utm_campaign=boxtop_launch", "permanent": false },
-    { "source": "/TheBoxTop", "destination": "/theboxtop/launch/", "permanent": false }
+    { "source": "/TheBoxTop", "destination": "/theboxtop/launch/", "permanent": false },
+    { "source": "/freebies", "destination": "/theboxtop/freebies/", "permanent": false },
+    { "source": "/freebies/", "destination": "/theboxtop/freebies/", "permanent": false },
+    { "source": "/Freebies", "destination": "/theboxtop/freebies/", "permanent": false },
+    { "source": "/FREEBIES", "destination": "/theboxtop/freebies/", "permanent": false },
+    { "source": "/theboxtop/bonuses", "destination": "/theboxtop/freebies/", "permanent": false },
+    { "source": "/theboxtop/bonuses/", "destination": "/theboxtop/freebies/", "permanent": false }
   ],
   "headers": [
     {
       "source": "/theboxtop/launch/box-top-launch.ics",
       "headers": [{ "key": "Content-Type", "value": "text/calendar; charset=utf-8" }]
+    },
+    {
+      "source": "/theboxtop/freebies/legacy-planning-packet.pdf",
+      "headers": [{ "key": "Content-Disposition", "value": "inline; filename=\"Legacy Planning Packet.pdf\"" }]
+    },
+    {
+      "source": "/theboxtop/freebies/legacy-and-business-planning-packet.pdf",
+      "headers": [{ "key": "Content-Disposition", "value": "inline; filename=\"Legacy and Business Planning Packet.pdf\"" }]
     },
     {
       "source": "/api/(.*)",

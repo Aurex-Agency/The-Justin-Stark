@@ -39,16 +39,17 @@ Each spot is marked with a `REPLACE` or `DEMO ONLY` comment in `index.html`:
 - **Env vars (Vercel):** `ZOOM_ACCOUNT_ID`, `ZOOM_CLIENT_ID`, `ZOOM_CLIENT_SECRET`, `ZOOM_WEBINAR_ID` (numeric), `GHL_BOXTOP_WEBHOOK_URL`, plus the existing `META_CAPI_TOKEN`. Without the Zoom vars the page still works: people land in GHL and the thank-you page sends them to Zoom's own registration page as step 2.
 - **Time states** (pre / live / over) switch on the clock; on preview or local, `?now=2026-11-09T12:10:00-06:00` forces one.
 - **Redirects** (`vercel.json`, all 307): `/theboxtop` → the launch page; `/boxtop` → the launch page tagged `utm_source=vanity`.
+- **Freebies page:** `/theboxtop/freebies/` (noindex) is the hub for the five launch freebies: the Box Top Quiz, the Box Top Training (class slides), the Legacy Trust Finder, and the two planning packets. The quiz, training and Trust Finder cards open their claude.ai artifacts in a new tab, so those three artifacts have to be shared publicly. The two packets are hosted here as fillable PDFs (`theboxtop/freebies/legacy-planning-packet.pdf`, `legacy-and-business-planning-packet.pdf`, exported from their artifacts; `vercel.json` gives them readable save names). To update a packet, replace the PDF under the same file name. Short links `/freebies` and `/theboxtop/bonuses` (307) point to the page. To swap a tool for a hosted version later, change its `href` in the page.
 - **Legal:** `/privacy/` (Meta Pixel notice + opt-out, A2P mobile-data language) and `/terms/` (with `#sms` terms) are site-wide.
 - **Tests:** `node --test tests/*.test.js`. **Backfill** of people who registered through the raw Zoom link: `node tools/zoom-registrants-to-ghl.js --dry-run`.
 - `docs/`, `tests/` and `tools/` are excluded from deploys by `.vercelignore`.
 
 ## Meta Pixel (ID 4533371650216162)
 
-Installed on the homepage, `/big-table/`, `/big-table/thanks/`, `/theboxtop/launch/`, and `/theboxtop/launch/thanks/`. Events:
+Installed on the homepage, `/big-table/`, `/big-table/thanks/`, `/theboxtop/launch/`, `/theboxtop/launch/thanks/`, and `/theboxtop/freebies/`. Events:
 
 - `PageView` — every page
-- `ViewContent` — first form focus on `/theboxtop/launch/`
+- `ViewContent` — first form focus on `/theboxtop/launch/`; on `/theboxtop/freebies/`, the first click on each tool (`content_name` = the tool, `content_category: boxtop_freebie`)
 - `CompleteRegistration` — Box Top launch registration (server via `/api/boxtop-register`, browser on the thank-you page, shared `event_id`)
 - `Lead` — free-ticket form submit on `/big-table/`, the homepage contact form's thank-you state, and every landing on `/big-table/thanks/`
 - `InitiateCheckout` — any payment-link click on `/big-table/` (with value for the $49/$149 seats)
