@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Legacy Trust Finder · The Box Top Method</title>
+<meta name="description" content="Answer 10 quick questions about your family, property and goals. See which trusts may fit, what your heirs could owe in estate tax, and how to fund the plan.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://thejustinstark.com/theboxtop/trust-finder/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://thejustinstark.com/theboxtop/trust-finder/">
+<meta property="og:title" content="Legacy Trust Finder: Which Trust Protects Your Family Best?">
+<meta property="og:description" content="10 quick questions, about 3 minutes. See which trusts may fit, what your heirs could owe, and how to fund the plan.">
+<meta property="og:image" content="https://thejustinstark.com/theboxtop/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<link rel="icon" type="image/svg+xml" href="/theboxtop/assets/favicon.svg">
+<link rel="apple-touch-icon" href="/theboxtop/assets/apple-touch-icon.png">
+<meta name="theme-color" content="#2D378F">
+<link rel="preconnect" href="https://connect.facebook.net" crossorigin>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '4533371650216162');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=4533371650216162&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+<script>
+window.mtrack=function(name,params){
+  var id='ev.'+Date.now().toString(36)+'.'+Math.random().toString(36).slice(2,10);
+  if(window.fbq){fbq('track',name,params||{},{eventID:id})}
+  try{
+    var body=JSON.stringify({event_name:name,event_id:id,event_source_url:location.href,custom_data:params||{}});
+    if(navigator.sendBeacon){navigator.sendBeacon('/api/meta',new Blob([body],{type:'application/json'}))}
+    else if(window.fetch){fetch('/api/meta',{method:'POST',headers:{'Content-Type':'application/json'},body:body,keepalive:true})}
+  }catch(e){}
+};
+mtrack('PageView');
+</script>
+<link rel="preload" href="/assets/fonts/Montserrat-var.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face { font-family: 'Montserrat'; font-style: normal; font-weight: 100 900; font-display: swap; src: url('/assets/fonts/Montserrat-var.woff2') format('woff2'); }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+/* Layout: navy masthead band, then one centered working column (quiz card -> results -> lead form). */
+:root {
+  --navy: #2D378F;
+  --gold: #3598D0;
+  --gold-deep: #2D378F;
+  --bg: #F1F1F1;
+  --surface: #FFFFFF;
+  --surface-2: #F7F8FC;
+  --fg: #1E2347;
+  --muted: #565C7E;
+  --line: #DFE3E9;
+  --chip: #E4EDF6;
+  --band: #2D378F;
+  --band-fg: #FDFADD;
+  --ok: #2F6B4E;
+  --warn: #9E4A3F;
+  --focus: #3598D0;
+  --font-display: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 16px; line-height: 1.55; }
+.wrap { max-width: 760px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+
+/* masthead */
+.band { background: var(--band); color: var(--band-fg); }
+.band .wrap { padding-block: 22px 30px; }
+.brand { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;
+  border-bottom: 1px solid color-mix(in srgb, var(--gold) 55%, transparent); padding-bottom: 12px; }
+.wordmark { font-family: var(--font-display); font-size: 1.1rem; font-weight: 900; letter-spacing: .06em; text-transform: uppercase; }
+.tag { color: var(--gold); font-size: .68rem; font-weight: 700; letter-spacing: .28em; }
+.hero { padding-top: 22px; display: grid; gap: 10px; }
+.eyebrow { color: var(--gold); font-size: .72rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
+h1 { font-family: var(--font-display); font-weight: 500; font-size: clamp(2rem, 6vw, 2.9rem); line-height: 1.08; margin: 0; text-wrap: balance; }
+h1 em { color: var(--gold); font-style: italic; }
+.hero p { margin: 0; max-width: 60ch; color: color-mix(in srgb, var(--band-fg) 82%, transparent); }
+.facts { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: .82rem; color: color-mix(in srgb, var(--band-fg) 75%, transparent); }
+.facts span::before { content: ""; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); margin-right: 7px; vertical-align: 2px; }
+
+main .wrap { padding-block: 0 48px; display: grid; gap: 18px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 24px; min-width: 0; }
+.lift { margin-top: -18px; box-shadow: 0 10px 30px -18px rgba(15, 37, 65, .45); }
+
+/* progress */
+.progress-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: .8rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.bar { height: 6px; background: var(--chip); border-radius: 99px; overflow: hidden; margin: 10px 0 20px; }
+.bar i { display: block; height: 100%; background: var(--gold); border-radius: 99px; transition: width .35s ease; }
+.qtitle { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.35rem, 4vw, 1.7rem); line-height: 1.2; margin: 0 0 6px; text-wrap: balance; }
+.qhelp { color: var(--muted); margin: 0 0 18px; font-size: .92rem; }
+.opts { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px; }
+.opt { text-align: left; background: var(--surface-2); color: var(--fg); border: 1.5px solid var(--line); border-radius: 10px;
+  padding: 13px 14px; font: 500 .95rem/1.35 var(--font-body); cursor: pointer; display: flex; gap: 10px; align-items: flex-start; min-width: 0; }
+.opt:hover { border-color: var(--gold); }
+.opt .box { flex: 0 0 18px; height: 18px; margin-top: 1px; border: 1.5px solid var(--muted); border-radius: 50%; display: grid; place-items: center; }
+.opt.multi .box { border-radius: 4px; }
+.opt[aria-pressed="true"] { border-color: var(--gold); background: color-mix(in srgb, var(--gold) 14%, var(--surface)); }
+.opt[aria-pressed="true"] .box { border-color: var(--gold); background: var(--gold); }
+.opt[aria-pressed="true"] .box::after { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--navy); }
+.opt.multi[aria-pressed="true"] .box::after { border-radius: 1px; }
+.opt small { display: block; color: var(--muted); font-weight: 400; font-size: .8rem; margin-top: 2px; }
+.nav { display: flex; justify-content: space-between; gap: 10px; margin-top: 22px; }
+.btn { border: 0; border-radius: 10px; padding: 12px 20px; font: 600 .95rem var(--font-body); cursor: pointer; }
+.btn-primary { background: var(--navy); color: #F4F1EA; }
+.btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--line); }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2.5px solid var(--focus); outline-offset: 2px; }
+
+/* results */
+.res-head { display: grid; grid-template-columns: auto 1fr; gap: 20px; align-items: center; }
+.gauge { width: 112px; height: 112px; position: relative; }
+.gauge svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.gauge .num { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; font-family: var(--font-display); font-size: 2rem; line-height: 1; font-variant-numeric: tabular-nums; }
+.gauge .num small { display: block; font-family: var(--font-body); font-size: .62rem; letter-spacing: .14em; color: var(--muted); margin-top: 4px; }
+.res-head h2 { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.4rem, 4vw, 1.8rem); line-height: 1.15; margin: 0 0 6px; text-wrap: balance; }
+.res-head p { margin: 0; color: var(--muted); font-size: .93rem; }
+.money { margin-top: 18px; border-radius: 10px; padding: 14px 16px; background: var(--surface-2); border: 1px solid color-mix(in srgb, var(--gold) 50%, var(--line)); display: grid; gap: 4px; }
+.money .lab { font-size: .72rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-deep); }
+.money .big { font-family: var(--font-display); font-size: 1.6rem; font-variant-numeric: tabular-nums; }
+.money p { margin: 0; font-size: .88rem; color: var(--muted); }
+.section-lab { font-size: .74rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--gold-deep); margin: 0 0 -6px; }
+.match { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--surface); }
+.match-top { padding: 16px 18px 6px; display: flex; justify-content: space-between; gap: 12px; align-items: baseline; flex-wrap: wrap; }
+.match h3 { font-family: var(--font-display); font-weight: 600; font-size: 1.25rem; margin: 0; }
+.strength { font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 4px 10px; border-radius: 99px; white-space: nowrap; }
+.s-strong { background: var(--gold); color: var(--navy); }
+.s-good { background: var(--chip); color: var(--fg); }
+.s-maybe { background: transparent; color: var(--muted); border: 1px solid var(--line); }
+.match-body { padding: 0 18px 14px; }
+.match-body p { margin: 0 0 8px; }
+.why { margin: 0; padding-left: 18px; color: var(--muted); font-size: .9rem; }
+.why li { margin: 2px 0; }
+.ins { background: var(--surface-2); border-top: 1px solid var(--line); padding: 12px 18px; font-size: .9rem; }
+.ins b { display: block; font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 2px; }
+.also { font-size: .9rem; color: var(--muted); }
+
+/* box top tie-in */
+.boxtop h2 { font-family: var(--font-display); font-weight: 500; font-size: 1.45rem; margin: 4px 0 8px; text-wrap: balance; }
+.boxtop > p { margin: 0 0 14px; max-width: 62ch; }
+.corners { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 6px 0 14px; }
+.corner { border: 1.5px solid var(--line); border-radius: 10px; padding: 12px 14px; background: var(--surface-2); min-width: 0; }
+.corner b { display: block; font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
+.corner span { font-family: var(--font-display); font-size: 1.05rem; line-height: 1.25; }
+.corner.edge { border-color: var(--gold); background: color-mix(in srgb, var(--gold) 12%, var(--surface)); }
+.corner.edge b { color: var(--gold-deep); }
+.edge-note { font-size: .9rem; color: var(--muted); margin: 0 0 12px; }
+.refrain { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; color: var(--gold-deep); margin: 0; }
+.book { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); font-size: .85rem; color: var(--muted); }
+@media (max-width: 420px) { .corners { grid-template-columns: 1fr; } }
+
+/* lead form */
+.lead h2 { font-family: var(--font-display); font-weight: 500; font-size: 1.6rem; margin: 0 0 6px; }
+.lead > p { margin: 0 0 18px; color: var(--muted); }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.grid .full { grid-column: 1 / -1; }
+label.f { display: grid; gap: 5px; font-size: .82rem; font-weight: 600; min-width: 0; }
+input, select, textarea { font: 400 1rem var(--font-body); color: var(--fg); background: var(--surface-2); border: 1.5px solid var(--line); border-radius: 9px; padding: 11px 12px; width: 100%; min-width: 0; }
+textarea { min-height: 70px; resize: vertical; }
+.consent { display: flex; gap: 10px; align-items: flex-start; font-size: .78rem; color: var(--muted); font-weight: 400; }
+.consent input { width: 18px; height: 18px; flex: 0 0 18px; margin-top: 2px; }
+.err { color: var(--warn); font-size: .85rem; min-height: 1.2em; margin: 8px 0 0; }
+.done { border-left: 4px solid var(--ok); padding: 6px 0 6px 14px; }
+.done h2 { margin-bottom: 4px; }
+.contact-box { display: grid; gap: 8px; background: var(--surface-2); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; margin-top: 12px; }
+.contact-box .row { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; align-items: center; }
+.contact-box .val { font-weight: 600; user-select: all; font-variant-numeric: tabular-nums; }
+.mini { font: 600 .78rem var(--font-body); background: var(--chip); color: var(--fg); border: 0; border-radius: 7px; padding: 6px 10px; cursor: pointer; }
+.fine { font-size: .74rem; color: var(--muted); line-height: 1.5; }
+
+@media (max-width: 560px) {
+  .card { padding: 18px; }
+  .res-head { grid-template-columns: 1fr; justify-items: start; }
+  .grid { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) { .bar i { transition: none; } }
+
+/* site additions: way back to the freebies, honeypot, legal footer */
+.back { color: var(--band-fg); font: 600 .78rem var(--font-body); text-decoration: none; border: 1px solid var(--gold); border-radius: 999px; padding: 7px 14px; white-space: nowrap; }
+.back:hover { background: color-mix(in srgb, var(--gold) 25%, transparent); }
+.back:focus-visible { outline: 2.5px solid var(--gold); outline-offset: 2px; }
+.hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.lead .fine a, .site-foot a { color: var(--navy); }
+.site-foot { color: var(--muted); font-size: .78rem; line-height: 1.55; padding: 0 0 44px; }
+.site-foot p { margin: 0 0 8px; }
+.site-foot nav { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 10px; }
+</style>
+</head>
+<body>
+
+<header class="band">
+  <div class="wrap">
+    <div class="brand">
+      <div>
+        <div class="wordmark">The Box Top Method</div>
+        <div class="tag">BY JUSTIN L STARK &bull; PRESENTED BY PONTOTOC INSURANCE AGENCY</div>
+      </div>
+      <a class="back" href="/theboxtop/freebies/">&larr; All free tools</a>
+    </div>
+    <div class="hero">
+      <div class="eyebrow">Legacy Trust Finder &middot; A Box Top tool</div>
+      <h1>Which trust protects <em>your</em> family best?</h1>
+      <p>Answer 10 quick questions about your family, property, and goals. You'll see the trusts that fit your situation, what your heirs could owe, and how to fund the plan.</p>
+      <div class="facts"><span>About 3 minutes</span><span>No account needed</span><span>Results on screen right away</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <section class="card lift" id="quiz" aria-live="polite"></section>
+    <div id="results" hidden style="display:grid;gap:18px"></div>
+    <p class="fine" id="disclaimer">Pontotoc Insurance Agency provides insurance and annuity products and does not provide legal or tax advice or draft trusts. Results are educational estimates based on 2026 federal limits ($15M estate tax exemption per person, 40% top rate) and your answers; your attorney and CPA should design any trust. Insurance guarantees depend on the claims-paying ability of the issuing carrier.</p>
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <p>Presented by Pontotoc Insurance Agency &middot; Published by Game Changer Publishing</p>
+    <p>This page uses cookies and the Meta Pixel to measure our ads. See how, and how to opt out, in our <a href="/privacy/#cookies">Privacy Policy</a>.</p>
+    <nav aria-label="Legal"><a href="/theboxtop/freebies/">All free tools</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms</a><a href="/terms/#sms">SMS Terms</a></nav>
+  </div>
+</footer>
+<script src="/theboxtop/assets/tools.js"></script>
+
+<script>
+const SITE = { agencyPhone: "662-200-2249", agencyEmail: "justin@pontotocinsuranceagency.com", agentName: "Justin Stark" };
+
+const QUESTIONS = [
+  { id: "marital", title: "What's your marital status?", help: "Married couples can use two estate tax exemptions and some trusts built for spouses.",
+    options: [["married","Married"],["single","Single"],["widowed","Widowed"],["remarried","Remarried, with a blended family"]] },
+  { id: "worth", title: "Roughly what is everything you own worth?", help: "Include your home, land, business, retirement accounts, savings, and life insurance death benefits.",
+    options: [["u1","Under $1 million"],["1to5","$1 to $5 million"],["5to15","$5 to $15 million"],["15to30","$15 to $30 million"],["30p","Over $30 million"]] },
+  { id: "business", title: "Do you own a business?", help: "",
+    options: [["none","No"],["owner","Yes, an LLC or sole proprietorship"],["scorp","Yes, an S corporation"],["family","Yes, and family members work in it"]] },
+  { id: "realestate", title: "What real estate do you own?", help: "",
+    options: [["home","My home only"],["land","Land, farm, or rental property"],["multistate","Property in more than one state"],["none","None right now"]] },
+  { id: "priority", title: "What matters most when your estate passes on?", help: "Pick the one that matters most.",
+    options: [["probate","Avoid probate and keep it private"],["taxes","Keep taxes as low as possible"],["protect","Protect heirs from divorce, lawsuits, or bad decisions"],["keep","Keep the business or land in the family"],["charity","Leave a gift to my church or a charity"]] },
+  { id: "family", title: "Does any of this describe your family?", help: "Choose all that apply.", multi: true,
+    options: [["minors","Minor children or grandchildren"],["special","A child or grandchild with special needs"],["spender","An heir who struggles with money"],["blended","Children from a prior marriage"],["nonef","None of these"]] },
+  { id: "liability", title: "Does your work carry lawsuit risk?", help: "Contractors, landlords, doctors, and most business owners say yes.",
+    options: [["yes","Yes"],["no","No"],["unsure","Not sure"]] },
+  { id: "ltc", title: "How do you feel about long-term care costs?", help: "A year in a nursing home now often costs over $100,000.",
+    options: [["worried","Worried, and I have no plan"],["planned","I have a plan or coverage"],["unsure","I haven't thought about it"]] },
+  { id: "insurance", title: "What life insurance do you have today?", help: "",
+    options: [["none","None"],["term","Term life only"],["perm","Permanent life (whole, universal, or IUL)"],["unsure","I'm not sure what I have"]] },
+  { id: "plan", title: "What estate plan do you have now?", help: "",
+    options: [["none","Nothing in place"],["will","A will only"],["oldtrust","A trust that's more than 5 years old"],["trust","A current trust"]] },
+];
+
+const TRUSTS = {
+  rlt: { name: "Revocable living trust", short: "RLT",
+    what: "Keeps your estate out of probate, so your family gets property quickly and privately while you keep full control.",
+    ins: "Naming the trust as beneficiary of your life insurance and annuities lets the money be managed for young or inexperienced heirs." },
+  ilit: { name: "Irrevocable life insurance trust", short: "ILIT",
+    what: "Owns a life insurance policy so the death benefit stays outside your taxable estate and pays taxes without forcing a sale.",
+    ins: "This trust exists to hold life insurance. A survivorship (second-to-die) policy on a married couple is the classic fit." },
+  slat: { name: "Spousal lifetime access trust", short: "SLAT",
+    what: "One spouse gifts assets into a trust for the other, moving them and their growth out of the estate while the family keeps access.",
+    ins: "A policy on the gifting spouse replaces the access the family would lose if the other spouse passes first." },
+  dynasty: { name: "Dynasty trust", short: "",
+    what: "Holds wealth for children, grandchildren, and beyond, avoiding estate tax at each generation. Tennessee allows these to last up to 360 years.",
+    ins: "Permanent life insurance inside the trust can turn modest yearly gifts into a multi-generation legacy fund." },
+  succession: { name: "Business succession trust (GRAT or IDGT)", short: "",
+    what: "Transfers a growing business to the next generation while freezing its value for estate tax purposes.",
+    ins: "Life insurance on the owner provides cash to keep the business running, fund a buy-sell agreement, or pay off the trust's note." },
+  scorp: { name: "S corporation-eligible trust (QSST or ESBT)", short: "",
+    what: "S corporations can only be owned by certain trusts. The wrong trust can end the S election, so this design step matters.",
+    ins: "Pair it with a funded buy-sell agreement and key-person coverage so ownership changes hands smoothly." },
+  crt: { name: "Charitable remainder trust", short: "CRT",
+    what: "Sell appreciated land or stock inside the trust with no capital gains tax, receive income for life, and leave the rest to charity.",
+    ins: "A wealth replacement policy in an ILIT gives your children back what went to charity." },
+  tnist: { name: "Asset protection trust", short: "",
+    what: "A Tennessee investment services trust shields assets from future lawsuits and creditors while you can still benefit.",
+    ins: "Annuities and life insurance cash value carry their own state creditor protections, often with no trust required." },
+  spendthrift: { name: "Spendthrift protection", short: "",
+    what: "A provision that keeps an heir's share safe from their creditors, a divorce, or their own spending.",
+    ins: "Life insurance paid into a spendthrift trust arrives as protected income rather than a lump sum." },
+  snt: { name: "Special needs trust", short: "",
+    what: "Provides for a loved one with a disability without disqualifying them from SSI or Medicaid.",
+    ins: "Life insurance payable to the trust is the most common way to fund lifetime care." },
+  mapt: { name: "Medicaid asset protection trust", short: "",
+    what: "Moves assets out of reach for nursing home Medicaid eligibility. It must be set up at least 5 years before care is needed.",
+    ins: "Hybrid life and long-term care policies and Medicaid-compliant annuities are alternatives worth comparing." },
+};
+
+const WORTH_MID = { u1: 0.5e6, "1to5": 3e6, "5to15": 10e6, "15to30": 22e6, "30p": 45e6 };
+const BIG = (a) => a.worth === "15to30" || a.worth === "30p";
+const MID = (a) => a.worth === "5to15";
+
+function score(a) {
+  const fam = a.family || [];
+  const s = {}; const why = {};
+  for (const k in TRUSTS) { s[k] = 0; why[k] = []; }
+  const add = (k, n, reason) => { s[k] += n; if (reason && !why[k].includes(reason)) why[k].push(reason); };
+  const married = a.marital === "married" || a.marital === "remarried";
+  const exemption = married ? 30e6 : 15e6;
+  const mid = WORTH_MID[a.worth] || 0;
+  const overEx = mid > exemption;
+  const hasBiz = a.business && a.business !== "none";
+
+  // Revocable living trust
+  add("rlt", 2);
+  if (a.plan === "none") add("rlt", 3, "You have no estate plan in place yet.");
+  if (a.plan === "will") add("rlt", 3, "A will alone still sends your estate through probate.");
+  if (a.plan === "oldtrust") add("rlt", 1, "Your trust is more than 5 years old and worth reviewing.");
+  if (a.realestate === "multistate") add("rlt", 2, "Property in more than one state can mean probate in each state.");
+  if (a.priority === "probate") add("rlt", 3, "Avoiding probate is your top priority.");
+  if (fam.includes("minors")) add("rlt", 1, "A trust manages money for minor children until they're ready.");
+  if (hasBiz) add("rlt", 1, "A trust keeps your business running without waiting on a court.");
+
+  // ILIT
+  if (overEx) add("ilit", 5, "Your estate is likely above the federal exemption, so heirs could owe 40% on the excess.");
+  else if (BIG(a)) add("ilit", 3, "Your estate is close to the federal exemption.");
+  else if (MID(a)) add("ilit", 2, "Your estate is large enough that liquidity at death matters.");
+  if ((hasBiz || a.realestate === "land") && mid >= 3e6) add("ilit", 2, "Much of your wealth is in a business or land, which is hard to sell quickly for cash.");
+  if (a.priority === "taxes") add("ilit", 2, "Keeping taxes low is your top priority.");
+  if (a.priority === "keep") add("ilit", 2, "Insurance cash lets your family keep the business or land instead of selling it.");
+  if ((a.insurance === "none" || a.insurance === "term" || a.insurance === "unsure") && mid >= 3e6) add("ilit", 2, "You don't have permanent coverage designed to last for life.");
+
+  // SLAT
+  if (married && BIG(a)) add("slat", 4, "As a married couple near or above the exemption, you can move growth out while keeping family access.");
+  else if (married && MID(a)) add("slat", 1, "Married couples with growing estates can lock in today's exemption.");
+  if (married && a.priority === "taxes") add("slat", 1);
+
+  // Dynasty
+  if (BIG(a)) add("dynasty", 3, "Your estate is large enough to plan for grandchildren and beyond.");
+  else if (MID(a)) add("dynasty", 1);
+  if (a.priority === "keep") add("dynasty", 3, "Keeping the business or land in the family for generations is your goal.");
+  if (a.priority === "protect") add("dynasty", 1);
+  if (fam.includes("minors") && mid >= 5e6) add("dynasty", 1, "You have young heirs who could benefit for decades.");
+
+  // Business succession
+  if (hasBiz) add("succession", 3, "You own a business that will need to change hands someday.");
+  if (a.business === "family") add("succession", 3, "Family members already work in the business.");
+  if (hasBiz && a.priority === "keep") add("succession", 2, "Keeping the business in the family is your top priority.");
+  if (hasBiz && mid >= 5e6) add("succession", 1);
+
+  // S corp
+  if (a.business === "scorp") add("scorp", 4, "Your business is an S corporation, which limits which trusts can own shares.");
+
+  // CRT
+  if (a.priority === "charity") add("crt", 5, "Leaving a gift to your church or a charity matters to you.");
+  if (a.priority === "charity" && a.realestate === "land") add("crt", 2, "Appreciated land can be sold inside the trust with no capital gains tax.");
+  if (a.priority === "charity" && mid >= 5e6) add("crt", 1);
+
+  // Asset protection
+  if (a.liability === "yes") add("tnist", 4, "Your work carries lawsuit risk.");
+  if (a.liability === "unsure" && hasBiz) add("tnist", 2, "Business owners often carry more lawsuit exposure than they realize.");
+  if (a.realestate === "land" && a.liability !== "no") add("tnist", 1, "Rental and land ownership adds liability exposure.");
+  if (a.priority === "protect") add("tnist", 1);
+
+  // Spendthrift
+  if (fam.includes("spender")) add("spendthrift", 4, "An heir who struggles with money needs their share protected.");
+  if (fam.includes("blended") || a.marital === "remarried") add("spendthrift", 2, "Blended families need clear rules so assets reach the right children.");
+  if (a.priority === "protect") add("spendthrift", 3, "Protecting heirs from divorce, lawsuits, or bad decisions is your top priority.");
+
+  // Special needs
+  if (fam.includes("special")) add("snt", 8, "You have a loved one with special needs whose benefits must be protected.");
+
+  // Medicaid
+  if (a.ltc === "worried") add("mapt", 4, "You're worried about long-term care costs and have no plan yet.");
+  if (a.ltc === "unsure") add("mapt", 1);
+  if (mid < 5e6 && a.ltc !== "planned") add("mapt", 1);
+  if (mid >= 5e6) s.mapt -= 2;
+
+  const ranked = Object.keys(s).filter(k => s[k] >= 3 && why[k].length).sort((x, y) => s[y] - s[x]);
+  const top = ranked.slice(0, 3);
+  const others = ranked.slice(3, 6);
+
+  // Readiness score
+  let r = 100;
+  if (a.plan === "none") r -= 30; else if (a.plan === "will") r -= 20; else if (a.plan === "oldtrust") r -= 10;
+  if (a.insurance === "none") r -= 20; else if (a.insurance === "term" || a.insurance === "unsure") r -= 12;
+  if (overEx && a.insurance !== "perm") r -= 15;
+  if (hasBiz && a.plan !== "trust") r -= 8;
+  if (a.ltc === "worried") r -= 10; else if (a.ltc === "unsure") r -= 5;
+  if (a.realestate === "multistate" && (a.plan === "none" || a.plan === "will")) r -= 5;
+  if (fam.includes("special") && a.plan !== "trust") r -= 8;
+  r = Math.max(8, Math.min(96, r));
+
+  const tax = overEx ? Math.round((mid - exemption) * 0.4) : 0;
+  return { top, others, s, why, readiness: r, tax, mid, exemption, married };
+}
+
+/* ---------- state ---------- */
+const answers = {};
+let step = 0;
+let result = null;
+const referral = (() => { try { return decodeURIComponent((location.hash || "").slice(1)).replace(/[^a-z0-9-]/gi, "").slice(0, 40); } catch { return ""; } })();
+
+const $ = (sel) => document.querySelector(sel);
+const esc = (t) => String(t).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const fmt$ = (n) => "$" + n.toLocaleString("en-US");
+
+function renderQuestion() {
+  const q = QUESTIONS[step];
+  const val = answers[q.id];
+  const chosen = (k) => q.multi ? (val || []).includes(k) : val === k;
+  const canNext = q.multi ? (val && val.length) : !!val;
+  $("#quiz").innerHTML = `
+    <div class="progress-row"><span>Question ${step + 1} of ${QUESTIONS.length}</span><span>${Math.round(step / QUESTIONS.length * 100)}% done</span></div>
+    <div class="bar"><i style="width:${(step / QUESTIONS.length) * 100}%"></i></div>
+    <h2 class="qtitle">${esc(q.title)}</h2>
+    ${q.help ? `<p class="qhelp">${esc(q.help)}</p>` : `<p class="qhelp"></p>`}
+    <div class="opts" role="${q.multi ? "group" : "radiogroup"}" aria-label="${esc(q.title)}">
+      ${q.options.map(([k, label]) => `<button type="button" id="opt-${q.id}-${k}" class="opt ${q.multi ? "multi" : ""}" data-k="${k}" aria-pressed="${chosen(k)}"><span class="box" aria-hidden="true"></span><span>${esc(label)}</span></button>`).join("")}
+    </div>
+    <div class="nav">
+      <button type="button" class="btn btn-ghost" id="backBtn" ${step === 0 ? "disabled" : ""}>Back</button>
+      <button type="button" class="btn btn-primary" id="nextBtn" ${canNext ? "" : "disabled"}>${step === QUESTIONS.length - 1 ? "See my results" : "Next"}</button>
+    </div>`;
+  $("#quiz").querySelectorAll(".opt").forEach(b => b.addEventListener("click", () => pick(q, b.dataset.k)));
+  $("#backBtn").addEventListener("click", () => { if (step > 0) { step--; renderQuestion(); } });
+  $("#nextBtn").addEventListener("click", next);
+}
+
+function pick(q, k) {
+  if (q.multi) {
+    let v = new Set(answers[q.id] || []);
+    if (k === "nonef") v = new Set(v.has("nonef") ? [] : ["nonef"]);
+    else { v.delete("nonef"); v.has(k) ? v.delete(k) : v.add(k); }
+    answers[q.id] = [...v];
+    renderQuestion();
+  } else {
+    answers[q.id] = k;
+    renderQuestion();
+    setTimeout(next, 180);
+  }
+}
+
+function next() {
+  const q = QUESTIONS[step];
+  const v = answers[q.id];
+  if (!(q.multi ? v && v.length : v)) return;
+  if (step < QUESTIONS.length - 1) { step++; renderQuestion(); $("#quiz").scrollIntoView({ block: "nearest" }); }
+  else showResults();
+}
+
+function strengthOf(n, i) {
+  if (n >= 7 || (i === 0 && n >= 5)) return ["Strong match", "s-strong"];
+  if (n >= 4) return ["Good fit", "s-good"];
+  return ["Worth discussing", "s-maybe"];
+}
+
+function gauge(v) {
+  const c = 2 * Math.PI * 46, off = c * (1 - v / 100);
+  const col = v >= 70 ? "var(--ok)" : v >= 45 ? "var(--gold)" : "var(--warn)";
+  return `<div class="gauge" role="img" aria-label="Legacy readiness ${v} out of 100">
+    <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="none" stroke="var(--chip)" stroke-width="8"/>
+    <circle cx="50" cy="50" r="46" fill="none" stroke="${col}" stroke-width="8" stroke-linecap="round" stroke-dasharray="${c}" stroke-dashoffset="${off}"/></svg>
+    <div class="num"><div>${v}<small>OF 100</small></div></div></div>`;
+}
+
+function showResults() {
+  result = score(answers);
+  const { top, others, s, why, readiness, tax, exemption, married } = result;
+  $("#quiz").hidden = true;
+  const label = readiness >= 70 ? "Your plan has a solid base" : readiness >= 45 ? "Your plan has gaps to close" : "Your family is exposed today";
+  const sub = readiness >= 70 ? "A review can confirm your trust and coverage still match your estate." : "The trusts below address the biggest gaps in your answers. Each one works best when it's funded properly.";
+  const moneyBox = tax > 0
+    ? `<div class="money"><span class="lab">Estimated federal estate tax</span><span class="big">${fmt$(tax)}</span>
+       <p>Based on the middle of the range you chose, minus the ${fmt$(exemption)} ${married ? "married couple" : "individual"} exemption, taxed at 40%. It's due about 9 months after death, often before a business or land can be sold.</p></div>`
+    : `<div class="money"><span class="lab">Estate tax picture</span><span class="big">Likely under today's exemption</span>
+       <p>Your heirs may owe no federal estate tax at today's ${fmt$(exemption)} limit. Probate costs, delays, income taxes on retirement accounts, and care costs can still shrink what they receive.</p></div>`;
+  const cards = top.map((k, i) => {
+    const t = TRUSTS[k]; const [lab, cls] = strengthOf(s[k], i);
+    return `<article class="match">
+      <div class="match-top"><h3>${esc(t.name)}</h3><span class="strength ${cls}">${lab}</span></div>
+      <div class="match-body"><p>${esc(t.what)}</p><ul class="why">${why[k].slice(0, 3).map(w => `<li>${esc(w)}</li>`).join("")}</ul></div>
+      <div class="ins"><b>How life insurance fits</b>${esc(t.ins)}</div>
+    </article>`;
+  }).join("");
+  const alsoHtml = others.length ? `<p class="also">Also worth raising with your planner: ${others.map(k => esc(TRUSTS[k].name)).join(", ")}.</p>` : "";
+
+  $("#results").innerHTML = `
+    <section class="card lift">
+      <div class="res-head">${gauge(readiness)}
+        <div><div class="eyebrow" style="color:var(--gold-deep)">Your legacy readiness</div><h2>${label}</h2><p>${sub}</p></div>
+      </div>
+      ${moneyBox}
+    </section>
+    <p class="section-lab">Your top trust matches</p>
+    ${cards}
+    ${alsoHtml}
+    <section class="card boxtop">
+      <div class="eyebrow" style="color:var(--gold-deep)">Where this fits in The Box Top</div>
+      <h2>A trust is one piece of the puzzle</h2>
+      <p>Most families have all the pieces and no picture of how they fit. The Box Top frames that picture with four corners. Before you build a trust, it helps to see the whole table.</p>
+      <div class="corners">
+        <div class="corner"><b>Corner One</b><span>Where your money sits</span></div>
+        <div class="corner edge"><b>Corner Two</b><span>What you want your money to do</span></div>
+        <div class="corner edge"><b>Corner Three</b><span>What it costs in tax</span></div>
+        <div class="corner"><b>Corner Four</b><span>How your money works</span></div>
+      </div>
+      <p class="edge-note">Legacy planning lives on the edge where Corner Two meets Corner Three. Your attorney drafts the trust and your CPA handles the tax side. We help you see the whole picture first, so the trust fits everything else you own.</p>
+      <p class="refrain">Clarity precedes confidence.</p>
+      <p class="book"><b>The Box Top</b> by Justin Stark came out November 9, 2026.</p>
+    </section>
+    <section class="card lead" id="leadCard">${leadFormHtml()}</section>
+    <div><button type="button" class="btn btn-ghost" id="restartBtn">Retake the quiz</button></div>`;
+  $("#results").hidden = false;
+  wireLeadForm();
+  $("#restartBtn").addEventListener("click", () => { for (const k in answers) delete answers[k]; step = 0; result = null; $("#results").hidden = true; $("#quiz").hidden = false; renderQuestion(); window.scrollTo({ top: 0 }); });
+  $("#results").scrollIntoView({ block: "start" });
+}
+
+function leadFormHtml() {
+  return `<h2>Get your free Box Top Review</h2>
+    <p>A licensed agent will walk through your results, lay out all four corners of your picture on one page, and help you find an estate attorney if you need one. No cost and no obligation.</p>
+    <form id="leadForm" novalidate>
+      <div class="grid">
+        <label class="f">First name<input id="fFirst" autocomplete="given-name" required></label>
+        <label class="f">Last name<input id="fLast" autocomplete="family-name" required></label>
+        <label class="f">Mobile phone<input id="fPhone" type="tel" autocomplete="tel" inputmode="tel" required placeholder="(662) 555-0123"></label>
+        <label class="f">Email<input id="fEmail" type="email" autocomplete="email" required placeholder="you@example.com"></label>
+        <label class="f">State<input id="fState" autocomplete="address-level1" placeholder="MS"></label>
+        <label class="f">Best time to reach you<select id="fTime"><option>Morning</option><option>Afternoon</option><option>Evening</option></select></label>
+        <label class="f full">Anything we should know? (optional)<textarea id="fNotes" placeholder="For example, we just sold land, or I want to cover estate taxes for the farm."></textarea></label>
+        <label class="consent full"><input type="checkbox" id="fSms"><span>Yes, text me about my results from Justin Stark / Pontotoc Insurance Agency. Msg frequency varies. Msg &amp; data rates may apply. Reply STOP to opt out, HELP for help. Consent is not a condition of purchase.</span></label>
+        <div class="hp" aria-hidden="true"><label>Company<input id="company" tabindex="-1" autocomplete="off"></label></div>
+      </div>
+      <p class="err" id="formErr" role="alert"></p>
+      <button class="btn btn-primary" id="submitBtn" type="submit">Request my free review</button>
+      <p class="fine" style="margin:12px 0 0">By sending this, you're asking Pontotoc Insurance Agency to call or email you about your results. <a href="/privacy/">Privacy Policy</a> &middot; <a href="/terms/#sms">SMS Terms</a></p>
+    </form>`;
+}
+
+function summaryText(lead) {
+  const r = result;
+  return [
+    `Legacy Trust Finder results for ${lead.first} ${lead.last}`,
+    `Legacy readiness: ${r.readiness}/100`,
+    r.tax > 0 ? `Estimated federal estate tax: ${fmt$(r.tax)}` : `Estate tax: likely under today's exemption`,
+    `Top matches: ${r.top.map(k => TRUSTS[k].name).join("; ")}`,
+    `Phone: ${lead.phone}  Email: ${lead.email}  State: ${lead.state || "-"}  Best time: ${lead.time}`,
+    lead.notes ? `Notes: ${lead.notes}` : "",
+  ].filter(Boolean).join("\n");
+}
+
+function answersText() {
+  return QUESTIONS.map(q => {
+    const a = answers[q.id];
+    if (q.kind === "rate") return `${q.title} ${q.items.map(([k, lab]) => lab + ": " + (a || {})[k]).join("; ")}`;
+    const picked = [].concat(a === undefined ? [] : a).map(x => (q.options.find(o => o[0] === x) || [x, x])[1]);
+    return `${q.title} ${picked.join("; ") || "-"}`;
+  }).join("\n");
+}
+
+function wireLeadForm() {
+  const form = $("#leadForm");
+  form.addEventListener("submit", async (ev) => {
+    ev.preventDefault();
+    const v = (id) => $("#" + id).value.trim();
+    const lead = {
+      first: v("fFirst"), last: v("fLast"), phone: v("fPhone"), email: v("fEmail"), state: v("fState"),
+      time: $("#fTime").value, notes: v("fNotes"), smsConsent: $("#fSms").checked, company: v("company"),
+    };
+    const err = $("#formErr");
+    if (!lead.first || !lead.last) return err.textContent = "Enter your first and last name.";
+    if (lead.phone.replace(/\D/g, "").length < 10) return err.textContent = "Enter a 10-digit phone number so an agent can reach you.";
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(lead.email)) return err.textContent = "Enter a valid email address, like name@example.com.";
+    err.textContent = "";
+    lead.referredBy = referral || "";
+    lead.toolResult = `Readiness ${result.readiness}/100 · ${result.tax > 0 ? "Est. estate tax " + fmt$(result.tax) : "Under the exemption"} · Top: ${result.top.map(k => TRUSTS[k].name).join(", ")}`;
+    lead.toolSummary = summaryText(lead) + "\n\n" + answersText();
+    const btn = $("#submitBtn"); btn.disabled = true; btn.textContent = "Sending…";
+    const res = await btTools.send("trust-finder", lead);
+    if (res.outcome === "invalid") { err.textContent = res.message; btn.disabled = false; btn.textContent = "Request my free review"; return; }
+    showDone(res.outcome, lead);
+  });
+}
+
+function showDone(outcome, lead) {
+  const card = $("#leadCard");
+  const contact = `<div class="contact-box">
+      <div class="row"><span>Call or text ${esc(SITE.agentName)}</span><span class="val">${esc(SITE.agencyPhone)}</span></div>
+      <div class="row"><span>Email</span><span class="val">${esc(SITE.agencyEmail)}</span></div>
+      <div class="row"><span class="fine">Copy your results and send them with your message.</span><button type="button" class="mini" id="copyBtn">Copy my results</button></div>
+    </div>`;
+  if (outcome === "saved") {
+    card.innerHTML = `<div class="done"><h2>Request received</h2><p>Thanks, ${esc(lead.first)}. A licensed Pontotoc Insurance Agency agent will reach out ${lead.time === "Evening" ? "in the evening" : "in the " + lead.time.toLowerCase()} within one business day to walk through your results.</p></div>${contact}`;
+  } else {
+    card.innerHTML = `<div class="done" style="border-left-color:var(--gold)"><h2>One last step</h2><p>This page can't send your request from here, ${esc(lead.first)}. Reach out directly and we'll set up your free Box Top Review.</p></div>${contact}`;
+  }
+  $("#copyBtn").addEventListener("click", async (e) => {
+    const text = summaryText(lead);
+    try { await navigator.clipboard.writeText(text); e.target.textContent = "Copied"; }
+    catch { const ta = document.createElement("textarea"); ta.value = text; ta.style.width = "100%"; card.appendChild(ta); ta.select(); e.target.textContent = "Select and copy the text below"; }
+  });
+}
+
+renderQuestion();
+</script>
+
+
+</body></html>

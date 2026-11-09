@@ -322,3 +322,79 @@ test('area codes: Hawaii flagged; PR/USVI/Guam/Canada get no texts even if boxes
   assert.equal(ghl.phone_area_flag, 'hawaii');
   assert.equal(ghl.sms_consent, 'yes');
 });
+
+// ---------- Box Top tools: quiz and Legacy Trust Finder lead forms ----------
+
+const QUIZ_LEAD = {
+  action: 'quiz', first_name: 'Jane', last_name: 'Doe', email: 'jane@example.com', phone: '662-555-0123',
+  state: 'MS', best_time: 'Evening', live_class: true, sms_consent: true, elapsed_ms: 120000,
+  tool_result: 'The Income Seeker · Clarity 7/16 · Gap: Corner Two',
+  tool_summary: 'Box Top Quiz results for Jane Doe\nRetiree type: The Income Seeker',
+  landing_page: 'https://thejustinstark.com/theboxtop/quiz/',
+};
+
+test('quiz lead: GHL gets the tool fields and tool consent; Meta gets a bare Lead; no Zoom', async () => {
+  at('2026-11-12T15:00:00Z');
+  const h = load(FULL_ENV);
+  const calls = mockFetch([...ZOOM_OK, ...GHL_OK, ...META_OK]);
+  const r = await run(h, QUIZ_LEAD);
+  assert.equal(r.status, 200);
+  assert.equal(r.json.ok, true);
+  assert.equal(r.json.action, 'quiz');
+  assert.ok(r.json.event_id);
+  assert.ok(!calls.some((c) => c.url.includes('zoom.us')));
+
+  const ghl = calls.find((c) => c.url.includes('leadconnectorhq')).body;
+  assert.equal(ghl.action, 'quiz');
+  assert.equal(ghl.event, 'boxtop-tools');
+  assert.equal(ghl.tool, 'The Box Top Quiz');
+  assert.equal(ghl.phone, '+16625550123');
+  assert.equal(ghl.best_time, 'Evening');
+  assert.equal(ghl.live_class, 'yes');
+  assert.equal(ghl.state, 'MS');
+  assert.match(ghl.tool_summary, /\nRetiree type/); // line breaks kept
+  assert.equal(ghl.sms_consent, 'yes');
+  assert.equal(ghl.consent_version, 'bt-tool-sms-v1');
+  assert.match(ghl.consent_text, /^Yes, text me about my results/);
+  assert.equal(ghl.sms_marketing_consent, 'no');
+  assert.equal(ghl.registered_at, '');
+  assert.equal(ghl.event_phase, '');
+  assert.equal(ghl.sms_confirm_ok, 'no');
+  assert.ok(ghl.submitted_at);
+
+  const meta = calls.find((c) => c.url.includes('graph.facebook.com')).body.data[0];
+  assert.equal(meta.event_name, 'Lead');
+  assert.equal(meta.event_id, r.json.event_id);
+  assert.deepEqual(meta.custom_data, { content_name: 'The Box Top Quiz', content_category: 'boxtop_tool' });
+  assert.ok(!JSON.stringify(meta).includes('Income Seeker')); // never the answers
+});
+
+test('trust finder lead: notes kept, no live-class flag, marketing consent ignored', async () => {
+  const h = load(FULL_ENV);
+  const calls = mockFetch([...GHL_OK, ...META_OK]);
+  const r = await run(h, Object.assign({}, QUIZ_LEAD, {
+    action: 'trust-finder', live_class: true, sms_consent: false, sms_marketing_consent: true,
+    best_time: 'Midnight', notes: 'We just sold land.\nAsk about the farm.',
+  }));
+  assert.equal(r.status, 200);
+  const ghl = calls.find((c) => c.url.includes('leadconnectorhq')).body;
+  assert.equal(ghl.tool, 'Legacy Trust Finder');
+  assert.equal(ghl.live_class, '');
+  assert.equal(ghl.best_time, ''); // not one of the form's options
+  assert.equal(ghl.notes, 'We just sold land.\nAsk about the farm.');
+  assert.equal(ghl.sms_consent, 'no');
+  assert.equal(ghl.sms_marketing_consent, 'no');
+  assert.equal(ghl.consent_version, '');
+});
+
+test('tool lead: phone is required; GHL down means 502 so the page shows the contact box', async () => {
+  const h = load(FULL_ENV);
+  mockFetch([...GHL_OK, ...META_OK]);
+  let r = await run(h, Object.assign({}, QUIZ_LEAD, { phone: '' }));
+  assert.equal(r.status, 422);
+  assert.ok(r.json.errors.phone);
+  mockFetch([['leadconnectorhq.com', () => ok({}, 500)], ...META_OK]);
+  r = await run(h, QUIZ_LEAD);
+  assert.equal(r.status, 502);
+  assert.equal(r.json.ok, false);
+});

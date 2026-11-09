@@ -1,0 +1,980 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Box Top Training · The Box Top Method</title>
+<meta name="description" content="The four-module Box Top class by Justin L Stark, slide by slide, with Justin's notes under each one. Free with The Box Top Method.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://thejustinstark.com/theboxtop/training/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://thejustinstark.com/theboxtop/training/">
+<meta property="og:title" content="The Box Top Training · The Box Top Method">
+<meta property="og:description" content="Four modules, slide by slide, with Justin's notes under each one. Free with The Box Top Method by Justin L Stark.">
+<meta property="og:image" content="https://thejustinstark.com/theboxtop/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<link rel="icon" type="image/svg+xml" href="/theboxtop/assets/favicon.svg">
+<link rel="apple-touch-icon" href="/theboxtop/assets/apple-touch-icon.png">
+<meta name="theme-color" content="#2D378F">
+<link rel="preconnect" href="https://connect.facebook.net" crossorigin>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '4533371650216162');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=4533371650216162&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+<script>
+window.mtrack=function(name,params){
+  var id='ev.'+Date.now().toString(36)+'.'+Math.random().toString(36).slice(2,10);
+  if(window.fbq){fbq('track',name,params||{},{eventID:id})}
+  try{
+    var body=JSON.stringify({event_name:name,event_id:id,event_source_url:location.href,custom_data:params||{}});
+    if(navigator.sendBeacon){navigator.sendBeacon('/api/meta',new Blob([body],{type:'application/json'}))}
+    else if(window.fetch){fetch('/api/meta',{method:'POST',headers:{'Content-Type':'application/json'},body:body,keepalive:true})}
+  }catch(e){}
+};
+mtrack('PageView');
+</script>
+<link rel="preload" href="/assets/fonts/Montserrat-var.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:100 900;font-display:swap;src:url('/assets/fonts/Montserrat-var.woff2') format('woff2')}
+:root{--indigo:#2D378F;--indigo-dk:#232c78;--sky:#3598D0;--cream:#FDFADD;--ground:#F1F1F1;--surface:#FFFFFF;--ink:#1E2347;--muted:#565C7E;--line:#CDD1DE;--gut:16px}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:'Montserrat',system-ui,-apple-system,'Segoe UI',sans-serif;font-size:17px;line-height:1.6}
+a{color:var(--indigo)}
+:focus-visible{outline:3px solid var(--indigo);outline-offset:2px}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.wrap{max-width:calc(1100px + 2 * var(--gut));margin:0 auto;padding:0 var(--gut)}
+.strip{background:var(--indigo);color:var(--cream);text-align:center;padding:.6rem var(--gut);font-weight:700;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase}
+.strip span{white-space:nowrap}
+
+/* Header */
+.hd{padding-top:.6rem}
+.back{display:inline-flex;align-items:center;gap:.5rem;min-height:48px;font-weight:700;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--indigo)}
+.back:hover .t{text-decoration:underline;text-underline-offset:3px}
+.label{font-weight:700;text-transform:uppercase;letter-spacing:.16em;font-size:.74rem;color:var(--muted);margin:.6rem 0 .5rem}
+.hd h1{font-weight:900;text-transform:uppercase;color:var(--indigo);line-height:1.08;letter-spacing:.01em;margin:0;font-size:clamp(2rem,9vw,3.4rem);text-wrap:balance}
+.lede{font-size:1.06rem;margin:.8rem 0 0;max-width:36rem}
+
+/* Viewer. The stage never gets taller than the screen leaves room for, so
+   the slide and its buttons fit together once you scroll to them. */
+.viewer{margin:1.6rem auto 0;width:100%;max-width:max(18rem,min(1100px,calc((100vh - 112px) * 16 / 9)))}
+@supports (height:100svh){.viewer{max-width:max(18rem,min(1100px,calc((100svh - 112px) * 16 / 9)))}}
+.frame{border:1px solid var(--line);background:var(--ground)}
+.stage{position:relative;width:100%;aspect-ratio:16 / 9;overflow:hidden;background:var(--ground)}
+.stage:focus{outline:none}
+.stage:focus-visible{outline:3px solid var(--indigo);outline-offset:3px}
+.progress{height:4px;background:#D9DCE8}
+.progress span{display:block;height:100%;width:0;background:var(--indigo);transition:width .25s ease-out}
+
+.controls{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem;margin-top:.9rem}
+.pager{flex:1 1 100%;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:.6rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:52px;min-width:52px;padding:0 .75rem;border:2px solid var(--indigo);border-radius:0;background:var(--surface);color:var(--indigo);font:inherit;font-weight:900;font-size:.9rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:background-color .15s,color .15s}
+.btn .ar{font-size:1.15rem;line-height:1;letter-spacing:0}
+.btn:hover{background:var(--cream)}
+.btn.next{background:var(--indigo);color:var(--cream)}
+.btn.next:hover{background:var(--indigo-dk)}
+.btn[aria-disabled="true"]{opacity:.38;cursor:default}
+.btn[aria-disabled="true"]:hover{background:var(--surface)}
+.btn.next[aria-disabled="true"]:hover{background:var(--indigo)}
+.count{margin:0;font-weight:900;font-size:1.1rem;color:var(--indigo);font-variant-numeric:tabular-nums;white-space:nowrap;text-align:center}
+.count .of{color:var(--muted);font-weight:700}
+.jump{flex:1 1 100%;display:flex;flex-wrap:wrap;align-items:center;gap:.4rem .7rem;min-width:0}
+.jump label{font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:.72rem;color:var(--muted);white-space:nowrap}
+.jump select{flex:1 1 16rem;min-width:0;width:100%;min-height:52px;padding:0 2.6rem 0 .9rem;border:2px solid var(--indigo);border-radius:0;background:var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%232D378F' stroke-width='2.5'/%3E%3C/svg%3E") no-repeat right .9rem center;color:var(--indigo);font:inherit;font-weight:700;font-size:.92rem;-webkit-appearance:none;appearance:none;cursor:pointer;text-overflow:ellipsis}
+.hint{font-size:.82rem;color:var(--muted);margin:.8rem 0 0;line-height:1.5}
+
+.notes{margin-top:1.4rem;background:var(--surface);border-top:6px solid var(--sky);padding:1.2rem 1.15rem 1.35rem}
+.notes h2{font-weight:900;text-transform:uppercase;color:var(--indigo);font-size:1.15rem;letter-spacing:.02em;line-height:1.2;margin:0}
+.notes .where{font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:.7rem;color:var(--muted);margin:.45rem 0 .8rem}
+.notes .say{font-size:1.06rem;line-height:1.65;margin:0;max-width:44rem}
+
+footer{color:var(--muted);font-size:.8rem;padding:2.4rem 0 3rem;line-height:1.55}
+footer p{margin:0 0 1em}
+footer nav{display:flex;gap:1.2rem;flex-wrap:wrap;margin-top:.8rem}
+footer nav a{display:inline-flex;align-items:center;min-height:44px}
+
+/* ---------- The slide canvas: a fixed 1920x1080 page, scaled to fit ----------
+   Mirrors the deck format's defaults: no margins, a div with no display is a
+   flex column, absolute children pin to the slide, h1-h3 do not inherit size. */
+.deck{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0}
+.deck>section{position:relative;width:1920px;height:1080px;overflow:hidden;display:flex;flex-direction:column;font-size:32px;font-weight:400;line-height:1.4;letter-spacing:normal;text-align:left;animation:bt-in .3s ease-out both}
+.deck>section[hidden]{display:none!important}
+.deck *,.deck *::before,.deck *::after{box-sizing:border-box;margin:0}
+.deck div{display:flex;flex-direction:column}
+.deck h1,.deck h2,.deck h3{font-weight:600}
+.deck h1{font-size:96px;line-height:1.1}
+.deck h2{font-size:64px;line-height:1.15}
+.deck h3{font-size:44px;line-height:1.2}
+.deck ul,.deck ol{padding:0 0 0 1.35em}
+.deck ul{list-style:disc outside}
+.deck ol{list-style:decimal outside}
+.deck img{display:block;max-width:none}
+.deck aside{display:none}
+.deck x-shape{display:block;flex:none}
+.deck x-shape[kind="arrow-right"]{clip-path:polygon(0 25%,60% 25%,60% 0,100% 50%,60% 100%,60% 75%,0 75%)}
+.deck x-shape[kind="arrow-left"]{clip-path:polygon(100% 25%,40% 25%,40% 0,0 50%,40% 100%,40% 75%,100% 75%)}
+@keyframes bt-in{from{opacity:0}to{opacity:1}}
+
+@media (prefers-reduced-motion:reduce){
+  .deck>section{animation:none}
+  .progress span,.btn{transition:none}
+}
+
+/* ---------- tablet and up: buttons left, module jump right ---------- */
+@media (min-width:640px){
+  :root{--gut:20px}
+  .pager{flex:0 0 auto;display:flex}
+  .btn{padding:0 1.1rem}
+  .count{min-width:5.5rem}
+  .jump{flex:0 1 31rem;margin-left:auto}
+  .notes{padding:1.5rem 1.6rem 1.6rem}
+}
+@media (min-width:960px){
+  :root{--gut:32px}
+  .hd{padding-top:1rem}
+}
+</style>
+</head>
+<body>
+<div class="strip"><span>The Box Top Method</span> · <span>By Justin L Stark</span></div>
+
+<main>
+  <header class="wrap hd">
+    <a class="back" href="/theboxtop/freebies/"><span aria-hidden="true">←</span> <span class="t">All free tools</span></a>
+    <p class="label">Free with The Box Top Method</p>
+    <h1>The Box Top Training</h1>
+    <p class="lede">Four modules, slide by slide, with Justin's notes under each one.</p>
+  </header>
+
+  <div class="wrap">
+    <div class="viewer">
+      <div class="frame">
+        <div class="stage" id="bt-stage" role="region" aria-label="Slide 1 of 43" tabindex="-1">
+          <div class="deck" id="bt-deck">
+<section data-id="cover" data-transition="fade" style="background:#F1F1F1;color:#2D378F;font-family:'Montserrat', Arial, sans-serif;padding:96px 128px 128px;display:flex;flex-direction:column;gap:36px">
+<img src="/theboxtop/assets/book-3d.webp" alt="The Box Top Method book cover" style="position:absolute;left:1300px;top:560px;width:540px;height:520px;object-fit:contain">
+<div style="position:absolute;left:0;top:250px;width:1920px;height:6px;background:#2D378F"></div>
+<div style="position:absolute;left:0;top:256px;width:1920px;height:208px;background:#3598D0"></div>
+<div style="position:absolute;left:0;top:464px;width:1920px;height:6px;background:#2D378F"></div>
+<p style="font-size:64px;font-weight:800;letter-spacing:6px;text-transform:uppercase;color:#2D378F">Four-module class</p>
+<p style="position:absolute;left:128px;top:282px;width:1700px;font-size:124px;font-weight:900;line-height:1.25;letter-spacing:2px;white-space:nowrap;color:#2D378F">THE <span style="color:#FDFADD">BOX TOP</span> METHOD</p>
+<div style="position:absolute;left:128px;top:506px;width:1664px;display:flex;flex-direction:row;align-items:center;gap:24px">
+<p style="font-size:36px;font-weight:700;letter-spacing:2px;color:#2D378F;white-space:nowrap">BY JUSTIN L STARK</p>
+<div style="flex:1;height:4px;background:#3598D0"></div>
+<p style="font-size:36px;font-weight:700;letter-spacing:2px;color:#2D378F;white-space:nowrap">YOU HAVE THE PIECES. LET’S FIND THE PICTURE.</p>
+</div>
+<p style="position:absolute;left:128px;top:640px;width:1100px;font-size:32px;font-weight:700;letter-spacing:6px;line-height:1.6;color:#3598D0">EDUCATIONAL SESSION<br>NO PRODUCTS ARE RECOMMENDED</p>
+<p style="position:absolute;left:128px;bottom:96px;width:1000px;font-size:26px;font-weight:700;letter-spacing:5px;color:#1E2347">PRESENTED BY: PONTOTOC INSURANCE AGENCY</p>
+<aside>Welcome everybody. Four sessions, about 45 minutes each. By the end you’ll have your own retirement picture laid out on one page. This is education only. Nobody’s selling anything in here.</aside>
+</section>
+<section data-id="m1-title" hidden data-transition="fade" style="background:#2D378F;color:#FDFADD;font-family:'Montserrat', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:40px">
+<div style="position:absolute;left:0;top:0;width:24px;height:1080px;background:#3598D0"></div>
+<p style="font-size:32px;letter-spacing:6px;text-transform:uppercase;color:#3598D0;font-weight:700">Module 1</p>
+<h1 style="font-family:'Montserrat', Arial, sans-serif;font-size:120px;font-weight:700;line-height:1.05;color:#FDFADD">The Pieces and the Picture</h1>
+<p style="font-size:44px;line-height:1.3;color:#C3C8F6;width:1300px">Why so many retirees feel unsure, even when they’ve done everything right.</p>
+<aside>Module 1 covers the Introduction and Chapters 1 through 3. One idea: most retirees don’t have a money problem, they have a clarity problem.</aside>
+</section>
+<section data-id="m1-shoebox" hidden data-transition="fade" style="background:#F1F1F1;color:#1E2347;font-family:'Montserrat', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;justify-content:center;gap:48px">
+<p style="font-size:28px;letter-spacing:4px;text-transform:uppercase;color:#3598D0;font-weight:700">Ms. B and the shoebox</p>
+<h2 style="font-family:'Montserrat', Arial, sans-serif;font-size:96px;font-weight:400;line-height:1.15;color:#2D378F;width:1560px">“I know it’s all in here somewhere, but I can’t tell if it’s good or bad.”</h2>
+<p style="font-size:32px;color:#565C7E">Statements, policies, a 401(k) summary, and a password on a sticky note.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#565C7E">The Box Top · Module 1 · Stories are fictional composites.</p>
+<aside>Tell Ms. B as a composite. She walked in with a shoebox overflowing with bank statements and policies, a 401(k) summary, and a sticky note with what looked like a password. Then ask: how many of y’all have a shoebox? Maybe it’s a drawer, or a folder on the computer.</aside>
+</section>
+<section data-id="m1-clarity" hidden data-transition="fade" style="background:#2D378F;color:#FDFADD;font-family:'Montserrat', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:40px">
+<h2 style="font-family:'Montserrat', Arial, sans-serif;font-size:104px;font-weight:400;line-height:1.15;color:#FDFADD;width:1600px">You don’t have a money problem. You have a <span style="color:#3598D0">clarity problem.</span></h2>
+<aside>Word track: Ms. B didn’t have a money problem. She had a clarity problem. She had every piece. She just didn’t have the picture.</aside>
+</section>
+<section data-id="m1-pieces" hidden data-transition="fade" style="background:#F1F1F1;color:#1E2347;font-family:'Montserrat', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:56px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;letter-spacing:4px;text-transform:uppercase;color:#3598D0;font-weight:700">You have the pieces</p>
+<h2 style="font-family:'Montserrat', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1;color:#2D378F">Every piece made sense the day you got it</h2>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:24px">
+<p style="font-size:32px;background:#FFFFFF;border:1px solid #DFE3E9;border-radius:12px;padding:28px">IRAs and 401(k)s</p>
+<p style="font-size:32px;background:#FFFFFF;border:1px solid #DFE3E9;border-radius:12px;padding:28px">Bank CDs</p>
+<p style="font-size:32px;background:#FFFFFF;border:1px solid #DFE3E9;border-radius:12px;padding:28px">The house</p>
+<p style="font-size:32px;background:#FFFFFF;border:1px solid #DFE3E9;border-radius:12px;padding:28px">Social Security</p>
+<p style="font-size:32px;background:#FFFFFF;border:1px solid #DFE3E9;border-radius:12px;padding:28px">A pension</p>
+<p style="font-size:32px;background:#FFFFFF;border:1px solid #DFE3E9;border-radius:12px;padding:28px">Old insurance policies</p>
+<p style="font-size:32px;background:#FFFFFF;border:1px solid #DFE3E9;border-radius:12px;padding:28px">Timber or land</p>
+<p style="font-size:32px;background:#FFFFFF;border:1px solid #DFE3E9;border-radius:12px;padding:28px">Advice from everybody</p>
+</div>
+<p style="font-size:36px;color:#565C7E;width:1500px">The problem is nobody’s laid them out on the same table, and most haven’t been looked at together in years.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#565C7E">The Box Top · Module 1</p>
+<aside>Walk through the pieces people bring. Each was bought for a good reason. Word track: Every one of those pieces made sense the day you got it. The problem is nobody’s laid them out on the same table.</aside>
+</section>
+<section data-id="m1-boxtop" hidden data-transition="fade" style="background:#F1F1F1;color:#1E2347;font-family:'Montserrat', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:56px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;letter-spacing:4px;text-transform:uppercase;color:#3598D0;font-weight:700">The box-top problem</p>
+<h2 style="font-family:'Montserrat', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1;color:#2D378F;width:1600px">A thousand-piece puzzle with no picture on the box</h2>
+</div>
+<div style="display:flex;flex-direction:row;gap:32px">
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#FFFFFF;border:1px solid #DFE3E9;border-top:8px solid #3598D0;border-radius:12px;padding:40px">
+<p style="font-family:'Montserrat', Arial, sans-serif;font-size:64px;color:#3598D0">1</p>
+<h3 style="font-size:40px;font-weight:700;color:#2D378F">It shows the finished picture</h3>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#FFFFFF;border:1px solid #DFE3E9;border-top:8px solid #3598D0;border-radius:12px;padding:40px">
+<p style="font-family:'Montserrat', Arial, sans-serif;font-size:64px;color:#3598D0">2</p>
+<h3 style="font-size:40px;font-weight:700;color:#2D378F">It names the pieces in front of you</h3>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#FFFFFF;border:1px solid #DFE3E9;border-top:8px solid #3598D0;border-radius:12px;padding:40px">
+<p style="font-family:'Montserrat', Arial, sans-serif;font-size:64px;color:#3598D0">3</p>
+<h3 style="font-size:40px;font-weight:700;color:#2D378F">It tells you where to start</h3>
+</div>
+</div>
+<p style="font-size:36px;color:#565C7E">Find the four corners first. Then the edges. Then everything else gets easier.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#565C7E">The Box Top · Module 1</p>
+<aside>Lego sets come with instructions. A puzzle just gives you a picture. Once you find the four corners, you can outline the frame, and the other pieces get easier to place. The box top does three jobs: shows the finished picture, names the pieces, and shows you where to start.</aside>
+</section>
+<section data-id="m1-confidence" hidden data-transition="fade" style="background:#3598D0;color:#2D378F;font-family:'Montserrat', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:48px">
+<h1 style="font-family:'Montserrat', Arial, sans-serif;font-size:160px;font-weight:700;line-height:1.05;color:#2D378F">Clarity precedes confidence.</h1>
+<p style="font-size:44px;line-height:1.3;color:#1E2347;width:1500px">What you need first isn’t a new opinion, a new account, or a new product. It’s clarity about what you already have.</p>
+<aside>Word track: Clarity precedes confidence. You can’t feel good about a decision when you can’t see the picture. Then: What you need first isn’t a new opinion, a new account, or a new product. It’s clarity about what you already have.</aside>
+</section>
+<section data-id="m1-redzone" hidden data-transition="fade" style="background:#F1F1F1;color:#1E2347;font-family:'Montserrat', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:64px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;letter-spacing:4px;text-transform:uppercase;color:#9E3B32;font-weight:700">The retirement red zone</p>
+<h2 style="font-family:'Montserrat', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1;color:#2D378F;width:1600px">Five years before and five years after your retirement date</h2>
+</div>
+<div style="display:flex;flex-direction:column;gap:20px">
+<div style="display:flex;flex-direction:row;height:96px">
+<div style="flex:1;background:#E3E7ED;border-radius:12px 0 0 12px"></div>
+<div style="flex:2;background:#B4453A;display:flex;flex-direction:row;justify-content:center;align-items:center"><p style="font-size:32px;font-weight:700;color:#FBF3F1;letter-spacing:3px">RED ZONE</p></div>
+<div style="flex:1;background:#E3E7ED;border-radius:0 12px 12px 0"></div>
+</div>
+<div style="display:flex;flex-direction:row">
+<p style="flex:1;font-size:28px;color:#565C7E">Building it</p>
+<div style="flex:2;display:flex;flex-direction:row;justify-content:space-between">
+<p style="font-size:28px;color:#565C7E">5 years before</p>
+<p style="font-size:28px;color:#2D378F;font-weight:700">Retirement date</p>
+<p style="font-size:28px;color:#565C7E">5 years after</p>
+</div>
+<p style="flex:1;font-size:28px;color:#565C7E;text-align:right">Living on it</p>
+</div>
+</div>
+<p style="font-size:36px;color:#565C7E;width:1500px">While you’re working, a bad market year is frustrating. In retirement, you’re living off that money.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#565C7E">The Box Top · Module 1</p>
+<aside>Tell the watermelon story first: belly down, pretty side to the customer. Details matter. Then the turn. Word track: The retirement red zone is the five years before and the five years after your retirement date. That’s when the order of your returns matters most.</aside>
+</section>
+<section data-id="m1-sequence" hidden data-transition="fade" style="background:#F1F1F1;color:#1E2347;font-family:'Montserrat', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:56px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;letter-spacing:4px;text-transform:uppercase;color:#9E3B32;font-weight:700">Sequence of returns</p>
+<h2 style="font-family:'Montserrat', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1;color:#2D378F">Down 10%, then up 10%, isn’t even</h2>
+</div>
+<div style="display:flex;flex-direction:row;align-items:center;gap:24px">
+<div style="flex:1;display:flex;flex-direction:column;gap:8px;background:#FFFFFF;border:1px solid #DFE3E9;border-radius:12px;padding:40px">
+<p style="font-size:28px;color:#565C7E">Start</p>
+<p style="font-family:'Montserrat', Arial, sans-serif;font-size:80px;color:#2D378F;font-variant-numeric:tabular-nums">$100,000</p>
+</div>
+<p style="font-size:32px;color:#9E3B32;font-weight:700;text-align:center;width:150px">down 10%</p>
+<div style="flex:1;display:flex;flex-direction:column;gap:8px;background:#FFFFFF;border:1px solid #DFE3E9;border-radius:12px;padding:40px">
+<p style="font-size:28px;color:#565C7E">Year one</p>
+<p style="font-family:'Montserrat', Arial, sans-serif;font-size:80px;color:#9E3B32;font-variant-numeric:tabular-nums">$90,000</p>
+</div>
+<p style="font-size:32px;color:#2F6B4E;font-weight:700;text-align:center;width:150px">up 10%</p>
+<div style="flex:1;display:flex;flex-direction:column;gap:8px;background:#FFFFFF;border:1px solid #DFE3E9;border-radius:12px;padding:40px">
+<p style="font-size:28px;color:#565C7E">Year two</p>
+<p style="font-family:'Montserrat', Arial, sans-serif;font-size:80px;color:#2D378F;font-variant-numeric:tabular-nums">$99,000</p>
+</div>
+</div>
+<p style="font-size:36px;color:#1E2347;width:1600px">Pull <b>$5,000</b> out during the down year and it’s like taking a <b>15% loss</b>. Retirement planning is different from investment planning.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#565C7E">The Box Top · Module 1</p>
+<aside>Walk the math slowly. Word track: Retirement planning is different from investment planning. When you’re living off your savings, the order matters.</aside>
+</section>
+<section data-id="m1-organize" hidden data-transition="fade" style="background:#F1F1F1;color:#1E2347;font-family:'Montserrat', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;justify-content:center;gap:40px">
+<img loading="lazy" decoding="async" src="/theboxtop/training/img/packet-p2.jpg" alt="" style="position:absolute;left:1250px;top:150px;width:541px;height:700px;object-fit:contain;opacity:0.55;border:1px solid #DFE3E9">
+<img loading="lazy" decoding="async" src="/theboxtop/training/img/packet-p1.jpg" alt="Cover of the Legacy Planning Packet" style="position:absolute;left:1180px;top:200px;width:541px;height:700px;object-fit:contain;border:1px solid #DFE3E9;box-shadow:0 24px 48px rgba(15,37,65,0.28)">
+<p style="font-size:28px;letter-spacing:4px;text-transform:uppercase;color:#3598D0;font-weight:700;width:960px">Lay the groundwork</p>
+<h2 style="font-family:'Montserrat', Arial, sans-serif;font-size:80px;font-weight:700;line-height:1.1;color:#2D378F;width:960px">Before you see the picture, get every piece on the table</h2>
+<p style="font-size:36px;color:#565C7E;line-height:1.4;width:900px">The Legacy Planning Packet gathers it all in one place, in two parts.</p>
+<div style="display:flex;flex-direction:row;gap:24px;width:960px">
+<div style="flex:1;display:flex;flex-direction:column;gap:8px;background:#FFFFFF;border:1px solid #DFE3E9;border-left:10px solid #2D378F;border-radius:12px;padding:28px 32px">
+<h3 style="font-size:36px;font-weight:700;color:#2D378F">Part 1 · Family &amp; Finances</h3>
+<p style="font-size:28px;color:#565C7E">Bring it back to us.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:8px;background:#FFFFFF;border:1px solid #DFE3E9;border-left:10px solid #2F6B4E;border-radius:12px;padding:28px 32px">
+<h3 style="font-size:36px;font-weight:700;color:#2F6B4E">Part 2 · Family Legacy Guide</h3>
+<p style="font-size:28px;color:#565C7E">Keep it at home.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#565C7E">The Box Top · Module 1 · Getting organized</p>
+<aside>So where do you start? You start by getting organized. Ms. B had a shoebox. This packet is how you empty it. Hand out printed copies now, or tell folks it’s coming by email. Two parts: Part 1 comes back to us so we can build your picture. Part 2 stays at home, because it has the private stuff your family will need someday.</aside>
+</section>
+<section data-id="m1-navigate" hidden data-transition="fade" style="background:#F1F1F1;color:#1E2347;font-family:'Montserrat', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<img loading="lazy" decoding="async" src="/theboxtop/training/img/packet-p1.jpg" alt="Packet cover with clickable part cards" style="position:absolute;left:712px;top:200px;width:525px;height:680px;object-fit:contain;border:1px solid #DFE3E9;box-shadow:0 16px 32px rgba(15,37,65,0.18)">
+<img loading="lazy" decoding="async" src="/theboxtop/training/img/packet-p2.jpg" alt="Packet contents page with clickable lines" style="position:absolute;left:1265px;top:200px;width:525px;height:680px;object-fit:contain;border:1px solid #DFE3E9;box-shadow:0 16px 32px rgba(15,37,65,0.18)">
+<p style="position:absolute;left:1127px;top:540px;width:56px;height:56px;font-size:28px;font-weight:700;line-height:2;text-align:center;background:#3598D0;color:#2D378F;border-radius:50%;box-shadow:0 4px 10px rgba(15,37,65,0.3)">1</p>
+<p style="position:absolute;left:1719px;top:412px;width:56px;height:56px;font-size:28px;font-weight:700;line-height:2;text-align:center;background:#3598D0;color:#2D378F;border-radius:50%;box-shadow:0 4px 10px rgba(15,37,65,0.3)">2</p>
+<p style="position:absolute;left:1697px;top:826px;width:56px;height:56px;font-size:28px;font-weight:700;line-height:2;text-align:center;background:#3598D0;color:#2D378F;border-radius:50%;box-shadow:0 4px 10px rgba(15,37,65,0.3)">3</p>
+<p style="position:absolute;left:856px;top:406px;width:56px;height:56px;font-size:28px;font-weight:700;line-height:2;text-align:center;background:#3598D0;color:#2D378F;border-radius:50%;box-shadow:0 4px 10px rgba(15,37,65,0.3)">4</p>
+<div style="display:flex;flex-direction:column;gap:12px;width:540px">
+<p style="font-size:28px;letter-spacing:4px;text-transform:uppercase;color:#3598D0;font-weight:700">Getting around the packet</p>
+<h2 style="font-family:'Montserrat', Arial, sans-serif;font-size:64px;font-weight:700;line-height:1.1;color:#2D378F">Click, don’t scroll</h2>
+</div>
+<div style="display:flex;flex-direction:column;gap:28px;width:540px">
+<div style="display:flex;flex-direction:row;gap:20px;align-items:start">
+<p style="width:48px;height:48px;font-size:26px;font-weight:700;line-height:1.85;text-align:center;background:#3598D0;color:#2D378F;border-radius:50%">1</p>
+<p style="flex:1;font-size:30px;line-height:1.35;color:#1E2347">Click a part on the cover to jump straight to it.</p>
+</div>
+<div style="display:flex;flex-direction:row;gap:20px;align-items:start">
+<p style="width:48px;height:48px;font-size:26px;font-weight:700;line-height:1.85;text-align:center;background:#3598D0;color:#2D378F;border-radius:50%">2</p>
+<p style="flex:1;font-size:30px;line-height:1.35;color:#1E2347">On the contents page, click any line to land on that section.</p>
+</div>
+<div style="display:flex;flex-direction:row;gap:20px;align-items:start">
+<p style="width:48px;height:48px;font-size:26px;font-weight:700;line-height:1.85;text-align:center;background:#3598D0;color:#2D378F;border-radius:50%">3</p>
+<p style="flex:1;font-size:30px;line-height:1.35;color:#1E2347">“Back to contents” sits at the bottom right of every page.</p>
+</div>
+<div style="display:flex;flex-direction:row;gap:20px;align-items:start">
+<p style="width:48px;height:48px;font-size:26px;font-weight:700;line-height:1.85;text-align:center;background:#3598D0;color:#2D378F;border-radius:50%">4</p>
+<p style="flex:1;font-size:30px;line-height:1.35;color:#1E2347">Type in the blue boxes, or print it and write by hand.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#565C7E">The Box Top · Module 1 · Getting organized</p>
+<aside>Walk the four numbers on screen. One: the cover has three cards, and clicking a card jumps you right to that part. Two: the contents page lists every section, and every line is a link. Three: if you get lost, look bottom right on any page for Back to contents. Four: the blue boxes are where you type. If you’d rather write it out, print it. Also mention the bookmarks panel in their PDF viewer for folks on a computer. And say it plainly: you don’t have to be perfect. Fill in what you know. Estimates are fine, and anything left blank we can cover together.</aside>
+</section>
+<section data-id="m1-part1" hidden data-transition="fade" style="background:#F1F1F1;color:#1E2347;font-family:'Montserrat', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<img loading="lazy" decoding="async" src="/theboxtop/training/img/packet-p5.jpg" alt="Packet page 5, Accounts and Assets and Insurance and Protection" style="position:absolute;left:1100px;top:140px;width:603px;height:780px;object-fit:contain;border:1px solid #DFE3E9;box-shadow:0 16px 32px rgba(15,37,65,0.18)">
+<div style="position:absolute;left:1139px;top:211px;width:524px;height:289px;border:5px solid #3598D0;border-radius:8px"></div>
+<p style="position:absolute;left:930px;top:228px;width:190px;font-size:26px;font-weight:700;text-align:center;background:#3598D0;color:#2D378F;border-radius:999px;padding:10px 16px">Start here</p>
+<div style="display:flex;flex-direction:column;gap:12px;width:760px">
+<p style="font-size:28px;letter-spacing:4px;text-transform:uppercase;color:#3598D0;font-weight:700">Part 1 · Family &amp; Finances</p>
+<h2 style="font-family:'Montserrat', Arial, sans-serif;font-size:64px;font-weight:700;line-height:1.1;color:#2D378F">Part 1 fills in all four corners</h2>
+</div>
+<div style="display:flex;flex-direction:column;gap:16px;width:760px">
+<div style="display:flex;flex-direction:column;gap:4px;background:#FFFFFF;border:1px solid #DFE3E9;border-left:10px solid #1F6F73;border-radius:10px;padding:18px 24px">
+<p style="font-size:24px;letter-spacing:3px;text-transform:uppercase;color:#1F6F73;font-weight:700">Corner One · Where your money sits</p>
+<p style="font-size:28px;color:#1E2347">Accounts &amp; Assets, page 5</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:4px;background:#FFFFFF;border:1px solid #DFE3E9;border-left:10px solid #C06A2E;border-radius:10px;padding:18px 24px">
+<p style="font-size:24px;letter-spacing:3px;text-transform:uppercase;color:#B0602A;font-weight:700">Corner Two · What you want it to do</p>
+<p style="font-size:28px;color:#1E2347">Income &amp; Cash Flow, page 4</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:4px;background:#FFFFFF;border:1px solid #DFE3E9;border-left:10px solid #5B4A7D;border-radius:10px;padding:18px 24px">
+<p style="font-size:24px;letter-spacing:3px;text-transform:uppercase;color:#5B4A7D;font-weight:700">Corner Three · What it costs in tax</p>
+<p style="font-size:28px;color:#1E2347">Taxes, page 6</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:4px;background:#FFFFFF;border:1px solid #DFE3E9;border-left:10px solid #3F7D5A;border-radius:10px;padding:18px 24px">
+<p style="font-size:24px;letter-spacing:3px;text-transform:uppercase;color:#2F6B4E;font-weight:700">Corner Four · How your money works</p>
+<p style="font-size:28px;color:#1E2347">Goals, Risk &amp; Legacy, page 7</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#565C7E">The Box Top · Module 1 · Getting organized · Part 1 runs pages 3 to 7</p>
+<aside>Part 1 is about 20 minutes, pages 3 through 7, and your spouse can help since many questions cover both of you. Start on page 5, Accounts and Assets. That’s your shoebox emptied onto one page: every retirement and investment account, who owns it, where it’s held, about what it’s worth, plus checking, savings and your emergency reserve. That page is Corner One. Page 4, Income and Cash Flow, is Corner Two. Page 6, Taxes, is Corner Three. Page 7 asks how comfortable you are with risk, which is Corner Four. Over the next three sessions we’ll take each corner in turn, and you’ll already have the pieces written down.</aside>
+</section>
+<section data-id="m1-part2" hidden data-transition="fade" style="background:#F1F1F1;color:#1E2347;font-family:'Montserrat', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<img loading="lazy" decoding="async" src="/theboxtop/training/img/packet-p10.jpg" alt="Packet page 10, document locator and accounts list" style="position:absolute;left:712px;top:200px;width:525px;height:680px;object-fit:contain;border:1px solid #DFE3E9;box-shadow:0 16px 32px rgba(15,37,65,0.18)">
+<img loading="lazy" decoding="async" src="/theboxtop/training/img/packet-p13.jpg" alt="Packet page 13, monthly income and bills and logins" style="position:absolute;left:1265px;top:200px;width:525px;height:680px;object-fit:contain;border:1px solid #DFE3E9;box-shadow:0 16px 32px rgba(15,37,65,0.18)">
+<div style="display:flex;flex-direction:column;gap:12px;width:540px">
+<p style="font-size:28px;letter-spacing:4px;text-transform:uppercase;color:#2F6B4E;font-weight:700">Part 2 · Family Legacy Guide</p>
+<h2 style="font-family:'Montserrat', Arial, sans-serif;font-size:64px;font-weight:700;line-height:1.1;color:#2D378F">Part 2 stays at home</h2>
+</div>
+<ul style="font-size:30px;line-height:1.5;color:#1E2347;width:540px">
+<li>Where everything is: wills, deeds, titles, the safe deposit box</li>
+<li>Accounts, policies and benefits</li>
+<li>Monthly income and bills</li>
+<li>Logins and passwords</li>
+<li>Final wishes and a letter to loved ones</li>
+</ul>
+<p style="font-size:30px;line-height:1.4;color:#2F6B4E;font-weight:700;width:540px">Never email it. Tell your executor where it is.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#565C7E">The Box Top · Module 1 · Getting organized · Part 2 runs pages 8 to 16</p>
+<aside>Part 2 is for your family, not for us. It holds Social Security numbers, account numbers and passwords, so it never gets sent back. Keep it in a home safe or a safe deposit box, tell your executor where it is, and update it once a year. Page 10, on the left, is the document locator: where the will is, where the deeds are, where the titles are. Page 13 is monthly income and bills, and logins. If something happened to you tomorrow, this is the book your family would reach for. Fill it in at your own pace.</aside>
+</section>
+<section data-id="m1-exercise" hidden data-transition="fade" style="background:#FDFADD;color:#1E2347;font-family:'Montserrat', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:56px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;letter-spacing:4px;text-transform:uppercase;color:#3598D0;font-weight:700">Exercise · 10 minutes</p>
+<h2 style="font-family:'Montserrat', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1;color:#2D378F">Empty the shoebox</h2>
+</div>
+<ol style="font-size:40px;line-height:1.5;color:#1E2347;width:1500px">
+<li>Open your Legacy Planning Packet to page 5, Accounts &amp; Assets.</li>
+<li>List every account and policy you have, one per line. Estimates are fine.</li>
+<li>Circle any piece you haven’t looked at in over a year.</li>
+<li>At home, finish the rest of Part 1 before our next session.</li>
+</ol>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#565C7E">The Box Top · Module 1</p>
+<aside>Give them about seven minutes on page 5, then ask two volunteers how many pieces they circled. Most rooms find a forgotten policy or an old 401(k). Send Part 1 home as homework. Next session we’ll put those pieces on the liquidity ladder.</aside>
+</section>
+<section data-id="m1-essence" hidden data-transition="fade" style="background:#2D378F;color:#FDFADD;font-family:'Montserrat', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:48px">
+<p style="font-size:32px;letter-spacing:6px;text-transform:uppercase;color:#3598D0;font-weight:700">The essence</p>
+<h2 style="font-family:'Montserrat', Arial, sans-serif;font-size:96px;font-weight:400;line-height:1.15;color:#FDFADD;width:1600px">You don’t have a money problem. You have a clarity problem.</h2>
+<p style="font-size:36px;color:#C3C8F6;width:1500px">Before next time: take The Box Top Quiz to see your retiree type and which corner is fuzziest.</p>
+<aside>Close on the essence. Put the quiz link on screen or in the chat.</aside>
+</section>
+<section data-id="m2-title" hidden data-transition="fade" style="background:#2D378F;color:#FDFADD;font-family:'Montserrat', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:40px">
+<div style="position:absolute;left:0;top:0;width:24px;height:540px;background:#2F8F93"></div>
+<div style="position:absolute;left:0;top:540px;width:24px;height:540px;background:#D9823F"></div>
+<p style="font-size:32px;letter-spacing:6px;text-transform:uppercase;color:#3598D0;font-weight:700">Module 2</p>
+<h1 style="font-family:'Montserrat', Arial, sans-serif;font-size:120px;font-weight:700;line-height:1.05;color:#FDFADD">Corners One and Two</h1>
+<p style="font-size:44px;line-height:1.3;color:#C3C8F6;width:1400px"><span style="color:#5FB4B8">Where your money sits</span> and <span style="color:#E79A62">what you want your money to do</span>.</p>
+<aside>Module 2 covers Chapters 4 and 5. One idea: before you decide anything, know where your money sits and what you want it to do.</aside>
+</section>
+<section data-id="m2-axe" hidden data-transition="fade" style="background:#F1F1F1;color:#1E2347;font-family:'Montserrat', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;justify-content:center;gap:56px">
+<p style="font-size:28px;letter-spacing:4px;text-transform:uppercase;color:#1F6F73;font-weight:700">Corner One · Where your money sits</p>
+<h2 style="font-family:'Montserrat', Arial, sans-serif;font-size:96px;font-weight:400;line-height:1.15;color:#2D378F;width:1600px">We want an axe, not a Swiss Army knife.</h2>
+<p style="font-size:40px;color:#565C7E;width:1500px">Your money should usually be earmarked for one or two big reasons.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#565C7E">The Box Top · Module 2</p>
+<aside>You could chop down a decent-sized tree with a Swiss Army knife. It would take all day. An axe has one job and does it well. Word track: Your money should usually be earmarked for one or two big reasons. We want an axe, not a Swiss Army knife.</aside>
+</section>
+<section data-id="m2-ladder" hidden data-transition="fade" style="background:#F1F1F1;color:#1E2347;font-family:'Montserrat', Arial, sans-serif;padding:128px 128px 160px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center">
+<div style="display:flex;flex-direction:column;gap:32px">
+<p style="font-size:28px;letter-spacing:4px;text-transform:uppercase;color:#1F6F73;font-weight:700">The liquidity ladder</p>
+<h2 style="font-family:'Montserrat', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1;color:#2D378F">The rung tells you how fast you can get to it</h2>
+<p style="font-size:36px;color:#565C7E;line-height:1.4">Spend from the bottom up. Protect your least liquid money for last.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;color:#1F6F73;font-weight:700;letter-spacing:2px">HARDEST TO REACH</p>
+<p style="font-size:32px;background:#1F6F73;color:#F3F8F8;border-radius:10px;padding:24px 32px">An annuity or a business</p>
+<p style="font-size:32px;background:#3C8A8E;color:#F3F8F8;border-radius:10px;padding:24px 32px">Stocks and bonds</p>
+<p style="font-size:32px;background:#7DB3B5;color:#2D378F;border-radius:10px;padding:24px 32px">Home equity line or cash value life</p>
+<p style="font-size:32px;background:#B5D6D7;color:#2D378F;border-radius:10px;padding:24px 32px">Savings</p>
+<p style="font-size:32px;background:#DCEDED;color:#2D378F;border-radius:10px;padding:24px 32px">Checking and cash on hand</p>
+<p style="font-size:24px;color:#1F6F73;font-weight:700;letter-spacing:2px">EASIEST TO REACH</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#565C7E">The Box Top · Module 2</p>
+<aside>Build the ladder from the bottom up. Word track: Most people think of their money as one big pile. It’s not. It sits on different rungs of a ladder, and the rung tells you how fast you can get to it. In a perfect world, you spend from the bottom up and protect your least liquid money for last.</aside>
+</section>
+<section data-id="m2-balance" hidden data-transition="fade" style="background:#F1F1F1;color:#1E2347;font-family:'Montserrat', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:56px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;letter-spacing:4px;text-transform:uppercase;color:#1F6F73;font-weight:700">Two ways to get it wrong</p>
+<h2 style="font-family:'Montserrat', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1;color:#2D378F">Too much at the bottom, or too little</h2>
+</div>
+<div style="display:flex;flex-direction:row;gap:32px">
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#FFFFFF;border:1px solid #DFE3E9;border-top:8px solid #1F6F73;border-radius:12px;padding:40px">
+<h3 style="font-size:44px;font-weight:700;color:#2D378F">Bottom-heavy</h3>
+<p style="font-size:32px;color:#565C7E;line-height:1.4">Too much sitting in checking and savings, doing nothing.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#FFFFFF;border:1px solid #DFE3E9;border-top:8px solid #1F6F73;border-radius:12px;padding:40px">
+<h3 style="font-size:44px;font-weight:700;color:#2D378F">All in</h3>
+<p style="font-size:32px;color:#565C7E;line-height:1.4">Nearly everything invested, with very little cash on hand.</p>
+</div>
+</div>
+<p style="font-family:'Montserrat', Arial, sans-serif;font-size:44px;font-style:italic;color:#1F6F73;width:1600px">“If you weren’t lazy saving it, your savings shouldn’t be lazy either.”</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#565C7E">The Box Top · Module 2</p>
+<aside>Tell the composite about the extra $60,000 in savings. Word track: That extra $60,000 wasn’t emergency money. It was fear of making the wrong move. If you weren’t lazy saving it, your savings shouldn’t be lazy either.</aside>
+</section>
+<section data-id="m2-levers" hidden data-transition="fade" style="background:#F1F1F1;color:#1E2347;font-family:'Montserrat', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:56px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;letter-spacing:4px;text-transform:uppercase;color:#B0602A;font-weight:700">Corner Two · What you want your money to do</p>
+<h2 style="font-family:'Montserrat', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1;color:#2D378F">Every retirement decision runs through three levers</h2>
+</div>
+<div style="display:flex;flex-direction:row;align-items:center;gap:24px">
+<div style="flex:1;display:flex;flex-direction:column;gap:12px;background:#FFFFFF;border:1px solid #DFE3E9;border-top:8px solid #C06A2E;border-radius:12px;padding:40px">
+<h3 style="font-family:'Montserrat', Arial, sans-serif;font-size:56px;font-weight:700;color:#2D378F">Time</h3>
+<p style="font-size:30px;color:#565C7E;line-height:1.4">Freedom and flexibility. What you traded for income.</p>
+</div>
+<x-shape kind="arrow-right" style="width:80px;height:40px;background:#C06A2E"></x-shape>
+<div style="flex:1;display:flex;flex-direction:column;gap:12px;background:#FFFFFF;border:1px solid #DFE3E9;border-top:8px solid #C06A2E;border-radius:12px;padding:40px">
+<h3 style="font-family:'Montserrat', Arial, sans-serif;font-size:56px;font-weight:700;color:#2D378F">Cash flow</h3>
+<p style="font-size:30px;color:#565C7E;line-height:1.4">A reliable stream of income for day-to-day life.</p>
+</div>
+<x-shape kind="arrow-left" style="width:80px;height:40px;background:#C06A2E"></x-shape>
+<div style="flex:1;display:flex;flex-direction:column;gap:12px;background:#FFFFFF;border:1px solid #DFE3E9;border-top:8px solid #C06A2E;border-radius:12px;padding:40px">
+<h3 style="font-family:'Montserrat', Arial, sans-serif;font-size:56px;font-weight:700;color:#2D378F">Cash</h3>
+<p style="font-size:30px;color:#565C7E;line-height:1.4">What you saved and stockpiled along the way.</p>
+</div>
+</div>
+<p style="font-size:36px;color:#565C7E;width:1600px">In retirement you pull the time lever less, so cash has to support cash flow.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#565C7E">The Box Top · Module 2</p>
+<aside>Everyone starts with the same amount of time. You trade it for income, and what you save becomes cash. In retirement, the time lever gets pulled less, so cash has to support cash flow.</aside>
+</section>
+<section data-id="m2-cashflow" hidden data-transition="fade" style="background:#2D378F;color:#FDFADD;font-family:'Montserrat', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:40px">
+<div style="position:absolute;left:0;top:0;width:24px;height:1080px;background:#D9823F"></div>
+<h2 style="font-family:'Montserrat', Arial, sans-serif;font-size:96px;font-weight:400;line-height:1.15;color:#FDFADD;width:1600px">Cash flow doesn’t make itself. It takes <span style="color:#E79A62">time or cash</span> to keep it going.</h2>
+<aside>Word track: Cash flow doesn’t make itself. It takes either time or cash to keep it going. When you stop trading time, cash has to pick up the load.</aside>
+</section>
+<section data-id="m2-msp" hidden data-transition="fade" style="background:#F1F1F1;color:#1E2347;font-family:'Montserrat', Arial, sans-serif;padding:128px 128px 160px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center">
+<div style="display:flex;flex-direction:column;gap:32px">
+<p style="font-size:28px;letter-spacing:4px;text-transform:uppercase;color:#B0602A;font-weight:700">Ms. P</p>
+<h2 style="font-family:'Montserrat', Arial, sans-serif;font-size:64px;font-weight:700;line-height:1.1;color:#2D378F">“I’m retiring. I don’t care what you say; I’m already done.”</h2>
+<p style="font-size:36px;color:#565C7E;line-height:1.4">She didn’t need more money. She needed to know what her money would do once the paychecks stopped.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:20px">
+<div style="display:flex;flex-direction:column;gap:4px;background:#FFFFFF;border:1px solid #DFE3E9;border-radius:12px;padding:32px">
+<p style="font-family:'Montserrat', Arial, sans-serif;font-size:64px;color:#2D378F">30 years</p>
+<p style="font-size:28px;color:#565C7E">at one company, in every plan they offered</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:4px;background:#FFFFFF;border:1px solid #DFE3E9;border-radius:12px;padding:32px">
+<p style="font-family:'Montserrat', Arial, sans-serif;font-size:64px;color:#2D378F">Nearly $500,000</p>
+<p style="font-size:28px;color:#565C7E">saved on just under $70,000 a year</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:4px;background:#FFFFFF;border:1px solid #DFE3E9;border-radius:12px;padding:32px">
+<p style="font-family:'Montserrat', Arial, sans-serif;font-size:64px;color:#B0602A">January</p>
+<p style="font-size:28px;color:#565C7E">she knew exactly what she’d draw starting then</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#565C7E">The Box Top · Module 2 · Fictional composite</p>
+<aside>Ms. P, a composite. Thirty years at one company, just under $70,000 a year, nearly $500,000 saved. She’d already told her boss she was done. Laying out the four corners showed her exactly what she’d draw starting in January. Word track: She didn’t need more money. She needed to know what her money was going to do once the paychecks stopped.</aside>
+</section>
+<section data-id="m2-exercise" hidden data-transition="fade" style="background:#FDFADD;color:#1E2347;font-family:'Montserrat', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:56px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;letter-spacing:4px;text-transform:uppercase;color:#3598D0;font-weight:700">Exercise · 10 minutes</p>
+<h2 style="font-family:'Montserrat', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1;color:#2D378F">Climb the ladder</h2>
+</div>
+<ol style="font-size:40px;line-height:1.5;color:#1E2347;width:1500px">
+<li>Open the workbook to Corners One and Two.</li>
+<li>Put every piece from last session’s list on a rung of the ladder.</li>
+<li>In one sentence: once the paychecks stop, which lever is doing the work?</li>
+</ol>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#565C7E">The Box Top · Module 2</p>
+<aside>Walk the room while they work. Ask a couple of folks which rung holds most of their money, and which lever they named.</aside>
+</section>
+<section data-id="m2-essence" hidden data-transition="fade" style="background:#2D378F;color:#FDFADD;font-family:'Montserrat', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:48px">
+<p style="font-size:32px;letter-spacing:6px;text-transform:uppercase;color:#3598D0;font-weight:700">The essence</p>
+<h2 style="font-family:'Montserrat', Arial, sans-serif;font-size:96px;font-weight:400;line-height:1.15;color:#FDFADD;width:1600px">Know where your money sits before you decide what it should do.</h2>
+<p style="font-size:36px;color:#C3C8F6;width:1500px">Before next time: bring a recent statement for each account. We’ll sort them by how they’re taxed.</p>
+<aside>Close on the essence and the homework for Module 3.</aside>
+</section>
+<section data-id="m3-title" hidden data-transition="fade" style="background:#2D378F;color:#FDFADD;font-family:'Montserrat', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:40px">
+<div style="position:absolute;left:0;top:0;width:24px;height:540px;background:#8C7BB5"></div>
+<div style="position:absolute;left:0;top:540px;width:24px;height:540px;background:#5BA478"></div>
+<p style="font-size:32px;letter-spacing:6px;text-transform:uppercase;color:#3598D0;font-weight:700">Module 3</p>
+<h1 style="font-family:'Montserrat', Arial, sans-serif;font-size:120px;font-weight:700;line-height:1.05;color:#FDFADD">Corners Three and Four</h1>
+<p style="font-size:44px;line-height:1.3;color:#C3C8F6;width:1400px"><span style="color:#B3A5D6">What it costs in tax</span> and <span style="color:#86C9A0">how your money works</span>.</p>
+<aside>Module 3 covers Chapters 6 and 7. One idea: the balance on your statement doesn’t tell the whole story. Every dollar carries a tax bill and a job.</aside>
+</section>
+<section data-id="m3-train" hidden data-transition="fade" style="background:#F1F1F1;color:#1E2347;font-family:'Montserrat', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;justify-content:center;gap:48px">
+<p style="font-size:28px;letter-spacing:4px;text-transform:uppercase;color:#5B4A7D;font-weight:700">Corner Three · What it costs in tax</p>
+<h2 style="font-family:'Montserrat', Arial, sans-serif;font-size:88px;font-weight:400;line-height:1.15;color:#2D378F;width:1600px">Your statement says $400,000. How much of it is yours?</h2>
+<p style="font-size:40px;color:#565C7E;width:1500px;line-height:1.4">Qualified money is a future tax bill. You deferred it. You didn’t erase it. The train is coming.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#565C7E">The Box Top · Module 3</p>
+<aside>Hold up a statement and let them guess. Word track: Qualified money is a future tax bill. Think of it like a freight train coming down the track. You can plan for it or not, but the train is coming.</aside>
+</section>
+<section data-id="m3-buckets" hidden data-transition="fade" style="background:#F1F1F1;color:#1E2347;font-family:'Montserrat', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:56px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;letter-spacing:4px;text-transform:uppercase;color:#5B4A7D;font-weight:700">The three tax buckets</p>
+<h2 style="font-family:'Montserrat', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1;color:#2D378F">Every account fits in one of three buckets</h2>
+</div>
+<div style="display:flex;flex-direction:row;gap:32px">
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#FFFFFF;border:1px solid #DFE3E9;border-top:8px solid #5B4A7D;border-radius:12px;padding:40px">
+<h3 style="font-size:44px;font-weight:700;color:#2D378F">Qualified</h3>
+<p style="font-size:32px;color:#1E2347">Not taxed yet. Taxed when it comes out.</p>
+<p style="font-size:28px;color:#565C7E">401(k), 403(b), traditional IRA</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#FFFFFF;border:1px solid #DFE3E9;border-top:8px solid #5B4A7D;border-radius:12px;padding:40px">
+<h3 style="font-size:44px;font-weight:700;color:#2D378F">Non-qualified</h3>
+<p style="font-size:32px;color:#1E2347">Already taxed.</p>
+<p style="font-size:28px;color:#565C7E">Checking, savings, CDs, brokerage</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#FFFFFF;border:1px solid #DFE3E9;border-top:8px solid #5B4A7D;border-radius:12px;padding:40px">
+<h3 style="font-size:44px;font-weight:700;color:#2D378F">Tax-privileged</h3>
+<p style="font-size:32px;color:#1E2347">Can come out tax-free when the rules are followed.</p>
+<p style="font-size:28px;color:#565C7E">Roth accounts</p>
+</div>
+</div>
+<p style="font-size:36px;color:#565C7E">Sort your accounts by tax status, not by balance.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#565C7E">The Box Top · Module 3 · Educational only, not tax advice</p>
+<aside>Word track: Sort your accounts by their tax status, not their balance. Every dollar you have carries a tax implication.</aside>
+</section>
+<section data-id="m3-product" hidden data-transition="fade" style="background:#2D378F;color:#FDFADD;font-family:'Montserrat', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:40px">
+<div style="position:absolute;left:0;top:0;width:24px;height:1080px;background:#8C7BB5"></div>
+<h2 style="font-family:'Montserrat', Arial, sans-serif;font-size:96px;font-weight:400;line-height:1.15;color:#FDFADD;width:1600px">The product doesn’t decide the bucket. <span style="color:#B3A5D6">The tax status does.</span></h2>
+<p style="font-size:40px;color:#C3C8F6;width:1400px">A CD can sit in an IRA. Same product, different bucket.</p>
+<aside>Word track: Don’t let the product fool you. A CD can sit in an IRA. The product doesn’t decide the bucket. The tax status does.</aside>
+</section>
+<section data-id="m3-cpa" hidden data-transition="fade" style="background:#F1F1F1;color:#1E2347;font-family:'Montserrat', Arial, sans-serif;padding:128px 128px 160px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center">
+<div style="display:flex;flex-direction:column;gap:32px">
+<p style="font-size:28px;letter-spacing:4px;text-transform:uppercase;color:#5B4A7D;font-weight:700">Why the mix matters</p>
+<h2 style="font-family:'Montserrat', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1;color:#2D378F">Most retirees find most of their money in one bucket</h2>
+</div>
+<div style="display:flex;flex-direction:column;gap:24px">
+<div style="display:flex;flex-direction:column;gap:8px;background:#FFFFFF;border:1px solid #DFE3E9;border-radius:12px;padding:32px">
+<h3 style="font-size:36px;font-weight:700;color:#2D378F">Every withdrawal is taxable</h3>
+<p style="font-size:30px;color:#565C7E">when it all sits in qualified accounts.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px;background:#FFFFFF;border:1px solid #DFE3E9;border-radius:12px;padding:32px">
+<h3 style="font-size:36px;font-weight:700;color:#2D378F">Required distributions come later</h3>
+<p style="font-size:30px;color:#565C7E">whether you need the money or not.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px;background:#EEEAF5;border:1px solid #C9BFDD;border-radius:12px;padding:32px">
+<h3 style="font-size:36px;font-weight:700;color:#5B4A7D">Bring this to your CPA</h3>
+<p style="font-size:30px;color:#565C7E">Knowing your buckets makes that conversation better.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#565C7E">The Box Top · Module 3 · Educational only, not tax advice</p>
+<aside>Stop here and route it. Word track: I’m not your CPA, and this isn’t tax advice. The point is to see which bucket your money is in so you can have a better conversation with your tax professional. Tell the Dawsons from Chapter 6 if time allows, and route estate planning to an attorney.</aside>
+</section>
+<section data-id="m3-sga" hidden data-transition="fade" style="background:#F1F1F1;color:#1E2347;font-family:'Montserrat', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:56px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;letter-spacing:4px;text-transform:uppercase;color:#2F6B4E;font-weight:700">Corner Four · How your money works</p>
+<h2 style="font-family:'Montserrat', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1;color:#2D378F">Every dollar has a job, whether you gave it one or not</h2>
+</div>
+<div style="display:flex;flex-direction:row;gap:32px">
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#FFFFFF;border:1px solid #DFE3E9;border-top:8px solid #3F7D5A;border-radius:12px;padding:40px">
+<h3 style="font-family:'Montserrat', Arial, sans-serif;font-size:56px;font-weight:700;color:#2D378F">Safety</h3>
+<p style="font-size:32px;color:#565C7E;line-height:1.4">Your principal is protected. What you put in, you can’t lose.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#FFFFFF;border:1px solid #DFE3E9;border-top:8px solid #3F7D5A;border-radius:12px;padding:40px">
+<h3 style="font-family:'Montserrat', Arial, sans-serif;font-size:56px;font-weight:700;color:#2D378F">Growth</h3>
+<p style="font-size:32px;color:#565C7E;line-height:1.4">It can outpace inflation. If it doesn’t, it’s losing value.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#FFFFFF;border:1px solid #DFE3E9;border-top:8px solid #3F7D5A;border-radius:12px;padding:40px">
+<h3 style="font-family:'Montserrat', Arial, sans-serif;font-size:56px;font-weight:700;color:#2D378F">Access</h3>
+<p style="font-size:32px;color:#565C7E;line-height:1.4">You can get to it quickly when you need it.</p>
+</div>
+</div>
+<p style="font-size:36px;color:#565C7E;width:1600px">Corner One shows where your money sits. Corner Four shows what it’s doing.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#565C7E">The Box Top · Module 3</p>
+<aside>Corner One is location. Corner Four is the job. Walk the three modes, then move to the balance slide.</aside>
+</section>
+<section data-id="m3-balance" hidden data-transition="fade" style="background:#2D378F;color:#FDFADD;font-family:'Montserrat', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:40px">
+<div style="position:absolute;left:0;top:0;width:24px;height:1080px;background:#5BA478"></div>
+<h2 style="font-family:'Montserrat', Arial, sans-serif;font-size:88px;font-weight:400;line-height:1.15;color:#FDFADD;width:1600px">The goal isn’t to pick one. It’s the <span style="color:#86C9A0">right balance</span> for where you are now.</h2>
+<p style="font-size:40px;color:#C3C8F6;width:1500px">Not where you were when you opened the account.</p>
+<aside>Word track: If everything’s safe, it may not grow enough. If everything’s growing, it may not be safe enough. That’s the balance we’re looking for.</aside>
+</section>
+<section data-id="m3-exercise" hidden data-transition="fade" style="background:#FDFADD;color:#1E2347;font-family:'Montserrat', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:56px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;letter-spacing:4px;text-transform:uppercase;color:#3598D0;font-weight:700">Exercise · 10 minutes</p>
+<h2 style="font-family:'Montserrat', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1;color:#2D378F">Two labels on every piece</h2>
+</div>
+<ol style="font-size:40px;line-height:1.5;color:#1E2347;width:1500px">
+<li>Open the workbook to Corners Three and Four.</li>
+<li>Label each piece with its bucket: Q, NQ, or TP.</li>
+<li>Label each piece with its job: S, G, or A.</li>
+<li>Roughly what share sits in qualified money?</li>
+</ol>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#565C7E">The Box Top · Module 3</p>
+<aside>Ask: did anybody surprise themselves? Most rooms find more in the qualified bucket than they expected.</aside>
+</section>
+<section data-id="m3-essence" hidden data-transition="fade" style="background:#2D378F;color:#FDFADD;font-family:'Montserrat', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:48px">
+<p style="font-size:32px;letter-spacing:6px;text-transform:uppercase;color:#3598D0;font-weight:700">The essence</p>
+<h2 style="font-family:'Montserrat', Arial, sans-serif;font-size:96px;font-weight:400;line-height:1.15;color:#FDFADD;width:1600px">Every dollar has a tax bill and a job. Know both.</h2>
+<p style="font-size:36px;color:#C3C8F6;width:1500px">Next time we put all four corners together. Bring your workbook and your quiz results.</p>
+<aside>Close on the essence and the homework for Module 4.</aside>
+</section>
+<section data-id="m4-title" hidden data-transition="fade" style="background:#2D378F;color:#FDFADD;font-family:'Montserrat', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:40px">
+<div style="position:absolute;left:0;top:0;width:24px;height:270px;background:#2F8F93"></div>
+<div style="position:absolute;left:0;top:270px;width:24px;height:270px;background:#D9823F"></div>
+<div style="position:absolute;left:0;top:540px;width:24px;height:270px;background:#8C7BB5"></div>
+<div style="position:absolute;left:0;top:810px;width:24px;height:270px;background:#5BA478"></div>
+<p style="font-size:32px;letter-spacing:6px;text-transform:uppercase;color:#3598D0;font-weight:700">Module 4</p>
+<h1 style="font-family:'Montserrat', Arial, sans-serif;font-size:120px;font-weight:700;line-height:1.05;color:#FDFADD">Building Your Box Top</h1>
+<p style="font-size:44px;line-height:1.3;color:#C3C8F6;width:1400px">Put the four corners together, find the gap, and let it point to the next step.</p>
+<aside>Module 4 covers Chapters 8 through 11. One idea: let the gap point to the next step.</aside>
+</section>
+<section data-id="m4-flight" hidden data-transition="fade" style="background:#F1F1F1;color:#1E2347;font-family:'Montserrat', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:56px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;letter-spacing:4px;text-transform:uppercase;color:#3598D0;font-weight:700">The dangers of old settings</p>
+<h2 style="font-family:'Montserrat', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1;color:#2D378F">The landing takes more skill than the takeoff</h2>
+</div>
+<div style="display:flex;flex-direction:row;gap:0px">
+<div style="flex:1;display:flex;flex-direction:column;gap:8px;background:#FFFFFF;border:1px solid #DFE3E9;padding:36px">
+<h3 style="font-size:40px;font-weight:700;color:#565C7E">Takeoff</h3>
+<p style="font-size:28px;color:#565C7E">Gets all the attention</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:8px;background:#FFFFFF;border:1px solid #DFE3E9;border-left:none;padding:36px">
+<h3 style="font-size:40px;font-weight:700;color:#565C7E">Cruising</h3>
+<p style="font-size:28px;color:#565C7E">Your working years</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:8px;background:#2D378F;border:1px solid #2D378F;padding:36px">
+<h3 style="font-size:40px;font-weight:700;color:#3598D0">Descent</h3>
+<p style="font-size:28px;color:#C3C8F6">The red zone</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:8px;background:#2D378F;border:1px solid #2D378F;padding:36px">
+<h3 style="font-size:40px;font-weight:700;color:#3598D0">Landing</h3>
+<p style="font-size:28px;color:#C3C8F6">Retirement itself</p>
+</div>
+</div>
+<p style="font-size:36px;color:#1E2347;width:1600px">Are you still following the same money strategy you picked when you were twenty-five?</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#565C7E">The Box Top · Module 4</p>
+<aside>Ask any pilot which phase takes the most skill: descent and landing. Word track: You might not be making bad decisions. You might just be running settings you picked for the climb.</aside>
+</section>
+<section data-id="m4-types" hidden data-transition="fade" style="background:#F1F1F1;color:#1E2347;font-family:'Montserrat', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:48px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;letter-spacing:4px;text-transform:uppercase;color:#3598D0;font-weight:700">The three retiree types</p>
+<h2 style="font-family:'Montserrat', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1;color:#2D378F">What did your quiz say?</h2>
+</div>
+<div style="display:flex;flex-direction:row;gap:32px">
+<div style="flex:1;display:flex;flex-direction:column;gap:20px;background:#FFFFFF;border:1px solid #DFE3E9;border-top:8px solid #3598D0;border-radius:12px;padding:40px">
+<h3 style="font-size:40px;font-weight:700;color:#2D378F">The Income Seeker</h3>
+<p style="font-family:'Montserrat', Arial, sans-serif;font-size:36px;font-style:italic;color:#3598D0">“Can I retire?”</p>
+<p style="font-size:28px;color:#565C7E;line-height:1.4">Wants a steady monthly check and no fear of running out.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px;background:#FFFFFF;border:1px solid #DFE3E9;border-top:8px solid #3598D0;border-radius:12px;padding:40px">
+<h3 style="font-size:40px;font-weight:700;color:#2D378F">The Legacy Builder</h3>
+<p style="font-family:'Montserrat', Arial, sans-serif;font-size:36px;font-style:italic;color:#3598D0">“We’re comfortable; I just want to ensure the grandkids are taken care of.”</p>
+<p style="font-size:28px;color:#565C7E;line-height:1.4">Wants to pass wealth on efficiently with fewer unnecessary taxes.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px;background:#FFFFFF;border:1px solid #DFE3E9;border-top:8px solid #3598D0;border-radius:12px;padding:40px">
+<h3 style="font-size:40px;font-weight:700;color:#2D378F">The Freedom Seeker</h3>
+<p style="font-family:'Montserrat', Arial, sans-serif;font-size:36px;font-style:italic;color:#3598D0">“I don’t really want to think about money anymore.”</p>
+<p style="font-size:28px;color:#565C7E;line-height:1.4">Wants peace of mind, simplicity, and some of all three modes.</p>
+</div>
+</div>
+<p style="font-size:32px;color:#565C7E">Most people are a mix, and that’s normal.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#565C7E">The Box Top · Module 4</p>
+<aside>Have folks call out their quiz result. Word track: Most of us are a mix, and that’s normal. You don’t have to pick a type before you use the four corners. The corners show you what matters most. Use the oxygen mask for the Legacy Builder: put your own mask on first. Cash flow is oxygen.</aside>
+</section>
+<section data-id="m4-corners" hidden data-transition="fade" style="background:#F1F1F1;color:#1E2347;font-family:'Montserrat', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:28px;letter-spacing:4px;text-transform:uppercase;color:#3598D0;font-weight:700">Putting the corners together · The Reynolds</p>
+<h2 style="font-family:'Montserrat', Arial, sans-serif;font-size:64px;font-weight:700;line-height:1.1;color:#2D378F">63 and 61, a year or two from retiring</h2>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+<div style="display:flex;flex-direction:column;gap:8px;background:#FFFFFF;border:1px solid #DFE3E9;border-left:10px solid #1F6F73;border-radius:12px;padding:28px 32px">
+<p style="font-size:24px;letter-spacing:3px;text-transform:uppercase;color:#1F6F73;font-weight:700">Corner One</p>
+<p style="font-size:30px;color:#1E2347;line-height:1.35">About $120,000 in checking and savings, a $600,000 401(k). No rung built to pay income.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px;background:#FFFFFF;border:1px solid #DFE3E9;border-left:10px solid #C06A2E;border-radius:12px;padding:28px 32px">
+<p style="font-size:24px;letter-spacing:3px;text-transform:uppercase;color:#B0602A;font-weight:700">Corner Two</p>
+<p style="font-size:30px;color:#1E2347;line-height:1.35">Lisa wants a paycheck every month, no matter what the market does.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px;background:#FFFFFF;border:1px solid #DFE3E9;border-left:10px solid #5B4A7D;border-radius:12px;padding:28px 32px">
+<p style="font-size:24px;letter-spacing:3px;text-transform:uppercase;color:#5B4A7D;font-weight:700">Corner Three</p>
+<p style="font-size:30px;color:#1E2347;line-height:1.35">Almost everything is qualified. Much of the $600,000 is a future tax bill.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px;background:#FFFFFF;border:1px solid #DFE3E9;border-left:10px solid #3F7D5A;border-radius:12px;padding:28px 32px">
+<p style="font-size:24px;letter-spacing:3px;text-transform:uppercase;color:#2F6B4E;font-weight:700">Corner Four</p>
+<p style="font-size:30px;color:#1E2347;line-height:1.35">Mostly growth and access. Very little safety.</p>
+</div>
+</div>
+<p style="font-size:32px;color:#2D378F;font-weight:700">The gap: they want a dependable paycheck and have no rung built to pay one.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#565C7E">The Box Top · Module 4 · Fictional composite</p>
+<aside>Walk all four corners for the Reynolds, a composite. Word track: Notice nobody’s named a product. The gap is right there on the table. A couple who wants a dependable paycheck has no rung built to pay one.</aside>
+</section>
+<section data-id="m4-gap" hidden data-transition="fade" style="background:#3598D0;color:#2D378F;font-family:'Montserrat', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:48px">
+<p style="font-size:32px;letter-spacing:6px;text-transform:uppercase;color:#2D378F;font-weight:700">Let the gap point to the next step</p>
+<h1 style="font-family:'Montserrat', Arial, sans-serif;font-size:128px;font-weight:700;line-height:1.05;color:#2D378F;width:1600px">Opportunities before solutions.</h1>
+<p style="font-size:40px;line-height:1.35;color:#1E2347;width:1500px">A gap isn’t always a purchase. Sometimes it’s reorganizing what you have, updating beneficiaries, or changing an allocation.</p>
+<aside>Never begin with the solution. Begin with the picture. Word track: Our framework reveals opportunities before solutions.</aside>
+</section>
+<section data-id="m4-questions" hidden data-transition="fade" style="background:#F1F1F1;color:#1E2347;font-family:'Montserrat', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:48px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;letter-spacing:4px;text-transform:uppercase;color:#3598D0;font-weight:700">Before you move a dollar</p>
+<h2 style="font-family:'Montserrat', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1;color:#2D378F">Every decision goes through all four corners</h2>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+<div style="display:flex;flex-direction:row;gap:24px;align-items:center;background:#FFFFFF;border:1px solid #DFE3E9;border-radius:12px;padding:32px">
+<p style="font-family:'Montserrat', Arial, sans-serif;font-size:64px;color:#1F6F73;width:56px">1</p>
+<p style="font-size:34px;color:#1E2347">Where does my money currently sit?</p>
+</div>
+<div style="display:flex;flex-direction:row;gap:24px;align-items:center;background:#FFFFFF;border:1px solid #DFE3E9;border-radius:12px;padding:32px">
+<p style="font-family:'Montserrat', Arial, sans-serif;font-size:64px;color:#B0602A;width:56px">2</p>
+<p style="font-size:34px;color:#1E2347">What do I want this money to accomplish?</p>
+</div>
+<div style="display:flex;flex-direction:row;gap:24px;align-items:center;background:#FFFFFF;border:1px solid #DFE3E9;border-radius:12px;padding:32px">
+<p style="font-family:'Montserrat', Arial, sans-serif;font-size:64px;color:#5B4A7D;width:56px">3</p>
+<p style="font-size:34px;color:#1E2347">How is this money taxed?</p>
+</div>
+<div style="display:flex;flex-direction:row;gap:24px;align-items:center;background:#FFFFFF;border:1px solid #DFE3E9;border-radius:12px;padding:32px">
+<p style="font-family:'Montserrat', Arial, sans-serif;font-size:64px;color:#2F6B4E;width:56px">4</p>
+<p style="font-size:34px;color:#1E2347">What job is this money currently doing?</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#565C7E">The Box Top · Module 4 · From Chapter 11</p>
+<aside>The four questions from Chapter 11. Word track: Every major money decision goes through all four corners, not just one.</aside>
+</section>
+<section data-id="m4-exercise" hidden data-transition="fade" style="background:#FDFADD;color:#1E2347;font-family:'Montserrat', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:56px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;letter-spacing:4px;text-transform:uppercase;color:#3598D0;font-weight:700">Exercise · 10 minutes</p>
+<h2 style="font-family:'Montserrat', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1;color:#2D378F">Find your gap</h2>
+</div>
+<ol style="font-size:40px;line-height:1.5;color:#1E2347;width:1500px">
+<li>Open the workbook to the last spread and lay all four corners side by side.</li>
+<li>Write down the one gap that stands out most.</li>
+<li>Answer the next question: who can help me address that gap?</li>
+</ol>
+<p style="font-size:32px;color:#565C7E">A CPA, an attorney, an insurance professional, or a financial professional.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#565C7E">The Box Top · Module 4</p>
+<aside>From Chapter 10: What gap stands out most to you? If you can’t answer it, revisit the corners. Then: who can help me address that gap? The answer often lies in who, not how.</aside>
+</section>
+<section data-id="m4-essence" hidden data-transition="fade" style="background:#2D378F;color:#FDFADD;font-family:'Montserrat', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:48px">
+<p style="font-size:32px;letter-spacing:6px;text-transform:uppercase;color:#3598D0;font-weight:700">The essence</p>
+<h2 style="font-family:'Montserrat', Arial, sans-serif;font-size:112px;font-weight:400;line-height:1.15;color:#FDFADD;width:1600px">Let the gap point to the next step.</h2>
+<aside>Close on the essence, then go to the next-step slide.</aside>
+</section>
+<section data-id="m4-next" hidden data-transition="fade" style="background:#F1F1F1;color:#1E2347;font-family:'Montserrat', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:56px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;letter-spacing:4px;text-transform:uppercase;color:#3598D0;font-weight:700">Your next step</p>
+<h2 style="font-family:'Montserrat', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1;color:#2D378F">See your whole picture on one page</h2>
+</div>
+<div style="display:flex;flex-direction:row;gap:32px">
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#2D378F;border-radius:12px;padding:48px">
+<h3 style="font-family:'Montserrat', Arial, sans-serif;font-size:52px;font-weight:700;color:#FDFADD">Book a free Box Top Review</h3>
+<p style="font-size:32px;color:#C3C8F6;line-height:1.4">We’ll put your four corners on your Client Money Map and talk through your gap. No cost, no obligation.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#FFFFFF;border:1px solid #DFE3E9;border-radius:12px;padding:48px">
+<h3 style="font-family:'Montserrat', Arial, sans-serif;font-size:52px;font-weight:700;color:#2D378F">Legacy on your mind?</h3>
+<p style="font-size:32px;color:#565C7E;line-height:1.4">Start with the Legacy Trust Finder. Ten questions, results on screen.</p>
+</div>
+</div>
+<p style="font-size:36px;color:#2D378F"><b>662-200-2249</b> · pontotocinsuranceagency.com</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#565C7E">The Box Top · Module 4</p>
+<aside>Make the ask plainly. Hand out the review booking card or put the link in the chat.</aside>
+</section>
+<section data-id="disclaimer" hidden data-transition="fade" style="background:#2D378F;color:#FDFADD;font-family:'Montserrat', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:40px">
+<p style="font-size:32px;letter-spacing:6px;text-transform:uppercase;color:#3598D0;font-weight:700">Important</p>
+<p style="font-size:36px;line-height:1.5;color:#C3C8F6;width:1560px">This training is educational. It is not financial, tax, or legal advice, and it does not recommend any specific product, security, or strategy. Tax questions belong with your CPA or tax professional. Estate and legal questions belong with an attorney. People and numbers in the examples are fictional composites used only to illustrate the framework.</p>
+<p style="font-size:30px;color:#FDFADD"><b>Pontotoc Insurance Agency</b> · 158 MS-15, Suite D, Pontotoc, MS 38863</p>
+<aside>Leave this up at the end of every session.</aside>
+</section>
+          </div>
+        </div>
+        <div class="progress" aria-hidden="true"><span id="bt-bar"></span></div>
+      </div>
+
+      <div class="controls">
+        <div class="pager">
+          <button type="button" class="btn prev" id="bt-prev" aria-label="Back to the previous slide"><span class="ar" aria-hidden="true">←</span> Back</button>
+          <p class="count" aria-hidden="true"><span id="bt-n">1</span> <span class="of">/ 43</span></p>
+          <button type="button" class="btn next" id="bt-next" aria-label="Next slide">Next <span class="ar" aria-hidden="true">→</span></button>
+        </div>
+        <div class="jump">
+          <label for="bt-jump">Jump to</label>
+          <select id="bt-jump">
+          <option value="cover">Cover</option>
+          <option value="m1-title">Module 1: The Pieces and the Picture</option>
+          <option value="m2-title">Module 2: Corners One and Two</option>
+          <option value="m3-title">Module 3: Corners Three and Four</option>
+          <option value="m4-title">Module 4: Building Your Box Top</option>
+          </select>
+        </div>
+      </div>
+      <p class="hint">The arrow keys work too. On a phone, swipe the slide.</p>
+      <div class="sr" id="bt-live" aria-live="polite" aria-atomic="true"></div>
+
+      <section class="notes" aria-labelledby="bt-notes-h">
+        <h2 id="bt-notes-h">What Justin says</h2>
+        <p class="where" id="bt-where">Cover · Slide 1 of 43</p>
+        <p class="say" id="bt-say"></p>
+      </section>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Presented by Pontotoc Insurance Agency · Published by Game Changer Publishing</p>
+    <p>This training is educational. It is not financial, tax, or legal advice, and it doesn't recommend any specific product, investment, or strategy. Take tax questions to your CPA and estate questions to your attorney. People and numbers in the examples are fictional composites.</p>
+    <p>This page uses cookies and the Meta Pixel to measure our ads. See how, and how to opt out, in our <a href="/privacy/#cookies">Privacy Policy</a>.</p>
+    <nav aria-label="Legal"><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms</a></nav>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var W=1920;
+  var stage=document.getElementById('bt-stage'),deck=document.getElementById('bt-deck');
+  var prev=document.getElementById('bt-prev'),next=document.getElementById('bt-next');
+  var num=document.getElementById('bt-n'),bar=document.getElementById('bt-bar');
+  var jump=document.getElementById('bt-jump'),live=document.getElementById('bt-live');
+  var where=document.getElementById('bt-where'),say=document.getElementById('bt-say');
+  var slides=Array.prototype.filter.call(deck.children,function(el){return el.tagName==='SECTION'});
+  var N=slides.length;
+  var ids=slides.map(function(s){return s.getAttribute('data-id')});
+  var parts=Array.prototype.map.call(jump.options,function(o){return {name:o.textContent,start:ids.indexOf(o.value),value:o.value}});
+  var cur=-1;
+
+  /* Scale the 1920x1080 canvas to the stage width. */
+  function fit(){var w=stage.clientWidth;if(w)deck.style.transform='scale('+(w/W)+')'}
+  if('ResizeObserver' in window){new ResizeObserver(fit).observe(stage)}else{window.addEventListener('resize',fit)}
+  fit();
+
+  function fromHash(){
+    var m=/^#slide-(.+)$/.exec(location.hash||'');
+    if(!m)return 0;
+    var i=ids.indexOf(decodeURIComponent(m[1]));
+    return i<0?0:i;
+  }
+  function partOf(i){var p=parts[0];for(var k=0;k<parts.length;k++){if(parts[k].start<=i)p=parts[k]}return p}
+  function titleOf(s){
+    var h=s.querySelector('h1,h2')||s.querySelector('p');
+    return h?h.textContent.replace(/\s+/g,' ').trim():'';
+  }
+  /* Warm the next slide's images so they are ready when it shows. */
+  function warm(i){
+    var s=slides[i];if(!s||s._warm)return;s._warm=1;
+    Array.prototype.forEach.call(s.querySelectorAll('img'),function(im){var p=new Image();p.src=im.getAttribute('src')});
+  }
+
+  function render(i,announce){
+    if(i===cur)return;
+    var old=slides[cur];
+    if(old){
+      /* Fade from the old slide's ground, not from a blank stage. */
+      stage.style.backgroundColor=getComputedStyle(old).backgroundColor;
+      old.hidden=true;
+    }else{
+      for(var k=0;k<N;k++)if(k!==i)slides[k].hidden=true;
+    }
+    slides[i].hidden=false;
+    Array.prototype.forEach.call(slides[i].querySelectorAll('img[loading="lazy"]'),function(im){im.loading='eager'});
+    cur=i;
+    var label='Slide '+(i+1)+' of '+N;
+    stage.setAttribute('aria-label',label);
+    num.textContent=i+1;
+    bar.style.width=((i+1)/N*100)+'%';
+    var aside=slides[i].querySelector('aside');
+    say.textContent=aside?aside.textContent.trim():'';
+    var p=partOf(i);
+    where.textContent=p.name+' · '+label;
+    jump.value=p.value;
+    prev.setAttribute('aria-disabled',i===0?'true':'false');
+    next.setAttribute('aria-disabled',i===N-1?'true':'false');
+    if(announce)live.textContent=label+'. '+titleOf(slides[i]);
+    warm(i+1);
+  }
+
+  function go(i){
+    i=Math.max(0,Math.min(N-1,i));
+    if(i===cur)return;
+    var h='#slide-'+ids[i];
+    if(location.hash!==h){
+      try{history.pushState(null,'',h)}catch(e){location.hash=h;return}
+    }
+    render(i,true);
+  }
+
+  window.addEventListener('popstate',function(){render(fromHash(),true)});
+  window.addEventListener('hashchange',function(){render(fromHash(),true)});
+
+  prev.addEventListener('click',function(){if(cur>0)go(cur-1)});
+  next.addEventListener('click',function(){if(cur<N-1)go(cur+1)});
+  jump.addEventListener('change',function(){var i=ids.indexOf(jump.value);if(i>=0)go(i)});
+
+  document.addEventListener('keydown',function(e){
+    if(e.defaultPrevented||e.altKey||e.ctrlKey||e.metaKey||e.shiftKey)return;
+    var t=e.target,tag=t&&t.tagName;
+    if(tag==='SELECT'||tag==='INPUT'||tag==='TEXTAREA'||(t&&t.isContentEditable))return;
+    var k=e.key,d=null;
+    if(k==='ArrowRight'||k==='PageDown')d=cur+1;
+    else if(k==='ArrowLeft'||k==='PageUp')d=cur-1;
+    else if(k==='Home')d=0;
+    else if(k==='End')d=N-1;
+    if(d===null)return;
+    e.preventDefault();
+    go(d);
+  });
+
+  /* Swipe left or right on the slide. Ignored while the page is pinch-zoomed. */
+  var sx=null,sy=0;
+  stage.addEventListener('touchstart',function(e){
+    if(e.touches.length!==1||(window.visualViewport&&visualViewport.scale>1.05)){sx=null;return}
+    sx=e.touches[0].clientX;sy=e.touches[0].clientY;
+  },{passive:true});
+  stage.addEventListener('touchend',function(e){
+    if(sx===null)return;
+    var t=e.changedTouches[0],dx=t.clientX-sx,dy=t.clientY-sy;sx=null;
+    if(Math.abs(dx)>40&&Math.abs(dx)>1.5*Math.abs(dy))go(cur+(dx<0?1:-1));
+  },{passive:true});
+  stage.addEventListener('touchcancel',function(){sx=null},{passive:true});
+
+  render(fromHash(),false);
+})();
+</script>
+</body>
+</html>
