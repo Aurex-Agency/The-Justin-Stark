@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Box Top Quiz · The Box Top Method</title>
+<meta name="description" content="14 questions, about 4 minutes. See your retiree type, how clear each of your four corners is, and where your biggest gap sits. From The Box Top Method by Justin L Stark.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://thejustinstark.com/theboxtop/quiz/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://thejustinstark.com/theboxtop/quiz/">
+<meta property="og:title" content="The Box Top Quiz: What Kind of Retiree Are You?">
+<meta property="og:description" content="14 questions, about 4 minutes. See your retiree type, how clear each of your four corners is, and where your biggest gap sits.">
+<meta property="og:image" content="https://thejustinstark.com/theboxtop/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<link rel="icon" type="image/svg+xml" href="/theboxtop/assets/favicon.svg">
+<link rel="apple-touch-icon" href="/theboxtop/assets/apple-touch-icon.png">
+<meta name="theme-color" content="#2D378F">
+<link rel="preconnect" href="https://connect.facebook.net" crossorigin>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '4533371650216162');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=4533371650216162&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+<script>
+window.mtrack=function(name,params){
+  var id='ev.'+Date.now().toString(36)+'.'+Math.random().toString(36).slice(2,10);
+  if(window.fbq){fbq('track',name,params||{},{eventID:id})}
+  try{
+    var body=JSON.stringify({event_name:name,event_id:id,event_source_url:location.href,custom_data:params||{}});
+    if(navigator.sendBeacon){navigator.sendBeacon('/api/meta',new Blob([body],{type:'application/json'}))}
+    else if(window.fetch){fetch('/api/meta',{method:'POST',headers:{'Content-Type':'application/json'},body:body,keepalive:true})}
+  }catch(e){}
+};
+mtrack('PageView');
+</script>
+<link rel="preload" href="/assets/fonts/Montserrat-var.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face { font-family: 'Montserrat'; font-style: normal; font-weight: 100 900; font-display: swap; src: url('/assets/fonts/Montserrat-var.woff2') format('woff2'); }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+/* Layout: navy masthead band with the book line, then one working column: quiz card -> results (type, red zone, four corners, gap) -> review request. */
+:root {
+  --navy: #2D378F;
+  --gold: #3598D0;
+  --gold-deep: #2D378F;
+  --bg: #F1F1F1;
+  --surface: #FFFFFF;
+  --surface-2: #F7F8FC;
+  --fg: #1E2347;
+  --muted: #565C7E;
+  --line: #DFE3E9;
+  --chip: #E4EDF6;
+  --band: #2D378F;
+  --band-fg: #FDFADD;
+  --ok: #2F6B4E;
+  --warn: #9E4A3F;
+  --c1: #1F6F73;
+  --c2: #C06A2E;
+  --c3: #5B4A7D;
+  --c4: #3F7D5A;
+  --font-display: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 16px; line-height: 1.55; }
+.wrap { max-width: 760px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+
+.band { background: var(--band); color: var(--band-fg); }
+.band .wrap { padding-block: 22px 32px; }
+.brand { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; border-bottom: 1px solid color-mix(in srgb, var(--gold) 55%, transparent); padding-bottom: 12px; }
+.wordmark { font-family: var(--font-display); font-size: 1.1rem; font-weight: 900; letter-spacing: .06em; text-transform: uppercase; }
+.tag { color: var(--gold); font-size: .68rem; font-weight: 700; letter-spacing: .28em; }
+.hero { padding-top: 22px; display: grid; gap: 10px; }
+.eyebrow { color: var(--gold); font-size: .72rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
+h1 { font-family: var(--font-display); font-weight: 500; font-size: clamp(2rem, 6vw, 2.9rem); line-height: 1.08; margin: 0; text-wrap: balance; }
+h1 em { color: var(--gold); }
+.hero p { margin: 0; max-width: 60ch; color: color-mix(in srgb, var(--band-fg) 82%, transparent); }
+.facts { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: .82rem; color: color-mix(in srgb, var(--band-fg) 75%, transparent); }
+.facts span::before { content: ""; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); margin-right: 7px; vertical-align: 2px; }
+.mini-corners { display: grid; grid-template-columns: repeat(4, 10px); gap: 4px; }
+.mini-corners i { width: 10px; height: 10px; border-radius: 2px; }
+
+main .wrap { padding-block: 0 48px; display: grid; gap: 18px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 24px; min-width: 0; }
+.lift { margin-top: -18px; box-shadow: 0 10px 30px -18px rgba(15, 37, 65, .45); }
+
+.progress-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: .8rem; color: var(--muted); font-variant-numeric: tabular-nums; flex-wrap: wrap; }
+.part-tag { font-weight: 700; letter-spacing: .08em; text-transform: uppercase; font-size: .72rem; color: var(--qc, var(--gold-deep)); }
+.bar { height: 6px; background: var(--chip); border-radius: 99px; overflow: hidden; margin: 10px 0 20px; }
+.bar i { display: block; height: 100%; background: var(--gold); border-radius: 99px; transition: width .35s ease; }
+.qtitle { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.35rem, 4vw, 1.7rem); line-height: 1.2; margin: 0 0 6px; text-wrap: balance; }
+.qhelp { color: var(--muted); margin: 0 0 18px; font-size: .92rem; }
+.opts { display: grid; gap: 10px; }
+.opt { text-align: left; background: var(--surface-2); color: var(--fg); border: 1.5px solid var(--line); border-radius: 10px; padding: 13px 14px; font: 500 .97rem/1.4 var(--font-body); cursor: pointer; display: flex; gap: 10px; align-items: flex-start; min-width: 0; }
+.opt:hover { border-color: var(--gold); }
+.opt .box { flex: 0 0 18px; height: 18px; margin-top: 2px; border: 1.5px solid var(--muted); border-radius: 50%; display: grid; place-items: center; }
+.opt[aria-pressed="true"] { border-color: var(--gold); background: color-mix(in srgb, var(--gold) 14%, var(--surface)); }
+.opt[aria-pressed="true"] .box { border-color: var(--gold); background: var(--gold); }
+.opt[aria-pressed="true"] .box::after { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--navy); }
+.opt.quote span:last-child { font-family: var(--font-display); font-size: 1.12rem; font-style: italic; }
+.sliders { display: grid; gap: 18px; }
+.slider label { display: flex; justify-content: space-between; gap: 10px; font-weight: 600; font-size: .95rem; }
+.slider output { font-family: var(--font-display); font-size: 1.3rem; color: var(--gold-deep); font-variant-numeric: tabular-nums; min-width: 2ch; text-align: right; }
+.slider input { width: 100%; accent-color: var(--gold); margin-top: 6px; }
+.slider .ends { display: flex; justify-content: space-between; font-size: .75rem; color: var(--muted); }
+.nav { display: flex; justify-content: space-between; gap: 10px; margin-top: 22px; }
+.btn { border: 0; border-radius: 10px; padding: 12px 20px; font: 600 .95rem var(--font-body); cursor: pointer; }
+.btn-primary { background: var(--navy); color: #F3F0E8; }
+.btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--line); }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2.5px solid var(--gold); outline-offset: 2px; }
+
+/* results */
+.section-lab { font-size: .74rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--gold-deep); margin: 6px 0 -6px; }
+.type h2 { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.9rem, 6vw, 2.5rem); line-height: 1.05; margin: 4px 0 10px; }
+.type .says { font-family: var(--font-display); font-style: italic; font-size: 1.25rem; color: var(--gold-deep); margin: 0 0 12px; }
+.type p { margin: 0 0 12px; max-width: 62ch; }
+.concerns { margin: 0 0 14px; padding-left: 18px; color: var(--muted); }
+.concerns li { margin: 3px 0; }
+.mix { display: grid; gap: 8px; border-top: 1px solid var(--line); padding-top: 14px; }
+.mix-row { display: grid; grid-template-columns: 9.5rem 1fr 3rem; gap: 10px; align-items: center; font-size: .88rem; }
+.mix-row .track { height: 8px; background: var(--chip); border-radius: 99px; overflow: hidden; }
+.mix-row .track i { display: block; height: 100%; background: var(--gold); border-radius: 99px; }
+.mix-row.dim .track i { background: color-mix(in srgb, var(--gold) 45%, var(--chip)); }
+.mix-row b { font-variant-numeric: tabular-nums; text-align: right; }
+.fine { font-size: .74rem; color: var(--muted); line-height: 1.5; }
+
+.redzone { border-left: 5px solid var(--warn); }
+.redzone.clear { border-left-color: var(--ok); }
+.redzone h3, .gap h3 { font-family: var(--font-display); font-weight: 600; font-size: 1.3rem; margin: 0 0 6px; }
+.redzone p { margin: 0 0 10px; }
+.math { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-variant-numeric: tabular-nums; font-size: .92rem; }
+.math span { background: var(--surface-2); border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; }
+.math em { color: var(--muted); font-style: normal; }
+
+.clarity-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+.clarity-head h3 { font-family: var(--font-display); font-weight: 600; font-size: 1.3rem; margin: 0; }
+.clarity-head .score { font-family: var(--font-display); font-size: 2rem; font-variant-numeric: tabular-nums; }
+.clarity-head .score small { font-size: .9rem; color: var(--muted); }
+.corner-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.corner { border: 1.5px solid var(--line); border-radius: 10px; padding: 12px 14px; background: var(--surface-2); min-width: 0; display: grid; gap: 6px; }
+.corner .ct { font-size: .7rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--cc); }
+.corner .cn { font-family: var(--font-display); font-size: 1.05rem; line-height: 1.25; }
+.pips { display: flex; gap: 4px; }
+.pips i { flex: 1; height: 7px; border-radius: 99px; background: var(--chip); }
+.pips i.on { background: var(--cc); }
+.corner .cs { font-size: .8rem; color: var(--muted); }
+.corner.weak { border-color: var(--cc); background: color-mix(in srgb, var(--cc) 10%, var(--surface)); }
+.gap { border-top: 4px solid var(--cc, var(--gold)); }
+.gap p { margin: 0 0 10px; max-width: 62ch; }
+.gap ol { margin: 0 0 10px; padding-left: 20px; }
+.gap li { margin: 4px 0; }
+.refrain { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; color: var(--gold-deep); margin: 0; }
+
+.lead h2 { font-family: var(--font-display); font-weight: 500; font-size: 1.6rem; margin: 0 0 6px; }
+.lead > p { margin: 0 0 18px; color: var(--muted); }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.grid .full { grid-column: 1 / -1; }
+label.f { display: grid; gap: 5px; font-size: .82rem; font-weight: 600; min-width: 0; }
+input:not([type=range]):not([type=checkbox]), select, textarea { font: 400 1rem var(--font-body); color: var(--fg); background: var(--surface-2); border: 1.5px solid var(--line); border-radius: 9px; padding: 11px 12px; width: 100%; min-width: 0; }
+textarea { min-height: 70px; resize: vertical; }
+.check { display: flex; gap: 10px; align-items: flex-start; font-size: .9rem; }
+.consent { font-size: .78rem; color: var(--muted); }
+.check input { width: 18px; height: 18px; flex: 0 0 18px; margin-top: 2px; accent-color: var(--gold); }
+.err { color: var(--warn); font-size: .85rem; min-height: 1.2em; margin: 8px 0 0; }
+.done { border-left: 4px solid var(--ok); padding: 6px 0 6px 14px; }
+.contact-box { display: grid; gap: 8px; background: var(--surface-2); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; margin-top: 12px; }
+.contact-box .row { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; align-items: center; }
+.contact-box .val { font-weight: 600; user-select: all; font-variant-numeric: tabular-nums; }
+.mini { font: 600 .78rem var(--font-body); background: var(--chip); color: var(--fg); border: 0; border-radius: 7px; padding: 6px 10px; cursor: pointer; }
+
+@media (max-width: 560px) {
+  .card { padding: 18px; }
+  .grid, .corner-grid { grid-template-columns: 1fr; }
+  .mix-row { grid-template-columns: 7.5rem 1fr 2.6rem; }
+}
+@media (prefers-reduced-motion: reduce) { .bar i { transition: none; } }
+
+/* site additions: way back to the freebies, honeypot, legal footer */
+.back { color: var(--band-fg); font: 600 .78rem var(--font-body); text-decoration: none; border: 1px solid var(--gold); border-radius: 999px; padding: 7px 14px; white-space: nowrap; }
+.back:hover { background: color-mix(in srgb, var(--gold) 25%, transparent); }
+.back:focus-visible { outline: 2.5px solid var(--gold); outline-offset: 2px; }
+.hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.lead .fine a, .site-foot a { color: var(--navy); }
+.site-foot { color: var(--muted); font-size: .78rem; line-height: 1.55; padding: 0 0 44px; }
+.site-foot p { margin: 0 0 8px; }
+.site-foot nav { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 10px; }
+</style>
+</head>
+<body>
+
+<header class="band">
+  <div class="wrap">
+    <div class="brand">
+      <div>
+        <div class="wordmark">The Box Top Method</div>
+        <div class="tag">BY JUSTIN L STARK &bull; PRESENTED BY PONTOTOC INSURANCE AGENCY</div>
+      </div>
+      <a class="back" href="/theboxtop/freebies/">&larr; All free tools</a>
+    </div>
+    <div class="hero">
+      <div class="eyebrow">The Box Top Quiz</div>
+      <h1>What kind of retiree are you, and how clear is <em>your</em> picture?</h1>
+      <p>Most people have all the pieces of retirement and no picture of how they fit. Answer 14 quick questions to see your retiree type, how clear each of your four corners is, and where your biggest gap sits.</p>
+      <div class="facts"><span>About 4 minutes</span><span>No account needed</span><span>From <i>The Box Top</i> by Justin Stark</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <section class="card lift" id="quiz" aria-live="polite"></section>
+    <div id="results" hidden style="display:grid;gap:18px"></div>
+    <p class="fine">This quiz is educational and is not tax, legal, or investment advice. Pontotoc Insurance Agency offers insurance and annuity products and does not provide tax or legal advice; talk with your CPA and attorney about tax and estate questions. No product is recommended by your results.</p>
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <p>Presented by Pontotoc Insurance Agency &middot; Published by Game Changer Publishing</p>
+    <p>This page uses cookies and the Meta Pixel to measure our ads. See how, and how to opt out, in our <a href="/privacy/#cookies">Privacy Policy</a>.</p>
+    <nav aria-label="Legal"><a href="/theboxtop/freebies/">All free tools</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms</a><a href="/terms/#sms">SMS Terms</a></nav>
+  </div>
+</footer>
+<script src="/theboxtop/assets/tools.js"></script>
+
+<script>
+const SITE = { agencyPhone: "662-200-2249", agencyEmail: "justin@pontotocinsuranceagency.com", agentName: "Justin Stark" };
+
+const CORNERS = {
+  c1: { num: "Corner One", name: "Where your money sits", color: "var(--c1)",
+    ask: ["Where does my money currently sit?", "Is it liquid or non-liquid?", "Is it positioned so I can access it in case of an emergency?"],
+    why: "Retirement planning is not just about how much money you have. It's about where that money sits and how easily you can get to it. Start by putting every account on the liquidity ladder, from checking and savings at the bottom up to an annuity or a business at the top." },
+  c2: { num: "Corner Two", name: "What you want your money to do", color: "var(--c2)",
+    ask: ["What do I want this money to accomplish?", "Do I need more free time, more reliable income, or a larger legacy?", "Is this decision moving me closer to my priorities?"],
+    why: "Every retirement decision runs through three levers: time, cash flow, and cash. Once the paychecks stop, cash has to support cash flow. Knowing what you need each month is where the picture starts to come together." },
+  c3: { num: "Corner Three", name: "What it costs in tax", color: "var(--c3)",
+    ask: ["How is this money taxed: qualified, non-qualified, or tax-privileged?", "How will this decision affect my future taxes?", "Have I talked this over with my CPA or tax professional?"],
+    why: "Every dollar you have carries a tax implication. Sort your accounts by their tax status, not their balance, and bring your CPA in before you move money." },
+  c4: { num: "Corner Four", name: "How your money works", color: "var(--c4)",
+    ask: ["What job is this money doing: safety, growth, or access?", "Do I have the right balance, and has it changed as I approach retirement?", "Do my account settings still reflect my retirement goals?"],
+    why: "Every dollar has a job, whether you've assigned it one or not. The goal isn't to pick one of safety, growth, and access. It's finding the right balance for where you are now, not where you were when you first set up the account." },
+};
+
+const TYPES = {
+  income: { name: "The Income Seeker", says: "“Can I retire?”", corner: "c2",
+    body: "Your first question is whether the money will be there every month. You want a steady check you can count on, and you don't want to worry about running out. Many lifelong W-2 earners land here, because they've always known what was coming in each payday.",
+    concerns: ["Running out of money", "Replacing your paycheck", "Not becoming a financial burden on your children", "Covering future care or unexpected expenses"] },
+  legacy: { name: "The Legacy Builder", says: "“We're comfortable. I just want to make sure the grandkids are taken care of.”", corner: "c3",
+    body: "Your own needs feel covered, so your attention has turned to what happens next: your children, your grandchildren, your church, or a cause you care about. Folks here usually face more tax challenges than income challenges.",
+    concerns: ["Passing on wealth efficiently", "Minimizing unnecessary taxes", "Coordinating tax and estate planning with a CPA and attorney"] },
+  freedom: { name: "The Freedom Seeker", says: "“I don't really want to think about money anymore.”", corner: "c4",
+    body: "You're not after something complicated. You want peace of mind, simplicity, and your mental bandwidth back. You want safety, growth, and access all at once, which makes you a blend of the other two types.",
+    concerns: ["Keeping money safe from big market swings", "Growing enough to last into your nineties", "Being able to get to your money without worry"] },
+};
+
+/* q.kind: "type" options carry an archetype; "rate" is three 1-10 sliders; "corner" options score 0-2; "zone" sets the red zone */
+const QUESTIONS = [
+  { id: "zone", part: 1, kind: "zone", title: "Where are you on the road to retirement?", help: "Pick the one closest to you.",
+    options: [["pre10", "Retiring in more than 5 years"], ["pre5", "Retiring within the next 5 years"], ["post5", "Retired within the last 5 years"], ["post10", "Retired more than 5 years ago"]] },
+  { id: "t1", part: 1, kind: "type", quote: true, title: "Which of these sounds most like you?", help: "Go with your gut.",
+    options: [["income", "“Can I retire?”"], ["legacy", "“We're comfortable. I just want the grandkids taken care of.”"], ["freedom", "“I don't really want to think about money anymore.”"]] },
+  { id: "t2", part: 1, kind: "type", title: "What worries you most about retirement?", help: "",
+    options: [["income", "Running out of money, or not being able to replace my paycheck"], ["legacy", "Taxes eating into what I leave behind"], ["freedom", "Keeping up with too many accounts and decisions"]] },
+  { id: "t3", part: 1, kind: "type", title: "Which best describes your income and bills?", help: "",
+    options: [["income", "I'm not sure our income will cover the bills once the paychecks stop"], ["legacy", "Our income covers our bills with plenty to spare"], ["freedom", "We'll be fine. I just want it simple and easy to get to"]] },
+  { id: "t4", part: 1, kind: "rate", title: "On a scale of one to ten, how much does each of these matter to you?", help: "Move each slider. There are no wrong answers.",
+    items: [["income", "A steady monthly income I can count on"], ["legacy", "Passing on what I've built to family, church, or charity"], ["freedom", "Peace of mind and simplicity"]] },
+  { id: "t5", part: 1, kind: "type", title: "Say you came into an extra $100,000 tomorrow. What would you do first?", help: "",
+    options: [["income", "Use it to make sure the monthly bills are covered for good"], ["legacy", "Set it aside for the kids, the grandkids, or a cause I care about"], ["freedom", "Put it somewhere safe I can get to, and stop thinking about it"]] },
+  { id: "k1", part: 2, kind: "corner", corner: "c1", title: "Could you list every account you own, and about what's in each?", help: "Checking, savings, CDs, 401(k)s, IRAs, life insurance, annuities, a business.",
+    options: [[2, "Yes, I could write it all down today"], [1, "Most of it, but I'd have to dig"], [0, "No, it's spread all over"]] },
+  { id: "k2", part: 2, kind: "corner", corner: "c1", title: "Do you know which money you could get to in a few days, and which would take longer?", help: "Some money is easy to reach, like checking and savings. Some takes time, like stocks, an annuity, or a business.",
+    options: [[2, "Yes, I know exactly"], [1, "Roughly"], [0, "Not really"]] },
+  { id: "k3", part: 2, kind: "corner", corner: "c2", title: "Do you know how much monthly income you'll need once the paychecks stop?", help: "",
+    options: [[2, "Yes, I have a number"], [1, "I have a rough idea"], [0, "No idea yet"]] },
+  { id: "k4", part: 2, kind: "corner", corner: "c2", title: "Do you know where that monthly income will come from?", help: "Social Security, a pension, part-time work, or your savings.",
+    options: [[2, "Yes, every dollar of it"], [1, "Part of it"], [0, "Not yet"]] },
+  { id: "k5", part: 2, kind: "corner", corner: "c3", title: "Do you know how much of your money is qualified, non-qualified, and tax-privileged?", help: "Qualified: 401(k)s, 403(b)s, traditional IRAs. Non-qualified: checking, savings, CDs, brokerage accounts. Tax-privileged: Roth accounts and other tax-free money.",
+    options: [[2, "Yes, I know my split"], [1, "I know some of it"], [0, "I've never sorted it that way"]] },
+  { id: "k6", part: 2, kind: "corner", corner: "c3", title: "Have you talked with a CPA or tax professional about how your retirement withdrawals will be taxed?", help: "",
+    options: [[2, "Yes, recently"], [1, "Years ago"], [0, "Never"]] },
+  { id: "k7", part: 2, kind: "corner", corner: "c4", title: "Do you know what job each of your dollars is doing?", help: "Some money is there for safety, some for growth, and some for quick access.",
+    options: [[2, "Yes, every account has a job"], [1, "For some of it"], [0, "Not really"]] },
+  { id: "k8", part: 2, kind: "corner", corner: "c4", title: "When did you last change how your accounts are set up?", help: "Many people are still running the settings they picked when they first started.",
+    options: [[2, "In the last two years"], [1, "A while back"], [0, "Never since I opened them"]] },
+];
+
+/* ---------- state ---------- */
+const answers = {};
+let step = 0, result = null;
+const referral = (() => { try { return decodeURIComponent((location.hash || "").slice(1)).replace(/[^a-z0-9-]/gi, "").slice(0, 40); } catch { return ""; } })();
+const $ = (s) => document.querySelector(s);
+const esc = (t) => String(t).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+function answered(q) {
+  if (q.kind === "rate") return true;
+  return answers[q.id] !== undefined;
+}
+
+function renderQuestion() {
+  const q = QUESTIONS[step];
+  const partLab = q.part === 1 ? "Part 1 · Your retiree type" : `Part 2 · ${CORNERS[q.corner].num}`;
+  const qc = q.corner ? CORNERS[q.corner].color : "var(--gold-deep)";
+  let body;
+  if (q.kind === "rate") {
+    const v = answers[q.id] || (answers[q.id] = { income: 5, legacy: 5, freedom: 5 });
+    body = `<div class="sliders">${q.items.map(([k, lab]) => `
+      <div class="slider"><label for="r-${k}"><span>${esc(lab)}</span><output id="o-${k}">${v[k]}</output></label>
+      <input type="range" id="r-${k}" min="1" max="10" step="1" value="${v[k]}" data-k="${k}">
+      <div class="ends"><span>1 &middot; not much</span><span>10 &middot; a great deal</span></div></div>`).join("")}</div>`;
+  } else {
+    body = `<div class="opts" role="radiogroup" aria-label="${esc(q.title)}">${q.options.map(([k, lab]) =>
+      `<button type="button" id="opt-${q.id}-${k}" class="opt ${q.quote ? "quote" : ""}" data-k="${k}" aria-pressed="${answers[q.id] === k}"><span class="box" aria-hidden="true"></span><span>${esc(lab)}</span></button>`).join("")}</div>`;
+  }
+  $("#quiz").innerHTML = `
+    <div class="progress-row" style="--qc:${qc}"><span class="part-tag">${partLab}</span><span>Question ${step + 1} of ${QUESTIONS.length}</span></div>
+    <div class="bar"><i style="width:${(step / QUESTIONS.length) * 100}%"></i></div>
+    <h2 class="qtitle">${esc(q.title)}</h2>
+    <p class="qhelp">${esc(q.help || "")}</p>
+    ${body}
+    <div class="nav">
+      <button type="button" class="btn btn-ghost" id="backBtn" ${step === 0 ? "disabled" : ""}>Back</button>
+      <button type="button" class="btn btn-primary" id="nextBtn" ${answered(q) ? "" : "disabled"}>${step === QUESTIONS.length - 1 ? "See my results" : "Next"}</button>
+    </div>`;
+  if (q.kind === "rate") {
+    $("#quiz").querySelectorAll("input[type=range]").forEach(r => r.addEventListener("input", () => {
+      answers[q.id][r.dataset.k] = +r.value; $("#o-" + r.dataset.k).textContent = r.value;
+    }));
+  } else {
+    $("#quiz").querySelectorAll(".opt").forEach(b => b.addEventListener("click", () => {
+      const raw = b.dataset.k; answers[q.id] = q.kind === "corner" ? +raw : raw;
+      renderQuestion(); setTimeout(next, 180);
+    }));
+  }
+  $("#backBtn").addEventListener("click", () => { if (step > 0) { step--; renderQuestion(); } });
+  $("#nextBtn").addEventListener("click", next);
+}
+
+function next() {
+  const q = QUESTIONS[step];
+  if (!answered(q)) return;
+  if (step < QUESTIONS.length - 1) { step++; renderQuestion(); $("#quiz").scrollIntoView({ block: "nearest" }); }
+  else showResults();
+}
+
+/* ---------- scoring ---------- */
+function score(a) {
+  const pts = { income: 0, legacy: 0, freedom: 0 };
+  for (const q of QUESTIONS) {
+    if (q.kind === "type" && a[q.id]) pts[a[q.id]] += 3;
+    if (q.kind === "rate") for (const k in pts) pts[k] += (a[q.id] || {})[k] || 5;
+  }
+  const total = pts.income + pts.legacy + pts.freedom;
+  const mix = {}; for (const k in pts) mix[k] = Math.round(pts[k] / total * 100);
+  const fix = 100 - (mix.income + mix.legacy + mix.freedom);
+  const order = Object.keys(pts).sort((x, y) => pts[y] - pts[x]);
+  mix[order[0]] += fix;
+  const type = order[0];
+  const corners = { c1: 0, c2: 0, c3: 0, c4: 0 };
+  for (const q of QUESTIONS) if (q.kind === "corner") corners[q.corner] += a[q.id] || 0;
+  const clarity = Object.values(corners).reduce((s, n) => s + n, 0);
+  // weakest corner; ties go to the corner that matters most for this type, then in corner order
+  const pref = TYPES[type].corner;
+  const weakest = Object.keys(corners).sort((x, y) => corners[x] - corners[y] || (y === pref) - (x === pref) || x.localeCompare(y))[0];
+  const redZone = a.zone === "pre5" || a.zone === "post5";
+  return { type, mix, order, corners, clarity, weakest, redZone };
+}
+
+function showResults() {
+  result = score(answers);
+  const { type, mix, order, corners, clarity, weakest, redZone } = result;
+  const t = TYPES[type], w = CORNERS[weakest];
+  $("#quiz").hidden = true;
+
+  const mixRows = order.map((k, i) => `<div class="mix-row ${i ? "dim" : ""}"><span>${esc(TYPES[k].name)}</span><span class="track"><i style="width:${mix[k]}%"></i></span><b>${mix[k]}%</b></div>`).join("");
+
+  const zoneCard = redZone
+    ? `<section class="card redzone"><h3>You're in the retirement red zone</h3>
+        <p>The red zone is the five years before and the five years after your retirement date. It's the stretch where the order of your returns matters most, because you're about to depend on your savings for income instead of just growing them.</p>
+        <div class="math" aria-label="Sequence of returns example"><span>$100,000</span><em>down 10% &rarr;</em><span>$90,000</span><em>up 10% &rarr;</em><span>$99,000</span></div>
+        <p class="fine" style="margin-top:10px">Pull $5,000 out during the down year and it's like taking a 15% loss. That's sequence of returns risk, and it's why retirement planning is different from investment planning.</p></section>`
+    : `<section class="card redzone clear"><h3>${answers.zone === "pre10" ? "You're ahead of the red zone" : "You're past the red zone"}</h3>
+        <p>${answers.zone === "pre10"
+          ? "The retirement red zone is the five years before and after your retirement date. You have time to get your picture clear before you get there, and that's the best time to do it."
+          : "The retirement red zone is the five years before and after your retirement date. You're past it, which makes this a good time to check that your settings still match the life you're living now."}</p></section>`;
+
+  const cornerCards = Object.keys(CORNERS).map(k => {
+    const c = CORNERS[k], n = corners[k];
+    const lab = n === 4 ? "Clear" : n >= 2 ? "Partly clear" : "Fuzzy";
+    return `<div class="corner ${k === weakest && n < 4 ? "weak" : ""}" style="--cc:${c.color}">
+      <span class="ct">${c.num}</span><span class="cn">${esc(c.name)}</span>
+      <div class="pips" aria-label="${n} of 4">${[0, 1, 2, 3].map(i => `<i class="${i < n ? "on" : ""}"></i>`).join("")}</div>
+      <span class="cs">${lab}${k === weakest && n < 4 ? " &middot; your biggest gap" : ""}</span></div>`;
+  }).join("");
+
+  const clarityLab = clarity >= 13 ? "Your picture is mostly clear" : clarity >= 8 ? "You have the pieces, and some of the picture" : "You have the pieces, but not the picture";
+
+  $("#results").innerHTML = `
+    <section class="card lift type">
+      <div class="eyebrow" style="color:var(--gold-deep)">Your retiree type</div>
+      <h2>${esc(t.name)}</h2>
+      <p class="says">${esc(t.says)}</p>
+      <p>${esc(t.body)}</p>
+      <ul class="concerns">${t.concerns.map(c => `<li>${esc(c)}</li>`).join("")}</ul>
+      <div class="mix">${mixRows}
+        <p class="fine" style="margin:4px 0 0">Most people are a mix of all three, and that's normal. Your type points to what matters most to you right now.</p></div>
+    </section>
+    ${zoneCard}
+    <p class="section-lab">Your four corners</p>
+    <section class="card">
+      <div class="clarity-head"><h3>${clarityLab}</h3><span class="score">${clarity}<small> / 16</small></span></div>
+      <div class="corner-grid">${cornerCards}</div>
+    </section>
+    <section class="card gap" style="--cc:${w.color}">
+      <div class="eyebrow" style="color:${w.color}">${corners[weakest] < 4 ? "Your biggest gap" : "The corner to keep watching"} &middot; ${w.num}</div>
+      <h3>${esc(w.name[0].toUpperCase() + w.name.slice(1))}</h3>
+      <p>${esc(w.why)}</p>
+      <p><b>Questions to ask before you move a dollar:</b></p>
+      <ol>${w.ask.map(x => `<li>${esc(x)}</li>`).join("")}</ol>
+      <p class="refrain">Clarity precedes confidence.</p>
+    </section>
+    <section class="card lead" id="leadCard">${leadFormHtml()}</section>
+    <div><button type="button" class="btn btn-ghost" id="restartBtn">Retake the quiz</button></div>`;
+  $("#results").hidden = false;
+  wireLeadForm();
+  $("#restartBtn").addEventListener("click", () => { for (const k in answers) delete answers[k]; step = 0; result = null; $("#results").hidden = true; $("#quiz").hidden = false; renderQuestion(); window.scrollTo({ top: 0 }); });
+  $("#results").scrollIntoView({ block: "start" });
+}
+
+function leadFormHtml() {
+  return `<h2>Get your free Box Top Review</h2>
+    <p>A licensed agent will sit down with you, put all four corners of your retirement on one page with your Client Money Map, and show you where the gaps are. No cost and no obligation.</p>
+    <form id="leadForm" novalidate>
+      <div class="grid">
+        <label class="f">First name<input id="fFirst" autocomplete="given-name" required></label>
+        <label class="f">Last name<input id="fLast" autocomplete="family-name" required></label>
+        <label class="f">Mobile phone<input id="fPhone" type="tel" autocomplete="tel" inputmode="tel" required placeholder="(662) 555-0123"></label>
+        <label class="f">Email<input id="fEmail" type="email" autocomplete="email" required placeholder="you@example.com"></label>
+        <label class="f">State<input id="fState" autocomplete="address-level1" placeholder="MS"></label>
+        <label class="f">Best time to reach you<select id="fTime"><option>Morning</option><option>Afternoon</option><option>Evening</option></select></label>
+        <label class="check full"><input type="checkbox" id="fClass"><span>Also save me a seat at the next free live class on The Box Top.</span></label>
+        <label class="check consent full"><input type="checkbox" id="fSms"><span>Yes, text me about my results from Justin Stark / Pontotoc Insurance Agency. Msg frequency varies. Msg &amp; data rates may apply. Reply STOP to opt out, HELP for help. Consent is not a condition of purchase.</span></label>
+        <div class="hp" aria-hidden="true"><label>Company<input id="company" tabindex="-1" autocomplete="off"></label></div>
+      </div>
+      <p class="err" id="formErr" role="alert"></p>
+      <button class="btn btn-primary" id="submitBtn" type="submit">Request my free review</button>
+      <p class="fine" style="margin:12px 0 0">By sending this, you're asking Pontotoc Insurance Agency to call or email you about your results. <a href="/privacy/">Privacy Policy</a> &middot; <a href="/terms/#sms">SMS Terms</a></p>
+    </form>`;
+}
+
+function summaryText(lead) {
+  const r = result;
+  return [
+    `Box Top Quiz results for ${lead.first} ${lead.last}`,
+    `Retiree type: ${TYPES[r.type].name} (mix: ${r.order.map(k => TYPES[k].name.replace("The ", "") + " " + r.mix[k] + "%").join(", ")})`,
+    `Red zone: ${r.redZone ? "yes" : "no"}`,
+    `Clarity: ${r.clarity}/16  (C1 ${r.corners.c1}/4, C2 ${r.corners.c2}/4, C3 ${r.corners.c3}/4, C4 ${r.corners.c4}/4)`,
+    `Biggest gap: ${CORNERS[r.weakest].num}, ${CORNERS[r.weakest].name}`,
+    `Live class: ${lead.liveClass ? "yes" : "no"}`,
+    `Phone: ${lead.phone}  Email: ${lead.email}  State: ${lead.state || "-"}  Best time: ${lead.time}`,
+  ].join("\n");
+}
+
+function answersText() {
+  return QUESTIONS.map(q => {
+    const a = answers[q.id];
+    if (q.kind === "rate") return `${q.title} ${q.items.map(([k, lab]) => lab + ": " + (a || {})[k]).join("; ")}`;
+    const picked = [].concat(a === undefined ? [] : a).map(x => (q.options.find(o => o[0] === x) || [x, x])[1]);
+    return `${q.title} ${picked.join("; ") || "-"}`;
+  }).join("\n");
+}
+
+function wireLeadForm() {
+  $("#leadForm").addEventListener("submit", async (ev) => {
+    ev.preventDefault();
+    const v = (id) => $("#" + id).value.trim();
+    const lead = { first: v("fFirst"), last: v("fLast"), phone: v("fPhone"), email: v("fEmail"), state: v("fState"),
+      time: $("#fTime").value, liveClass: $("#fClass").checked, smsConsent: $("#fSms").checked, company: v("company") };
+    const err = $("#formErr");
+    if (!lead.first || !lead.last) return err.textContent = "Enter your first and last name.";
+    if (lead.phone.replace(/\D/g, "").length < 10) return err.textContent = "Enter a 10-digit phone number so an agent can reach you.";
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(lead.email)) return err.textContent = "Enter a valid email address, like name@example.com.";
+    err.textContent = "";
+    lead.referredBy = referral || "";
+    lead.toolResult = `${TYPES[result.type].name} · Clarity ${result.clarity}/16 · Gap: ${CORNERS[result.weakest].num}${result.redZone ? " · Red zone" : ""}`;
+    lead.toolSummary = summaryText(lead) + "\n\n" + answersText();
+    const btn = $("#submitBtn"); btn.disabled = true; btn.textContent = "Sending…";
+    const res = await btTools.send("quiz", lead);
+    if (res.outcome === "invalid") { err.textContent = res.message; btn.disabled = false; btn.textContent = "Request my free review"; return; }
+    showDone(res.outcome, lead);
+  });
+}
+
+function showDone(outcome, lead) {
+  const card = $("#leadCard");
+  const contact = `<div class="contact-box">
+      <div class="row"><span>Call or text ${esc(SITE.agentName)}</span><span class="val">${esc(SITE.agencyPhone)}</span></div>
+      <div class="row"><span>Email</span><span class="val">${esc(SITE.agencyEmail)}</span></div>
+      <div class="row"><span class="fine">Copy your results and send them with your message.</span><button type="button" class="mini" id="copyBtn">Copy my results</button></div>
+    </div>`;
+  card.innerHTML = outcome === "saved"
+    ? `<div class="done"><h2>Request received</h2><p>Thanks, ${esc(lead.first)}. A licensed Pontotoc Insurance Agency agent will reach out ${lead.time === "Evening" ? "in the evening" : "in the " + lead.time.toLowerCase()} within one business day to set up your Box Top Review${lead.liveClass ? " and get you the live class details" : ""}.</p></div>${contact}`
+    : `<div class="done" style="border-left-color:var(--gold)"><h2>One last step</h2><p>This page can't send your request from here, ${esc(lead.first)}. Reach out directly and we'll set up your free Box Top Review.</p></div>${contact}`;
+  $("#copyBtn").addEventListener("click", async (e) => {
+    const text = summaryText(lead);
+    try { await navigator.clipboard.writeText(text); e.target.textContent = "Copied"; }
+    catch { const ta = document.createElement("textarea"); ta.value = text; ta.style.width = "100%"; card.appendChild(ta); ta.select(); e.target.textContent = "Select and copy the text below"; }
+  });
+}
+
+renderQuestion();
+</script>
+
+</body></html>
