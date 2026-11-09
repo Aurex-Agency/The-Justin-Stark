@@ -362,7 +362,7 @@ test('quiz lead: GHL gets the tool fields and tool consent; Meta gets a bare Lea
   assert.equal(ghl.sms_confirm_ok, 'no');
   assert.ok(ghl.submitted_at);
 
-  const meta = calls.find((c) => c.url.includes('graph.facebook.com')).body.data[0];
+  const meta = calls.find((c) => new URL(c.url).hostname === 'graph.facebook.com').body.data[0];
   assert.equal(meta.event_name, 'Lead');
   assert.equal(meta.event_id, r.json.event_id);
   assert.deepEqual(meta.custom_data, { content_name: 'The Box Top Quiz', content_category: 'boxtop_tool' });
