@@ -7,7 +7,13 @@
     { "source": "/BoxTop", "destination": "/theboxtop/launch/?utm_source=vanity&utm_medium=offline&utm_campaign=boxtop_launch", "permanent": false },
     { "source": "/Boxtop", "destination": "/theboxtop/launch/?utm_source=vanity&utm_medium=offline&utm_campaign=boxtop_launch", "permanent": false },
     { "source": "/BOXTOP", "destination": "/theboxtop/launch/?utm_source=vanity&utm_medium=offline&utm_campaign=boxtop_launch", "permanent": false },
-    { "source": "/TheBoxTop", "destination": "/theboxtop/launch/", "permanent": false }
+    { "source": "/TheBoxTop", "destination": "/theboxtop/launch/", "permanent": false },
+    { "source": "/freebies", "destination": "/theboxtop/freebies/", "permanent": false },
+    { "source": "/freebies/", "destination": "/theboxtop/freebies/", "permanent": false },
+    { "source": "/Freebies", "destination": "/theboxtop/freebies/", "permanent": false },
+    { "source": "/FREEBIES", "destination": "/theboxtop/freebies/", "permanent": false },
+    { "source": "/theboxtop/bonuses", "destination": "/theboxtop/freebies/", "permanent": false },
+    { "source": "/theboxtop/bonuses/", "destination": "/theboxtop/freebies/", "permanent": false }
   ],
   "headers": [
     {
