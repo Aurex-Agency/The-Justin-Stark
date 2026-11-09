@@ -1,7 +1,7 @@
 // Box Top launch registration: one form, registered everywhere.
 //
 // POST /api/boxtop-register  (JSON)
-//   action: "register" | "profile" | "replay"
+//   action: "register" | "profile" | "replay" | "quiz" | "trust-finder"
 //
 // register → 1) Zoom: add the person as a webinar registrant (personal join_url)
 //            2) GoHighLevel: inbound webhook with contact, attribution, join_url
@@ -9,6 +9,9 @@
 //               same event_id the browser pixel uses, so Meta dedupes the pair)
 // profile  → GHL only (the one-question survey on the thank-you page)
 // replay   → GHL + Meta Lead (sign-ups after the live webinar has ended)
+// quiz, trust-finder → GHL + Meta Lead: a results-review request from the Box Top Quiz
+//            (/theboxtop/quiz/) or the Legacy Trust Finder (/theboxtop/trust-finder/).
+//            GHL gets the answers summary; Meta gets a bare Lead, never the answers.
 //
 // Nothing here fails closed on the visitor: if Zoom is down the contact still
 // reaches GHL and the page hands them the Zoom registration link; if both
@@ -60,6 +63,20 @@ const MARKETING_CONSENT_TEXT =
   'Consent is not a condition of registration.';
 const SEGMENTS = ['retired', 'red-zone', 'planning', 'business-owner', 'pro'];
 
+// The Box Top tools. Their lead forms ask for a call back; texts need the optional checkbox.
+const TOOLS = {
+  quiz: { name: 'The Box Top Quiz', page: 'https://thejustinstark.com/theboxtop/quiz/' },
+  'trust-finder': { name: 'Legacy Trust Finder', page: 'https://thejustinstark.com/theboxtop/trust-finder/' },
+};
+const TOOL_EVENT_SLUG = 'boxtop-tools';
+const TOOL_CONSENT_VERSION = 'bt-tool-sms-v1';
+// Must match the checkbox label on both tool pages word for word (proof of consent).
+const TOOL_CONSENT_TEXT =
+  'Yes, text me about my results from Justin Stark / Pontotoc Insurance Agency. ' +
+  'Msg frequency varies. Msg & data rates may apply. Reply STOP to opt out, HELP for help. ' +
+  'Consent is not a condition of purchase.';
+const BEST_TIMES = ['Morning', 'Afternoon', 'Evening'];
+
 function phoneAreaFlag(e164) {
   if (!e164) return '';
   const area = e164.slice(2, 5);
@@ -82,6 +99,12 @@ const GRAPH_VERSION = 'v25.0';
 function str(v, max) {
   if (v === undefined || v === null) return '';
   return String(v).replace(/[\u0000-\u001f\u007f]/g, ' ').trim().slice(0, max || 200);
+}
+
+// Like str(), but keeps line breaks (results summaries and notes read better in GHL).
+function text(v, max) {
+  if (v === undefined || v === null) return '';
+  return String(v).replace(/\r\n?/g, '\n').replace(/[\u0000-\u0009\u000b-\u001f\u007f]/g, ' ').trim().slice(0, max || 2000);
 }
 
 function sha256(v) {
@@ -194,7 +217,7 @@ async function sendToGhl(payload) {
 
 // ---------- Meta Conversions API ----------
 
-async function sendToMeta(eventName, p, req, eventId) {
+async function sendToMeta(eventName, p, req, eventId, custom) {
   const token = process.env.META_CAPI_TOKEN;
   if (!token) return { status: 'skipped' };
   const cookies = parseCookies(req.headers.cookie);
@@ -220,9 +243,11 @@ async function sendToMeta(eventName, p, req, eventId) {
       event_time: Math.floor(Date.now() / 1000),
       event_id: eventId,
       action_source: 'website',
-      event_source_url: p.landing_page || 'https://thejustinstark.com/theboxtop/launch/',
+      event_source_url: p.landing_page || (custom && custom.page) || 'https://thejustinstark.com/theboxtop/launch/',
       user_data: userData,
-      custom_data: { content_name: EVENT_NAME, content_category: 'webinar' },
+      custom_data: custom
+        ? { content_name: custom.name, content_category: 'boxtop_tool' }
+        : { content_name: EVENT_NAME, content_category: 'webinar' },
     }],
   };
   if (process.env.META_TEST_EVENT_CODE) payload.test_event_code = process.env.META_TEST_EVENT_CODE;
@@ -263,7 +288,8 @@ module.exports = async (req, res) => {
   if (!body || typeof body !== 'object') return reply(res, 400, { ok: false, error: 'bad payload' });
 
   let action = str(body.action, 20) || 'register';
-  if (!['register', 'profile', 'replay'].includes(action)) return reply(res, 400, { ok: false, error: 'bad action' });
+  if (!['register', 'profile', 'replay'].includes(action) && !TOOLS[action]) return reply(res, 400, { ok: false, error: 'bad action' });
+  const tool = TOOLS[action] || null;
 
   // Bots: a filled honeypot or an instant submit gets a quiet success and nothing else.
   const filledIn = Number(body.elapsed_ms);
@@ -288,8 +314,9 @@ module.exports = async (req, res) => {
     if (rawPhone) {
       p.phone = normalizePhone(rawPhone);
       if (!p.phone) errors.phone = 'Enter a 10-digit US mobile number.';
-    } else if (action === 'register' && Date.now() <= EVENT_END) {
-      errors.phone = 'Enter your mobile number.'; // required for registration; replay requests don't ask
+    } else if ((action === 'register' && Date.now() <= EVENT_END) || tool) {
+      // required for registration and for a tool's call-back request; replay requests don't ask
+      errors.phone = tool ? 'Enter a 10-digit phone number so an agent can reach you.' : 'Enter your mobile number.';
     }
   } else {
     p.segment = SEGMENTS.includes(str(body.segment, 30)) ? str(body.segment, 30) : '';
@@ -305,7 +332,8 @@ module.exports = async (req, res) => {
   const areaFlag = phoneAreaFlag(p.phone);
   // Numbers we can't text inside 8 AM to 8 PM local get no texts at all.
   const smsConsent = rawSmsConsent && areaFlag !== 'no-sms';
-  const smsMarketing = action !== 'profile' && !!p.phone && areaFlag !== 'no-sms' && yes(body.sms_marketing_consent);
+  // Tools have one checkbox (texts about their results), no marketing consent.
+  const smsMarketing = action !== 'profile' && !tool && !!p.phone && areaFlag !== 'no-sms' && yes(body.sms_marketing_consent);
   const eventId = /^[A-Za-z0-9_.-]{8,64}$/.test(str(body.event_id, 64))
     ? str(body.event_id, 64)
     : 'bt-' + crypto.randomBytes(8).toString('hex');
@@ -332,9 +360,20 @@ module.exports = async (req, res) => {
 
   // 2) GHL + 3) Meta, in parallel
   const nowIso = new Date(now).toISOString();
+  const toolFields = tool ? {
+    tool: tool.name,
+    tool_result: str(body.tool_result, 300),
+    tool_summary: text(body.tool_summary, 4000),
+    state: str(body.state, 40),
+    best_time: BEST_TIMES.includes(str(body.best_time, 20)) ? str(body.best_time, 20) : '',
+    live_class: action === 'quiz' ? (yes(body.live_class) ? 'yes' : 'no') : '',
+    notes: text(body.notes, 1000),
+    referral_code: str(body.referral_code, 40),
+    submitted_at: nowIso,
+  } : {};
   const ghlPayload = {
     action,
-    event: EVENT_SLUG,
+    event: tool ? TOOL_EVENT_SLUG : EVENT_SLUG,
     first_name: p.first_name,
     last_name: p.last_name,
     email: p.email,
@@ -344,29 +383,30 @@ module.exports = async (req, res) => {
     sms_consent_at: smsConsent ? nowIso : '',
     sms_marketing_consent: action === 'profile' ? '' : (smsMarketing ? 'yes' : 'no'),
     sms_marketing_consent_at: smsMarketing ? nowIso : '',
-    consent_version: smsConsent || smsMarketing ? CONSENT_VERSION : '',
-    consent_text: smsConsent ? CONSENT_TEXT : '',
+    consent_version: smsConsent || smsMarketing ? (tool ? TOOL_CONSENT_VERSION : CONSENT_VERSION) : '',
+    consent_text: smsConsent ? (tool ? TOOL_CONSENT_TEXT : CONSENT_TEXT) : '',
     marketing_consent_text: smsMarketing ? MARKETING_CONSENT_TEXT : '',
     // registered | already | skipped (no Zoom credentials yet: Plan B, no alert) | failed (alert)
     zoom_status: action === 'register' ? (['registered', 'already', 'skipped'].includes(zoom.status) ? zoom.status : 'failed') : '',
     zoom_join_url: zoom.join_url || '',
     zoom_registrant_id: zoom.registrant_id || '',
     zoom_fallback_url: action === 'register' && zoom.status !== 'registered' && zoom.status !== 'already' ? ZOOM_FALLBACK_URL : '',
-    registered_at: action === 'profile' ? '' : nowIso,
-    event_phase: action === 'profile' ? '' : eventPhase(now),
-    sms_confirm_ok: smsConsent && now < SMS_CONFIRM_CUTOFF ? 'yes' : 'no',
+    registered_at: action === 'profile' || tool ? '' : nowIso,
+    event_phase: action === 'profile' || tool ? '' : eventPhase(now),
+    sms_confirm_ok: !tool && smsConsent && now < SMS_CONFIRM_CUTOFF ? 'yes' : 'no',
     phone_area_flag: areaFlag,
     source_bucket: sourceBucket(p.lt_source || p.ft_source, p.lt_medium || p.ft_medium),
     ft_source: p.ft_source, ft_medium: p.ft_medium, ft_campaign: p.ft_campaign, ft_content: p.ft_content, ft_term: p.ft_term,
     lt_source: p.lt_source, lt_medium: p.lt_medium, lt_campaign: p.lt_campaign, lt_content: p.lt_content, lt_term: p.lt_term,
     campaign_id: p.campaign_id, fbclid: p.fbclid, gclid: p.gclid,
     landing_page: p.landing_page, referrer: p.referrer,
+    ...toolFields,
   };
 
-  const metaEvent = action === 'register' ? 'CompleteRegistration' : action === 'replay' ? 'Lead' : null;
+  const metaEvent = action === 'register' ? 'CompleteRegistration' : (action === 'replay' || tool) ? 'Lead' : null;
   const [ghlRes, metaRes] = await Promise.allSettled([
     sendToGhl(ghlPayload),
-    metaEvent ? sendToMeta(metaEvent, p, req, eventId) : Promise.resolve({ status: 'n/a' }),
+    metaEvent ? sendToMeta(metaEvent, p, req, eventId, tool) : Promise.resolve({ status: 'n/a' }),
   ]);
   if (ghlRes.status === 'rejected') logError('ghl', ghlRes.reason, p.email);
   if (metaRes.status === 'rejected') logError('capi', metaRes.reason, p.email);
