@@ -21,6 +21,14 @@
       "headers": [{ "key": "Content-Type", "value": "text/calendar; charset=utf-8" }]
     },
     {
+      "source": "/theboxtop/freebies/legacy-planning-packet.pdf",
+      "headers": [{ "key": "Content-Disposition", "value": "inline; filename=\"Legacy Planning Packet.pdf\"" }]
+    },
+    {
+      "source": "/theboxtop/freebies/legacy-and-business-planning-packet.pdf",
+      "headers": [{ "key": "Content-Disposition", "value": "inline; filename=\"Legacy and Business Planning Packet.pdf\"" }]
+    },
+    {
       "source": "/api/(.*)",
       "headers": [{ "key": "Cache-Control", "value": "no-store" }]
     }
